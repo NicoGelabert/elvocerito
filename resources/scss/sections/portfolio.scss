@@ -1,0 +1,76 @@
+#portfolio{
+    .vertical-text{
+        @apply rotate-180;
+        writing-mode: vertical-rl;
+    }
+    #main-carousel{
+        .splide__slide img {
+            @apply w-auto max-h-[420px];
+        }
+        .splide__arrows{
+            @apply absolute w-full md:w-1/2 -bottom-12 md:bottom-0 flex;
+            .splide__arrow{
+                @apply relative w-1/2 bg-transparent opacity-100 rounded-none hover:bg-primary;
+                transform: translateY(0);
+                svg{
+                    @apply dark:fill-white;
+                }
+            }
+            .splide__arrow--prev{
+                @apply left-0;
+            }
+            .splide__arrow--next{
+                @apply right-0;
+            }
+        }
+        .splide__pagination{
+            @apply gap-1 md:hidden;
+            .splide__pagination__page{
+                @apply bg-[#D9D9D9] w-2 h-2;
+                border-radius:10px;
+                cursor:pointer;
+                transition:0.3s ease width;
+    
+            }
+            .splide__pagination__page.is-active{
+                @apply bg-primary scale-100 w-4;
+                ;
+            }
+        }
+    }
+    #thumbnail-carousel{
+        .splide__slide {
+            img {
+                @apply h-auto object-cover w-auto;
+            }
+        }
+        .splide__slide {
+            @apply h-auto;
+            opacity: 0.6;
+            width: auto;
+        }
+        .splide__slide.is-active {
+            @apply h-auto;
+            opacity: 1;
+            width: auto;
+        }
+        .splide__track--nav>.splide__list>.splide__slide.is-active{
+            border:none;
+        }
+        .splide__pagination{
+            @apply gap-1 -bottom-8 md:bottom-2;
+            .splide__pagination__page{
+                @apply bg-[#D9D9D9] w-2 h-2;
+                border-radius:10px;
+                cursor:pointer;
+                transition:0.3s ease width;
+    
+            }
+            .splide__pagination__page.is-active{
+                @apply bg-primary scale-100 w-4;
+                ;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,9 @@
+.demo-logo{
+    @apply fill-demo_primary;
+    a{
+        @apply max-w-2
+    }
+}
+.demo-logo-hamburguer{
+    @apply fill-black w-16;
+}

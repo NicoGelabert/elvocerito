@@ -1,0 +1,16 @@
+.services-container {
+    @apply flex flex-col gap-8 h-3/4 w-full mx-8 md:flex-row md:h-1/2;
+}
+
+.service-item {
+    @apply basis-1/3 h-full bg-cover bg-center flex items-center justify-center overflow-hidden;
+    transition: flex-basis 0.3s ease-in-out;    
+}
+
+.service-item:hover {
+    @apply basis-1/2;
+}
+
+.services-container:hover .service-item:not(:hover) {
+    @apply basis-1/4;
+}

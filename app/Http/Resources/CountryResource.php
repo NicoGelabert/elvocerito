@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+
+class CountryResource extends JsonResource
+{
+    public static $wrap = false;
+    /**
+     * Transform the resource into an array.
+     *
+     *
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     */
+    public function toArray($request): array
+    {
+        return [
+            'code' => $this->code,
+            'name' => $this->name,
+            'states' => json_decode($this->states, true),
+        ];
+    }
+}

@@ -1,0 +1,35 @@
+@use './globals' as *;
+@use './demo' as *;
+@use './animations/animations' as *;
+
+html {
+    scroll-behavior: smooth;
+  }
+body{
+    @apply bg-white text-black dark:bg-black dark:text-white;
+    font-family: $secondary-font;
+    h1, h2, h3, h4, h5, h6{
+        font-family: $primary-font;
+    }
+    h1{
+        @apply text-5xl leading-tight lg:text-6xl lg:leading-tight;
+    }
+    h2{
+        @apply text-5xl;
+    }
+    h3{
+        @apply text-4xl;
+    }
+    h4{
+        @apply text-4xl;
+    }
+    h5{
+        @apply text-3xl;
+    }
+    h6{
+        @apply text-lg;
+    }
+    p{
+        @apply text-base;
+    }
+}

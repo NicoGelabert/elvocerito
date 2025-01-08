@@ -1,0 +1,9 @@
+header{
+    @apply py-2;
+    nav ul li a{
+        @apply py-6 transition-all;        
+    }
+}
+.scrolled-bottom{
+    @apply shadow-md bg-white text-black dark:bg-black dark:text-white;
+}

@@ -1,0 +1,68 @@
+.form{
+    input, select, textarea{
+        @apply 
+        bg-transparent
+        text-gray-500 
+        border-b-gray-300
+        border-transparent
+        focus:ring-transparent
+        focus:border-b-gray-600
+        focus:border-t-transparent
+        focus:border-x-transparent
+        focus:ring-0
+    }
+    select{
+        @apply dark:bg-black;
+    }
+    input[type=checkbox]{
+        @apply border-gray-300
+    }
+}
+
+#quotationForm{
+    .checkbox-container .peer:checked ~ label {
+        @apply bg-primary text-white;
+    }
+
+}
+
+.form_loader {
+    /* change color here */
+    @apply text-primary;
+  }
+  .form_loader,
+  .form_loader div {
+    @apply box-border;
+  }
+  .form_loader {
+    @apply inline-block w-20 relative h-20;
+  }
+  .form_loader div {
+    animation: form_loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    @apply border-4 border-solid border-current rounded-full opacity-100 absolute;
+  }
+  .form_loader div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes form_loader {
+    0% {
+        @apply h-2 left-9 top-9 w-2 opacity-0;
+    }
+    4.9% {
+        @apply h-2 left-9 top-9 w-2 opacity-0;
+    }
+    5% {
+        @apply h-2 left-9 top-9 w-2 opacity-100
+    }
+    100% {
+        @apply h-20 left-0 top-0 w-20 opacity-0;
+    }
+  }
+  
+  .loader_container {
+    @apply flex items-center gap-2;
+}
+
+  .hidden_loader {
+    @apply hidden;
+  }
