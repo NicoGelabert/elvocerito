@@ -1,23 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 /* Fonts */
-$primary-font: "Anton", sans-serif;
-$secondary-font: "Noto Serif", sans-serif;
+
 $body-font: "Inter", sans-serif;
 
 a{
     @apply hover:text-primary;
 }
 .logo svg{
-    @apply h-auto w-32 transition-all;
-}
-.demo-logo .logo_letters,
-.demo-logo-hamburguer .logo_letters{
-    @apply fill-black dark:fill-demo_white;
-}
-.demo-logo .logo_squares,
-.demo-logo-hamburguer .logo_squares{
-    @apply fill-demo_primary;
+    @apply transition-all;
 }
 // nav{
 //     .logo{
@@ -84,7 +74,7 @@ header, .mobile-menu{
 // End Function to show header according to scroll view
 // Hamburguer Menu icon
 .openbtn {
-    @apply w-[40px] h-[20px] relative rounded cursor-pointer;
+    @apply w-[24px] h-[20px] relative rounded cursor-pointer;
     }
 
     .openbtn .openbtn-area{
@@ -93,7 +83,7 @@ header, .mobile-menu{
     }
 
     .openbtn span {
-        @apply w-1/2 h-[3px] relative left-[12px] bg-black dark:bg-white rounded inline ;
+        @apply h-[3px] relative bg-black dark:bg-white rounded inline ;
         transition: all .4s;
     }
 
@@ -128,5 +118,5 @@ header, .mobile-menu{
 }
 // Social icons
 .social-icons a{
-    @apply aspect-square rounded-md flex justify-center items-center ring-1 text-black/70 bg-black/5 ring-black/20 hover:bg-primary hover:text-white hover:ring-primary_darker transition-all dark:text-white/50 dark:bg-white/5 dark:ring-white/20 dark:hover:bg-primary dark:hover:text-white dark:hover:ring-primary_darker;
+    @apply aspect-square rounded-md flex justify-center items-center ring-1 text-black/70 bg-black/5 ring-black/20 hover:bg-primary hover:text-white hover:ring-primary transition-all dark:text-white/50 dark:bg-white/5 dark:ring-white/20 dark:hover:bg-primary dark:hover:text-white dark:hover:ring-primary;
 }

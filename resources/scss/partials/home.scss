@@ -3,15 +3,11 @@
 }
 
 #loader {
-    @apply bg-dark_gray dark:bg-ligth_gray rounded-2xl h-1.5 overflow-hidden relative w-1/2;
+    @apply bg-gray_800 dark:bg-gray_200 rounded-2xl h-1.5 overflow-hidden relative w-1/2;
 }
 
 #progress-bar {
     @apply bg-primary rounded-2xl h-full w-0;
-    transition: width 0.3s;
-}
-#demo-progress-bar{
-    @apply bg-demo_primary rounded-2xl h-full w-0;
     transition: width 0.3s;
 }
 
@@ -107,5 +103,5 @@
 }
 
 .big-text{
-    @apply text-ligth_gray dark:text-dark_gray;
+    @apply text-gray_200 dark:text-gray_800;
 }

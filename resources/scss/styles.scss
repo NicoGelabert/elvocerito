@@ -1,35 +1,36 @@
 @use './globals' as *;
-@use './demo' as *;
 @use './animations/animations' as *;
 
 html {
     scroll-behavior: smooth;
   }
 body{
-    @apply bg-white text-black dark:bg-black dark:text-white;
-    font-family: $secondary-font;
-    h1, h2, h3, h4, h5, h6{
-        font-family: $primary-font;
-    }
+    @apply bg-white text-secondary font-sans_serif;
     h1{
-        @apply text-5xl leading-tight lg:text-6xl lg:leading-tight;
+        @apply text-mobile_h1 sm:text-tablet_h1 lg:text-desktop_h1;
     }
     h2{
-        @apply text-5xl;
+        @apply text-mobile_h2 sm:text-tablet_h2 lg:text-5xl;
     }
     h3{
-        @apply text-4xl;
+        @apply text-mobile_h3 sm:text-tablet_h3 lg:text-desktop_h3;
     }
     h4{
-        @apply text-4xl;
+        @apply text-2xl sm:text-tablet_h4 lg:text-desktop_h4;
     }
     h5{
-        @apply text-3xl;
+        @apply text-lg sm:text-xl lg:text-2xl;
     }
     h6{
-        @apply text-lg;
+        @apply text-base sm:text-lg lg:text-xl;
     }
     p{
-        @apply text-base;
+        @apply text-sm sm:text-base;
+    }
+    .text-large{
+        @apply text-base sm:text-lg lg:text-xl;
+    }
+    .text-small{
+        @apply font-semibold text-text_small leading-4 sm:text-xs;
     }
 }

@@ -8,15 +8,15 @@ footer{
                 @apply w-48 h-auto mx-auto;
             }
             .logo_letters{
-                @apply fill-demo_white;
+                @apply fill-white;
             }
             .logo_squares{
-                @apply fill-demo_primary;
+                @apply fill-primary;
             }
             .social-icons{
                 @apply flex justify-center items-center;    
                 a{
-                    @apply h-8 w-8 aspect-square rounded-md ring-1 text-white bg-white/15 ring-white/20 hover:bg-primary hover:text-white hover:ring-primary_darker transition-all;
+                    @apply h-8 w-8 aspect-square rounded-md ring-1 text-white bg-white/15 ring-white/20 hover:bg-primary hover:text-white hover:ring-primary transition-all;
                 }
             } 
         }
@@ -24,7 +24,7 @@ footer{
             @apply flex flex-col md:flex-row gap-4 text-center md:gap-8;
         }
         p{
-            @apply text-center text-xs text-ligth_gray;
+            @apply text-center text-xs text-gray_200;
         }
     }
     .footer-divider{ 

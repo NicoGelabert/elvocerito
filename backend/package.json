@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+    "@ckeditor/ckeditor5-build-classic": "^44.1.0",
     "@ckeditor/ckeditor5-vue": "^5.1.0",
     "chart.js": "^4.3.3",
     "flowbite": "^2.4.1",
-    "flowbite-vue": "^0.1.5",
+    "flowbite-vue": "^0.0.7",
     "sortablejs": "^1.15.2",
     "sortablejs-vue3": "^1.2.11",
     "uuid": "^9.0.1",

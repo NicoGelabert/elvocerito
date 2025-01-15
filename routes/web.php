@@ -11,8 +11,6 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
 
-//Demo
-use App\Http\Controllers\DemoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,43 +35,28 @@ Route::middleware(['guestOrVerified'])->group(function () {
         return view('underconstruction');
     });
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+    
+    Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
+    //Servicios
+    Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/servicios/{service:slug}', [ServiceController::class, 'view'])->name('service.view');
 
-    if (request()->getHost() === 'demo.chimicreativo.es' || request()->getHost() === 'demo.chimicreativo.local') {
-        Route::get('/',[DemoController::class, 'index'])->name('welcome');
-        Route::get('/products', [ProductController::class, 'index'])->name('product.index');
-        Route::get('/categories', [CategoriesController::class, 'index'])->name('category.index');
-        // Route::get('/categorias-json', [CategoryController::class, 'categoriasJson'])->name('categorias.json');
-        // Route::get('/categories/{category:slug}', [CategoryController::class, 'view'])->name('category.view');
-        Route::get('/products/{category:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
-        Route::prefix('/cart')->name('cart.')->group(function () {
-            Route::get('/', [CartController::class, 'index'])->name('index');
-            Route::post('/add/{product:slug}', [CartController::class, 'add'])->name('add');
-            Route::post('/remove/{product:slug}', [CartController::class, 'remove'])->name('remove');
-            Route::post('/update-quantity/{product:slug}', [CartController::class, 'updateQuantity'])->name('update-quantity');
-        });
-    }else{
-        Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
-        //Servicios
-        Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
-        Route::get('/servicios/{service:slug}', [ServiceController::class, 'view'])->name('service.view');
-    
-        Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-        Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-    
-        Route::get('/quotation', [QuotationController::class, 'create'])->name('quotation.create');
-        Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
+    Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-        // Política de Privacidad
-        Route::get('/politica-de-privacidad', function (){
-            return view('legal/privacy-policy');
-        });
-        Route::get('/terminos-y-condiciones', function (){
-            return view('legal/terms-and-conditions');
-        });
-    }
-    
-    
+    Route::get('/quotation', [QuotationController::class, 'create'])->name('quotation.create');
+    Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
+
+    // Política de Privacidad
+    Route::get('/politica-de-privacidad', function (){
+        return view('legal/privacy-policy');
+    });
+    Route::get('/terminos-y-condiciones', function (){
+        return view('legal/terms-and-conditions');
+    });
+
 });
+
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/profile', [ProfileController::class, 'view'])->name('profile');
     Route::post('/profile', [ProfileController::class, 'store'])->name('profile.update');

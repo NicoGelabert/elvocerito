@@ -25,7 +25,7 @@
                             @foreach($tags as $tag)
                             <div class="checkbox-container">
                                 <input type="checkbox" name="tags[]" value="{{ $tag->name }}" id="checkbox-{{ $tag->id }}" class="peer hidden">
-                                <label for="checkbox-{{ $tag->id }}" class="block bg-slate-100 px-4 py-2 rounded-full text-xs dark:bg-dark_gray">{{ $tag->name }}</label>
+                                <label for="checkbox-{{ $tag->id }}" class="block bg-slate-100 px-4 py-2 rounded-full text-xs dark:bg-gray_800">{{ $tag->name }}</label>
                             </div>
                             @endforeach
                         </div>

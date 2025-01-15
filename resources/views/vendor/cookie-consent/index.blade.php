@@ -1,6 +1,6 @@
 @if($cookieConsentConfig['enabled'] && ! $alreadyConsentedWithCookies)
     <!-- Banner de cookies -->
-    <div class="js-cookie-consent cookie-consent fixed bottom-0 inset-x-0 shadow-cookie bg-white dark:bg-dark_gray text-black dark:text-white z-10">
+    <div class="js-cookie-consent cookie-consent fixed bottom-0 inset-x-0 shadow-cookie bg-white dark:bg-gray_800 text-black dark:text-white z-10">
         <div class="mx-auto flex items-center flex-wrap gap-4 rounded-lg p-8 max-w-screen-xl">
             <p class="cookie-consent__message">
                 {!! trans('cookie-consent::texts.message') !!}
@@ -16,7 +16,7 @@
 
     <!-- Modal para personalizar cookies -->
     <div id="cookieConsentModal" class="cookie-consent-modal hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50">
-        <div class="modal-content bg-white dark:bg-dark_gray mx-auto p-6 rounded-xl max-w-lg mt-20 flex flex-col gap-4">
+        <div class="modal-content bg-white dark:bg-gray_800 mx-auto p-6 rounded-xl max-w-lg mt-20 flex flex-col gap-4">
             <h2 class="text-xl">{!! trans('cookie-consent::texts.modal-title') !!}</h2>
             <p class="text-sm cookie-consent__message">
                 {!! trans('cookie-consent::texts.modal-message') !!}

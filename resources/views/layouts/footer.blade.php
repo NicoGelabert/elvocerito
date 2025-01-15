@@ -6,13 +6,7 @@
                 <x-social-icons />
             </div>
             <ul class="footer-menu">
-                @foreach ($services as $service)
-                    <li>
-                        <a href="{{ route('service.view', $service->slug) }}">
-                            <span>{{ $service->name }}</span>
-                        </a>
-                    </li>
-                @endforeach
+                
             </ul>
             <div class="flex gap-4">
                 <p><a href="/politica-de-privacidad">{{ __('Política de Privacidad') }}</a></p>

@@ -28,7 +28,7 @@
                             <div>
                                 <div class="flex justify-between">
                                     <h5>{{ $project->title }}</h5>
-                                    <h4 class="text-ligth_gray ml-4">{{ $project->id }}/15</h4>
+                                    <h4 class="text-gray_200 ml-4">{{ $project->id }}/15</h4>
                                 </div>
                                 <ul>
                                     @foreach($project->clients as $client)
@@ -38,7 +38,7 @@
                             </div>
                             <ul class="hidden md:flex flex-wrap gap-2">
                                 @foreach($project->tags as $tag)
-                                <li class="mt-1 bg-gray-50 text-xs w-fit rounded-full px-2 py-1 text-black dark:bg-dark_gray dark:text-white">{{ $tag->name }}</li>
+                                <li class="mt-1 bg-gray-50 text-xs w-fit rounded-full px-2 py-1 text-black dark:bg-gray_800 dark:text-white">{{ $tag->name }}</li>
                                 @endforeach
                             </ul>
                         </div>

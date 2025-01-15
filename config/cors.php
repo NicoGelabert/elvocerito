@@ -19,11 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'https://admin.chimicreativo.es',
-        'https://demo.chimicreativo.es',
-        'https://chimicreativo.es'
-    ],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => ['https://*.chimicreativo.es'],
 

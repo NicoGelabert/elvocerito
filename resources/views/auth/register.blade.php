@@ -1,4 +1,4 @@
-<x-app-demo>
+<x-app>
     <div class="flex justify-center items-center backlogin py-32">
         <div class="bg-form">
             <form
@@ -50,4 +50,4 @@
             </form>
         </div>
     </div>
-</x-app-demo>
+</x-app>

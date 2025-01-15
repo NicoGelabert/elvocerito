@@ -15,27 +15,29 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $homeherobanners = HomeHeroBanner::all();
-        $features = Feature::all();
-        $services = Service::all();
-        $tags = Tag::all();
-        $clients = Client::all();
-        $projects = Project::with('tags', 'clients')->whereHas('services', function($query) {
-            $query->where('service_id', 2);
-        })->get();
-        $devprojects = Project::with('tags', 'clients')->whereHas('services', function($query) {
-            $query->where('service_id', 1);
-        })->get();
-        $faqs = Faq::all();
-        return view('welcome', compact(
-            'homeherobanners',
-            'features',
-            'services',
-            'tags',
-            'clients',
-            'projects',
-            'devprojects',
-            'faqs'
-        ));
+        // $homeherobanners = HomeHeroBanner::all();
+        // $features = Feature::all();
+        // $services = Service::all();
+        // $tags = Tag::all();
+        // $clients = Client::all();
+        // $projects = Project::with('tags', 'clients')->whereHas('services', function($query) {
+        //     $query->where('service_id', 2);
+        // })->get();
+        // $devprojects = Project::with('tags', 'clients')->whereHas('services', function($query) {
+        //     $query->where('service_id', 1);
+        // })->get();
+        // $faqs = Faq::all();
+        return view('welcome'
+        //, compact(
+            //'homeherobanners',
+            // 'features',
+            // 'services',
+            // 'tags',
+            // 'clients',
+            // 'projects',
+            // 'devprojects',
+            // 'faqs'
+        //)
+    );
     }
 }

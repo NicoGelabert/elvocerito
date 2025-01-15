@@ -1,4 +1,4 @@
-<x-app-demo>
+<x-app>
     <div class="cartview flex flex-col justify-start lg:w-2/3 xl:w-2/3 mx-auto min-h-screen pt-32 pb-16 px-3">
         <h1 class="text-3xl mb-6">{{__('Your Cart Items')}}</h1>
 
@@ -108,4 +108,4 @@
         </div>
         
     </div>
-</x-app-demo>
+</x-app>
