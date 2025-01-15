@@ -7,7 +7,9 @@ a{
     @apply hover:text-primary;
 }
 .logo svg{
-    @apply transition-all;
+    @apply transition-all fill-secondary
+    sm:h-10 w-auto
+    md:h-12 w-auto;
 }
 // nav{
 //     .logo{
@@ -110,7 +112,8 @@ header, .mobile-menu{
     }
 // Contenedor gral
 .container{
-    @apply w-full max-w-screen-xl mx-auto px-4 2xl:px-0;
+    @apply w-full max-w-screen-xl mx-auto px-4
+    2xl:px-0;
 }
 // línea divisoria
 .divider{ 

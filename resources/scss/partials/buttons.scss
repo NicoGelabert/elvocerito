@@ -1,7 +1,7 @@
 @use '../globals/variables' as *;
 
 .btn{
-    @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans leading-none
+    @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans leading-none min-h-8
     rounded-md sm:rounded-lg
     text-xs sm:text-sm md:text-base
     px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3;

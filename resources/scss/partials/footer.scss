@@ -1,42 +1,85 @@
 footer{
-    @apply bg-black text-white;
-    .footer-container{
-        @apply max-w-screen-xl mx-auto flex flex-col items-center gap-y-8 py-12 px-4 md:flex-row md:justify-center;
-        .footer-logo{
-            @apply flex flex-col gap-4 max-w-none;
-            svg{
-                @apply w-48 h-auto mx-auto;
-            }
-            .logo_letters{
-                @apply fill-white;
-            }
-            .logo_squares{
-                @apply fill-primary;
+    @apply w-full bg-secondary text-white;
+    svg{
+        @apply fill-white;
+    }
+    .footer{
+        @apply flex flex-col gap-8 py-12;
+        .identity{
+            @apply flex justify-between
+            md:border-b md:border-gray_600
+            md:pb-8;
+            .footer-logo svg{
+                @apply w-auto
+                h-8 sm:h-10 md:h-12;
             }
             .social-icons{
-                @apply flex justify-center items-center;    
-                a{
-                    @apply h-8 w-8 aspect-square rounded-md ring-1 text-white bg-white/15 ring-white/20 hover:bg-primary hover:text-white hover:ring-primary transition-all;
+                @apply p-2.5;
+                svg{
+                    @apply w-auto
+                    h-4 sm:h-6;
                 }
-            } 
+            }
         }
         .footer-menu{
-            @apply flex flex-col md:flex-row gap-4 text-center md:gap-8;
-        }
-        p{
-            @apply text-center text-xs text-gray_200;
-        }
-    }
-    .footer-divider{ 
-        @apply h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent opacity-50;
-    }
-    .post-footer{
-        @apply max-w-screen-xl mx-auto flex justify-between items-center p-4 text-xs;
-        .developed-by{
-            @apply text-white/50;
-            a:hover{
-                @apply text-white;
+            ul{
+                @apply w-full flex md:gap-12 font-semibold
+                flex-col md:flex-row;
+                li{
+                    @apply flex flex-col justify-between md:justify-start gap-4
+                    py-4 md:py-0
+                    border-b border-gray_600 md:border-none
+                    md:w-1/3 lg:w-full;
+                    svg{
+                        @apply md:hidden;
+                    }
+                    .footer-sub-menu{
+                        @apply flex flex-col gap-2;
+                        li{
+                            @apply py-0 text-gray_500 border-none
+                            md:w-full;
+                            p{
+                                @apply text-sm font-light ;
+                            }
+                        }
+                    }
+                }
+                li:first-of-type{
+                    @apply border-t border-gray_600;
+                }
             }
+        }
+        .footer-subscription{
+            @apply flex flex-col gap-4 font-semibold;
+            .form{
+                @apply w-full flex gap-4
+                flex-col sm:flex-row md:flex-col
+                sm:justify-between;
+                input{
+                    @apply sm:h-full;
+                }
+                .btn{
+                    @apply w-auto md:w-fit;
+                }
+                svg{
+                    @apply w-4 fill-gray_400;
+                }
+            }
+        }
+        .need_help{
+            ul{
+                @apply m-auto flex justify-between
+                w-3/4 sm:w-1/2 md:w-fit
+                md:gap-4;
+            }
+        }
+    }
+    .post_footer{
+        @apply flex m-auto text-center text-gray_400 py-3 border-t border-gray_600
+        flex-col sm:flex-row
+        sm:justify-between;
+        a{
+            @apply text-gray_300 hover:text-primary;
         }
     }
 }

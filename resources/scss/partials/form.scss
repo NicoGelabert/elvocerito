@@ -1,15 +1,12 @@
 .form{
     input, select, textarea{
         @apply 
+        flex flex-col
         bg-transparent
-        text-gray-500 
-        border-b-gray-300
-        border-transparent
-        focus:ring-transparent
-        focus:border-b-gray-600
-        focus:border-t-transparent
-        focus:border-x-transparent
-        focus:ring-0
+        text-gray_500 
+        border-gray_600
+        rounded-lg
+        text-sm
     }
     select{
         @apply dark:bg-black;
@@ -17,13 +14,6 @@
     input[type=checkbox]{
         @apply border-gray-300
     }
-}
-
-#quotationForm{
-    .checkbox-container .peer:checked ~ label {
-        @apply bg-primary text-white;
-    }
-
 }
 
 .form_loader {
