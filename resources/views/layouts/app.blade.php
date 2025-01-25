@@ -26,7 +26,7 @@
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/scss/styles.scss', 'resources/js/app.js'])
     </head>
     <body>
         <div id="loader-wrapper" class="dark:bg-black">
@@ -80,7 +80,7 @@
             </div>
             <!--/ Toast -->
             @include('layouts.navigation')
-            <main class="w-full mx-auto container h-screen">
+            <main class="h-screen">
                 {{ $slot }}
             </main>            
             @include('layouts.footer')

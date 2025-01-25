@@ -58,14 +58,6 @@
                                         <CustomInput class="mb-2" v-model="homeHeroBanner.link" label="Image Link" />
                                     </div>
                                     <div class="flex flex-col mb-2">
-                                        <h3 class="text-lg font-bold">Pie de Imagen</h3>
-                                        <CustomInput class="mb-2" v-model="homeHeroBanner.title" label="Image Title" />
-                                    </div>
-                                    <div class="flex flex-col mb-2">
-                                        <h3 class="text-lg font-bold">Servicio</h3>
-                                        <CustomInput class="mb-2" v-model="homeHeroBanner.service" label="Service" />
-                                    </div>
-                                    <div class="flex flex-col mb-2">
                                         <h3 class="text-lg font-bold">Imagen</h3>
                                         <CustomInput type="file" class="mb-2" label="Image" @change="file => homeHeroBanner.image = file" />
                                     </div>
@@ -115,9 +107,7 @@ const homeHeroBanner = ref({
     image: props.homeHeroBanner.image,
     headline: props.homeHeroBanner.headline,
     description: props.homeHeroBanner.description,
-    link: props.homeHeroBanner.link,
-    title: props.homeHeroBanner.title,
-    service: props.homeHeroBanner.service
+    link: props.homeHeroBanner.link
 })
 console.log(homeHeroBanner)
 const loading = ref(false)
@@ -135,9 +125,7 @@ onUpdated(() => {
         image: props.homeHeroBanner.image,
         headline: props.homeHeroBanner.headline,
         description: props.homeHeroBanner.description,
-        link: props.homeHeroBanner.link,
-        title: props.homeHeroBanner.title,
-        service: props.homeHeroBanner.service
+        link: props.homeHeroBanner.link
     }
 })
 

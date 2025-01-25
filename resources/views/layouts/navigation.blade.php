@@ -4,11 +4,11 @@
         cartItemsCount: {{ \App\Helpers\Cart::getCartItemsCount() }},
     }"
     @cart-change.window="cartItemsCount = $event.detail.count"
-    class="flex flex-col gap-4"
+    class="flex flex-col gap-4 px-4"
     id="navbar"
 >
     <!-- Responsive Menu -->
-    <div class="flex items-center justify-between z-10 w-full px-4">
+    <div class="flex items-center justify-between z-10 w-full">
         <div
             class="block fixed z-10 top-0 bottom-0 h-full w-full transition-all mobile-menu lg:hidden"
             :class="mobileMenuOpen ? 'left-0' : 'left-full'"

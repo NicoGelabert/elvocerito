@@ -26,7 +26,6 @@ const DEFAULT_HOMEHEROBANNER = {
     headline: '',
     description: '',
     link: '',
-    background: ''
 }
 
 const homeherobanners = computed(() => store.state.homeHeroBanners);

@@ -8,7 +8,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
+        './node_modules/@splidejs/splide/**/*',
     ],
 
     theme: {
@@ -42,7 +43,7 @@ export default {
                 mobile_h1           : '2.5rem',
                 tablet_h1           : '3.5rem',
                 desktop_h1          : '4rem',
-                mobile_h2           : '2rem',
+                mobile_h2           : '1.625rem',
                 tablet_h2           : '2.5rem',
                 mobile_h3           : '1.75rem',
                 tablet_h3           : '2rem',

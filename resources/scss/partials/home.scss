@@ -22,20 +22,6 @@
 #body-content.fade-in {
     @apply opacity-100;
 }
-
-.home-hero-banner{
-    @apply flex items-center justify-evenly;
-    hr{
-        @apply border-t-2 border-transparent;
-    }
-    img{
-        @apply w-auto h-[90%] rounded-3xl rounded-e-none object-cover;
-    }
-    .vertical-text{
-        transform: rotate(180deg);
-        writing-mode: vertical-lr;
-    }
-}
 #services{
     .card {
         @apply relative h-auto w-full flex flex-col justify-between aspect-square gap-8;

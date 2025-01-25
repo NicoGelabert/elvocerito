@@ -14,7 +14,7 @@ class HomeHeroBanner extends Model
     use HasSlug;
     use SoftDeletes;
 
-    protected $fillable = ['image', 'image_mime', 'image_size', 'headline', 'description', 'link', 'background', 'created_by', 'updated_by'];
+    protected $fillable = ['image', 'image_mime', 'image_size', 'headline', 'description', 'link', 'created_by', 'updated_by'];
 
     public function getSlugOptions() : SlugOptions
     {

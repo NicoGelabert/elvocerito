@@ -1,7 +1,7 @@
 /* Flag Icon CSS */
-@import url('/node_modules/flag-icon-css/sass/flag-icons.scss');
-@import url('../scss/styles.scss');
-@import url('/node_modules/@splidejs/splide/dist/css/splide.min.css');
+@import '/node_modules/@splidejs/splide/dist/css/splide.min.css';
+@use url('/node_modules/flag-icon-css/sass/flag-icons.scss');
+@use '../scss/styles.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

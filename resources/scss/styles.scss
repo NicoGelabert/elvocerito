@@ -6,6 +6,9 @@ html {
   }
 body{
     @apply bg-white text-secondary font-sans_serif;
+    h1, h2, h3, h4, h5, h6, .text-small{
+        @apply font-semibold;
+    }
     h1{
         @apply text-mobile_h1 sm:text-tablet_h1 lg:text-desktop_h1;
     }
@@ -25,12 +28,12 @@ body{
         @apply text-base sm:text-lg lg:text-xl;
     }
     p{
-        @apply text-sm sm:text-base;
+        @apply text-xs;
     }
     .text-large{
-        @apply text-base sm:text-lg lg:text-xl;
+        @apply text-sm;
     }
     .text-small{
-        @apply font-semibold text-text_small leading-4 sm:text-xs;
+        @apply text-text_small leading-4 ;
     }
 }
