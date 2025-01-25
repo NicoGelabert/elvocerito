@@ -19,9 +19,9 @@
 
         <meta name="keywords" content="Chimi Creativo, estudio de diseño gráfico, desarrollo web, diseño de marca, branding, diseño web, agencia de diseño, diseño UX/UI, identidad visual, Málaga, diseño creativo, diseño de logotipos, marketing digital, soluciones creativas">
         
-        <title inertia>{{ config('app.name', 'Chimi Design') }}</title>
+        <title inertia>{{ config('app.name', 'El Vocerito') }}</title>
 
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/common/logo_chimi_favicon.ico') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/common/iso_vocerito.svg') }}">
 
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
