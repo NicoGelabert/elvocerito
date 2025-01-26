@@ -142,7 +142,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
   var homeHeroBannerElement = document.querySelector('.home-hero-banner');
   if (homeHeroBannerElement) {
     var homeHeroBanner = new Splide(homeHeroBannerElement, {
-      type        : 'slide',
+      type        : 'loop',
       rewind      : true,
       autoplay    : true,
       arrows      : false,
@@ -150,6 +150,12 @@ document.addEventListener( 'DOMContentLoaded', function () {
       gap         : '1rem',
       pagination  : true,
       interval    : 5000,
+      breakpoints: {
+        480: {
+          padding : '1.5rem',
+          gap     : '0.75rem',
+        }
+      },
     });
     homeHeroBanner.mount();
   };

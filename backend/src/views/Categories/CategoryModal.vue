@@ -44,6 +44,7 @@
               <form @submit.prevent="onSubmit">
                   <div class="bg-white px-4 pt-5 pb-4">
                   <CustomInput class="mb-2" v-model="category.name" label="Category Title"/>
+                  <CustomInput class="mb-2" v-model="category.description" label="Category Description"/>
                   <CustomInput type="file" class="mb-2" label="Category Image" @change="file => category.image = file"/>
                   <CustomInput type="checkbox" class="mb-2" v-model="category.active" label="Active"/>
                   </div>
@@ -87,6 +88,7 @@ const category = ref({
   id: props.category.id,
   name: props.category.name,
   active: props.category.active,
+  description:props.category.description,
   parent_id: props.category.parent_id,
 })
 

@@ -24,6 +24,9 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'active' => ['required', 'boolean'],
+            'description' => ['nullable', 'string'],
+            'image' => ['required', 'image'],
             'parent_id' => [
                 'nullable', 'exists:categories,id',
                 function(string $attribute, $value, \Closure $fail) {
@@ -38,8 +41,6 @@ class UpdateCategoryRequest extends FormRequest
                     }
                 }
             ],
-            'image' => ['required', 'image'],
-            'active' => ['required', 'boolean']
         ];
     }
 }

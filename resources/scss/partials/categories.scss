@@ -1,0 +1,19 @@
+#categories{
+    .categories_title{
+        @apply flex justify-between items-center;
+    }
+    .categories_content{
+        ul{
+           @apply flex gap-2; 
+            li{
+                @apply flex flex-col gap-4 items-center w-[85px];
+                p{
+                    @apply text-xs text-center font-bold;
+                }
+                img{
+                    @apply w-10 h-auto;
+                }
+            }
+        }
+    }
+}

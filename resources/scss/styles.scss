@@ -16,10 +16,10 @@ body{
         @apply text-mobile_h2 sm:text-tablet_h2 lg:text-5xl;
     }
     h3{
-        @apply text-mobile_h3 sm:text-tablet_h3 lg:text-desktop_h3;
+        @apply text-mobile_h3 sm:text-tablet_h3 lg:text-desktop_h3 leading-none;
     }
     h4{
-        @apply text-2xl sm:text-tablet_h4 lg:text-desktop_h4;
+        @apply text-2xl sm:text-tablet_h4 lg:text-desktop_h4 leading-none;
     }
     h5{
         @apply text-lg sm:text-xl lg:text-2xl;

@@ -6,6 +6,11 @@ $body-font: "Inter", sans-serif;
 a{
     @apply hover:text-primary;
 }
+a:hover{
+    svg{
+        @apply fill-primary;
+    }
+} 
 .logo svg{
     @apply transition-all fill-secondary
     sm:h-10 w-auto
@@ -117,7 +122,7 @@ header, .mobile-menu{
 }
 // línea divisoria
 .divider{ 
-    @apply h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-black to-transparent opacity-30 dark:via-white my-16;
+    @apply h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-black to-transparent opacity-30 dark:via-white;
 }
 // Social icons
 .social-icons a{

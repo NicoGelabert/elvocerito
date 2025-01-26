@@ -8,6 +8,7 @@ import store from "../store";
 import NotFound from "../views/NotFound.vue";
 import HomeHeroBanners from "../views/HomeHeroBanners/HomeHeroBanners.vue";
 import Categories from "../views/Categories/Categories.vue";
+import CategoryView from "../views/Categories/CategoryView.vue";
 import Products from "../views/Products/Products.vue";
 import ProductView from "../views/Products/ProductView.vue";
 import Alergens from "../views/Alergens/Alergens.vue";
@@ -54,6 +55,19 @@ const routes = [
         path: 'categories',
         name: 'app.categories',
         component: Categories
+      },
+      {
+        path: 'categories/create',
+        name: 'app.categories.create',
+        component: CategoryView
+      },
+      {
+        path: 'categories/:id',
+        name: 'app.categories.edit',
+        component: CategoryView,
+        props: {
+          id: (value) => /^\d+$/.test(value)
+        }
       },
       {
         path: 'products',
