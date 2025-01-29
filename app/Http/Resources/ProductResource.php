@@ -35,7 +35,6 @@ class ProductResource extends JsonResource
             'quantity' => $this->quantity,
             'published' => (bool)$this->published,
             'categories' => $this->categories->map(fn($c) => $c->id),
-            'alergens' => $this->alergens->map(fn($a) => $a->id),
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
         ];

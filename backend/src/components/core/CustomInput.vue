@@ -76,6 +76,11 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const editor = ClassicEditor;
 
+// Configuración del editor por defecto
+const defaultEditorConfig = {
+  licenseKey: 'GPL', // Se usa 'GPL' para proyectos de código abierto.
+};
+
 const props = defineProps({
   modelValue: [String, Number, File],
   label: String,
@@ -103,6 +108,14 @@ const props = defineProps({
     default: () => ({})
   }
 })
+
+const editorConfig = computed(() => {
+  // Configuración personalizada
+  return {
+    ...defaultEditorConfig,
+    ...props.editorConfig,
+  };
+});
 
 const id = computed(() => {
   if (props.id) return props.id;

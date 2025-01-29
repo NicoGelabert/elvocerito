@@ -26,7 +26,6 @@ class ProductListResource extends JsonResource
             'updated_at' => ( new \DateTime($this->updated_at) )->format('Y-m-d H:i:s'),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'prices' => ProductPriceResource::collection($this->whenLoaded('prices')),
-            'alergens' => ProductAlergenResource::collection($this->whenLoaded('alergens')),
         ];
     }
 }

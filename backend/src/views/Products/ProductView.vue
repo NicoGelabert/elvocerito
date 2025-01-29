@@ -68,11 +68,6 @@
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Alergens</h3>
-            <treeselect v-model="product.alergens" :multiple="true" :options="alergensOptions" :errors="errors['alergens']"/>
-          </div>
-          <hr class="my-4">
-          <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Published</h3>
             <CustomInput type="checkbox" class="mb-2" v-model="product.published" label="Published" :errors="errors['published']"/>
           </div>
@@ -132,7 +127,6 @@ const product = ref({
   quantity: null,
   published: false,
   categories: [],
-  alergens: [],
 })
 
 console.log(product.prices)
@@ -140,7 +134,6 @@ const errors = ref({});
 
 const loading = ref(false);
 const categoriesOptions = ref([]);
-const alergensOptions = ref([]);
 
 const emit = defineEmits(['update:modelValue', 'close'])
 
@@ -160,11 +153,6 @@ onMounted(() => {
   axiosClient.get('/categories/tree')
   .then(result => {
     categoriesOptions.value = result.data
-  })
-  
-  axiosClient.get('/alergens/tree')
-  .then(result => {
-    alergensOptions.value = result.data
   })
 
 })

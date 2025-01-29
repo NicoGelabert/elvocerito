@@ -31,7 +31,7 @@ class ProductController extends Controller
         $search = $request->get('search', '');
         $categorySlug = $request->get('category', '');  // Agregar parámetro category
 
-        $query = Product::query()->with(['prices', 'categories', 'alergens'])
+        $query = Product::query()->with(['prices', 'categories'])
             ->where('title', 'like', "%{$search}%");
 
         // Filtrar por categoría si se pasa el slug de la categoría
@@ -65,14 +65,12 @@ class ProductController extends Controller
         $images = $data['images'] ?? [];
         $imagePositions = $data['image_positions'] ?? [];
         $categories = $data['categories'] ?? [];
-        $alergens = $data['alergens'] ?? [];
         $prices = $data['prices'] ?? [];
 
         $product = Product::create($data);
 
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
-        $this->saveAlergens($alergens, $product);
         $this->savePrices($prices, $product);
 
         return new ProductResource($product);
@@ -101,7 +99,6 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['updated_by'] = $request->user()->id;
         $categories = $data['categories'] ?? [];
-        $alergens = $data['alergens'] ?? [];
         $prices = $data['prices'] ?? [];
 
         /** @var \Illuminate\Http\UploadedFile[] $images */
@@ -114,7 +111,6 @@ class ProductController extends Controller
         if (count($deletedImages) > 0) {
             $this->deleteImages($deletedImages, $product);
         }
-        $this->saveAlergens($alergens, $product);
         $this->savePrices($prices, $product);
 
         $product->update($data);
@@ -141,14 +137,6 @@ class ProductController extends Controller
         $data = array_map(fn($id) => (['category_id' => $id, 'product_id' => $product->id]), $categoryIds);
 
         ProductCategory::insert($data);
-    }
-
-    private function saveAlergens($alergenIds, Product $product)
-    {
-        ProductAlergen::where('product_id', $product->id)->delete();
-        $data = array_map(fn($id) => (['alergen_id' => $id, 'product_id' => $product->id]), $alergenIds);
-
-        ProductAlergen::insert($data);
     }
 
     protected function savePrices(array $prices, Product $product)

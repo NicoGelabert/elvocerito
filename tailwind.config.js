@@ -51,6 +51,7 @@ export default {
                 tablet_h4           : '1.75rem',
                 desktop_h4          : '2rem',
                 text_small          : '0.625rem',
+                text_badge          : '0.5rem',
             },
             boxShadow: {
                 cookie: '0 2px 4px 6px rgb(0 0 0 / 0.1)',

@@ -37,6 +37,10 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
     
     Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
+
+    // Anunciantes = Products
+    Route::get('/all', [ProductController::class, 'index'])->name('products.index');
+
     //Servicios
     Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
     Route::get('/servicios/{service:slug}', [ServiceController::class, 'view'])->name('service.view');

@@ -1,0 +1,48 @@
+.news{
+    @apply flex flex-col gap-6;
+    .news-title{
+        @apply flex justify-between items-center;
+        a{
+            @apply flex gap-2 items-center font-medium
+            text-gray_500 hover:text-gray_700;
+            svg{
+                @apply fill-gray_500;
+            }
+        }
+        a:hover{
+            svg{
+                @apply fill-gray_700;
+            }
+        }
+    }
+    .news-card{
+        @apply flex flex-col sm:flex-row gap-6;
+        .news-card-img{
+            @apply sm:w-1/2;
+            img{
+                @apply rounded-lg md:aspect-video;
+            }
+        }
+        .news-card-content{
+            @apply flex flex-col gap-4 sm:w-1/2;
+            .news-card-content-header{
+                @apply flex items-center gap-2;
+                .author{
+                    @apply flex gap-2 text-gray_600;
+                    img{
+                        @apply max-h-6 w-auto rounded-full;
+                    }
+                }
+                .dot-divider{
+                    @apply text-4xl leading-5;
+                }
+                .dot-divider, .news-date{
+                    @apply text-gray_500;
+                }
+            }
+            .description{
+                @apply text-gray_600;
+            }
+        }
+    }
+}

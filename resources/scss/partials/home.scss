@@ -22,54 +22,6 @@
 #body-content.fade-in {
     @apply opacity-100;
 }
-#services{
-    .card {
-        @apply relative h-auto w-full flex flex-col justify-between aspect-square gap-8;
-        .imgBx{
-            @apply relative h-full w-full rounded-3xl bg-cover bg-center;
-            .price{
-                @apply absolute flex items-center bg-white dark:bg-black rounded-bl-3xl h-20 w-auto right-0 px-4 py-4;
-            }
-            .price::after{
-                @apply absolute rounded-full bg-transparent h-12 -left-12 top-0 w-12 shadow-[24px_-24px_0_0_rgba(251,252,255,1)] dark:shadow-[24px_-24px_0_0_rgba(10,10,10,1)];
-                content: '';
-            }
-            .price::before{
-                @apply absolute rounded-full bg-transparent h-12 right-0 -bottom-12 w-12 shadow-[24px_-24px_0_0_rgba(251,252,255,1)] dark:shadow-[24px_-24px_0_0_rgba(10,10,10,1)];
-                content: '';
-            }
-        }
-        .content{
-            @apply flex flex-col gap-4 px-4;
-            .card-title{
-                @apply flex justify-between items-center;
-                a{
-                    @apply text-primary text-3xl hover:text-black dark:hover:text-white hover:rotate-90;
-                    line-height: 0;
-                    transform-origin: center;
-                    transition: transform 0.3s, color 0.3s;
-                }      
-            }
-        }
-    }
-    .splide__pagination{
-        @apply relative mt-16 gap-1;
-        .splide__pagination__page{
-            @apply bg-[#D9D9D9] w-4 h-4;
-            border-radius:20px;
-            cursor:pointer;
-            transition:0.3s ease width;
-
-        }
-        .splide__pagination__page.is-active{
-            @apply bg-primary scale-100 w-8;
-            ;
-        }
-    }
-    .vertical-text{
-        writing-mode: vertical-lr;
-    }
-}
 #faqs{
     .questions{
         @apply flex flex-col md:flex-row justify-between flex-wrap w-full gap-4;
@@ -90,4 +42,52 @@
 
 .big-text{
     @apply text-gray_200 dark:text-gray_800;
+}
+
+// Pagination dots
+.splide__pagination_custom{
+    @apply flex justify-center items-center m-0;
+    // @apply relative mt-16 gap-1;
+    .splide__pagination__page{
+        @apply bg-gray_600;
+        // border-radius:20px;
+        // cursor:pointer;
+        // transition:0.3s ease width;
+
+    }
+    .splide__pagination__page.is-active{
+        @apply bg-primary;
+    }
+}
+
+// Splde arrows
+.splide__arrows_custom{
+    @apply flex gap-4
+    sm:absolute right-0 top-2;
+    .splide__arrow{
+        @apply relative translate-y-0;
+    }
+    .splide__arrow--prev{
+        @apply left-0;
+    }
+    .splide__arrow--next{
+        @apply right-0;
+    }
+
+}
+// Splde arrows - Botonera de news
+.splide__arrows_custom_news{
+    @apply bottom-12 top-auto pr-4;
+}
+
+//Badge
+.badge{
+    @apply bg-gray_100;
+}
+.star{
+    @apply bg-primary text-gray_50 py-1;
+    svg{
+        @apply w-4 h-auto fill-gray_50;
+
+    }
 }

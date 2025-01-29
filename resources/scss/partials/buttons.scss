@@ -16,6 +16,10 @@
     @apply bg-primary hover:bg-primary_hover;
 }
 
+.btn-secondary{
+    @apply border border-secondary/20 text-secondary hover:bg-gray_100;
+}
+
 .btn-urgencies{
     @apply bg-urgencies 
     hover:bg-urgencies_hover

@@ -217,13 +217,6 @@ export function createProduct({ commit }, product) {
     });
   }
 
-  // Agregar alérgenos al FormData
-  if (product.alergens && product.alergens.length) {
-    product.alergens.forEach((alergen) => {
-      form.append(`alergens[]`, alergen);
-    });
-  }
-
   // Agregar cantidad al FormData
   if (product.quantity) {
     form.append('quantity', product.quantity);
@@ -246,13 +239,6 @@ export function updateProduct({commit}, product) {
   if (product.categories && product.categories.length) {
     product.categories.forEach((category) => {
       form.append(`categories[]`, category);
-    });
-  }
-
-  // Agregar alérgenos al FormData
-  if (product.alergens && product.alergens.length) {
-    product.alergens.forEach((alergen) => {
-      form.append(`alergens[]`, alergen);
     });
   }
   

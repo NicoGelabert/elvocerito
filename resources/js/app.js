@@ -8,6 +8,9 @@ import 'flowbite';
 import Splide from '@splidejs/splide';
 import ProductList from './components/products/ProductList.vue';
 
+const productIndex = createApp({});
+productIndex.component('product-list', ProductList);
+productIndex.mount('#product-index');
 Alpine.plugin(collapse)
 
 window.Alpine = Alpine;
@@ -159,4 +162,49 @@ document.addEventListener( 'DOMContentLoaded', function () {
     });
     homeHeroBanner.mount();
   };
+  // Fin Home Hero Banner
+  // Últimos anunciantes
+  var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
+  if (ultimosAnuncinatesElement) {
+    var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
+      type        : 'loop',
+      perPage     : 5,
+      arrows      : false,
+      gap         : '1rem',
+      padding     : '2rem',
+      autoplay    : true,
+      interval    : 4000,
+      breakpoints: {
+        1024: {
+          perPage     : 4,
+        },
+        768: {
+          perPage     : 3,
+        },
+        480: {
+          perPage     : 2,
+          gap         : '0.5rem',
+          padding     : '1rem',
+        }
+      },
+    })
+  };
+  ultimosAnuncinates.mount();
+  // Fin Últimos anunciantes
+  // News
+  var newsElement = document.querySelector('.news');
+  if (newsElement) {
+    var news = new Splide(newsElement, {
+      classes: {
+        pagination: 'splide__pagination_custom',
+        arrows    : 'splide__arrows_custom splide__arrows_custom_news',
+      },
+      gap       : '1.5rem',
+      pagination: true,
+      rewind    : true,
+      type      : 'loop',
+    });
+    news.mount();
+  }
+  // Fin News
 });

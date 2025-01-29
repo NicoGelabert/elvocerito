@@ -1,0 +1,27 @@
+#anunciantes_destacados{
+    .products_title{
+
+    }
+    .products_card{
+        ul{
+            @apply w-full grid gap-4
+            grid-cols-2 md:grid-cols-3;
+            li{
+                img{
+                    @apply rounded-t-lg object-cover
+                    aspect-square lg:aspect-video;
+                }
+                .products_card_content{
+                    @apply flex flex-col p-2 gap-2;
+                    .badge{
+                        @apply w-fit rounded-sm py-[2px] px-2 bg-gray_100;
+                    }
+                    p{
+                        @apply line-clamp-3;
+                    }
+                    
+                }
+            }
+        }
+    }
+}

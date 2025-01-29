@@ -1,8 +1,12 @@
 @forward '../globals/variables';
 @forward '../partials/header.scss';
 @forward '../partials/home.scss';
-@forward '../partials/homeherobanner.scss';
-@forward '../partials/categories.scss';
+@forward '../sections/homeherobanner.scss';
+@forward '../sections/categories.scss';
+@forward '../sections/anunciantes_destacados.scss';
+@forward '../sections/ultimos_anunciantes.scss';
+@forward '../sections/como_buscar_en_la_guia.scss';
+@forward '../sections/news.scss';
 @forward '../partials/form.scss';
 @forward '../partials/buttons.scss';
 @forward '../partials/footer.scss';

@@ -80,7 +80,7 @@
             </div>
             <!--/ Toast -->
             @include('layouts.navigation')
-            <main class="h-screen">
+            <main>
                 {{ $slot }}
             </main>            
             @include('layouts.footer')

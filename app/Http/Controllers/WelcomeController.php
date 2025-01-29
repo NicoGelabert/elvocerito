@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HomeHeroBanner;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -12,6 +13,8 @@ class WelcomeController extends Controller
     {
         $homeherobanners = HomeHeroBanner::all();
         $categories = Category::all();
+        $anunciantes_destacados = Product::with('prices')->get();
+        $ultimos_anunciantes = Product::all();
         // $features = Feature::all();
         // $services = Service::all();
         // $tags = Tag::all();
@@ -26,6 +29,8 @@ class WelcomeController extends Controller
         return view('welcome', compact(
             'homeherobanners',
             'categories',
+            'anunciantes_destacados',
+            'ultimos_anunciantes',
             // 'features',
             // 'services',
             // 'tags',

@@ -4,10 +4,10 @@
         <p class="small cookie-consent__message text-white">
             {!! trans('cookie-consent::texts.message') !!}
         </p>
-        <x-button class="js-cookie-consent-agree cookie-consent__agree cursor-pointer btn-primary">
+        <x-button class="js-cookie-consent-agree cookie-consent__agree cursor-pointer btn btn-primary">
             <span>{{ trans('cookie-consent::texts.agree') }}</span>
         </x-button>
-        <x-button class="js-cookie-consent-customize cookie-consent__customize cursor-pointer btn-secondary">
+        <x-button class="js-cookie-consent-customize cookie-consent__customize cursor-pointer btn btn-secondary">
             <span>{{ trans('cookie-consent::texts.customize') }}</span>
         </x-button>
     </div>

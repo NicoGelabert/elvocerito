@@ -5,11 +5,9 @@
             <p class="cookie-consent__message">
                 {!! trans('cookie-consent::texts.message') !!}
             </p>
-            <x-button class="js-cookie-consent-agree cookie-consent__agree cursor-pointer btn-primary">
-                <i class="fi fi-rr-arrow-right arrow-to-right"></i><span>{{ trans('cookie-consent::texts.agree') }}</span>
+            <x-button class="js-cookie-consent-agree cookie-consent__agree cursor-pointer btn btn-primary"><span>{{ trans('cookie-consent::texts.agree') }}</span>
             </x-button>
-            <x-button class="js-cookie-consent-customize cookie-consent__customize cursor-pointer btn-primary">
-            <i class="fi fi-rr-arrow-right arrow-to-right"></i><span>{{ trans('cookie-consent::texts.customize') }}</span>
+            <x-button class="js-cookie-consent-customize cookie-consent__customize cursor-pointer btn btn-secondary"><span>{{ trans('cookie-consent::texts.customize') }}</span>
             </x-button>
         </div>
     </div>
@@ -31,9 +29,9 @@
                     {{ trans('cookie-consent::texts.marketing-cookies') }}
                 </label>
             </form>
-            <div class="mt-4">
-                <x-button class="js-cookie-consent-save btn-primary" onclick="saveCookiePreferences()"><i class="fi fi-rr-arrow-right arrow-to-right"></i><span>{{ trans('cookie-consent::texts.save-preferences') }}</span></x-button>
-                <x-button class="js-cookie-consent-close btn-secondary" onclick="hideCustomizeDialog()">{{ trans('cookie-consent::texts.close') }}</x-button>
+            <div class="mt-4 flex gap-4">
+                <x-button class="js-cookie-consent-save btn btn-primary" onclick="saveCookiePreferences()"><span>{{ trans('cookie-consent::texts.save-preferences') }}</span></x-button>
+                <x-button class="js-cookie-consent-close btn btn-secondary" onclick="hideCustomizeDialog()">{{ trans('cookie-consent::texts.close') }}</x-button>
             </div>
         </div>
     </div>

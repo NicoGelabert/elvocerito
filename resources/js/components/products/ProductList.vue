@@ -42,12 +42,7 @@
           <ul class="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4">
             <li v-for="product in products" :key="product.id" class="relative overflow-hidden rounded-lg bg-white dark:bg-black flex">
               <a :href="'/products/' + product.categories[0]?.slug + '/' + product.slug" class="aspect-w-3 aspect-h-2 block overflow-hidden">
-                <div v-if="product.alergens && product.alergens.length > 0">
-                  <ul>
-                    <li v-for="alergen in product.alergens" :key="alergen.id" class="text-xs w-fit rounded-full px-2 py-1 absolute z-10 top-4 left-4 text-sm"
-                    :class="alergen.name === 'Analógica' ? 'bg-demo_secondary_soft text-demo_secondary' : 'bg-demo_primary_soft text-demo_primary'">{{ alergen.name }}</li>
-                  </ul>
-                </div>
+                
                 <img :src="product.image_url" alt="" class="card-image object-cover hover:scale-105 hover:rotate-1 transition-transform" />
                 <div class="flex flex-col p-4 gap-2">
                   <div v-if="product.prices && product.prices.length > 0">
