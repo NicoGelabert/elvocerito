@@ -1,16 +1,33 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-9a2aa25b.css",
+    "file": "assets/app-4f553385.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-dd5ee521.js",
+    "dynamicImports": [
+      "resources/js/catalog.js",
+      "resources/js/home.js"
+    ],
+    "file": "assets/app-92e34fef.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
+  "resources/js/catalog.js": {
+    "file": "assets/catalog-788cc8f5.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/catalog.js"
+  },
+  "resources/js/home.js": {
+    "file": "assets/home-ad6d1bc8.js",
+    "isDynamicEntry": true,
+    "src": "resources/js/home.js"
+  },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-fc6e1579.css",
+    "file": "assets/styles-d7813175.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },

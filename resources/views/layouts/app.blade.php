@@ -28,7 +28,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/scss/styles.scss', 'resources/js/app.js'])
     </head>
-    <body>
+    <body data-page="{{ request()->route()->getName() ?? '' }}">
         <div id="loader-wrapper" class="dark:bg-black">
             <div class="w-40">
                 <x-application-logo/>
@@ -88,24 +88,3 @@
         </div>
     </body>
 </html>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let percentage = 0;
-        const progressBar = document.getElementById('progress-bar');
-        const interval = setInterval(function() {
-            if (percentage < 100) {
-                percentage += 1;
-                document.getElementById('loader-percentage').innerText = percentage + '%';
-                progressBar.style.width = percentage + '%';
-            } else {
-                clearInterval(interval);
-                document.getElementById('loader-wrapper').style.display = 'none';
-                const content = document.getElementById('body-content');
-                content.style.display = 'block';
-                setTimeout(function() {
-                    content.classList.add('fade-in');
-                }, 10);
-            }
-        });
-    });
-</script>

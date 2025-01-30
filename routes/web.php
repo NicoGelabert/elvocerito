@@ -58,6 +58,9 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/terminos-y-condiciones', function (){
         return view('legal/terms-and-conditions');
     });
+    Route::get('/documentation/js/carga-de-scripts', function(){
+        return view('documentation/js/carga-de-scripts');
+    });
 
 });
 
