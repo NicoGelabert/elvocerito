@@ -1,0 +1,51 @@
+// VISTA DE LISTADO DE PRODUCTOS
+#product-index{
+    .product_index_hero{
+        @apply flex justify-center mt-14 py-12 lg:py-24;
+        h2{
+            @apply text-center
+        }
+    }
+    .product-list{
+        @apply py-12;
+        .error {
+            @apply text-red-600;
+        }
+          
+        .active-category {
+            button{
+                @apply bg-primary text-white;
+            }
+        }
+        .card-buttons{
+            span{
+                @apply hidden lg:block;
+            }
+        }
+        .divider-product_list{ 
+            @apply border-t-gray_300;
+        }
+        
+        .spinner-overlay {
+            @apply absolute top-32 md:top-16 left-1/2 -translate-x-1/2 z-10;
+        }
+        
+        .spinner {
+            @apply w-10 h-10 border-4 border-solid border-black/20 border-t-primary rounded-full;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Aplicar opacidad reducida al listado de productos mientras carga */
+        .loading-opacity {
+            @apply opacity-20;
+        }
+    
+    }
+}
+// FIN VISTA DE PRODUCTOS

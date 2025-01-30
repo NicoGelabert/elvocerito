@@ -39,7 +39,7 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
 
     // Anunciantes = Products
-    Route::get('/all', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/todo', [ProductController::class, 'index'])->name('products.index');
 
     //Servicios
     Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
