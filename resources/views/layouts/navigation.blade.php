@@ -41,29 +41,3 @@
     
     
 </header>
-
-<script>
-    var prevScrollpos = window.pageYOffset;
-    var navbar = document.getElementById("navbar");
-    // navbar.style.top = "5px";
-    var scrollThreshold = 15; // Umbral de desplazamiento mínimo antes de ocultar el encabezado
-    window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-        var scrollDifference = Math.abs(prevScrollpos - currentScrollPos);
-        if (scrollDifference >= scrollThreshold) {
-            if (prevScrollpos > currentScrollPos) {
-                navbar.style.top = "0";
-            } else {
-                navbar.style.top = "-110px";
-            }
-        }
-        prevScrollpos = currentScrollPos;
-
-        var distanceFromTop = Math.abs(window.scrollY);
-        if(distanceFromTop <= 5){
-            document.getElementById("navbar").classList.remove("scrolled-bottom");
-        }else{
-            document.getElementById("navbar").classList.add("scrolled-bottom");
-        }
-    }
-</script>

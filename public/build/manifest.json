@@ -1,20 +1,24 @@
 {
+  "_splide.esm-688b6f4b.js": {
+    "file": "assets/splide.esm-688b6f4b.js"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-811e5f99.css",
+    "file": "assets/app-505b79e8.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
     "dynamicImports": [
       "resources/js/catalog.js",
-      "resources/js/home.js"
+      "resources/js/home.js",
+      "resources/js/product-view.js"
     ],
-    "file": "assets/app-8bab55bd.js",
+    "file": "assets/app-fee4f180.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-a9beca6e.js",
+    "file": "assets/catalog-163beef3.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -22,12 +26,23 @@
     "src": "resources/js/catalog.js"
   },
   "resources/js/home.js": {
-    "file": "assets/home-ad6d1bc8.js",
+    "file": "assets/home-99c231bc.js",
+    "imports": [
+      "_splide.esm-688b6f4b.js"
+    ],
     "isDynamicEntry": true,
     "src": "resources/js/home.js"
   },
+  "resources/js/product-view.js": {
+    "file": "assets/product-view-f2914e64.js",
+    "imports": [
+      "_splide.esm-688b6f4b.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/product-view.js"
+  },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-059bf443.css",
+    "file": "assets/styles-a1e58f0b.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },

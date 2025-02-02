@@ -91,3 +91,15 @@
 
     }
 }
+.open{
+    @apply bg-lime-200 shadow-2xl shadow-black;
+    svg{
+        @apply w-3 fill-lime-400;
+    }
+}
+.closed{
+    @apply bg-red-300 shadow-2xl shadow-black;
+    svg{
+        @apply w-3 fill-red-700;
+    }
+}
