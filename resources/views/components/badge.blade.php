@@ -3,9 +3,9 @@
 ])
 <div {{ $attributes->merge(['class' => "badge"]) }}>
     @if ($attributes->has('class') && str_contains($attributes->get('class'), 'star'))
-        <x-icons.star class="mr-2" />
+        <x-icons.star />
     @elseif($attributes->has('class') && (str_contains($attributes->get('class'), 'open') || str_contains($attributes->get('class'), 'closed')))
-        <x-icons.dot class="mr-2" />
+        <x-icons.dot/>
     @endif
     <p>{{ $badge_title }}</p>
 </div>

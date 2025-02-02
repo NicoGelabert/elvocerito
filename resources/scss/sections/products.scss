@@ -111,30 +111,31 @@
             .product_header_texts{
                 @apply relative -translate-y-20 flex flex-col items-center lg:items-start gap-2;
             }
+        }
+        .product_body{
             .contact-icons{
-                @apply w-full sm:w-auto relative -translate-y-16;
+                @apply sm:w-auto lg:w-1/4 lg:absolute  -translate-y-20 lg:-translate-y-1/2 lg:grid-cols-1 right-0 shadow-md p-8 rounded-lg bg-white;
                 div{
                     svg{
                         @apply fill-gray_500 border rounded-lg bg-gray_50 w-12 h-12 p-2 drop-shadow-sm;
                     }
                 }
             }
-        }
-        .product_content{
-            @apply flex flex-col gap-16 mb-12;
-            .product_short_description{
-                @apply text-center;
-            }
-            .product_opening_hours{
-                @apply text-center;
-            }
-            .product_description{
-                @apply w-full lg:w-3/4;
-            }
-            .product_map{
-                @apply w-full;
-                iframe{
-                    @apply w-full;
+            @apply relative lg:flex flex-col gap-4;
+            .product_body_content{
+                @apply flex flex-col gap-8 lg:gap-16 mb-12 lg:w-3/4 -translate-y-10 lg:translate-y-0 pr-4;
+                .product_short_description{
+                }
+                .product_opening_hours{
+                }
+                .product_description{
+                    @apply w-full lg:w-3/4;
+                }
+                .product_map{
+                    @apply w-full flex flex-col gap-4;
+                    iframe{
+                        @apply w-full;
+                    }
                 }
             }
         }

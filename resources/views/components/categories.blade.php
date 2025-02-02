@@ -13,6 +13,5 @@
                 @endforeach
             </ul>
         </div>
-
     </div>
 </section>

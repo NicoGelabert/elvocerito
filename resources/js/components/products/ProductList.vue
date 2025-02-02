@@ -16,7 +16,7 @@
       <!-- FILTRO DE CATEGORÍAS -->
       <aside class="w-full lg:w-1/5 flex flex-col gap-4">
         <h6>Filter By</h6>
-        <hr class="divider-product_list">
+        <hr class="divider">
         <p>Type</p>
         <ul class="flex flex-wrap justify-start gap-4">
           <li
