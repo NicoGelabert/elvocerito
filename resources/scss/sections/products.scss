@@ -52,7 +52,7 @@
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{
     .product_menu{
-        @apply shadow-md bg-white transition-transform duration-300 p-2 flex-col items-center sm:flex-row sm:justify-between gap-6 fixed top-0 left-0 w-full z-10 ;
+        @apply w-full shadow-md bg-white transition-transform duration-300 px-2 py-4 flex-col sm:flex-row sm:justify-between fixed top-0 left-0 z-10 ;
         transition: top 0.3s, transform 0.3s;
         .product_menu_header{
             @apply flex gap-4 items-center;
@@ -60,16 +60,30 @@
                 @apply text-lg;
             }
             img{
-                @apply max-w-24 w-full h-full aspect-square border-2 rounded-full shadow-xl;
+                @apply max-w-16 w-full h-full aspect-square border-2 rounded-full shadow-xl;
+            }
+            .badge{
+                
+            }
+            .open, .closed{
+                @apply absolute top-0 -right-3 bg-transparent;
+                svg{
+                    @apply w-5;
+                }
+                p{
+                    @apply hidden;
+                }
             }
         }
         .contact-icons{
-            @apply w-full sm:w-auto;
+            @apply w-auto flex justify-end absolute right-2
+            top-2.5 sm:top-1/2 sm:-translate-y-1/2;
             span, p{
                 @apply sm:hidden lg:block;
             }
             svg{
-                @apply fill-gray_500 border rounded-lg bg-gray_50 w-10 h-10 p-2 drop-shadow-sm;
+                @apply fill-gray_500 border rounded-lg bg-gray_50 p-1 drop-shadow-sm
+                w-6 h-6 sm:w-10 sm:h-10;
             }
         }
     }

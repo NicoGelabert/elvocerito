@@ -12,12 +12,12 @@
 .open{
     @apply bg-lime-200 shadow-2xl shadow-black;
     svg{
-        @apply w-3 fill-lime-400;
+        @apply w-3 fill-lime-400 drop-shadow-[0_0_10px_#a3e635];
     }
 }
 .closed{
     @apply bg-red-300 shadow-2xl shadow-black;
     svg{
-        @apply w-3 fill-red-700;
+        @apply w-3 fill-red-700 drop-shadow-[0_0_10px_#C81E1E];
     }
 }

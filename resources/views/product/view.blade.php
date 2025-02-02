@@ -6,7 +6,7 @@
         ['icon' => 'email', 'name' => 'E-mail', 'text' => 'contacto@empresa.com', 'active' => true],
     ];
     $bgImage = asset('storage/common/impermeabilizacion_de_techos.png');
-    $badge_title = "cerrado";
+    $badge_title = "abierto";
 @endphp
 <x-app-layout>
     <div id="product-view"
@@ -26,16 +26,18 @@
         ]) }})">
         <div class="product_menu opacity-0 -translate-y-full">
             <div class="product_menu_header">
-                <img src="{{ $product->image }}" alt="{{ $product->title }}">
+                <div class="relative">
+                    <img src="{{ $product->image }}" alt="{{ $product->title }}">
+                    <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
+                    badge_title="{{ $badge_title }}" />
+                </div>
                 <div class="flex flex-col gap-2">
-                    <h2>{{ $product->title }}</h2>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($product->categories as $category)
                         <x-badge badge_title="{{ $category->name }}" />
                         @endforeach
-                        <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
-                        badge_title="{{ $badge_title }}" />
                     </div>
+                    <h2>{{ $product->title }}</h2>
                 </div>
                 <!-- <div class="product_header_texts">
                 </div> -->
