@@ -20,7 +20,7 @@
                     </div>
                     <h5>¿Con que impermeabilizar el techo?</h5>
                     <p class="description">Pueden ofrecernos dos variantes de membranas, líquida o en rollo, la cual podemos elegir de acuerdo a nuestras necesidades y presupuesto, vamos a conocer más...</p>
-                    <x-badge badge_title="#PalabrasDeExpertos" class="badge" />
+                    <x-badge badge_title="#PalabrasDeExpertos" />
                 </div>
             </li>
 
@@ -39,9 +39,7 @@
                     </div>
                     <h5>¿Con que impermeabilizar el techo?</h5>
                     <p class="description">Pueden ofrecernos dos variantes de membranas, líquida o en rollo, la cual podemos elegir de acuerdo a nuestras necesidades y presupuesto, vamos a conocer más...</p>
-                    <div class="badge">
-                        <p class="text-badge">#PalabrasDeExpertos</p>
-                    </div>
+                    <x-badge badge_title="#PalabrasDeExpertos" />
                 </div>
             </li>
         </ul>

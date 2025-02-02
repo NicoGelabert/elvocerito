@@ -11,7 +11,7 @@
                         <ul class="absolute top-2 left-2">
                             @foreach ($anunciante_destacado->prices as $price)
                                 <li>
-                                    <x-badge class="badge star" badge_title="{{ $price->number }}" />
+                                    <x-badge class="star" badge_title="{{ $price->number }}" />
                                 </li>
                             @endforeach
                         </ul>
@@ -19,7 +19,7 @@
                     <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
                     <div class="products_card_content">
                         @foreach ($anunciante_destacado->categories as $category)
-                        <x-badge class="badge" badge_title="{{ $category->name }}" />
+                        <x-badge badge_title="{{ $category->name }}" />
                         @endforeach
                         <h5>{{ $anunciante_destacado->title}}</h5>
                         <p>{{ $anunciante_destacado->description }}</p>

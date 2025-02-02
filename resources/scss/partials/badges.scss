@@ -1,0 +1,23 @@
+//Badge
+.badge{
+    @apply bg-gray_100 font-bold text-gray_600 w-fit rounded-md py-1 px-2 flex items-center gap-1 capitalize;
+}
+.star{
+    @apply bg-primary text-gray_50 py-1;
+    svg{
+        @apply w-4 h-auto fill-gray_50;
+
+    }
+}
+.open{
+    @apply bg-lime-200 shadow-2xl shadow-black;
+    svg{
+        @apply w-3 fill-lime-400;
+    }
+}
+.closed{
+    @apply bg-red-300 shadow-2xl shadow-black;
+    svg{
+        @apply w-3 fill-red-700;
+    }
+}

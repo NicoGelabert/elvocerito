@@ -10,7 +10,7 @@
                     <img src="{{ $ultimo_anunciante->image }}" alt="{{ $ultimo_anunciante->title }}">
                     <div class="ultimos_anunciantes_card_content">
                         @foreach ($ultimo_anunciante->categories as $category)
-                        <x-badge class="badge" badge_title="{{ $category->name }}" />
+                        <x-badge badge_title="{{ $category->name }}" />
                         @endforeach
                         <h5>{{ $ultimo_anunciante->title}}</h5>
                         <p>{{ $ultimo_anunciante->description }}</p>

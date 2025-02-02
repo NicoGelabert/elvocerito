@@ -31,7 +31,7 @@
                     <h2>{{ $product->title }}</h2>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($product->categories as $category)
-                        <x-badge badge_title="{{ $category->name }}" class="badge" />
+                        <x-badge badge_title="{{ $category->name }}" />
                         @endforeach
                         <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
                         badge_title="{{ $badge_title }}" />
@@ -58,7 +58,7 @@
                 <div class="product_header_texts">
                     <div class="flex flex-wrap gap-2">
                         @foreach ($product->categories as $category)
-                        <x-badge badge_title="{{ $category->name }}" class="badge" />
+                        <x-badge badge_title="{{ $category->name }}" />
                         @endforeach
                         <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
                         badge_title="{{ $badge_title }}" />

@@ -58,7 +58,7 @@
                   <!-- BADGE CATEGORÍA -->
                   <div v-if="product.categories && product.categories.length > 0" >
                     <ul class="font-bold text-xs">
-                      <li class="bg-gray_200 text-gray_600 rounded-md py-1 px-2 w-fit" v-for="category in product.categories" :key="category.id"><span>{{ category.name }}</span></li>
+                      <li class="badge" v-for="category in product.categories" :key="category.id"><span>{{ category.name }}</span></li>
                     </ul>
                   </div>
                   <!-- FIN BADGE CATEGORÍA -->

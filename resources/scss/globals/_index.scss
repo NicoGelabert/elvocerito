@@ -1,6 +1,10 @@
 @forward '../globals/variables';
 @forward '../partials/header.scss';
 @forward '../partials/home.scss';
+@forward '../partials/form.scss';
+@forward '../partials/buttons.scss';
+@forward '../partials/badges.scss';
+@forward '../partials/footer.scss';
 @forward '../sections/homeherobanner.scss';
 @forward '../sections/categories.scss';
 @forward '../sections/anunciantes_destacados.scss';
@@ -8,9 +12,6 @@
 @forward '../sections/como_buscar_en_la_guia.scss';
 @forward '../sections/news.scss';
 @forward '../sections/products.scss';
-@forward '../partials/form.scss';
-@forward '../partials/buttons.scss';
-@forward '../partials/footer.scss';
 @forward '../sections/services.scss';
 @forward '../sections/portfolio.scss';
 // @import "@flaticon/flaticon-uicons/css/all/all";
