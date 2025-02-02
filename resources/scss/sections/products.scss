@@ -62,9 +62,6 @@
             img{
                 @apply max-w-16 w-full h-full aspect-square border-2 rounded-full shadow-xl;
             }
-            .badge{
-                
-            }
             .open, .closed{
                 @apply absolute top-0 -right-3 bg-transparent;
                 svg{
@@ -76,14 +73,16 @@
             }
         }
         .contact-icons{
-            @apply w-auto flex justify-end absolute right-2
-            top-2.5 sm:top-1/2 sm:-translate-y-1/2;
+            @apply w-auto flex justify-end right-2
+            top-2.5 sm:top-1/2 lg:top-0
+            sm:-translate-y-1/2 lg:-translate-y-0
+            absolute lg:relative ;
             span, p{
                 @apply sm:hidden lg:block;
             }
             svg{
                 @apply fill-gray_500 border rounded-lg bg-gray_50 p-1 drop-shadow-sm
-                w-6 h-6 sm:w-10 sm:h-10;
+                w-6 h-6 sm:w-8 sm:h-8;
             }
         }
     }
@@ -122,9 +121,21 @@
             }
         }
         .product_content{
-            @apply flex flex-col lg:flex-row-reverse lg:gap-16;
-            .product_content_description{
+            @apply flex flex-col gap-16 mb-12;
+            .product_short_description{
+                @apply text-center;
+            }
+            .product_opening_hours{
+                @apply text-center;
+            }
+            .product_description{
                 @apply w-full lg:w-3/4;
+            }
+            .product_map{
+                @apply w-full;
+                iframe{
+                    @apply w-full;
+                }
             }
         }
     }
