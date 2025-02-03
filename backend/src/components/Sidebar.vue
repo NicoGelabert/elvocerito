@@ -42,6 +42,15 @@
                 <ArchiveBoxIcon class="w-5"/>
             </span>
         </router-link>
+        <router-link :to="{name: 'app.authors'}"
+                    class="flex items-center justify-between p-2 gap-8 rounded transition-colors hover:bg-white">
+            <span class="text-sm">
+                Author
+            </span>
+            <span class="mr-2">
+                <IdentificationIcon class="w-5"/>
+            </span>
+        </router-link>
         <router-link :to="{name: 'app.alergens'}"
                     class="flex items-center justify-between p-2 gap-8 rounded transition-colors hover:bg-white">
             <span class="text-sm">
@@ -129,7 +138,23 @@
 
 <script setup>
 
-import { ChevronLeftIcon,  BuildingStorefrontIcon, PhotoIcon, MegaphoneIcon, ArchiveBoxIcon, EyeDropperIcon, BriefcaseIcon, LightBulbIcon, TagIcon, TrophyIcon, CurrencyEuroIcon, ClipboardDocumentListIcon, UsersIcon, UserGroupIcon, PresentationChartLineIcon } from '@heroicons/vue/24/outline'
+import {ArchiveBoxIcon,
+        BriefcaseIcon,
+        BuildingStorefrontIcon,
+        ChevronLeftIcon,
+        ClipboardDocumentListIcon,
+        CurrencyEuroIcon,
+        EyeDropperIcon,
+        IdentificationIcon,
+        LightBulbIcon,
+        MegaphoneIcon,
+        PhotoIcon,
+        PresentationChartLineIcon,
+        TagIcon,
+        TrophyIcon,
+        UserGroupIcon,
+        UsersIcon,
+        } from '@heroicons/vue/24/outline'
 import {ref} from "vue";
 
 const emit = defineEmits(['toggle-sidebar'])

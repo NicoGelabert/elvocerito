@@ -58,6 +58,17 @@ export function setProducts(state, [loading, data = null]) {
   state.products.loading = loading;
 }
 
+export function setAuthors(state, [loading, data = null]) {
+
+  if (data) {
+    state.authors = {
+      ...state.authors,
+      data: data.data,
+    }
+  }
+  state.authors.loading = loading;
+}
+
 export function setUsers(state, [loading, data = null]) {
 
   if (data) {

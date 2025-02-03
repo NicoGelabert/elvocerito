@@ -33,6 +33,16 @@ export default {
     limit: null,
     total: null
   },
+  authors: {
+    loading: false,
+    data: [],
+    links: [],
+    from: null,
+    to: null,
+    page: 1,
+    limit: null,
+    total: null
+  },
   prices: {
     loading: false,
     data: [],
