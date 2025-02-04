@@ -274,6 +274,101 @@ export function deleteProduct({commit}, id) {
   return axiosClient.delete(`/products/${id}`)
 }
 
+// ARTICLES
+export function getArticles({commit, state}, {url = null, search = '', per_page, sort_field, sort_direction} = {}) {
+  commit('setArticles', [true])
+  url = url || '/articles'
+  const params = {
+    per_page: state.articles.limit,
+  }
+  return axiosClient.get(url, {
+    params: {
+      ...params,
+      search, per_page, sort_field, sort_direction
+    }
+  })
+    .then((response) => {
+      commit('setArticles', [false, response.data])
+    })
+    .catch(() => {
+      commit('setArticles', [false])
+    })
+}
+
+export function getArticle({commit}, id) {
+  return axiosClient.get(`/articles/${id}`)
+}
+
+export function createArticle({ commit }, article) {
+  const form = new FormData();
+
+  form.append('title', article.title);
+  form.append('subtitle', article.subtitle || '');
+  form.append('news_lead', article.news_lead || '');
+  form.append('description', article.description || '');
+  form.append('published', article.published ? 1 : 0);
+
+  // Agregar imágenes al FormData
+  if (article.images && article.images.length) {
+    article.images.forEach((im) => {
+      form.append(`images[]`, im);
+    });
+  }
+
+  // Agregar alérgenos al FormData
+  if (article.authors && article.authors.length) {
+    article.authors.forEach((author) => {
+      form.append(`authors[]`, author);
+    });
+  }
+  
+  return axiosClient.post('/articles', form);
+}
+
+
+export function updateArticle({commit}, article) {
+  const id = article.id
+  if (article.images && article.images.length) {
+    const form = new FormData();
+    form.append('id', article.id);
+    form.append('title', article.title);
+    form.append('subtitle', article.subtitle || '');
+    form.append('news_lead', article.news_lead || '');
+    form.append('description', article.description || '');
+    form.append('published', article.published ? 1 : 0);
+
+  // Agregar alérgenos al FormData
+  if (article.authors && article.authors.length) {
+    article.authors.forEach((author) => {
+      form.append(`authors[]`, author);
+    });
+  }
+    // Agregar imágenes al FormData
+    if (article.images && article.images.length) {
+      article.images.forEach((im) => {
+        form.append(`images[]`, im);
+      });
+    }
+    // Agregar imágenes eliminadas al FormData
+    if (article.deleted_images && article.deleted_images.length) {
+      article.deleted_images.forEach((id) => form.append('deleted_images[]', id));
+    }
+    // Agregar posiciones de imágenes al FormData
+    for (let id in article.image_positions) {
+      form.append(`image_positions[${id}]`, article.image_positions[id]);
+    }
+    form.append('_method', 'PUT');
+    article = form;
+  } else {
+    article._method = 'PUT'
+  }
+  return axiosClient.post(`/articles/${id}`, article)
+}
+
+export function deleteArticle({commit}, id) {
+  return axiosClient.delete(`/articles/${id}`)
+}
+
 // AUTHOR
 export function getAuthors({commit, state}, {sort_field, sort_direction} = {}) {
   commit('setAuthors', [true])
@@ -288,6 +383,10 @@ export function getAuthors({commit, state}, {sort_field, sort_direction} = {}) {
     .catch(() => {
       commit('setAuthors', [false])
     })
+}
+
+export function getAuthor({commit}, id) {
+  return axiosClient.get(`/authors/${id}`)
 }
 
 export function createAuthor({commit}, author) {

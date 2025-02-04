@@ -1,41 +1,44 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-    <div class="flex items-center justify-between mb-3">
-      <h1 v-if="!loading" class="text-3xl font-semibold">
-        {{ author.id ? `Update author: "${author.name}"` : 'Create new Author' }}
-      </h1>
-    </div>
-    <div class="bg-white rounded-lg shadow animate-fade-in-down">
-        <Spinner v-if="loading" class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50"/>
+    <div class="p-4 bg-white shadow rounded-lg">
+        <h1 v-if="!loading" class="text-2xl font-bold">
+            {{ author.id ? `Update Author: "${author.name}"` : 'Create new Author' }}
+        </h1>
+      
+        <Spinner v-if="loading" class="my-4" />
+      
         <form v-if="!loading" @submit.prevent="onSubmit">
             <div class="grid grid-cols-3">
                 <div class="col-span-2 px-4 pt-5 pb-4">
                     <div class="flex flex-col gap-2">
-                        <h3 class="text-lg font-bold">Name</h3>
+                        <h3 class="text-lg font-bold">Author Name</h3>
                         <CustomInput class="mb-2" v-model="author.name" label="Author name" :errors="errors['name']"/>
                     </div>
-                    <hr class="my-4">
-                    <CustomInput type="select"
-                               :select-options="parentAuthors"
-                               class="mb-2"
-                               v-model="author.parent_id"
-                               label="Parent" :errors="errors['parent_id']"/>
                     <hr class="my-4">
                     <div class="flex flex-col gap-2">
                         <h3 class="text-lg font-bold">Description</h3>
                         <CustomInput type="richtext" class="mb-2" v-model="author.description" label="Description" :errors="errors['description']"/>
                     </div>
                     <hr class="my-4">
-                    <CustomInput type="checkbox" class="mb-2" v-model="author.active" label="Active"/>
+                    <CustomInput type="select" :select-options="parentAuthors" class="mb-2" v-model="author.parent_id" label="Parent" :errors="errors['parent_id']"/>
+                    <hr class="my-4">
+                    <CustomInput type="checkbox" class="mb-2" v-model="author.active" label="Active" :errors="errors['active']"/>
                 </div>
                 <div class="col-span-1 px-4 pt-5 pb-4">
                     <h3 class="text-lg font-bold mb-2">Imagen</h3>
                     <!-- Imagen Previa -->
-                    <div class="my-4">
-                      <img v-if="author.image_url" class="w-16 h-16" :src="author.image_url" :alt="author.name">
-                      <img v-else class="w-16 h-16 object-cover" src="../../assets/noimage.png">
+                     <div v-if="author.image_url" class="relative w-40 h-40 rounded-lg border border-dashed flex items-center justify-center overflow-hidden bg-gray-100">
+                        <img :src="author.image_url" alt="Previsualización" class="object-cover w-full h-full">
+                        <button class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600" @click="author.image_url = null">
+                            ✕
+                        </button>
                     </div>
-                    <CustomInput type="file" class="mb-2" label="Author Image" @change="file => author.image = file"/>
+                    <!-- Input para Cargar Imagen -->
+                     <div v-else class="relative w-40 h-40 rounded-lg border border-dashed flex items-center justify-center hover:border-purple-500 overflow-hidden bg-gray-50">
+                        <label class="flex flex-col items-center justify-center cursor-pointer text-gray-600 hover:text-purple-500">
+                            <span>Seleccionar Imagen</span>
+                            <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="onImageChange" />
+                        </label>
+                    </div>
                 </div>
             </div>
             <footer class="bg-gray-50 rounded-b-lg px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -52,106 +55,92 @@
         </form>
     </div>
 </template>
-
-<script setup>
-import {computed, onMounted, ref} from 'vue'
-import CustomInput from "../../components/core/CustomInput.vue";
-import store from "../../store/index.js";
-import Spinner from "../../components/core/Spinner.vue";
-import {useRoute, useRouter} from "vue-router";
-import ImagePreview from "../../components/ImagePreview.vue";
-import {PlusCircleIcon, TrashIcon} from '@heroicons/vue/24/solid';
-
-import axiosClient from "../../axios.js";
   
-const route = useRoute()
-const router = useRouter()
+<script setup>
+import { computed, ref, onMounted } from 'vue';
+import CustomInput from "../../components/core/CustomInput.vue";
+import { useRoute, useRouter } from 'vue-router';
+import store from '../../store/index.js';
+import Spinner from '../../components/core/Spinner.vue';
+import Treeselect from 'vue3-treeselect';
+import 'vue3-treeselect/dist/vue3-treeselect.css';
+import axiosClient from "../../axios.js";
+
+const route = useRoute();
+const router = useRouter();
 
 const author = ref({
     id: null,
     name: '',
     description: '',
-    image: '',
-    active: '',
     parent_id: '',
-})
+    image: '',
+    image_url: '',
+    active: '',
+});
 
-const errors = ref({});
 const loading = ref(false);
+const errors = ref({});
 
-const emit = defineEmits(['update:modelValue', 'close'])
+const parentAuthors = computed(() => [
+    { key: '', text: 'Select Parent Author' },
+    ...store.state.authors.data
+    .filter(c => !author.value.id || c.id !== author.value.id)
+    .map(c => ({ key: c.id, text: c.name }))
+    .sort((c1, c2) => c1.text.localeCompare(c2.text))
+]);
 
-const parentAuthors = computed(() => {
-  return [
-    {key: '', text: 'Select Parent Author'},
-    ...store.state.alergens.data
-      .filter(c => {
-        if (alergen.value.id) {
-          return c.id !== alergen.value.id
-        }
-        return true;
-      })
-      .map(c => ({key: c.id, text: c.name}))
-      .sort((c1, c2) => {
-        if (c1.text < c2.text) return -1;
-        if (c1.text > c2.text) return 1;
-        return 0;
-      })
-  ]
-})
+function onImageChange(event) {
+    const file = event?.target?.files[0];
+    if (file) {
+        author.value.image = file;
+        author.value.image_url = URL.createObjectURL(file);
+    }
+}
 
 onMounted(() => {
     if (route.params.id) {
-        loading.value = true
+        loading.value = true;
         store.dispatch('getAuthor', route.params.id)
         .then((response) => {
-            loading.value = false;
-            author.value = response.data;
+            author.value = response.data.data || {};
+            if (author.value.image) {
+                author.value.image_url = author.value.image;
+            }
         })
+        .catch((error) => {
+            console.error('Error fetching author:', error);
+        })
+        .finally(() => {
+            loading.value = false;
+        });
     }
-})
+});
 
 function onSubmit($event, close = false) {
-    loading.value = true
+    loading.value = true;
     errors.value = {};
-    if (author.value.id) {
-        store.dispatch('updateAuthor', author.value)
-        .then(response => {
-            loading.value = false;
-            if (response.status === 200) {
-                author.value = response.data
-                store.commit('showToast', 'Author was successfully updated');
-                store.dispatch('getAuthors')
-                if (close) {
-                    router.push({name: 'app.authors'})
-                }
+
+    const action = author.value.id ? 'updateAuthor' : 'createAuthor';
+
+    store.dispatch(action, author.value)
+    .then(response => {
+        loading.value = false;
+        if (response.status === (author.value.id ? 200 : 201)) {
+            author.value = response.data;
+            store.commit('showToast', `Author was successfully ${author.value.id ? 'updated' : 'created'}`);
+            store.dispatch('getAuthors');
+    
+            if (close) {
+                router.push({ name: 'app.authors' });
+            } else if (!author.value.id) {
+                router.push({ name: 'app.authors.edit', params: { id: response.data.id } });
             }
-        })
-        .catch(err => {
-            loading.value = false;
-            errors.value = err.response.data.errors
-        })
-    } else {
-        store.dispatch('createAuthor', author.value)
-        .then(response => {
-            loading.value = false;
-            if (response.status === 201) {
-                author.value = response.data
-                store.commit('showToast', 'Author was successfully created');
-                store.dispatch('getAuthors')
-                if (close) {
-                    router.push({name: 'app.authors'})
-                } else {
-                    author.value = response.data
-                    router.push({name: 'app.authors.edit', params: {id: response.data.id}})
-                }
-            }
-        })
-        .catch(err => {
-            loading.value = false;
-            errors.value = err.response.data.errors
-        })
-    }
+        }
+    })
+    .catch(err => {
+        loading.value = false;
+        errors.value = err.response.data.errors;
+    });
 }
 </script>
-    

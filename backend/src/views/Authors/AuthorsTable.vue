@@ -88,22 +88,22 @@
                     class="absolute z-10 right-0 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                     <div class="px-1 py-1">
-                    <MenuItem v-slot="{ active }">
-                        <button
-                        :class="[
-                            active ? 'bg-black text-white' : 'text-gray-900',
+                      <MenuItem v-slot="{ active }">
+                        <router-link
+                          :to="{name: 'app.authors.edit', params: {id: author.id}}"
+                          :class="[
+                            active ? 'bg-gray-200 text-black' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                        ]"
-                        @click="editAuthor(author)"
+                          ]"
                         >
-                        <PencilSquareIcon
+                          <PencilSquareIcon
                             :active="active"
-                            class="mr-2 h-5 w-5 text-gray-500"
+                            class="mr-2 h-5 w-5 text-black"
                             aria-hidden="true"
-                        />
-                        Edit
-                        </button>
-                    </MenuItem>
+                          />
+                          Edit
+                        </router-link>
+                      </MenuItem>
                     <MenuItem v-slot="{ active }">
                         <button
                         :class="[
@@ -177,8 +177,6 @@
   const sortField = ref('updated_at');
   const sortDirection = ref('desc')
   const author = ref({})
-  const showAuthorModal = ref(false);
-  const emit = defineEmits(['clickEdit'])
   onMounted(() => {
   getAuthors();
   })
@@ -211,9 +209,7 @@
       }
       getAuthors()
   }
-  function showAddNewModal() {
-  showAuthorModal.value = true
-  }
+  
   function deleteAuthor(author) {
   if (!confirm(`Are you sure you want to delete the author?`)) {
     return
@@ -223,9 +219,6 @@
       // TODO Show notification
       store.dispatch('getAuthors')
     })
-  }
-  function editAuthor(p) {
-  emit('clickEdit', p)
   }
   </script>
   

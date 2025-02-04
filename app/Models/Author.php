@@ -5,13 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Author extends Model
 {
     use HasFactory;
+    use HasSlug;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'active', 'parent_id', 'image', 'image_mime', 'image_size', 'created_by', 'updated_by'];
+    protected $fillable = ['name', 'slug', 'description', 'active', 'parent_id', 'image', 'image_mime', 'image_size', 'created_by', 'updated_by'];
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
     public function parent()
     {
@@ -20,7 +30,7 @@ class Author extends Model
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class); // article_author
+        return $this->belongsToMany(Article::class, 'article_authors'); // article_author
     }
 
     public static function getActiveAsTree($resourceClassName = null)

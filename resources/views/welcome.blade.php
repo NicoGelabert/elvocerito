@@ -8,7 +8,7 @@
         <hr class="divider container">
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
         <x-como-buscar-en-la-guia />
-        <x-news />
+        <x-news :articles="$articles" />
         <hr class="divider container">
     </div>
 </x-app-layout>

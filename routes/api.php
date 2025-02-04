@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\HomeHeroBannerController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\AlergenController;
 use App\Http\Controllers\Api\ServiceController;
@@ -36,6 +37,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::apiResource('categories', CategoryController::class)->except('show');
     Route::get('/categories/tree', [CategoryController::class, 'getAsTree']);
     Route::apiResource('products', ProductController::class);
+    Route::apiResource('articles', ArticleController::class);
     Route::apiResource('authors', AuthorController::class)->except('show');
     Route::get('/authors/tree', [AuthorController::class, 'getAsTree']);
     Route::apiResource('alergens', AlergenController::class)->except('show');
@@ -71,6 +73,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
+Route::apiResource('authors', AuthorController::class)->only(['index', 'show']);
 Route::get('/categories/{category:slug}/products', [ProductController::class, 'productsByCategory']);
 Route::get('categories/{category}/products', [ProductController::class, 'productsByCategory'])->name('category.products');
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

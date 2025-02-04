@@ -59,6 +59,17 @@ class AuthorController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param \App\Models\Author $author
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Author $author)
+    {
+        return new AuthorResource($author);
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateAuthorRequest $request, Author $author)

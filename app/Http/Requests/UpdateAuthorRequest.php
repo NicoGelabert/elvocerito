@@ -24,6 +24,7 @@ class UpdateAuthorRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
             'parent_id' => [
                 'nullable', 'exists:authors,id',
                 function(string $attribute, $value, \Closure $fail) {

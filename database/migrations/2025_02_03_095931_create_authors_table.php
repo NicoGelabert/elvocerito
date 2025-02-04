@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->longtext('description')->nullable();
             $table->string('image', 2000)->nullable();
             $table->string('image_mime')->nullable();

@@ -19,6 +19,7 @@ class AuthorResource extends JsonResource
         return[
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'image_url' => $this->image ?: null,
             'description' => $this->description,
             'active' => (bool)$this->active,

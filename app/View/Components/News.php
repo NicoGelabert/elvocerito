@@ -8,12 +8,15 @@ use Illuminate\View\Component;
 
 class News extends Component
 {
-    /**
+    public $articles;
+     /**
      * Create a new component instance.
+     * @param  mixed  $articles
+     * @return void
      */
-    public function __construct()
+    public function __construct($articles)
     {
-        //
+        $this->articles = $articles;
     }
 
     /**
