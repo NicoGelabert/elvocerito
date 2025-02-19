@@ -2,18 +2,6 @@
     @apply flex flex-col gap-6;
     .news-title{
         @apply flex justify-between items-center;
-        a{
-            @apply flex gap-2 items-center font-medium
-            text-gray_500 hover:text-gray_700;
-            svg{
-                @apply fill-gray_500;
-            }
-        }
-        a:hover{
-            svg{
-                @apply fill-gray_700;
-            }
-        }
     }
     .news-card{
         @apply flex flex-col sm:flex-row gap-6;

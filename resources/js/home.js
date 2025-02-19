@@ -29,11 +29,33 @@ homeHeroBanner.mount();
 var categoriesElement = document.querySelector('#categories');
 if (categoriesElement) {
     var categories = new Splide(categoriesElement, {
-        perPage     : 9,
-        arrows      : true,
         autoplay    : false,
+        breakpoints: {
+            1280: {
+                perPage     : 10,
+                perMove     : 10,
+            },
+            1024: {
+                perPage     : 8,
+                perMove     : 8,
+            },
+            768: {
+                perPage     : 6,
+                perMove     : 6,
+            },
+            480: {
+                perPage     : 3,
+                perMove     : 3,
+            }
+        },
+        classes: {
+            arrows    : 'splide__arrows_custom',
+        },
+        gap         : '1rem',
         pagination  : false,
         padding     : 0,
+        perMove     : 12,
+        perPage     : 12,
     })
 };
 categories.mount();
@@ -73,7 +95,6 @@ if (newsElement) {
     var news = new Splide(newsElement, {
         classes: {
             pagination: 'splide__pagination_custom',
-            arrows    : 'splide__arrows_custom splide__arrows_custom_news',
         },
         gap       : '1.5rem',
         pagination: true,

@@ -1,0 +1,9 @@
+.splide__arrows{
+    @apply hidden md:flex relative gap-12;
+    button{
+        @apply relative bg-transparent border border-solid border-primary w-7 h-7;
+        svg{
+            @apply fill-primary w-3 h-3;
+        }
+    }
+}

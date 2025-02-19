@@ -1,7 +1,13 @@
 <div class="container news splide" aria-label="Latest news">
     <div class="news-title">
         <h4>News</h4>
-        <x-see-all />
+        <div class="flex">
+            <div class="splide__arrows  splide__arrows--ltr">
+            </div>
+            <x-button class="see-all" href="{{route ('products.index')}}" >
+                Ver todas
+            </x-button>
+        </div>
     </div>
     <div class="splide__track">
         <ul class="splide__list">

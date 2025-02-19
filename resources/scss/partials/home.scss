@@ -60,22 +60,4 @@
     }
 }
 
-// Splde arrows
-.splide__arrows_custom{
-    @apply flex gap-4
-    sm:absolute right-0 top-2;
-    .splide__arrow{
-        @apply relative translate-y-0;
-    }
-    .splide__arrow--prev{
-        @apply left-0;
-    }
-    .splide__arrow--next{
-        @apply right-0;
-    }
 
-}
-// Splde arrows - Botonera de news
-.splide__arrows_custom_news{
-    @apply bottom-12 top-auto pr-4;
-}

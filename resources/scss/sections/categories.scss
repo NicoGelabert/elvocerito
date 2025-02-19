@@ -4,7 +4,7 @@
     }
     .categories_content{
         ul{
-           @apply flex gap-2; 
+           @apply flex; 
             li{
                 @apply flex flex-col gap-4 items-center w-[85px];
                 p{
