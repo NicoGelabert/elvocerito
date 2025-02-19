@@ -1,10 +1,5 @@
 @php
-    $contactIcons = [
-        ['icon' => 'phone', 'name' => 'Teléfono', 'text' => '+54 11 1234-5678', 'active' => true],
-        ['icon' => 'mobile', 'name' => 'Teléfono Móvil', 'text' => '+54 9 11 9876-5432', 'active' => true],
-        ['icon' => 'whatsapp', 'name' => 'WhatsApp', 'text' => '+54 9 11 1234-5678', 'active' => true],
-        ['icon' => 'email', 'name' => 'E-mail', 'text' => 'contacto@empresa.com', 'active' => true],
-    ];
+    
     $bgImage = asset('storage/common/impermeabilizacion_de_techos.png');
     $badge_title = "cerrado";
 @endphp
@@ -16,12 +11,7 @@
         'image' => $product->image,
         'title' => $product->title,
         'quantity' => $product->quantity,
-        'prices' => $product->prices->map(function ($price) {
-            return [
-                'number' => $price->number,
-                'size' => $price->size,
-            ];
-        }),
+        'contacts' => $product->contacts,
         'images' => $product->images->pluck('url') 
         ]) }})">
         <div class="product_menu opacity-0 -translate-y-full">
@@ -37,16 +27,16 @@
                             @foreach ($product->categories as $category)
                             <x-badge badge_title="{{ $category->name }}" />
                             @endforeach
-                            @foreach ($product->prices as $price)
-                            <x-badge class="star" badge_title="{{ $price->number % 1 == 0 ? number_format($price->number, 0) : number_format($price->number, 1) }}" />
-                            @endforeach
+                            <!-- @foreach ($product->contacts as $contact)
+                            <x-badge class="star" badge_title="{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}" />
+                            @endforeach -->
                         </div>
                         <h2>{{ $product->title }}</h2>
                     </div>
                     <!-- <div class="product_header_texts">
                     </div> -->
                 </div>
-                <x-contact-icons class="contact-icons" :icons="collect($contactIcons)->where('active', true)->toArray()"></x-contact-icons>
+                <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
             </div>
         </div>
         <div class="product-view-hero splide">
@@ -67,9 +57,9 @@
                         @foreach ($product->categories as $category)
                         <x-badge badge_title="{{ $category->name }}" />
                         @endforeach
-                        @foreach ($product->prices as $price)
-                        <x-badge class="star" badge_title="{{ $price->number % 1 == 0 ? number_format($price->number, 0) : number_format($price->number, 1) }}" />
-                        @endforeach
+                        <!-- @foreach ($product->contacts as $contact)
+                        <x-badge class="star" badge_title="{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}" />
+                        @endforeach -->
                         <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
                         badge_title="{{ $badge_title }}" />
                     </div>
@@ -77,10 +67,10 @@
                 </div>
             </div>
             <div class="product_body">
-                <x-contact-icons class="contact-icons" :icons="collect($contactIcons)->where('active', true)->toArray()"></x-contact-icons>
+                <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
                 <div class="product_body_content">
                     <div class="product_short_description">
-                        <p class="text-large">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam aspernatur earum optio commodi similique modi hic quos incidunt, dolores veniam vel sunt, quia maxime voluptate reprehenderit amet nihil. Similique, maiores!</p>
+                        <p class="text-large">{{ $product->short_description}}</p>
                     </div>
                     <div class="product_opening_hours">
                         <h4>Horario de atención</h4>
@@ -99,9 +89,9 @@
                     <hr class="divider">
                     <div class="product_rating">
                         <h4>Valoración de los clientes</h4>
-                        @foreach ($product->prices as $price)
+                        @foreach ($product->contacts as $contact)
                             <div class="flex gap-2 items-center">
-                                <p class="text-4xl">{{ $price->number % 1 == 0 ? number_format($price->number, 0) : number_format($price->number, 1) }}</p>
+                                <p class="text-4xl">{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}</p>
                                 <x-icons.star class="h-auto w-8 fill-amber-500" />
                             </div>
                         @endforeach

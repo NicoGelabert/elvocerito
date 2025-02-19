@@ -22,21 +22,31 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
+            'short_description' => $this->short_description,
             'description' => $this->description,
-            'image_url' => $this->image,
-            'images' => $this->images,
-            'prices' => $this->prices->map(function ($price) {
-                return [
-                    'id' => $price->id,
-                    'number' => $price->number,
-                    'size' => $price->size,
-                ];
-            }),
-            'quantity' => $this->quantity,
+            'leading_home' => (bool)$this->leading_home,
+            'leading_category' => (bool)$this->leading_category,
+            'urgencies' => (bool)$this->urgencies,
             'published' => (bool)$this->published,
-            'categories' => $this->categories->map(fn($c) => $c->id),
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
+            'categories' => $this->categories->map(fn($c) => $c->id),
+            'image_url' => $this->image,
+            'images' => $this->images,
+            'contacts' => $this->contacts->map(function ($contact) {
+                return [
+                    'id' => $contact->id,
+                    'type' => $contact->type,
+                    'info' => $contact->info,
+                ];
+            }),
+            'socials' => $this->socials->map(function ($social) {
+                return [
+                    'id' => $social->id,
+                    'rrss' => $social->rrss,
+                    'link' => $social->link,
+                ];
+            }),
         ];
     }
 }

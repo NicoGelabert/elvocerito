@@ -1,9 +1,12 @@
 //Badge
 .badge{
     @apply bg-gray_100 font-bold text-gray_600 w-fit rounded-md py-1 px-2 flex items-center gap-1 capitalize;
-    p{
+    p, span{
         @apply text-text_small lg:text-xs;
     }
+}
+.truncate-text{
+    @apply block w-[140px] lg:w-[180px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 .star{
     @apply bg-amber-200;

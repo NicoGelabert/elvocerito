@@ -14,7 +14,17 @@ class Product extends Model
     use HasSlug;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'price', 'quantity', 'published', 'created_by', 'updated_by'];
+    protected $fillable = [
+        'title',
+        'short_description',
+        'description', 
+        'leading_home',
+        'leading_category',
+        'urgencies',
+        'published',
+        'created_by',
+        'updated_by'
+    ];
 
     public function getSlugOptions() : SlugOptions
     {
@@ -28,6 +38,11 @@ class Product extends Model
         return 'slug';
     }
     
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_categories');
+    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class)->orderBy('position');
@@ -38,14 +53,14 @@ class Product extends Model
         return $this->images->count() > 0 ? $this->images->get(0)->url : null;
     }
 
-    public function categories()
+    public function contacts()
     {
-        return $this->belongsToMany(Category::class, 'product_categories');
+        return $this->hasMany(ProductContact::class);
     }
 
-    public function prices()
+    public function socials()
     {
-        return $this->hasMany(ProductPrice::class);
+        return $this->hasMany(ProductSocial::class);
     }
 
 }

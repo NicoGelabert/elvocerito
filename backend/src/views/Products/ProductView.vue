@@ -22,30 +22,40 @@
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Short Description</h3>
+            <CustomInput type="text" class="mb-2" v-model="product.short_description" label="Short Description" :errors="errors['short_description']"/>
+          </div>
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Description</h3>
             <CustomInput type="richtext" class="mb-2" v-model="product.description" label="Description" :errors="errors['description']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Prices</h3>
-            <div v-for="(price, index) in product.prices" :key="index" class="flex gap-1">
+            <h3 class="text-lg font-bold">Contact Info</h3>
+            <div v-for="(contact, index) in product.contacts" :key="index" class="flex gap-1">
               <CustomInput 
-                v-model="price.number" 
-                type="number" 
+                v-model="contact.type" 
+                type="select" 
                 class="mb-2 w-4/12" 
-                label="Price" 
-                prepend="$" 
-                :errors="errors[`prices.${index}.number`]" 
+                label="Contact" 
+                :select-options="[
+                  { key: 'fijo', text: 'Teléfono Fijo' },
+                  { key: 'movil', text: 'Teléfono Móvil' },
+                  { key: 'whatsapp', text: 'Whatsapp' },
+                  { key: 'email', text: 'E-Mail' }
+                ]" 
+                :errors="errors[`contacts.${index}.type`]" 
               />
               <CustomInput 
-                v-model="price.size" 
+                v-model="contact.info" 
                 type="text" 
                 class="mb-2 w-7/12" 
-                label="Size" 
-                :errors="errors[`prices.${index}.size`]" 
+                label="Info" 
+                :errors="errors[`contacts.${index}.info`]" 
               />
               <div class="w-1/12 flex items-center justify-center">
-                <button class="group border-0 rounded-full hover:bg-black" v-if="product.prices.length > 1" @click.prevent="removePrice(index)">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="product.contacts.length > 1" @click.prevent="removeContact(index)">
                   <TrashIcon
                     class="h-5 w-5 text-black group-hover:text-white"
                     aria-hidden="true"
@@ -53,8 +63,8 @@
                 </button>
               </div>
             </div>
-            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addPrice">
-              <h4 class="text-sm">New Price</h4>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addContact">
+              <h4 class="text-sm">New Contact</h4>
               <PlusCircleIcon
                 class="h-5 w-5 text-black group-hover:text-white"
                 aria-hidden="true"
@@ -62,9 +72,62 @@
             </button>
           </div>
           <hr class="my-4">
+
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Quantity</h3>
-            <CustomInput type="number" class="mb-2" v-model="product.quantity" label="Quantity" :errors="errors['quantity']"/>
+            <h3 class="text-lg font-bold">RRSS</h3>
+            <div v-for="(social, index) in product.socials" :key="index" class="flex gap-1">
+              <CustomInput 
+                v-model="social.rrss" 
+                type="select" 
+                class="mb-2 w-4/12" 
+                label="Social" 
+                :select-options="[
+                  { key: 'instagram', text: 'Instagram' },
+                  { key: 'facebook', text: 'Facebook' },
+                  { key: 'youtube', text: 'Youtube' },
+                  { key: 'tiktok', text: 'Tik Tok' }
+                ]" 
+                :errors="errors[`socials.${index}.rrss`]" 
+              />
+              <CustomInput 
+                v-model="social.link" 
+                type="text" 
+                class="mb-2 w-7/12" 
+                label="Link" 
+                :errors="errors[`socials.${index}.link`]" 
+              />
+              <div class="w-1/12 flex items-center justify-center">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="product.socials.length > 1" @click.prevent="removeSocial(index)">
+                  <TrashIcon
+                    class="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addSocial">
+              <h4 class="text-sm">New Social</h4>
+              <PlusCircleIcon
+                class="h-5 w-5 text-black group-hover:text-white"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+          
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Leading Home</h3>
+            <CustomInput type="checkbox" class="mb-2" v-model="product.leading_home" label="Leading Home" :errors="errors['leading_home']"/>
+          </div>
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Leading Category</h3>
+            <CustomInput type="checkbox" class="mb-2" v-model="product.leading_category" label="Leading Category" :errors="errors['leading_category']"/>
+          </div>
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Urgencies</h3>
+            <CustomInput type="checkbox" class="mb-2" v-model="product.urgencies" label="Urgencies" :errors="errors['urgencies']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
@@ -119,17 +182,20 @@ const router = useRouter()
 const product = ref({
   id: null,
   title: null,
+  short_description: '',
+  description: '',
+  leading_home: false,
+  leading_category: false,
+  urgencies: false,
+  published: false,
+  categories: [],
   images: [],
   deleted_images: [],
   image_positions: {},
-  description: '',
-  prices: [{ number: '', size: '' }],
-  quantity: null,
-  published: false,
-  categories: [],
+  contacts: [{ type: '', info: '' }],
+  socials: [{ rrss: '', link: '' }],
 })
 
-console.log(product.prices)
 const errors = ref({});
 
 const loading = ref(false);
@@ -144,8 +210,11 @@ onMounted(() => {
       .then((response) => {
         loading.value = false;
         product.value = response.data;
-        if (!product.value.prices.length) {
-          product.value.prices.push({ number: '', size: '' }); // Asegúrate de tener un campo vacío si no hay precios
+        if (!product.value.contacts.length) {
+          product.value.contacts.push({ type: '', info: '' });
+        }
+        if (!product.value.socials.length) {
+          product.value.socials.push({ rrss: '', link: '' });
         }
       })
   }
@@ -157,23 +226,39 @@ onMounted(() => {
 
 })
 
-function addPrice() {
-  product.value.prices.push({ number: '', size: '' });
+// Contact Info
+function addContact() {
+  product.value.contacts.push({ type: '', info: '' });
 }
 
-function removePrice(index) {
-product.value.prices.splice(index, 1);
-if (product.value.prices.length === 0) {
-  addPrice(); // Asegúrate de que siempre haya al menos un campo
+function removeContact(index) {
+  product.value.contacts.splice(index, 1);
+  if (product.value.contacts.length === 0) {
+    addContact(); 
+  }
 }
+// Fin Contact Info
+// Social Media
+function addSocial() {
+  product.value.socials.push({ rrss: '', link: '' });
 }
+
+function removeSocial(index) {
+  product.value.socials.splice(index, 1);
+  if (product.value.socials.length === 0) {
+    addSocial(); 
+  }
+}
+// End Social Media
 
 function onSubmit($event, close = false) {
   loading.value = true
   errors.value = {};
-  product.value.quantity = product.value.quantity || null;
-  product.value.prices = product.value.prices.filter(
-    (price) => price.number !== '' && price.size !== ''
+  product.value.contacts = product.value.contacts.filter(
+    (contact) => contact.type !== '' && contact.info !== ''
+  );
+  product.value.socials = product.value.socials.filter(
+    (social) => social.rrss !== '' && social.link !== ''
   );
   if (product.value.id) {
     store.dispatch('updateProduct', product.value)

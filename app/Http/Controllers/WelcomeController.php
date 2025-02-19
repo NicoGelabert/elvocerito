@@ -14,7 +14,7 @@ class WelcomeController extends Controller
     {
         $homeherobanners = HomeHeroBanner::all();
         $categories = Category::all();
-        $anunciantes_destacados = Product::with('prices')->get();
+        $anunciantes_destacados = Product::where('leading_home', 1)->get();
         $ultimos_anunciantes = Product::all();
         $articles = Article::all();
         // $features = Feature::all();

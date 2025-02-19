@@ -1,10 +1,10 @@
 @props(['name'])
 
-@if ($name === 'phone')
+@if ($name === 'fijo')
     <x-icons.phone-call />
 @endif
 
-@if ($name === 'mobile')
+@if ($name === 'movil')
     <x-icons.smartphone />
 @endif
 

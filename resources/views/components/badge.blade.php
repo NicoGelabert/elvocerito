@@ -7,5 +7,5 @@
     @elseif($attributes->has('class') && (str_contains($attributes->get('class'), 'open') || str_contains($attributes->get('class'), 'closed')))
         <x-icons.dot/>
     @endif
-    <p>{{ $badge_title }}</p>
+    <span>{{ $badge_title }}</span>
 </div>

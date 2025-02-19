@@ -14,14 +14,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->text('title', 50);
-            $table->text('slug', 50);
-            $table->string('image', 2000)->nullable();
-            $table->string('image_mime')->nullable();
-            $table->integer('image_size')->nullable();
+            $table->text('title', 100);
+            $table->text('slug', 100);
+            $table->longText('short_description')->nullable();
             $table->longText('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->boolean('published')->default(true);
+            $table->boolean('leading_home')->default(false);
+            $table->boolean('leading_category')->default(false);
+            $table->boolean('published')->default(false);
             $table->foreignIdFor(User::class, 'created_by')->nullable();
             $table->foreignIdFor(User::class, 'updated_by')->nullable();
             $table->softDeletes();

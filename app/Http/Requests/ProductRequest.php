@@ -25,16 +25,23 @@ class ProductRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:2000'],
-            'categories.*' => ['nullable', 'int', 'exists:categories,id'],
-            'prices' => ['nullable', 'array'],
-            'prices.*.number' => ['nullable', 'numeric', 'min:0.01'],
-            'prices.*.size' => ['nullable', 'string', 'max:200'],
-            'quantity' => ['nullable', 'numeric', 'min:0'],
+            'short_description' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
+            'leading_home' => ['required', 'boolean'],
+            'leading_category' => ['required', 'boolean'],
+            'urgencies' => ['required', 'boolean'],
+            'published' => ['required', 'boolean'],
+            'categories.*' => ['nullable', 'int', 'exists:categories,id'],
             'images.*' => ['nullable', 'image'],
             'deleted_images.*' => ['nullable', 'int'],
             'image_positions.*' => ['nullable', 'int'],
-            'published' => ['required', 'boolean']
+            'contacts' => ['nullable', 'array'],
+            'contacts.*.type' => ['nullable', 'string', 'max:200'],
+            'contacts.*.info' => ['nullable', 'string', 'max:200'],
+            'socials' => ['nullable', 'array'],
+            'socials.*.rrss' => ['nullable', 'string', 'max:200'],
+            'socials.*.link' => ['nullable', 'string', 'max:200'],
+            // 'quantity' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 }

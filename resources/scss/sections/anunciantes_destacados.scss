@@ -5,7 +5,7 @@
     .products_card{
         ul{
             @apply w-full grid gap-4
-            grid-cols-2 md:grid-cols-3;
+            grid-cols-2 md:grid-cols-4;
             li{
                 img{
                     @apply rounded-t-lg object-cover

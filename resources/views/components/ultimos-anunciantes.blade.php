@@ -10,10 +10,10 @@
                     <img src="{{ $ultimo_anunciante->image }}" alt="{{ $ultimo_anunciante->title }}">
                     <div class="ultimos_anunciantes_card_content">
                         @foreach ($ultimo_anunciante->categories as $category)
-                        <x-badge badge_title="{{ $category->name }}" />
+                        <x-badge badge_title="{{ $category->name }}" class="truncate-text" />
                         @endforeach
                         <h5><a href="{{ route('product.view', ['category' => $ultimo_anunciante->categories->first()->slug, 'product' => $ultimo_anunciante->slug]) }}">{{ $ultimo_anunciante->title}}</a></h5>
-                        <p>{{ $ultimo_anunciante->description }}</p>
+                        <p>{{ $ultimo_anunciante->short_description }}</p>
                     </div>
                 </li>
                 @endforeach

@@ -7,7 +7,7 @@
             <ul>
                 @foreach ($anunciantes_destacados as $anunciante_destacado)
                 <li class="relative flex flex-col rounded-lg border border-gray_200">
-                    @if ($anunciante_destacado->prices->isNotEmpty())
+                    @if ($anunciante_destacado->prices)
                         <ul class="absolute top-2 left-2">
                             @foreach ($anunciante_destacado->prices as $price)
                                 <li>
@@ -19,10 +19,10 @@
                     <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
                     <div class="products_card_content">
                         @foreach ($anunciante_destacado->categories as $category)
-                        <x-badge badge_title="{{ $category->name }}" />
+                        <x-badge badge_title="{{ $category->name }}" class="truncate-text" />
                         @endforeach
                         <h5><a href="{{ route('product.view', ['category' => $anunciante_destacado->categories->first()->slug, 'product' => $anunciante_destacado->slug]) }}">{{ $anunciante_destacado->title}}</a></h5>
-                        <p>{{ $anunciante_destacado->description }}</p>
+                        <p>{{ $anunciante_destacado->short_description }}</p>
                     </div>
                 </li>
                 @endforeach

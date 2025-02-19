@@ -4,6 +4,7 @@ var productViewHeroElement = document.querySelector('.product-view-hero');
 if (productViewHeroElement) {
     var productViewHero = new Splide(productViewHeroElement, {
         type        : 'loop',
+        arrows      : false,
 });
 
 productViewHero.mount();

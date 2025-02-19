@@ -10,7 +10,8 @@ use App\Models\Api\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\ProductAlergen;
-use App\Models\ProductPrice;
+use App\Models\ProductContact;
+use App\Models\ProductSocial;
 use App\Models\Api\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -31,7 +32,7 @@ class ProductController extends Controller
         $search = $request->get('search', '');
         $categorySlug = $request->get('category', '');  // Agregar parámetro category
 
-        $query = Product::query()->with(['prices', 'categories'])
+        $query = Product::query()->with(['categories', 'contacts', 'socials'])
             ->where('title', 'like', "%{$search}%");
 
         // Filtrar por categoría si se pasa el slug de la categoría
@@ -62,16 +63,21 @@ class ProductController extends Controller
         $data['updated_by'] = $request->user()->id;
 
         /** @var \Illuminate\Http\UploadedFile[] $images */
+        $categories = $data['categories'] ?? [];
+        
         $images = $data['images'] ?? [];
         $imagePositions = $data['image_positions'] ?? [];
-        $categories = $data['categories'] ?? [];
-        $prices = $data['prices'] ?? [];
+        
+        $contacts = $data['contacts'] ?? [];
+
+        $socials = $data['socials'] ?? [];
 
         $product = Product::create($data);
 
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
-        $this->savePrices($prices, $product);
+        $this->saveContacts($contacts, $product);
+        $this->saveSocials($socials, $product);
 
         return new ProductResource($product);
     }
@@ -98,20 +104,24 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['updated_by'] = $request->user()->id;
+        
         $categories = $data['categories'] ?? [];
-        $prices = $data['prices'] ?? [];
 
         /** @var \Illuminate\Http\UploadedFile[] $images */
         $images = $data['images'] ?? [];
         $deletedImages = $data['deleted_images'] ?? [];
         $imagePositions = $data['image_positions'] ?? [];
 
+        $contacts = $data['contacts'] ?? [];
+        $socials = $data['socials'] ?? [];
+
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
         if (count($deletedImages) > 0) {
             $this->deleteImages($deletedImages, $product);
         }
-        $this->savePrices($prices, $product);
+        $this->saveContacts($contacts, $product);
+        $this->saveSocials($socials, $product);
 
         $product->update($data);
 
@@ -137,15 +147,6 @@ class ProductController extends Controller
         $data = array_map(fn($id) => (['category_id' => $id, 'product_id' => $product->id]), $categoryIds);
 
         ProductCategory::insert($data);
-    }
-
-    protected function savePrices(array $prices, Product $product)
-    {
-        $product->prices()->delete(); // Limpia precios existentes para simplificar la actualización
-
-        foreach ($prices as $price) {
-            $product->prices()->create($price); // Esto usará la relación hasMany para crear los precios
-        }
     }
 
     /**
@@ -201,6 +202,24 @@ class ProductController extends Controller
         }
     }
 
+    protected function saveContacts(array $contacts, Product $product)
+    {
+        $product->contacts()->delete(); // Limpia precios existentes para simplificar la actualización
+
+        foreach ($contacts as $contact) {
+            $product->contacts()->create($contact); // Esto usará la relación hasMany para crear los precios
+        }
+    }
+
+    protected function saveSocials(array $socials, Product $product)
+    {
+        $product->socials()->delete(); 
+
+        foreach ($socials as $social) {
+            $product->socials()->create($social);
+        }
+    }
+
     public function productsByCategory($categorySlug)
     {
         // Buscar la categoría por el slug
@@ -212,7 +231,7 @@ class ProductController extends Controller
         }
 
         // Obtener los productos asociados a la categoría
-        $products = $category->products()->with(['categories', 'prices'])->get();
+        $products = $category->products()->with(['categories', 'contacts', 'social'])->get();
 
         // Retornar los productos usando el recurso ProductListResource
         return ProductListResource::collection($products);

@@ -21,11 +21,10 @@ class ProductListResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
+            'urgencies' => $this->urgencies,
             'image_url' => $this->image,
-            'quantity' => $this->quantity,
             'updated_at' => ( new \DateTime($this->updated_at) )->format('Y-m-d H:i:s'),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'prices' => ProductPriceResource::collection($this->whenLoaded('prices')),
         ];
     }
 }

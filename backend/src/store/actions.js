@@ -197,34 +197,40 @@ export function createProduct({ commit }, product) {
   const form = new FormData();
 
   form.append('title', product.title);
+  form.append('short_description', product.short_description || '');
   form.append('description', product.description || '');
+  form.append('leading_home', product.leading_home ? 1 : 0);
+  form.append('leading_category', product.leading_category ? 1 : 0);
+  form.append('urgencies', product.urgencies ? 1 : 0);
   form.append('published', product.published ? 1 : 0);
 
-  // Agregar precios al FormData
-  if (product.prices && product.prices.length) {
-    product.prices.forEach((price, index) => {
-      form.append(`prices[${index}][number]`, price.number);
-      form.append(`prices[${index}][size]`, price.size);
-    });
-  }
-
-  // Agregar imágenes al FormData
-  if (product.images && product.images.length) {
-    product.images.forEach((im) => {
-      form.append(`images[]`, im);
-    });
-  }
-
+  
   // Agregar categorías al FormData
   if (product.categories && product.categories.length) {
     product.categories.forEach((category) => {
       form.append(`categories[]`, category);
     });
   }
+  
+  // Agregar imágenes al FormData
+  if (product.images && product.images.length) {
+    product.images.forEach((im) => {
+      form.append(`images[]`, im);
+    });
+  }
+  
+  if (product.contacts && product.contacts.length) {
+    product.contacts.forEach((contact, index) => {
+      form.append(`contacts[${index}][type]`, contact.type);
+      form.append(`contacts[${index}][info]`, contact.info);
+    });
+  }
 
-  // Agregar cantidad al FormData
-  if (product.quantity) {
-    form.append('quantity', product.quantity);
+  if (product.socials && product.socials.length) {
+    product.socials.forEach((social, index) => {
+      form.append(`socials[${index}][rrss]`, social.rrss);
+      form.append(`socials[${index}][link]`, social.link);
+    });
   }
 
   return axiosClient.post('/products', form);
@@ -237,7 +243,11 @@ export function updateProduct({commit}, product) {
     const form = new FormData();
     form.append('id', product.id);
     form.append('title', product.title);
+    form.append('short_description', product.short_description || '');
     form.append('description', product.description || '');
+    form.append('leading_home', product.leading_home ? 1 : 0);
+    form.append('leading_category', product.leading_category ? 1 : 0);
+    form.append('urgencies', product.urgencies ? 1 : 0);
     form.append('published', product.published ? 1 : 0);
     
   // Agregar categorías al FormData
@@ -247,26 +257,35 @@ export function updateProduct({commit}, product) {
     });
   }
   
-    if (product.prices && product.prices.length) {
-      product.prices.forEach((price, index) => {
-        form.append(`prices[${index}][number]`, price.number);
-        form.append(`prices[${index}][size]`, price.size);
-      });
-    }
-    // Agregar imágenes al FormData
-    if (product.images && product.images.length) {
-      product.images.forEach((im) => {
-        form.append(`images[]`, im);
-      });
-    }
-    // Agregar imágenes eliminadas al FormData
-    if (product.deleted_images && product.deleted_images.length) {
-      product.deleted_images.forEach((id) => form.append('deleted_images[]', id));
-    }
-    // Agregar posiciones de imágenes al FormData
-    for (let id in product.image_positions) {
-      form.append(`image_positions[${id}]`, product.image_positions[id]);
-    }
+  // Agregar imágenes al FormData
+  if (product.images && product.images.length) {
+    product.images.forEach((im) => {
+      form.append(`images[]`, im);
+    });
+  }
+  // Agregar imágenes eliminadas al FormData
+  if (product.deleted_images && product.deleted_images.length) {
+    product.deleted_images.forEach((id) => form.append('deleted_images[]', id));
+  }
+  // Agregar posiciones de imágenes al FormData
+  for (let id in product.image_positions) {
+    form.append(`image_positions[${id}]`, product.image_positions[id]);
+  }
+
+  if (product.contacts && product.contacts.length) {
+    product.contacts.forEach((contact, index) => {
+      form.append(`contacts[${index}][type]`, contact.type);
+      form.append(`contacts[${index}][info]`, contact.info);
+    });
+  }
+
+  if (product.socials && product.socials.length) {
+    product.socials.forEach((social, index) => {
+      form.append(`socials[${index}][rrss]`, social.rrss);
+      form.append(`socials[${index}][link]`, social.link);
+    });
+  }
+
     form.append('_method', 'PUT');
     product = form;
   } else {
