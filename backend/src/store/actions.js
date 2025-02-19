@@ -131,6 +131,10 @@ export function getCategories({commit, state}, {sort_field, sort_direction} = {}
     })
 }
 
+export function getCategory({commit}, id) {
+  return axiosClient.get(`/categories/${id}`)
+}
+
 export function createCategory({commit}, category) {
   if (category.image instanceof File) {
     const form = new FormData();
@@ -147,6 +151,7 @@ export function updateCategory({commit}, category) {
   const id = category.id
   if (category.image instanceof File) {
     const form = new FormData();
+    form.append('id', category.id);
     form.append('name', category.name);
     form.append('description', category.description);
     form.append('image', category.image);

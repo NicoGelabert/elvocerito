@@ -107,13 +107,13 @@
                             <x-icons.mail />
                         </div>
                     </div>
-                    <x-button class="btn btn-primary">Suscribirme</x-button>
+                    <x-button class="btn btn-terciary">Suscribirme</x-button>
                 </form>
             </div>
         </div>
         <div class="need_help">
             <ul>
-                <li><p class="text-gray_500 ">¿Necesitás ayuda?</p></li>
+                <li><p class="text-gray_200">¿Necesitás ayuda?</p></li>
                 <li><a href=""><p>Contactanos</p></a></li>
             </ul>
         </div>

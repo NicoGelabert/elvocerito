@@ -12,9 +12,12 @@ a:hover{
     }
 } 
 .logo svg{
-    @apply transition-all fill-secondary
+    @apply transition-all fill-gray_50
     sm:h-10 w-auto
     md:h-12 w-auto;
+}
+.logo #signo{
+    @apply fill-primary;
 }
 // nav{
 //     .logo{
@@ -33,7 +36,7 @@ a:hover{
     }
 }
 header{
-    @apply h-auto fixed top-0 w-full block shadow-none bg-transparent text-black dark:text-white;
+    @apply h-auto fixed top-0 w-full block shadow-none bg-secondary text-black dark:text-white;
     transition: top 0.3s, background-color 0.3s ease;
     i {
         @apply leading-none text-lg;
@@ -87,7 +90,7 @@ header, .mobile-menu{
     }
 
     .openbtn span {
-        @apply h-[3px] relative bg-black dark:bg-white rounded inline ;
+        @apply h-[3px] relative bg-gray_50 dark:bg-white rounded inline ;
         transition: all .4s;
     }
 

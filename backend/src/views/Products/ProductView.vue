@@ -152,7 +152,7 @@ onMounted(() => {
   
   axiosClient.get('/categories/tree')
   .then(result => {
-    categoriesOptions.value = result.data
+    categoriesOptions.value = result.data;
   })
 
 })

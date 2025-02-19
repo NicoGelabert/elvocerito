@@ -24,6 +24,20 @@ if (homeHeroBannerElement) {
 homeHeroBanner.mount();
 };
 // //Fin Home Hero Banner
+
+// Categories
+var categoriesElement = document.querySelector('#categories');
+if (categoriesElement) {
+    var categories = new Splide(categoriesElement, {
+        perPage     : 9,
+        arrows      : true,
+        autoplay    : false,
+        pagination  : false,
+        padding     : 0,
+    })
+};
+categories.mount();
+// Fin Categories
 // // Últimos anunciantes
 var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
 if (ultimosAnuncinatesElement) {

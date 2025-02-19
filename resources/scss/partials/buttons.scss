@@ -23,6 +23,10 @@
     @apply border border-secondary/20 text-secondary hover:bg-gray_100;
 }
 
+.btn-terciary{
+    @apply bg-secondary/20 text-gray_50 hover:bg-secondary hover:text-primary;
+}
+
 .btn-urgencies{
     @apply bg-urgencies 
     hover:bg-urgencies_hover
