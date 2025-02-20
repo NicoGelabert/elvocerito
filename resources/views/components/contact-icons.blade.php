@@ -1,5 +1,5 @@
 @props(['icons' => []])
-<div {{ $attributes->merge(['class' => 'grid grid-cols-4 gap-4 mt-2 justify-between']) }}>
+<div {{ $attributes->merge(['class' => '']) }}>
     @foreach ($icons as $iconData)
         <div class="flex flex-col text-center lg:text-left lg:flex-row items-center gap-2">
             <x-icons.icon :name="$iconData['type']" />

@@ -51,12 +51,12 @@
 // FIN VISTA DE PRODUCTOS
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{
-    @apply mt-28;
+    @apply mt-28 lg:mt-20;
     .product_menu{
-        @apply w-full shadow-md bg-white transition-transform duration-300 px-2 py-4 flex-col sm:flex-row sm:justify-between fixed top-0 left-0 z-10 ;
+        @apply w-full shadow-md bg-white transition-transform duration-300 px-2 pt-4 pb-2 md:pb-4 flex-col sm:flex-row sm:justify-between fixed top-0 left-0 z-10 ;
         transition: top 0.3s, transform 0.3s;
         .product_menu_header{
-            @apply flex gap-4 items-center;
+            @apply flex gap-4 items-center w-full;
             h2{
                 @apply text-lg;
             }
@@ -68,22 +68,20 @@
                 svg{
                     @apply w-5;
                 }
-                span{
+                span, p{
                     @apply hidden;
                 }
             }
         }
         .contact-icons{
-            @apply w-auto flex justify-end right-2
-            top-2.5 sm:top-1/2 lg:top-0
-            sm:-translate-y-1/2 lg:-translate-y-0
-            absolute lg:relative ;
+            @apply w-auto flex justify-center gap-12
+            sm:-translate-y-1/2 lg:-translate-y-0;
             span, p{
                 @apply sm:hidden lg:block;
             }
             svg{
                 @apply fill-gray_500 border rounded-lg bg-gray_50 p-1 drop-shadow-sm
-                w-6 h-6 sm:w-8 sm:h-8;
+                w-8 h-8;
             }
         }
     }
@@ -115,7 +113,7 @@
         }
         .product_body{
             .contact-icons{
-                @apply sm:w-auto lg:w-1/4 lg:absolute  -translate-y-20 lg:-translate-y-1/2 lg:grid-cols-1 right-0 shadow-md p-8 rounded-lg bg-white;
+                @apply sm:w-auto lg:w-1/4 lg:absolute  -translate-y-20 lg:-translate-y-[30%] flex lg:flex-col right-0 shadow-md p-8 rounded-lg bg-white justify-center gap-12;
                 div{
                     svg{
                         @apply fill-gray_500 border rounded-lg bg-gray_50 w-12 h-12 p-2 drop-shadow-sm;

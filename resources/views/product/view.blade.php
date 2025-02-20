@@ -15,7 +15,7 @@
         'images' => $product->images->pluck('url') 
         ]) }})">
         <div class="product_menu opacity-0 -translate-y-full">
-            <div class="lg:mx-auto lg:max-w-screen-xl lg:flex items-center justify-between lg:w-full">
+            <div class="lg:mx-auto lg:max-w-screen-xl flex flex-col md:flex-row gap-4 items-center justify-between lg:w-full">
                 <div class="product_menu_header">
                     <div class="relative">
                         <img src="{{ $product->image }}" alt="{{ $product->title }}">
@@ -89,12 +89,10 @@
                     <hr class="divider">
                     <div class="product_rating">
                         <h4>Valoración de los clientes</h4>
-                        @foreach ($product->contacts as $contact)
                             <div class="flex gap-2 items-center">
-                                <p class="text-4xl">{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}</p>
+                                <p class="text-4xl">5</p>
                                 <x-icons.star class="h-auto w-8 fill-amber-500" />
                             </div>
-                        @endforeach
                     </div>
                 </div>
             </div>

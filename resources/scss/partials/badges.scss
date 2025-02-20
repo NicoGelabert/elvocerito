@@ -5,7 +5,7 @@
         @apply text-text_small lg:text-xs;
     }
 }
-.truncate-text{
+.truncate-text {
     @apply block w-[140px] lg:w-[180px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 .star{
