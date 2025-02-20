@@ -63,5 +63,10 @@ class Product extends Model
         return $this->hasMany(ProductSocial::class);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(ProductAddress::class);
+    }
+
 }
 

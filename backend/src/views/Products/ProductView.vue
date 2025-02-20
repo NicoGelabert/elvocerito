@@ -30,6 +30,112 @@
             <h3 class="text-lg font-bold">Description</h3>
             <CustomInput type="richtext" class="mb-2" v-model="product.description" label="Description" :errors="errors['description']"/>
           </div>
+
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Dirección</h3>
+            <div v-for="(address, index) in product.addresses" :key="index" class="flex flex-col gap-1">
+              <CustomInput 
+                v-model="address.title" 
+                type="text" 
+                class="mb-2 w-7/12" 
+                label="Title" 
+                :errors="errors[`addresses.${index}.title`]" 
+              />
+              <div class="flex gap-1">
+                <CustomInput 
+                  v-model="address.via" 
+                  type="select" 
+                  class="mb-2 w-2/12" 
+                  label="Tipo de Vía" 
+                  :select-options="[
+                    { key: 'Av.', text: 'Av.' },
+                    { key: 'Calle', text: 'Calle' },
+                    { key: 'Camino', text: 'Camino' },
+                    { key: 'Ruta', text: 'Ruta' }
+                  ]" 
+                  :errors="errors[`addresses.${index}.via`]" 
+                />
+                <CustomInput 
+                  v-model="address.via_name" 
+                  type="text" 
+                  class="mb-2 w-6/12"
+                  label="Nombre de la vía"
+                  :errors="errors[`addresses.${index}.via_name`]" 
+                />
+                <CustomInput 
+                  v-model="address.via_number"
+                  type="number"
+                  class="mb-2 w-2/12"
+                  label="Número"
+                  step="1"
+                  :errors="errors[`addresses.${index}.via_number`]" 
+                />
+                <CustomInput 
+                  v-model="address.address_unit" 
+                  type="text" 
+                  class="mb-2 w-2/12"
+                  label="Piso o departamento"
+                  :errors="errors[`addresses.${index}.address_unit`]" 
+                />
+              </div>
+              <div class="flex gap-1">
+                <CustomInput 
+                  v-model="address.city" 
+                  type="text" 
+                  class="mb-2 w-5/12"
+                  label="Ciudad"
+                  :errors="errors[`addresses.${index}.city`]" 
+                />
+                <CustomInput 
+                  v-model="address.zip_code" 
+                  type="text" 
+                  class="mb-2 w-2/12"
+                  label="Código Postal"
+                  :errors="errors[`addresses.${index}.zip_code`]" 
+                />
+                <CustomInput 
+                  v-model="address.province" 
+                  type="text" 
+                  class="mb-2 w-5/12"
+                  label="Provincia"
+                  :errors="errors[`addresses.${index}.province`]" 
+                />
+              </div>
+              <div>
+                <CustomInput 
+                    v-model="address.link" 
+                    type="text" 
+                    class="mb-2 w-5/12"
+                    label="Link"
+                    :errors="errors[`addresses.${index}.link`]" 
+                  />
+                  <CustomInput 
+                  v-model="address.google_maps" 
+                  type="text" 
+                  class="mb-2 w-5/12"
+                  label="Google Maps"
+                  :errors="errors[`addresses.${index}.google_maps`]" 
+                />
+              </div>
+              <div class="w-1/12 flex items-center justify-center">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="product.addresses.length > 1" @click.prevent="removeAddress(index)">
+                  <TrashIcon
+                    class="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addAddress">
+              <h4 class="text-sm">New Address</h4>
+              <PlusCircleIcon
+                class="h-5 w-5 text-black group-hover:text-white"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+
           <hr class="my-4">
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Contact Info</h3>
@@ -194,6 +300,7 @@ const product = ref({
   image_positions: {},
   contacts: [{ type: '', info: '' }],
   socials: [{ rrss: '', link: '' }],
+  addresses: [{ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '', link: '', google_maps: '' }],
 })
 
 const errors = ref({});
@@ -215,6 +322,9 @@ onMounted(() => {
         }
         if (!product.value.socials.length) {
           product.value.socials.push({ rrss: '', link: '' });
+        }
+        if (!product.value.addresses.length) {
+          product.value.addresses.push({ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '', link: '', google_maps: ''  });
         }
       })
   }
@@ -251,6 +361,19 @@ function removeSocial(index) {
 }
 // End Social Media
 
+// Addresses
+function addAddress() {
+  product.value.addresses.push({ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '' , link: '', google_maps: '' });
+}
+
+function removeAddress(index) {
+  product.value.addresses.splice(index, 1);
+  if (product.value.addresses.length === 0) {
+    addAddress(); 
+  }
+}
+// End Addresses
+
 function onSubmit($event, close = false) {
   loading.value = true
   errors.value = {};
@@ -259,6 +382,9 @@ function onSubmit($event, close = false) {
   );
   product.value.socials = product.value.socials.filter(
     (social) => social.rrss !== '' && social.link !== ''
+  );
+  product.value.addresses = product.value.addresses.filter(
+    (address) => Object.values(address).some(value => value !== '')
   );
   if (product.value.id) {
     store.dispatch('updateProduct', product.value)

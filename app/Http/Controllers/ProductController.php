@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function view(Category $category, Product $product)
     {
-        $product->load(['categories', 'images','contacts']);
+        $product->load(['categories', 'images','contacts', 'socials', 'addresses']);
         return view('product.view', ['product' => $product, 'category' => $category]);
     }
 

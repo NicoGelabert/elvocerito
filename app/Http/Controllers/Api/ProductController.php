@@ -12,6 +12,7 @@ use App\Models\ProductImage;
 use App\Models\ProductAlergen;
 use App\Models\ProductContact;
 use App\Models\ProductSocial;
+use App\Models\ProductAddress;
 use App\Models\Api\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -32,7 +33,7 @@ class ProductController extends Controller
         $search = $request->get('search', '');
         $categorySlug = $request->get('category', '');  // Agregar parámetro category
 
-        $query = Product::query()->with(['categories', 'contacts', 'socials'])
+        $query = Product::query()->with(['categories', 'contacts', 'socials', 'addresses'])
             ->where('title', 'like', "%{$search}%");
 
         // Filtrar por categoría si se pasa el slug de la categoría
@@ -72,12 +73,15 @@ class ProductController extends Controller
 
         $socials = $data['socials'] ?? [];
 
+        $addresses = $data['addresses'] ?? [];
+
         $product = Product::create($data);
 
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
         $this->saveContacts($contacts, $product);
         $this->saveSocials($socials, $product);
+        $this->saveAddresses($addresses, $product);
 
         return new ProductResource($product);
     }
@@ -113,7 +117,10 @@ class ProductController extends Controller
         $imagePositions = $data['image_positions'] ?? [];
 
         $contacts = $data['contacts'] ?? [];
+
         $socials = $data['socials'] ?? [];
+
+        $addresses = $data['addresses'] ?? [];
 
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
@@ -122,6 +129,7 @@ class ProductController extends Controller
         }
         $this->saveContacts($contacts, $product);
         $this->saveSocials($socials, $product);
+        $this->saveAddresses($addresses, $product);
 
         $product->update($data);
 
@@ -220,6 +228,15 @@ class ProductController extends Controller
         }
     }
 
+    protected function saveAddresses(array $addresses, Product $product)
+    {
+        $product->addresses()->delete(); 
+
+        foreach ($addresses as $address) {
+            $product->addresses()->create($address);
+        }
+    }
+
     public function productsByCategory($categorySlug)
     {
         // Buscar la categoría por el slug
@@ -231,7 +248,7 @@ class ProductController extends Controller
         }
 
         // Obtener los productos asociados a la categoría
-        $products = $category->products()->with(['categories', 'contacts', 'social'])->get();
+        $products = $category->products()->with(['categories', 'contacts', 'social', 'address'])->get();
 
         // Retornar los productos usando el recurso ProductListResource
         return ProductListResource::collection($products);

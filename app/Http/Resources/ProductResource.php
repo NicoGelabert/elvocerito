@@ -47,6 +47,21 @@ class ProductResource extends JsonResource
                     'link' => $social->link,
                 ];
             }),
+            'addresses' => $this->addresses->map(function ($address) {
+                return [
+                    'id' => $address->id,
+                    'title' => $address->title,
+                    'via' => $address->via,
+                    'via_name' => $address->via_name,
+                    'via_number' => $address->via_number,
+                    'address_unit' => $address->address_unit,
+                    'city' => $address->city,
+                    'zip_code' => $address->zip_code,
+                    'province' => $address->province,
+                    'link' => $address->link,
+                    'google_maps' => $address->google_maps,
+                ];
+            }),
         ];
     }
 }

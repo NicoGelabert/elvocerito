@@ -233,6 +233,21 @@ export function createProduct({ commit }, product) {
     });
   }
 
+  if (product.addresses && product.addresses.length) {
+    product.addresses.forEach((address, index) => {
+      form.append(`addresses[${index}][title]`, address.title || '');
+      form.append(`addresses[${index}][via]`, address.via || '');
+      form.append(`addresses[${index}][via_name]`, address.via_name || '');
+      form.append(`addresses[${index}][via_number]`, address.via_number || '');
+      form.append(`addresses[${index}][address_unit]`, address.address_unit || '');
+      form.append(`addresses[${index}][city]`, address.city || '');
+      form.append(`addresses[${index}][zip_code]`, address.zip_code || '');
+      form.append(`addresses[${index}][province]`, address.province || '');
+      form.append(`addresses[${index}][link]`, address.link || '');
+      form.append(`addresses[${index}][google_maps]`, address.google_maps || '');
+    });
+  }
+
   return axiosClient.post('/products', form);
 }
 
@@ -286,6 +301,21 @@ export function updateProduct({commit}, product) {
     });
   }
 
+  if (product.addresses && product.addresses.length) {
+    product.addresses.forEach((address, index) => {
+      form.append(`addresses[${index}][title]`, address.title || '');
+      form.append(`addresses[${index}][via]`, address.via || '');
+      form.append(`addresses[${index}][via_name]`, address.via_name || '');
+      form.append(`addresses[${index}][via_number]`, address.via_number || '');
+      form.append(`addresses[${index}][address_unit]`, address.address_unit || '');
+      form.append(`addresses[${index}][city]`, address.city || '');
+      form.append(`addresses[${index}][zip_code]`, address.zip_code || '');
+      form.append(`addresses[${index}][province]`, address.province || '');
+      form.append(`addresses[${index}][link]`, address.link || '');
+      form.append(`addresses[${index}][google_maps]`, address.google_maps || '');
+    });
+  }
+  
     form.append('_method', 'PUT');
     product = form;
   } else {
