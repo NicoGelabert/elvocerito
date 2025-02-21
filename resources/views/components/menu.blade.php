@@ -10,7 +10,7 @@
     <x-search />
     <ul class="grid lg:grid-flow-col items-center justify-end gap-4 text-center">
         <li>
-            <x-button href="#" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
+            <x-button href="/urgencias" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
         </li>
     </ul>
 </nav>

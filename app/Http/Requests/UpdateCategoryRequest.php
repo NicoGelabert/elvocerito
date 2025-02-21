@@ -26,7 +26,7 @@ class UpdateCategoryRequest extends FormRequest
             'name' => ['required', 'string'],
             'active' => ['required', 'boolean'],
             'description' => ['nullable', 'string'],
-            'image' => ['required', 'image'],
+            'image' => ['nullable', 'image'],
             'parent_id' => [
                 'nullable', 'exists:categories,id',
                 function(string $attribute, $value, \Closure $fail) {

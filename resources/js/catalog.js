@@ -3,4 +3,4 @@ import ProductList from './components/products/ProductList.vue';
 
 const productIndex = createApp({});
 productIndex.component('product-list', ProductList);
-productIndex.mount('#product-index');
+productIndex.mount('.product-index');

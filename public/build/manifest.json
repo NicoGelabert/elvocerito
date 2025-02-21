@@ -3,7 +3,7 @@
     "file": "assets/splide.esm-688b6f4b.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-b6e78446.css",
+    "file": "assets/app-6a108f07.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -13,15 +13,12 @@
       "resources/js/home.js",
       "resources/js/product-view.js"
     ],
-    "file": "assets/app-d2e950dc.js",
+    "file": "assets/app-9a11648a.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-be4c8be2.js",
-    "imports": [
-      "resources/js/app.js"
-    ],
+    "file": "assets/catalog-7bae07f3.js",
     "isDynamicEntry": true,
     "src": "resources/js/catalog.js"
   },
@@ -42,7 +39,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-a89e135b.css",
+    "file": "assets/styles-1616018f.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },

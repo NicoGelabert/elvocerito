@@ -34,6 +34,19 @@ class ProductController extends Controller
         return view('product.view', ['product' => $product, 'category' => $category]);
     }
 
+    public function urgencies(Product $products, Category $categories)
+    {
+        // Obtener los productos con las relaciones necesarias
+        $products = Product::query()->where('urgencies', 1)
+            ->with(['categories', 'images', 'contacts', 'socials', 'addresses']) // Sin categorías
+            ->get();
+
+        $categories = $products->pluck('categories')->flatten()->unique('id');
+
+        // Pasar solo los productos a la vista
+        return view('product.urgencies', ['products' => $products, 'categories' => $categories]);
+    }
+
     private function renderProducts(Builder $query)
     {
         $search = \request()->get('search');
