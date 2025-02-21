@@ -2,54 +2,74 @@
   <div class="mb-2 flex justify-between">
     <h1 class="text-3xl font-semibold">Dashboard</h1>
     <div class="flex items-center">
-      <label class="mr-2">Change Date Period</label>
+      <label class="mr-2">Cambiar período</label>
       <CustomInput type="select" v-model="chosenDate" @change="onDatePickerChange" :select-options="dateOptions"/>
     </div>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
     <!--    Active Customers-->
-    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
+    <!-- <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
       <label class="text-lg font-semibold block mb-2">Active Customers</label>
       <template v-if="!loading.customersCount">
         <span class="text-3xl font-semibold">{{ customersCount }}</span>
       </template>
       <Spinner v-else text="" class=""/>
-    </div>
+    </div> -->
     <!--/    Active Customers-->
+    <!--    Total Products -->
+    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
+         style="animation-delay: 0.1s">
+      <label class="text-lg font-semibold block mb-2">Anunciantes totales</label>
+      <template v-if="!loading.totalProductsCount">
+        <span class="text-3xl font-semibold">{{ totalProductsCount }}</span>
+      </template>
+      <Spinner v-else text="" class=""/>
+    </div>
+    <!--/    Total Products -->
     <!--    Active Products -->
     <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
          style="animation-delay: 0.1s">
-      <label class="text-lg font-semibold block mb-2">Active Products</label>
-      <template v-if="!loading.productsCount">
-        <span class="text-3xl font-semibold">{{ productsCount }}</span>
+      <label class="text-lg font-semibold block mb-2">Anunciantes activos</label>
+      <template v-if="!loading.activeProductsCount">
+        <span class="text-3xl font-semibold">{{ activeProductsCount }}</span>
+      </template>
+      <Spinner v-else text="" class=""/>
+    </div>
+    <!--/    Active Products -->
+    <!--    Active Products -->
+    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
+         style="animation-delay: 0.1s">
+      <label class="text-lg font-semibold block mb-2">Categorías activas</label>
+      <template v-if="!loading.activeCategoriesCount">
+        <span class="text-3xl font-semibold">{{ activeCategoriesCount }}</span>
       </template>
       <Spinner v-else text="" class=""/>
     </div>
     <!--/    Active Products -->
     <!--    Paid Orders -->
-    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
+    <!-- <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
          style="animation-delay: 0.2s">
       <label class="text-lg font-semibold block mb-2">Paid Orders</label>
       <template v-if="!loading.paidOrders">
         <span class="text-3xl font-semibold">{{ paidOrders }}</span>
       </template>
       <Spinner v-else text="" class=""/>
-    </div>
+    </div> -->
     <!--/    Paid Orders -->
     <!--    Total Income -->
-    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center"
+    <!-- <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center"
          style="animation-delay: 0.3s">
       <label class="text-lg font-semibold block mb-2">Total Income</label>
       <template v-if="!loading.totalIncome">
         <span class="text-3xl font-semibold">{{ totalIncome }}</span>
       </template>
       <Spinner v-else text="" class=""/>
-    </div>
+    </div> -->
     <!--/    Total Income -->
   </div>
 
   <div class="grid grid-rows-1 md:grid-rows-2 md:grid-flow-col grid-cols-1 md:grid-cols-3 gap-3">
-    <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
+    <!-- <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
       <label class="text-lg font-semibold block mb-2">Latest Orders</label>
       <template v-if="!loading.latestOrders">
         <div v-for="o of latestOrders" :key="o.id" class="py-2 px-3 hover:bg-gray-50">
@@ -66,7 +86,7 @@
         </div>
       </template>
       <Spinner v-else text="" class=""/>
-    </div>
+    </div> -->
     <!-- TO FIX -->
     <!-- <div class="bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
       <label class="text-lg font-semibold block mb-2">Orders by Country</label>
@@ -75,7 +95,7 @@
       </template>
       <Spinner v-else text="" class=""/>
     </div> -->
-    <div class="bg-white py-6 px-5 rounded-lg shadow">
+    <!-- <div class="bg-white py-6 px-5 rounded-lg shadow">
       <label class="text-lg font-semibold block mb-2">Latest Customers</label>
       <template v-if="!loading.latestCustomers">
         <router-link :to="{name: 'app.customers.view', params: {id: c.id}}" v-for="c of latestCustomers" :key="c.id"
@@ -88,6 +108,36 @@
             <p>{{ c.email }}</p>
           </div>
         </router-link>
+      </template>
+      <Spinner v-else text="" class=""/>
+    </div> -->
+    <div class="col-span-1 md:col-span-1 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
+      <label class="text-lg font-semibold block mb-2">Últimos anunciantes</label>
+      <template v-if="!loading.latestProducts">
+        <router-link :to="{name: 'app.products.edit', params: {id: p.id}}" v-for="p of latestProducts" :key="p.id"
+                     class="mb-3 flex gap-4">
+          <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded-full mr-2">
+            <img :src="p.images.length ? p.images[0].url : '../../assets/noimage.png'" alt="Imagen del producto" class="aspect-square object-cover">
+          </div>
+          <div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ new Date(p.created_at).toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' }) }}</p>
+          </div>
+        </router-link>
+      </template>
+      <Spinner v-else text="" class=""/>
+    </div>
+    <div class="col-span-1 md:col-span-1 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
+      <label class="text-lg font-semibold block mb-2">Categorías Populares</label>
+      <template v-if="!loading.popularCategoriesCount">
+        <div class="mb-3 flex gap-4" v-for="c of popularCategoriesCount" :key="c.id">
+          <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded-full mr-2">
+            <img :src="c.image" alt="Imagen de la categoría" class="aspect-square object-cover">
+          </div>
+          <div>
+            <h3>{{ c.name }}</h3>
+          </div>
+        </div>
       </template>
       <Spinner v-else text="" class=""/>
     </div>
@@ -109,54 +159,82 @@ const dateOptions = computed(() => store.state.dateOptions);
 const chosenDate = ref('all')
 
 const loading = ref({
-  customersCount: true,
-  productsCount: true,
-  paidOrders: true,
-  totalIncome: true,
+  totalProductsCount: true,
+  activeProductsCount: true,
+  latestProducts: true,
+  activeCategoriesCount: true,
+  popularCategoriesCount: true,
+  // customersCount: true,
+  // paidOrders: true,
+  // totalIncome: true,
   // ordersByCountry: true,
-  latestCustomers: true,
-  latestOrders: true
+  // latestCustomers: true,
+  // latestOrders: true
 })
-const customersCount = ref(0);
-const productsCount = ref(0);
-const paidOrders = ref(0);
-const totalIncome = ref(0);
+const totalProductsCount = ref(0);
+const activeProductsCount = ref(0);
+const latestProducts = ref([]);
+const activeCategoriesCount = ref(0);
+const popularCategoriesCount = ref([]);
+// const customersCount = ref(0);
+// const paidOrders = ref(0);
+// const totalIncome = ref(0);
 // const ordersByCountry = ref([]);
-const latestCustomers = ref([]);
-const latestOrders = ref([]);
+// const latestCustomers = ref([]);
+// const latestOrders = ref([]);
 
 function updateDashboard() {
   const d = chosenDate.value
   loading.value = {
-    customersCount: true,
-    productsCount: true,
-    paidOrders: true,
-    totalIncome: true,
+    totalProductsCount: true,
+    activeProductsCount: true,
+    latestProducts: true,
+    activeCategoriesCount: true,
+    popularCategoriesCount: true,
+    // customersCount: true,
+    // paidOrders: true,
+    // totalIncome: true,
     // ordersByCountry: true,
-    latestCustomers: true,
-    latestOrders: true
+    // latestCustomers: true,
+    // latestOrders: true
   }
-  axiosClient.get(`/dashboard/customers-count`, {params: {d}}).then(({data}) => {
-    customersCount.value = data
-    loading.value.customersCount = false;
+  axiosClient.get(`/dashboard/total-products-count`, {params: {d}}).then(({data}) => {
+    totalProductsCount.value = data;
+    loading.value.totalProductsCount = false;
   })
-  axiosClient.get(`/dashboard/products-count`, {params: {d}}).then(({data}) => {
-    productsCount.value = data;
-    loading.value.productsCount = false;
+  axiosClient.get(`/dashboard/active-products-count`, {params: {d}}).then(({data}) => {
+    activeProductsCount.value = data;
+    loading.value.activeProductsCount = false;
   })
-  axiosClient.get(`/dashboard/orders-count`, {params: {d}}).then(({data}) => {
-    paidOrders.value = data;
-    loading.value.paidOrders = false;
+  axiosClient.get(`/dashboard/latest-products`, {params: {d}}).then(({data}) => {
+    latestProducts.value = data;
+    loading.value.latestProducts = false;
   })
-  axiosClient.get(`/dashboard/income-amount`, {params: {d}}).then(({data}) => {
-    totalIncome.value = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0
-    })
-      .format(data);
-    loading.value.totalIncome = false;
+  axiosClient.get(`/dashboard/active-categories-count`, {params: {d}}).then(({data}) => {
+    activeCategoriesCount.value = data;
+    loading.value.activeCategoriesCount = false;
   })
+  axiosClient.get(`/dashboard/popular-categories`, {params: {d}}).then(({data}) => {
+    popularCategoriesCount.value = data;
+    loading.value.popularCategoriesCount = false;
+  })
+  // axiosClient.get(`/dashboard/customers-count`, {params: {d}}).then(({data}) => {
+  //   customersCount.value = data
+  //   loading.value.customersCount = false;
+  // })
+  // axiosClient.get(`/dashboard/orders-count`, {params: {d}}).then(({data}) => {
+  //   paidOrders.value = data;
+  //   loading.value.paidOrders = false;
+  // })
+  // axiosClient.get(`/dashboard/income-amount`, {params: {d}}).then(({data}) => {
+  //   totalIncome.value = new Intl.NumberFormat('en-US', {
+  //     style: 'currency',
+  //     currency: 'USD',
+  //     minimumFractionDigits: 0
+  //   })
+  //     .format(data);
+  //   loading.value.totalIncome = false;
+  // })
 
   // axiosClient.get(`/dashboard/orders-by-country`, {params: {d}}).then(({data: countries}) => {
   //   loading.value.ordersByCountry = false;
@@ -174,14 +252,14 @@ function updateDashboard() {
   //   ordersByCountry.value = chartData
   // })
   
-  axiosClient.get(`/dashboard/latest-customers`, {params: {d}}).then(({data: customers}) => {
-    latestCustomers.value = customers;
-    loading.value.latestCustomers = false;
-  })
-  axiosClient.get(`/dashboard/latest-orders`, {params: {d}}).then(({data: orders}) => {
-    latestOrders.value = orders.data;
-    loading.value.latestOrders = false;
-  })
+//   axiosClient.get(`/dashboard/latest-customers`, {params: {d}}).then(({data: customers}) => {
+//     latestCustomers.value = customers;
+//     loading.value.latestCustomers = false;
+//   })
+//   axiosClient.get(`/dashboard/latest-orders`, {params: {d}}).then(({data: orders}) => {
+//     latestOrders.value = orders.data;
+//     loading.value.latestOrders = false;
+//   })
 }
 
 function onDatePickerChange() {

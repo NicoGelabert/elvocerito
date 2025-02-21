@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Dashboard\OrderResource;
 use App\Models\Customer;
 use App\Models\Order;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Alergen;
 use App\Traits\ReportTrait;
@@ -33,9 +33,43 @@ class DashboardController extends Controller
      */
     public function activeCategories()
     {
-        return Categories::all();
+        return Category::all()->count();
     }
 
+    public function popularCategories()
+    {
+        return Category::query()
+            ->select(['categories.id', 'categories.name', 'categories.image'])
+            ->withCount('products')
+            ->with(['products' => function ($query) {
+                $query->select('products.id', 'products.title', 'products.created_at')
+                    ->orderByDesc('products.created_at') // Ordenamos por el producto más reciente
+                    ->limit(1);
+            }])
+            ->whereHas('products', function ($query) {
+                $query->whereNull('products.deleted_at'); // Filtrar productos no eliminados
+            })
+            ->where('active', 1)
+            ->orderByDesc(function ($query) {
+                $query->select('created_at')
+                    ->from('products')
+                    ->join('product_categories', 'product_categories.product_id', '=', 'products.id')
+                    ->whereRaw('product_categories.category_id = categories.id')
+                    ->whereNull('products.deleted_at')
+                    ->latest()
+                    ->limit(1);
+            }) // Ordenar categorías por el último producto creado
+            ->limit(5)
+            ->get();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function totalProducts()
+    {
+        return Product::all()->count();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -43,6 +77,22 @@ class DashboardController extends Controller
     public function activeProducts()
     {
         return Product::where('published', '=', 1)->count();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function latestProducts()
+    {
+        return Product::query()
+            ->select(['id', 'title', 'created_at'])
+            ->with(['images' => function ($query) {
+                $query->select('id', 'product_id', 'url')->orderBy('id')->limit(1);
+            }])
+            ->where('published', 1)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
     }
 
     /**

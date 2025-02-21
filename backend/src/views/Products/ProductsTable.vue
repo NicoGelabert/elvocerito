@@ -2,7 +2,7 @@
     <div class="bg-white p-4 rounded-lg shadow animate-fade-in-down">
       <div class="flex justify-between border-b-2 pb-3">
         <div class="flex items-center">
-          <span class="whitespace-nowrap mr-3">Per Page</span>
+          <span class="whitespace-nowrap mr-3">Por página</span>
           <select @change="getProducts(null)" v-model="perPage"
                   class="appearance-none relative block w-24 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
             <option value="5">5</option>
@@ -11,12 +11,12 @@
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
-          <span class="ml-3">Found {{ products.total }} products</span>
+          <span class="ml-3">Encontrados {{ products.total }} anunciantes</span>
         </div>
         <div>
           <input v-model="search" @change="getProducts(null)"
                  class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                 placeholder="Type to Search products">
+                 placeholder="Buscar anunciante">
         </div>
       </div>
   
@@ -27,26 +27,26 @@
             ID
           </TableHeaderCell>
           <TableHeaderCell field="image" :sort-field="sortField" :sort-direction="sortDirection">
-            Image
+            Imagen
           </TableHeaderCell>
           <TableHeaderCell field="title" :sort-field="sortField" :sort-direction="sortDirection"
                            @click="sortProducts('title')">
-            Title
+            Nombre
           </TableHeaderCell>
-          <!-- <TableHeaderCell field="price" :sort-field="sortField" :sort-direction="sortDirection"
-                           @click="sortProducts('price')">
-            Price
-          </TableHeaderCell> -->
+          <TableHeaderCell field="urgencies" :sort-field="sortField" :sort-direction="sortDirection"
+                           @click="sortProducts('urgencies')">
+            Urgencias
+          </TableHeaderCell>
           <TableHeaderCell field="category" :sort-field="sortField" :sort-direction="sortDirection"
                            @click="sortProducts('category')">
-            Category
+            Categoría
           </TableHeaderCell>
           <TableHeaderCell field="updated_at" :sort-field="sortField" :sort-direction="sortDirection"
                            @click="sortProducts('updated_at')">
-            Last Updated At
+            Último cambio
           </TableHeaderCell>
           <TableHeaderCell field="actions">
-            Actions
+            Acciones
           </TableHeaderCell>
         </tr>
         </thead>
@@ -55,7 +55,7 @@
           <td colspan="6">
             <Spinner v-if="products.loading"/>
             <p v-else class="text-center py-8 text-gray-700">
-              There are no products
+              No hay anunciantes
             </p>
           </td>
         </tr>
@@ -70,9 +70,9 @@
           <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
             {{ product.title }}
           </td>
-          <!-- <td class="border-b p-2">
-            {{ $filters.currencyUSD(product.price) }}
-          </td> -->
+          <td class="border-b p-2">
+            {{ product.urgencies ? 'Sí' : 'No' }}
+          </td>
           <td class="border-b p-2">
             {{ product.categories.length > 0 ? product.categories[0].name : 'Sin categoría' }}
           </td>
@@ -116,7 +116,7 @@
                           class="mr-2 h-5 w-5 text-black"
                           aria-hidden="true"
                         />
-                        Edit
+                        Editar
                       </router-link>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
@@ -132,7 +132,7 @@
                           class="mr-2 h-5 w-5 text-black"
                           aria-hidden="true"
                         />
-                        Delete
+                        Borrar
                       </button>
                     </MenuItem>
                   </div>
@@ -146,7 +146,7 @@
   
       <div v-if="!products.loading" class="flex justify-between items-center mt-5">
         <div v-if="products.data.length">
-          Showing from {{ products.from }} to {{ products.to }}
+          Mostrando desde {{ products.from }} a {{ products.to }}
         </div>
         <nav
           v-if="products.total > products.limit"

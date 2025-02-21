@@ -150,13 +150,13 @@ export default {
     delay: 5000
   },
   dateOptions: [
-    {key: '1d', text: 'Last Day'},
-    {key: '1k', text: 'Last Week'},
-    {key: '2k', text: 'Last 2 Weeks'},
-    {key: '1m', text: 'Last Month'},
-    {key: '3m', text: 'Last 3 Months'},
-    {key: '6m', text: 'Last 6 Months'},
-    {key: 'all', text: 'All Time'},
+    {key: '1d', text: 'Último día'},
+    {key: '1k', text: 'Última semana'},
+    {key: '2k', text: 'Últimas 2 semanas'},
+    {key: '1m', text: 'Último mes'},
+    {key: '3m', text: 'Últimos 3 meses'},
+    {key: '6m', text: 'Últimos 6 meses'},
+    {key: 'all', text: 'Histórico'},
   ]
 }
   

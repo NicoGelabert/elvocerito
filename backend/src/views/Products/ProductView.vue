@@ -2,7 +2,7 @@
 <template>
   <div class="flex items-center justify-between mb-3">
     <h1 v-if="!loading" class="text-3xl font-semibold">
-      {{ product.id ? `Update product: "${product.title}"` : 'Create new Product' }}
+      {{ product.id ? `Editar anunciante: "${product.title}"` : 'Crear nuevo anunciante' }}
     </h1>
   </div>
   <div class="bg-white rounded-lg shadow animate-fade-in-down">
@@ -12,22 +12,22 @@
       <div class="grid grid-cols-3">
         <div class="col-span-2 px-4 pt-5 pb-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Product Name</h3>
+            <h3 class="text-lg font-bold">Nombre</h3>
             <CustomInput class="mb-2" v-model="product.title" label="Product Title" :errors="errors['title']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Category</h3>
+            <h3 class="text-lg font-bold">Categorías</h3>
             <treeselect v-model="product.categories" :multiple="true" :options="categoriesOptions" :errors="errors['categories']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Short Description</h3>
+            <h3 class="text-lg font-bold">Descripción corta</h3>
             <CustomInput type="text" class="mb-2" v-model="product.short_description" label="Short Description" :errors="errors['short_description']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Description</h3>
+            <h3 class="text-lg font-bold">Descripción larga</h3>
             <CustomInput type="richtext" class="mb-2" v-model="product.description" label="Description" :errors="errors['description']"/>
           </div>
 
@@ -128,7 +128,7 @@
               </div>
             </div>
             <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addAddress">
-              <h4 class="text-sm">New Address</h4>
+              <h4 class="text-sm">Crear otra dirección</h4>
               <PlusCircleIcon
                 class="h-5 w-5 text-black group-hover:text-white"
                 aria-hidden="true"
@@ -138,7 +138,7 @@
 
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Contact Info</h3>
+            <h3 class="text-lg font-bold">Información de contacto</h3>
             <div v-for="(contact, index) in product.contacts" :key="index" class="flex gap-1">
               <CustomInput 
                 v-model="contact.type" 
@@ -180,7 +180,7 @@
           <hr class="my-4">
 
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">RRSS</h3>
+            <h3 class="text-lg font-bold">Redes Sociales</h3>
             <div v-for="(social, index) in product.socials" :key="index" class="flex gap-1">
               <CustomInput 
                 v-model="social.rrss" 
@@ -212,7 +212,7 @@
               </div>
             </div>
             <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addSocial">
-              <h4 class="text-sm">New Social</h4>
+              <h4 class="text-sm">Crear nueva red</h4>
               <PlusCircleIcon
                 class="h-5 w-5 text-black group-hover:text-white"
                 aria-hidden="true"
@@ -222,22 +222,22 @@
           
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Leading Home</h3>
+            <h3 class="text-lg font-bold">Destacado en Home</h3>
             <CustomInput type="checkbox" class="mb-2" v-model="product.leading_home" label="Leading Home" :errors="errors['leading_home']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Leading Category</h3>
+            <h3 class="text-lg font-bold">Destacado en Categoría principal</h3>
             <CustomInput type="checkbox" class="mb-2" v-model="product.leading_category" label="Leading Category" :errors="errors['leading_category']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Urgencies</h3>
+            <h3 class="text-lg font-bold">Atiende Urgencias</h3>
             <CustomInput type="checkbox" class="mb-2" v-model="product.urgencies" label="Urgencies" :errors="errors['urgencies']"/>
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Published</h3>
+            <h3 class="text-lg font-bold">Publicado</h3>
             <CustomInput type="checkbox" class="mb-2" v-model="product.published" label="Published" :errors="errors['published']"/>
           </div>
         </div>
@@ -251,17 +251,17 @@
       <footer class="bg-gray-50 rounded-b-lg px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
         <button type="submit"
                 class="bg-black text-base font-medium text-white border rounded-md border-gray-300 shadow-sm w-full inline-flex justify-center mt-3 px-4 py-2 hover:bg-black/10 hover:text-black focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-black sm:w-auto sm:mt-0 sm:ml-3 sm:text-sm">
-          Save
+          Guardar
         </button>
         <button type="button"
                 @click="onSubmit($event, true)"
                 class="bg-black text-base font-medium text-white border rounded-md border-gray-300 shadow-sm w-full inline-flex justify-center mt-3 px-4 py-2 hover:bg-black/10 hover:text-black focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-black sm:w-auto sm:mt-0 sm:ml-3 sm:text-sm">
-          Save & Close
+          Guardar & Cerrar
         </button>
         <router-link :to="{name: 'app.products'}"
                       class="bg-white text-base font-medium text-gray-700 border rounded-md border-gray-300 shadow-sm w-full inline-flex justify-center mt-3 px-4 py-2 hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-300 sm:w-auto sm:mt-0 sm:ml-3 sm:text-sm"
                       ref="cancelButtonRef">
-          Cancel
+          Cancelar
         </router-link>
       </footer>
     </form>

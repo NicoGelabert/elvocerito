@@ -59,7 +59,11 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
     // Dashboard Routes
     Route::get('/dashboard/customers-count', [DashboardController::class, 'activeCustomers']);
-    Route::get('/dashboard/products-count', [DashboardController::class, 'activeProducts']);
+    Route::get('/dashboard/total-products-count', [DashboardController::class, 'totalProducts']);
+    Route::get('/dashboard/active-products-count', [DashboardController::class, 'activeProducts']);
+    Route::get('/dashboard/latest-products', [DashboardController::class, 'latestProducts']);
+    Route::get('/dashboard/active-categories-count', [DashboardController::class, 'activeCategories']);
+    Route::get('/dashboard/popular-categories', [DashboardController::class, 'popularCategories']);
     Route::get('/dashboard/orders-count', [DashboardController::class, 'paidOrders']);
     Route::get('/dashboard/income-amount', [DashboardController::class, 'totalIncome']);
     Route::get('/dashboard/orders-by-country', [DashboardController::class, 'ordersByCountry']);
