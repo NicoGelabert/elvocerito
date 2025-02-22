@@ -1,10 +1,11 @@
 <x-app-layout>
-    <div class="flex flex-col gap-12 mt-32 mb-16">
-        <x-home-hero-banner :homeherobanners="$homeherobanners" />
+    <div class="flex flex-col gap-20 mb-16">
+        <x-search-hero />
+        <x-categories :categories="$categories"/>
         <div class="container">
             <hr class="divider">
         </div>
-        <x-categories :categories="$categories"/>
+        <x-home-hero-banner :homeherobanners="$homeherobanners" />
         <div class="container">
             <hr class="divider">
         </div>

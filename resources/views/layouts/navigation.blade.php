@@ -2,8 +2,10 @@
     x-data="{
         mobileMenuOpen: false,
         cartItemsCount: {{ \App\Helpers\Cart::getCartItemsCount() }},
+        showElement: false
     }"
     @cart-change.window="cartItemsCount = $event.detail.count"
+    @scroll.window="showElement = window.scrollY > 375"
     class="flex flex-col gap-2 md:gap-0 p-4"
     id="navbar"
 >
@@ -18,7 +20,10 @@
         <div class="logo flex items-center lg:hidden">
             <x-application-logo/>
         </div>
-        <x-search class="hidden md:block lg:hidden" />
+        <x-search class="hidden md:block lg:hidden" 
+                  x-show="showElement"
+                  x-transition:enter="transition-opacity duration-500 ease-in" 
+                  x-transition:leave="transition-opacity duration-500 ease-out"/>
         <div class="flex items-center gap-4 lg:hidden">
             <div>
                 <x-button href="#" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
@@ -26,7 +31,10 @@
             <x-hamburguer />
         </div>
     </div>
-    <x-search class="md:hidden" />
+    <x-search class="md:hidden" 
+              x-show="showElement"
+              x-transition:enter="transition-opacity duration-500 ease-in" 
+              x-transition:leave="transition-opacity duration-500 ease-out"/>
     <!--/ Responsive Menu -->
 
     <!-- Main Menu -->   

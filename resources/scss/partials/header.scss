@@ -3,16 +3,18 @@ header{
     nav ul li a{
         @apply py-6 transition-all;        
     }
-    .search_bar{
-        @apply w-full h-full lg:max-w-lg;
-        form{
-            @apply w-full md:px-4 relative;
-            input{
-                @apply w-full px-3 py-2 bg-gray_50 text-gray-900 rounded-md border-transparent sm:text-sm sm:h-10 md:h-12;
-            }
-        }
-    }
+    // .search_bar{
+    //     @apply w-full h-full lg:max-w-lg;
+    //     form{
+    //         @apply w-full md:px-4 relative;
+    //         input{
+    //             @apply w-full px-3 py-2 bg-gray_50 text-gray-900 rounded-md border-transparent sm:text-sm sm:h-10 md:h-12;
+    //         }
+    //     }
+    // }
 }
 .scrolled-bottom{
     @apply fixed shadow-md bg-secondary text-black dark:bg-black dark:text-white;
 }
+
+

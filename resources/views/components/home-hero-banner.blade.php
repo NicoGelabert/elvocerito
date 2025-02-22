@@ -2,16 +2,21 @@
     <div class="splide__track">
         <ul class="splide__list">
             @foreach ($homeherobanners as $homeherobanner)
-            <li class="splide__slide" style=" background-color:#000; background-image: url('{{ asset($homeherobanner->image) }}')">
-                <div class="home-hero-banner-li-content">
-                    <h2>{{ $homeherobanner->headline }}</h2>
-                    <p class="text-large">{{ $homeherobanner->description }}</p>
-                    <x-button class="btn btn-primary">Ver más <x-icons.send /></x-button>
+            <li class="splide__slide">
+                <div class="home-hero-banner-li_header">
+                    <h3>{{ $homeherobanner->description }}</h3>
                 </div>
-                <div class="home-hero-banner-li-overlay"></div>
+                <div class="home-hero-banner-li-content">
+                    <div class="flex flex-col gap-8">
+                        <div class="home-hero-banner-li-content_img">
+                            <img src="{{ $homeherobanner->image }}" alt="">
+                        </div>
+                        <h6>{{ $homeherobanner->headline }}</h6>
+                        <!-- <x-button class="btn btn-primary">Ver más <x-icons.send /></x-button> -->
+                    </div>
+                </div>
             </li>
             @endforeach
         </ul>
     </div>
-    <div class="splide__pagination"></div>
 </section>

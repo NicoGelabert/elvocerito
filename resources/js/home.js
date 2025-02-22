@@ -9,9 +9,7 @@ if (homeHeroBannerElement) {
         rewind      : true,
         autoplay    : true,
         arrows      : false,
-        padding     : '3rem',
-        gap         : '1rem',
-        pagination  : true,
+        pagination  : false,
         interval    : 5000,
         breakpoints: {
           480: {

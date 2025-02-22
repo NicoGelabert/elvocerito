@@ -1,21 +1,32 @@
 .home-hero-banner{
+    @apply bg-primary/10 rounded-xl;
     ul{
         li{
-            @apply relative flex flex-col justify-center
-            rounded-xl aspect-[4/3] md:aspect-video lg:aspect-[6/2] bg-cover bg-center
-            text-gray_50;
+            @apply flex justify-between
+            gap-12 md:gap-4
+            flex-col md:flex-row
+            px-4 py-8 lg:p-16;
+            .home-hero-banner-li_header{
+                @apply lg:w-1/2 flex items-start;
+                h3{
+                    @apply leading-[1.5]
+                }
+                
+            }
             .home-hero-banner-li-content{
-                @apply flex flex-col gap-4 z-20
-                px-5 md:px-28 lg:px-40;
+                @apply lg:w-1/2 flex flex-col items-center mx-auto;
+                .home-hero-banner-li-content_img{
+                    @apply aspect-square md:aspect-video max-w-lg h-auto;
+                    img{
+                        @apply h-full w-full rounded-xl object-cover;
+                    }
+                }
                 .btn{
                     @apply w-fit hidden md:flex;
                     svg{
                         @apply fill-gray_50;
                     }
                 }
-            }
-            .home-hero-banner-li-overlay{
-                @apply absolute top-0 left-0 right-0 bottom-0 bg-black opacity-30 z-10 rounded-xl;
             }
         };
     }

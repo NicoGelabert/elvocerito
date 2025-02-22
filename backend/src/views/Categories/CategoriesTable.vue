@@ -33,6 +33,11 @@
                           @click="sortCategories('name')">
           Name
           </TableHeaderCell>
+          
+          <TableHeaderCell field="parent_id" :sort-field="sortField" :sort-direction="sortDirection"
+                          @click="sortCategories('parent_id')">
+          Parent ID
+          </TableHeaderCell>
           <TableHeaderCell field="updated_at" :sort-field="sortField" :sort-direction="sortDirection"
                           @click="sortCategories('updated_at')">
           Last Updated At
@@ -60,6 +65,9 @@
           </td>
           <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
           {{ category.name }}
+          </td>
+          <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
+          {{ category.parent_id }}
           </td>
           <td class="border-b p-2 ">
           {{ category.updated_at }}
