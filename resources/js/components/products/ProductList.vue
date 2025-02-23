@@ -98,28 +98,28 @@ export default {
   },
   methods: {
     changeCategory(categoryId) {
-  this.selectedCategory = categoryId;
-  this.loading = true;
+        console.log("Categoria seleccionada:", categoryId); // Verificar qué categoría está seleccionada
+        this.selectedCategory = categoryId;
+        this.loading = true;
 
-  setTimeout(() => {
-    if (this.selectedCategory === 'all') {
-      this.filteredProducts = this.products;
-    } else {
-      // Filtrar productos basándonos en la relación 'categories'
-      this.filteredProducts = this.products.filter(product => {
-        if (product.categories && Array.isArray(product.categories)) {
-          console.log("Categorias disponibles:", product.categories);
-          return product.categories.some(category => category.id === this.selectedCategory);
-        }
-        return false;
-      });
+        setTimeout(() => {
+            if (this.selectedCategory === 'all') {
+                this.filteredProducts = this.products;
+            } else {
+                // Filtrar productos basándonos en la relación 'categories'
+                this.filteredProducts = this.products.filter(product => {
+                    if (product.categories && Array.isArray(product.categories)) {
+                        console.log("Categorias del producto:", product.categories); // Verificar qué categorías tiene cada producto
+                        return product.categories.some(category => category.id === this.selectedCategory);
+                    }
+                    return false;
+                });
+            }
+
+            console.log("Productos filtrados:", this.filteredProducts);
+            this.loading = false;
+        }, 500);
     }
-
-    console.log("Productos filtrados:", this.filteredProducts);
-    this.loading = false;
-  }, 500);
-}
-
 },
 
   mounted() {
@@ -132,7 +132,7 @@ export default {
     } else {
         this.filteredProducts = [];
     }
-}
+  }
 
 };
 </script>

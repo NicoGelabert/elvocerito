@@ -5,8 +5,8 @@
     .categories_content{
         ul{
            @apply flex; 
-            li{
-                @apply flex flex-col gap-4 items-center w-[85px];
+            li a{
+                @apply flex flex-col gap-4 items-center w-full;
                 p{
                     @apply text-xs text-center font-bold;
                 }

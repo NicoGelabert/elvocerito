@@ -13,7 +13,16 @@
         <div class="categories_content splide__track">
             <ul class="splide__list">
                 @foreach ($categories as $category)
-                <li class="splide__slide"><img src="{{ $category->image }}" alt=""> <p>{{ $category->name }}</p></li>
+                <li class="splide__slide">
+                    <x-button class="bg-transparent" href="{{ 
+                        $category->parent_id 
+                        ? route('categories.view.subcategory', ['category' => $category->parent->slug, 'subcategory' => $category->slug]) 
+                        : route('categories.view', ['category' => $category->slug]) 
+                    }}">
+                        <img src="{{ $category->image }}" alt="">
+                        <p>{{ $category->name }}</p>
+                    </x-button>
+                </li>
                 @endforeach
             </ul>
         </div>

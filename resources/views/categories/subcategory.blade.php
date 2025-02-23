@@ -1,8 +1,11 @@
 <x-app-layout>
     <div class="category_view product-index">
         <div class="category_view_header">
-            <h2>{{ $category->name }}</h2>
+            <h2>{{ $subcategory->name }}</h2>
         </div>
-        <product-list />
+        @foreach ($products as $product)
+        {{ $product->title}}
+        @endforeach
+        <product-list :products="$products" />
     </div>
 </x-app-layout>

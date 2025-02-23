@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="categories_index">
         <x-search-hero />
-        <div class="container my-28" >
+        <div class="container" >
             <div class="categories_index_hero">
                 <h3>Categorías</h3>
             </div>
