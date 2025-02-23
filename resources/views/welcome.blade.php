@@ -1,6 +1,7 @@
 <x-app-layout>
     <div class="flex flex-col gap-20 mb-16">
         <x-search-hero />
+        <x-backgrounds.circulos />
         <x-categories :categories="$categories"/>
         <div class="container">
             <hr class="divider">

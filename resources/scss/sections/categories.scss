@@ -17,3 +17,52 @@
         }
     }
 }
+
+.categories_index{
+    .search_hero{
+        @apply h-[70vh];
+        h1, p{
+            @apply hidden;
+        }
+    }
+    .categories_index_hero{
+        @apply flex justify-center py-12;
+    }
+    
+    .masonry {
+        @apply columns-3 gap-12;
+        .item{
+            @apply inline-block bg-gray_50/50 w-full mb-12 rounded-2xl;
+            .item_header{
+                @apply flex rounded-t-2xl justify-between bg-primary/50 p-6 gap-2 items-center;
+                img{
+                    @apply h-10 w-auto;
+                }
+            }
+            ul{
+                @apply p-6;
+                li{
+                    @apply border-t-gray_200 border-t py-4;
+                }
+                li:first-child{
+                    @apply border-t-transparent pt-0;
+                }
+                li:last-child{
+                    @apply pb-0;
+                }
+            }
+        }
+      }
+    
+}
+
+.category_view{
+    .category_view_header{
+        @apply flex justify-center py-12 lg:py-6;
+        h2{
+            @apply text-center
+        }
+    }
+    .category_view_product_list{
+    }
+}

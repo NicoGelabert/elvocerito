@@ -29,14 +29,6 @@ if (categoriesElement) {
     var categories = new Splide(categoriesElement, {
         autoplay    : false,
         breakpoints: {
-            1280: {
-                perPage     : 10,
-                perMove     : 10,
-            },
-            1024: {
-                perPage     : 8,
-                perMove     : 8,
-            },
             768: {
                 perPage     : 6,
                 perMove     : 6,
@@ -52,8 +44,8 @@ if (categoriesElement) {
         gap         : '1rem',
         pagination  : false,
         padding     : 0,
-        perMove     : 12,
-        perPage     : 12,
+        perMove     : 8,
+        perPage     : 8,
     })
 };
 categories.mount();

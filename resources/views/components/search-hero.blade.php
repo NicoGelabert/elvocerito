@@ -5,4 +5,3 @@
         <x-search></x-search>
     </div>
 </div>
-<x-backgrounds.circulos />

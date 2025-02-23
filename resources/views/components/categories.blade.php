@@ -5,7 +5,7 @@
             <div class="flex">
                 <div class="splide__arrows  splide__arrows--ltr">
                 </div>
-                <x-button class="see-all" href="{{route ('products.index')}}" >
+                <x-button class="see-all" href="{{route ('categories.index')}}" >
                     Ver todas
                 </x-button>
             </div>

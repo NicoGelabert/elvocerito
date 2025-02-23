@@ -47,7 +47,7 @@ export default {
                 tablet_h2           : '2.5rem',
                 mobile_h3           : '1.5rem',
                 tablet_h3           : '2rem',
-                desktop_h3          : '2.5rem',
+                desktop_h3          : '2rem',
                 tablet_h4           : '1.75rem',
                 desktop_h4          : '2rem',
                 text_small          : '0.625rem',

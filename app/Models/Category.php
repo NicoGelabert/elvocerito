@@ -28,6 +28,11 @@ class Category extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories');
@@ -55,9 +60,7 @@ class Category extends Model
         foreach ($categories as $category) {
             if ($category->parent_id === $parentId) {
                 $children = self::buildCategoryTree($categories, $category->id, $resourceClassName);
-                if ($children) {
-                    $category->setAttribute('children', $children);
-                }
+                $category->setAttribute('children', collect($children));
                 $categoryTree[] = $resourceClassName ? new $resourceClassName($category) : $category;
             }
         }

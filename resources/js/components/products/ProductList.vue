@@ -27,6 +27,7 @@
     <!-- Productos -->
     <div v-if="filteredProducts.length > 0" class="product-list">
       <div v-for="product in filteredProducts" :key="product.id" class="p-2">
+        
         <!-- Badge categoría -->
         <div v-if="product.categories && product.categories.length > 0">
           <ul class="category_badges">
@@ -37,12 +38,24 @@
         </div>
         <!-- Fin badge categoría -->
 
-        <img :src="product.images[0].url" alt="Imagen del producto" />
+        <!-- Imagen del producto -->
+        <img 
+          :src="product.images?.[0]?.url || '/images/default-product.jpg'" 
+          alt="Imagen del producto" 
+        />
+
         <div class="flex flex-col justify-between py-4 gap-2">
           <h5 class="w-fit">{{ product.title }}</h5>
           <div class="flex gap-4 card-buttons">
-            <a href="{{ product.link }}" class="btn btn-primary btn-products_list"><WhatsappIcon /></a>
-            <a :href="'/todo/' + product.categories[0]?.slug + '/' + product.slug" class="btn btn-secondary btn-products_list"><EyeIcon /></a>
+            <a :href="product.link" class="btn btn-primary btn-products_list">
+              <WhatsappIcon />
+            </a>
+            <a 
+              :href="`/todo/${product.categories?.[0]?.slug || 'sin-categoria'}/${product.slug}`" 
+              class="btn btn-secondary btn-products_list"
+            >
+              <EyeIcon />
+            </a>
           </div>
         </div>
       </div>
@@ -56,6 +69,7 @@
     <div v-if="loading" class="spinner-overlay">
       <div class="spinner"></div>
     </div>
+
 
   </div>
 </template>
@@ -84,23 +98,41 @@ export default {
   },
   methods: {
     changeCategory(categoryId) {
-      this.selectedCategory = categoryId;
-      this.loading = true; // Activar spinner
+  this.selectedCategory = categoryId;
+  this.loading = true;
 
-      setTimeout(() => {
-        if (this.selectedCategory === 'all') {
-          this.filteredProducts = this.products;
-        } else {
-          this.filteredProducts = this.products.filter(product =>
-            product.categories.some(category => category.id === this.selectedCategory)
-          );
+  setTimeout(() => {
+    if (this.selectedCategory === 'all') {
+      this.filteredProducts = this.products;
+    } else {
+      // Filtrar productos basándonos en la relación 'categories'
+      this.filteredProducts = this.products.filter(product => {
+        if (product.categories && Array.isArray(product.categories)) {
+          console.log("Categorias disponibles:", product.categories);
+          return product.categories.some(category => category.id === this.selectedCategory);
         }
-        this.loading = false; // Ocultar spinner
-      }, 500); // Simula una carga de 0.5s
+        return false;
+      });
     }
-  },
+
+    console.log("Productos filtrados:", this.filteredProducts);
+    this.loading = false;
+  }, 500);
+}
+
+},
+
   mounted() {
-    this.filteredProducts = this.products; // Cargar productos inicialmente
-  }
+    console.log('Productos:', this.products);
+    console.log('Categorías:', this.categories);
+
+    // Verifica si `this.products` tiene datos antes de asignarlo
+    if (Array.isArray(this.products) && this.products.length > 0) {
+        this.filteredProducts = [...this.products]; // Copia los productos correctamente
+    } else {
+        this.filteredProducts = [];
+    }
+}
+
 };
 </script>

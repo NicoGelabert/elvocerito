@@ -13,7 +13,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $homeherobanners = HomeHeroBanner::all();
-        $categories = Category::all();
+        $categories = Category::inRandomOrder()->get();
         $anunciantes_destacados = Product::where([
             ['published', '=', 1],
             ['leading_home', '=', 1]

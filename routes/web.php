@@ -46,6 +46,9 @@ Route::middleware(['guestOrVerified'])->group(function () {
     // Categorías
     Route::get('/categorias', [CategoriesController::class, 'index'])->name('categories.index');
     Route::get('/categorias/{category:slug}', [CategoriesController::class, 'view'])->name('categories.view');
+    Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])
+    ->name('categories.view.subcategory');
+
 
     //Servicios
     Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
