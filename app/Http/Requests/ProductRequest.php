@@ -52,6 +52,7 @@ class ProductRequest extends FormRequest
             'addresses.*.province' => ['nullable', 'string', 'max:50'],
             'addresses.*.link' => ['nullable', 'string', 'max:500'],
             'addresses.*.google_maps' => ['nullable', 'string', 'max:1000'],
+            'tags.*' => ['nullable', 'int', 'exists:tags,id'],
         ];
     }
 }

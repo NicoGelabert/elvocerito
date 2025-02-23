@@ -8,13 +8,31 @@
         }
     }
     .filter_categories{
-        @apply flex flex-col gap-8 text-text_small lg:text-xs;
+        @apply flex flex-col gap-4 text-text_small lg:text-xs;
         ul{
             @apply flex flex-col gap-2;
+            li{
+                @apply font-bold text-gray_600;
+            }
+            li.active{
+                @apply text-primary;
+            }
+        }
+    }
+    .filter_tags{
+        @apply flex flex-col gap-4 text-text_small lg:text-xs;
+        ul{
+            @apply flex flex-row flex-wrap gap-2;
+            li{
+                @apply w-auto;
+            }
+            li.active{
+                @apply font-bold bg-primary text-secondary;
+            }
         }
     }
     .product-list{
-        @apply w-3/4 grid grid-cols-4 gap-8 relative;
+        @apply lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-8 relative;
         .category_badges{
             @apply absolute m-2;
         }
@@ -124,7 +142,7 @@
             }
             @apply relative lg:flex flex-col gap-4;
             .product_body_content{
-                @apply flex flex-col gap-8 lg:gap-16 mb-12 lg:w-3/4 -translate-y-10 lg:translate-y-0 lg:pr-4;
+                @apply flex flex-col gap-8 mb-12 lg:w-3/4 -translate-y-10 lg:translate-y-0 lg:pr-4;
                 .product_short_description{
                 }
                 .product_opening_hours{

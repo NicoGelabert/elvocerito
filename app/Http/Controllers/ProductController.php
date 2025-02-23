@@ -40,11 +40,11 @@ class ProductController extends Controller
         $products = Product::query()->where('urgencies', 1)
             ->with(['categories', 'images', 'contacts', 'socials', 'addresses']) // Sin categorías
             ->get();
-
+            
         $categories = $products->pluck('categories')->flatten()->unique('id');
-
+        $tags = $products->pluck('tags')->flatten()->unique('id');
         // Pasar solo los productos a la vista
-        return view('product.urgencies', ['products' => $products, 'categories' => $categories]);
+        return view('product.urgencies', compact('products', 'categories', 'tags'));
     }
 
     private function renderProducts(Builder $query)

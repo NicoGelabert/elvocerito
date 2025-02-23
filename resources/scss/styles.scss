@@ -13,7 +13,7 @@ body{
         @apply text-mobile_h1 sm:text-tablet_h1 lg:text-desktop_h1;
     }
     h2{
-        @apply text-mobile_h2 leading-8 sm:text-tablet_h2 lg:text-4xl;
+        @apply text-mobile_h2 sm:text-tablet_h2 lg:text-4xl;
     }
     h3{
         @apply text-mobile_h3 sm:text-tablet_h3 lg:text-desktop_h3 leading-none;

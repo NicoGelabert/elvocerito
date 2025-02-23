@@ -13,6 +13,7 @@ use App\Models\ProductAlergen;
 use App\Models\ProductContact;
 use App\Models\ProductSocial;
 use App\Models\ProductAddress;
+use App\Models\ProductTag;
 use App\Models\Api\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -33,7 +34,7 @@ class ProductController extends Controller
         $search = $request->get('search', '');
         $categorySlug = $request->get('category', '');  // Agregar parámetro category
 
-        $query = Product::query()->with(['categories', 'contacts', 'socials', 'addresses'])
+        $query = Product::query()->with(['categories', 'contacts', 'socials', 'addresses', 'tags'])
             ->where('title', 'like', "%{$search}%");
 
         // Filtrar por categoría si se pasa el slug de la categoría
@@ -75,6 +76,8 @@ class ProductController extends Controller
 
         $addresses = $data['addresses'] ?? [];
 
+        $tags = $data['tags'] ?? [];
+
         $product = Product::create($data);
 
         $this->saveCategories($categories, $product);
@@ -82,6 +85,7 @@ class ProductController extends Controller
         $this->saveContacts($contacts, $product);
         $this->saveSocials($socials, $product);
         $this->saveAddresses($addresses, $product);
+        $this->saveTags($tags, $product);
 
         return new ProductResource($product);
     }
@@ -122,6 +126,8 @@ class ProductController extends Controller
 
         $addresses = $data['addresses'] ?? [];
 
+        $tags = $data['tags'] ?? [];
+
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
         if (count($deletedImages) > 0) {
@@ -130,6 +136,7 @@ class ProductController extends Controller
         $this->saveContacts($contacts, $product);
         $this->saveSocials($socials, $product);
         $this->saveAddresses($addresses, $product);
+        $this->saveTags($tags, $product);
 
         $product->update($data);
 
@@ -237,6 +244,14 @@ class ProductController extends Controller
         }
     }
 
+    private function saveTags($tagIds, Product $product)
+    {
+        ProductTag::where('product_id', $product->id)->delete();
+        $data = array_map(fn($id) => (['tag_id' => $id, 'product_id' => $product->id]), $tagIds);
+
+        ProductTag::insert($data);
+    }
+
     public function productsByCategory($categorySlug)
     {
         // Buscar la categoría por el slug
@@ -248,7 +263,7 @@ class ProductController extends Controller
         }
 
         // Obtener los productos asociados a la categoría
-        $products = $category->products()->with(['categories', 'contacts', 'social', 'address'])->get();
+        $products = $category->products()->with(['categories', 'contacts', 'social', 'address', 'tags'])->get();
 
         // Retornar los productos usando el recurso ProductListResource
         return ProductListResource::collection($products);

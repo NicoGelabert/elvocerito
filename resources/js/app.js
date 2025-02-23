@@ -177,7 +177,7 @@ window.onscroll = function () {
   // Captura de nombre de la página
   const page = document.body.dataset.page;  
   // carga de archivos js por nombre de página
-  if (page === 'product.urgencies' || page === 'categories.view') {
+  if (page === 'product.urgencies' || page === 'categories.view' || page === 'categories.view.subcategory') {
     import('./catalog.js');
   } else if (page === 'welcome') {
     import('./home.js');

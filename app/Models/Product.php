@@ -67,6 +67,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductAddress::class);
     }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tags');
+    }
 
 }
 

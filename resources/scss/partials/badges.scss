@@ -6,7 +6,7 @@
     }
 }
 .truncate-text {
-    @apply block w-fit max-w-[140px] lg:max-w-[180px] text-ellipsis overflow-hidden whitespace-nowrap;
+    @apply block w-fit max-w-[120px] lg:max-w-[180px] text-ellipsis overflow-hidden whitespace-nowrap;
 }
 .star{
     @apply bg-amber-200;

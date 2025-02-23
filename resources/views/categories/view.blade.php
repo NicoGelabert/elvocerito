@@ -5,6 +5,6 @@
         </div>
 
         <!-- Aquí pasamos las subcategorías y los productos al componente Vue -->
-        <product-list :products='@json($products)' :categories='@json($subcategories)' />
+        <product-list :products='@json($products)' :categories='@json($subcategories)' :tags='@json($tags)' />
     </div>
 </x-app-layout>

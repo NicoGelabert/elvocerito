@@ -22,6 +22,11 @@
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-bold">Tags</h3>
+              <treeselect v-model="product.tags" :multiple="true" :options="tagsOptions" :errors="errors['tags']"/>
+          </div>
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Descripción corta</h3>
             <CustomInput type="text" class="mb-2" v-model="product.short_description" label="Short Description" :errors="errors['short_description']"/>
           </div>
@@ -301,12 +306,14 @@ const product = ref({
   contacts: [{ type: '', info: '' }],
   socials: [{ rrss: '', link: '' }],
   addresses: [{ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '', link: '', google_maps: '' }],
+  tags:[],
 })
 
 const errors = ref({});
 
 const loading = ref(false);
 const categoriesOptions = ref([]);
+const tagsOptions = ref([]);
 
 const emit = defineEmits(['update:modelValue', 'close'])
 
@@ -332,6 +339,11 @@ onMounted(() => {
   axiosClient.get('/categories/tree')
   .then(result => {
     categoriesOptions.value = result.data;
+  })
+  
+  axiosClient.get('/tags/tree')
+  .then(result => {
+    tagsOptions.value = result.data
   })
 
 })

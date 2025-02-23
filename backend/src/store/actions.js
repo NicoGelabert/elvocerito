@@ -248,6 +248,13 @@ export function createProduct({ commit }, product) {
     });
   }
 
+  // Agregar tags al FormData
+  if (product.tags && product.tags.length) {
+    product.tags.forEach((tag) => {
+      form.append(`tags[]`, tag);
+    });
+  }
+
   return axiosClient.post('/products', form);
 }
 
@@ -313,6 +320,13 @@ export function updateProduct({commit}, product) {
       form.append(`addresses[${index}][province]`, address.province || '');
       form.append(`addresses[${index}][link]`, address.link || '');
       form.append(`addresses[${index}][google_maps]`, address.google_maps || '');
+    });
+  }
+
+  // Agregar tags al FormData
+  if (product.tags && product.tags.length) {
+    product.tags.forEach((tag) => {
+      form.append(`tags[]`, tag);
     });
   }
   

@@ -3,9 +3,11 @@
         <div class="category_view_header">
             <h2>{{ $subcategory->name }}</h2>
         </div>
-        @foreach ($products as $product)
-        {{ $product->title}}
-        @endforeach
-        <product-list :products="$products" />
+        
+        @if ($products->isNotEmpty())
+            <product-list :products='@json($products)' :tags='@json($tags)' />
+        @else
+            <p class="text-center">No hay Anunciantes para esta categoría</p>
+        @endif
     </div>
 </x-app-layout>

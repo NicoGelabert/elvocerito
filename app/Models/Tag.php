@@ -28,9 +28,9 @@ class Tag extends Model
         return $this->belongsTo(Tag::class);
     }
 
-    public function projects()
+    public function product()
     {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public static function getActiveAsTree($resourceClassName = null)

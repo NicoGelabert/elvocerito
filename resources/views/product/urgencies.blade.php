@@ -4,6 +4,6 @@
             <h2>Urgencias</h2>
         </div>
         <!-- Pasar productos al componente Vue -->
-        <product-list :products="{{ json_encode($products) }}" :categories="{{ json_encode($categories) }}" />
+        <product-list :products='@json($products)' :categories='@json($categories)' :tags='@json($tags)' />
     </div>
 </x-app-layout>

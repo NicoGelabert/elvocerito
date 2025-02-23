@@ -62,6 +62,7 @@ class ProductResource extends JsonResource
                     'google_maps' => $address->google_maps,
                 ];
             }),
+            'tags' => $this->tags->map(fn($t) => $t->id),
         ];
     }
 }

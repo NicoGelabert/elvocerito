@@ -20,9 +20,10 @@ class CategoriesController extends Controller
         $subcategories = $category->children()->where('active', 1)->get();
         $products = Product::whereHas('categories', function ($query) use ($subcategories) {
             $query->whereIn('categories.id', $subcategories->pluck('id'));
-        })->where('published', 1)->with(['images', 'categories'])->get();
+        })->where('published', 1)->with(['images', 'categories', 'tags'])->get();
         // dd($products);
-        return view('categories.view', compact('category', 'subcategories', 'products'));
+        $tags = $products->pluck('tags')->flatten()->unique('id');
+        return view('categories.view', compact('category', 'subcategories', 'products', 'tags'));
     }
 
     public function viewSubcategory($category, $subcategory)
@@ -32,7 +33,8 @@ class CategoriesController extends Controller
         ->where('parent_id', $category->id)
         ->firstOrFail();
         $subcategory->load('products');
-        $products = $subcategory->products()->where('published', 1)->get();
-        return view('categories.subcategory', compact('category', 'subcategory', 'products'));
+        $products = $subcategory->products()->where('published', 1)->with(['images', 'categories', 'tags'])->get();
+        $tags = $products->pluck('tags')->flatten()->unique('id');
+        return view('categories.subcategory', compact('category', 'subcategory', 'products', 'tags'));
     }
 }
