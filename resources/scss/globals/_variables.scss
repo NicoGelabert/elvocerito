@@ -52,6 +52,12 @@ header{
 }
 .mobile-menu{
     @apply bg-white text-black dark:bg-black dark:text-white;
+    .mobile-menu-inner{
+        @apply my-40 text-secondary;
+        .logo svg{
+            @apply fill-secondary w-40 h-auto;
+        }
+    }
 }
 header, .mobile-menu{
     .dropdown{
@@ -99,20 +105,21 @@ header, .mobile-menu{
     }
 
     .openbtn.active span{
+        @apply bg-secondary;
         &:nth-of-type(1) {
-            left: 14px;
-            top: 2px;
-            transform: translateY(6px) rotate(-135deg);
-            width: 45%;
+            left: 0;
+            top: -4px;
+            transform: translateY(11px) rotate(-135deg);
+            width: 100%;
         }
         &:nth-of-type(2) {
             opacity: 0;
         }
         &:nth-of-type(3) {
-            left: 14px;
-            top: 1px;
-            transform: translateY(-6px) rotate(135deg);
-            width: 45%;
+            left: 0;
+            top: 4px;
+            transform: translateY(-11px) rotate(135deg);
+            width: 100%;
         }
     }
 // Contenedor gral

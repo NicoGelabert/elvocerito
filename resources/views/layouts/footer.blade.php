@@ -2,7 +2,7 @@
     <div class="footer max-w-screen-xl mx-auto px-4">
         <div class="identity">
             <div class="footer-logo">
-                <x-application-logo />
+                <x-logo />
             </div>
             <x-social-icons />
         </div>

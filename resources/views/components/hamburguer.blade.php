@@ -1,6 +1,6 @@
 <button 
     @click="mobileMenuOpen = !mobileMenuOpen" 
-    class="block md:hidden z-10"
+    class="block md:hidden z-30"
 >
     <div class="openbtn">
         <div class="openbtn-area"><span></span><span></span><span></span>

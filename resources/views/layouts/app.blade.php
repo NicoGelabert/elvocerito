@@ -31,7 +31,7 @@
     <body data-page="{{ request()->route()->getName() ?? '' }}">
         <div id="loader-wrapper" class="dark:bg-black">
             <div class="w-40">
-                <x-application-logo/>
+                <x-logo/>
             </div>
             <div id="loader">
                 <div id="progress-bar"></div>

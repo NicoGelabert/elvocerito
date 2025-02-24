@@ -20,7 +20,7 @@
 
     <main class="w-full mx-auto flex flex-col justify-evenly items-center h-screen px-10">
         <div class="enconstruccion">
-            <x-application-logo class="block fill-current" />
+            <x-logo class="block fill-current" />
         </div>
         <div class="w-full grid grid-cols-1 mx-16 gap-y-8 text-center">
             <h2 class="text-3xl font-bold sm:text-4xl">Página en construcción</h2>
