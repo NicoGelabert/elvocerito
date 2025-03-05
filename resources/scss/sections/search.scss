@@ -8,24 +8,24 @@
         }
     }
 }
-.search_bar{
-    @apply w-full lg:max-w-lg md:px-8;
-    > div:first-child { // Aplica solo al primer div hijo
-        @apply shadow-lg;
-    }
-    div{
-        form{
-            @apply w-full relative z-20;
-            input{
-                @apply w-full px-3 py-2 bg-gray_50 text-gray-900 rounded-md border-transparent sm:text-sm sm:h-10 md:h-12;
-            }
-        }
-    }
+.search_bar {
+    @apply w-full lg:max-w-lg md:px-8 relative z-40;
 }
+
+.search_bar.fixed {
+    @apply bg-secondary;
+    left: 50%;
+    max-width: 600px;
+    padding: 1rem 1rem;
+    position: fixed;
+    transform: translateX(-50%);
+    transition: top 0.3s, background-color 0.3s;
+}
+
 
 .circles{
     @apply w-full absolute top-0 left-0 overflow-hidden 
-    h-3/4 lg:h-full;
+    h-3/4 lg:h-full pointer-events-none;
 }
 
 .circles li{

@@ -81,10 +81,7 @@
             <a :href="product.link" class="btn btn-primary btn-products_list">
               <WhatsappIcon />
             </a>
-            <a 
-              :href="`/todo/${product.categories?.[0]?.slug || 'sin-categoria'}/${product.slug}`" 
-              class="btn btn-secondary btn-products_list"
-            >
+            <a :href="`/categorias/${product.categories?.[0]?.parent?.slug || 'sin-categoria'}/${product.categories?.[0]?.slug || 'sin-subcategoria'}/${product.slug}`" class="btn btn-secondary btn-products_list">
               <EyeIcon />
             </a>
           </div>
@@ -115,7 +112,7 @@ export default {
     EyeIcon,
   },
   props: {
-    products: Array,
+    products: Object,
     categories: Array,
     tags: Array,
   },
@@ -170,6 +167,11 @@ export default {
     },
   },
   mounted() {
+    
+  if (this.product && this.product.categories) {
+    console.log('Categorías del producto:', this.product.categories);
+    console.log('Categoría principal (padre) de la primera categoría:', this.product.categories?.[0]?.parent);
+  }
     console.log("📦 Productos recibidos en Vue:", this.products);
     console.log("🏷 Tags recibidos en Vue:", this.tags);
     this.filteredProducts = [...this.products];

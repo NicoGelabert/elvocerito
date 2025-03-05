@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
@@ -38,9 +39,12 @@ Route::middleware(['guestOrVerified'])->group(function () {
     
     Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
 
+    // Search
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+
     // Anunciantes = Products
-    Route::get('/todo', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/todo/{category:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/categorias/{category:slug}/{subcategory:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
     Route::get('/urgencias', [ProductController::class, 'urgencies'])->name('product.urgencies');
 
     // Categorías

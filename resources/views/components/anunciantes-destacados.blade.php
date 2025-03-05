@@ -21,7 +21,16 @@
                         @foreach ($anunciante_destacado->categories as $category)
                         <x-badge badge_title="{{ $category->name }}" class="truncate-text" />
                         @endforeach
-                        <h5><a href="{{ route('product.view', ['category' => $anunciante_destacado->categories->first()->slug, 'product' => $anunciante_destacado->slug]) }}">{{ $anunciante_destacado->title}}</a></h5>
+                        
+                        <a href="{{ route('product.view', [
+                            'category' => $anunciante_destacado->categories->first()->parent ? $anunciante_destacado->categories->first()->parent->slug : 'sin-subcategoria', // Obtiene la categoría principal
+                            'subcategory' => $anunciante_destacado->categories->first()->slug, // Obtiene la subcategoría
+                            'product' => $anunciante_destacado->slug // Obtiene el producto
+                        ]) }}">
+                            <h5>
+                                {{ $anunciante_destacado->title}}
+                            </h5>
+                        </a>
                         <p>{{ $anunciante_destacado->short_description }}</p>
                     </div>
                 </li>

@@ -122,55 +122,70 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   
   // Movimiento del header
-var prevScrollpos = window.scrollY;
-var navbar = document.getElementById("navbar");
-var productMenu = document.querySelector(".product_menu");
-var productContact = document.querySelector(".product .contact-icons");
-var scrollThreshold = 15; // Umbral de desplazamiento mínimo antes de ocultar el encabezado
-
+  // Movimiento del header
+let prevScrollpos = window.scrollY;
+let scrollThreshold = 5;
 window.onscroll = function () {
     var currentScrollPos = window.scrollY;
     var scrollDifference = Math.abs(prevScrollpos - currentScrollPos);
-    var navbarHeight = navbar.offsetHeight; // Obtener la altura del navbar dinámicamente
-
-    // 📌 Lógica de Navbar (Siempre funciona en todas las páginas)
+    var navbarHeight = navbar.offsetHeight; // Altura del navbar
+    var searchBar = document.querySelector(".search_bar");
+    var searchTriggerPoint = 325; // Punto donde el search se fija
+  
+    // 📌 Lógica de Navbar
     if (scrollDifference >= scrollThreshold) {
         if (prevScrollpos > currentScrollPos) {
-            navbar.style.top = "0";
+            navbar.style.top = "0"; // Navbar vuelve a aparecer
         } else {
-            navbar.style.top = "-110px";
+            navbar.style.top = `-${navbarHeight}px`; // Navbar desaparece
         }
     }
     prevScrollpos = currentScrollPos;
-
-    var distanceFromTop = Math.abs(window.scrollY);
-    if (distanceFromTop <= 5) {
+  
+    // 📌 Lógica para fijar el Search Bar después de 325px de scroll
+    if (currentScrollPos >= searchTriggerPoint) {
+        // Si el navbar está visible (top = 0), colocamos el search bar justo debajo
+        if (navbar.style.top === "0px") {
+            searchBar.classList.add("fixed");
+            searchBar.style.top = `${navbarHeight - 1}px`; // Posicionamos debajo del navbar
+        } else {
+            searchBar.classList.add("fixed");
+            searchBar.style.top = `0px`; // Si el navbar está oculto, el search bar se coloca en la parte superior
+        }
+    } else {
+        // Si el scroll es menor que 325px, el search bar regresa a su posición original
+        searchBar.classList.remove("fixed");
+        searchBar.style.top = ""; // Vuelve a su posición normal
+    }
+  
+    // 📌 Añadir o quitar clase cuando el scroll está cerca del top
+    if (currentScrollPos <= 5) {
         navbar.classList.remove("scrolled-bottom");
     } else {
         navbar.classList.add("scrolled-bottom");
     }
 
     // 📌 Lógica de productMenu (SOLO SI ESTAMOS EN product.view)
-    if (productMenu && productContact) {
-        var rect = productContact.getBoundingClientRect();
-        var navbarTop = parseInt(navbar.style.top, 10) || 0;
+    // if (productMenu && productContact) {
+    //     var rect = productContact.getBoundingClientRect();
+    //     var navbarTop = parseInt(navbar.style.top, 10) || 0;
 
-        if (rect.top <= 0) {
-            // Mostrar productMenu con animación
-            productMenu.classList.remove("opacity-0", "-translate-y-full");
-            productMenu.classList.add("flex", "opacity-100", "translate-y-0", "transition-all", "duration-300");
+    //     if (rect.top <= 0) {
+    //         // Mostrar productMenu con animación
+    //         productMenu.classList.remove("opacity-0", "-translate-y-full");
+    //         productMenu.classList.add("flex", "opacity-100", "translate-y-0", "transition-all", "duration-300");
 
-            // Asegurarse de que productMenu se mueva abajo con el navbar
-            productMenu.style.top = navbarTop >= 0 ? `${navbarHeight}px` : "0px";
-        } else {
-            // Ocultar productMenu con animación
-            productMenu.classList.remove("flex", "opacity-100", "translate-y-0");
-            productMenu.classList.add("-translate-y-full", "transition-transform", "duration-300");
+    //         // Asegurarse de que productMenu se mueva abajo con el navbar
+    //         productMenu.style.top = navbarTop >= 0 ? `${navbarHeight}px` : "0px";
+    //     } else {
+    //         // Ocultar productMenu con animación
+    //         productMenu.classList.remove("flex", "opacity-100", "translate-y-0");
+    //         productMenu.classList.add("-translate-y-full", "transition-transform", "duration-300");
 
-            // Resetear top para evitar posiciones incorrectas
-            productMenu.style.top = "";
-        }
-    }
+    //         // Resetear top para evitar posiciones incorrectas
+    //         productMenu.style.top = "";
+    //     }
+    // }
 };
 
 

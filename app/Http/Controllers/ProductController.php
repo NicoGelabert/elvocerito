@@ -28,10 +28,28 @@ class ProductController extends Controller
         return $this->renderProducts($query);
     }
 
-    public function view(Category $category, Product $product)
+    public function view($subcategorySlug, Category $category, Product $product)
     {
-        $product->load(['categories', 'images','contacts', 'socials', 'addresses']);
-        return view('product.view', ['product' => $product, 'category' => $category]);
+        // Obtener la subcategoría usando el slug
+        $subcategory = $category->children()->where('slug', $subcategorySlug)->firstOrFail();
+
+        // Cargar las subcategorías relacionadas de la categoría principal
+        $subcategories = $category->children()->where('active', 1)->get();
+
+        // Cargar el producto con sus relaciones
+        $product->load(['categories', 'images', 'contacts', 'socials', 'addresses']);
+
+        // Obtener los productos relacionados (si es necesario)
+        $tags = $product->tags()->get();
+
+        // Retornar la vista con la información necesaria
+        return view('product.view', [
+            'product' => $product,
+            'category' => $category,
+            'subcategory' => $subcategory,
+            'subcategories' => $subcategories,
+            'tags' => $tags,
+        ]);
     }
 
     public function urgencies(Product $products, Category $categories)

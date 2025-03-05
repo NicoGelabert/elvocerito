@@ -4,12 +4,10 @@
     'text-color' => 'gray_50',
 ])
 
-<nav {{ $attributes->merge(['class' => "text-gray_50 h-full flex flex-$layout gap-$gap w-full max-w-screen-xl mx-auto items-center"]) }}>
+<nav {{ $attributes->merge(['class' => "text-gray_50 h-full flex flex-$layout gap-$gap w-full max-w-screen-xl mx-auto items-center justify-between"]) }}>
     <div class="logo flex justify-center">
         <x-logo/>
     </div>
-    
-    <x-search class="hidden md:block"/>
 
     <ul class="grid lg:grid-flow-col items-center justify-end gap-4 text-center">
         <li>

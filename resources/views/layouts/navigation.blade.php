@@ -10,7 +10,6 @@
     id="navbar"
 >
     <!-- Responsive Menu -->
-    <x-search class="md:hidden" />
     <div class="flex items-center justify-between w-full">
         <div
             class="block z-20 fixed top-0 bottom-0 h-full w-full transition-all mobile-menu lg:hidden"
