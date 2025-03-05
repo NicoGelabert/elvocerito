@@ -112,7 +112,7 @@ export default {
     EyeIcon,
   },
   props: {
-    products: Object,
+    products: Array,
     categories: Array,
     tags: Array,
   },
@@ -160,6 +160,14 @@ export default {
         this.loading = false;
       }, 500);
     },
+    getCategorySlug(product) {
+      // Acceder a la categoría principal (padre) de la subcategoría
+      return product.categories?.[0]?.parent?.slug || 'sin-categoria';
+    },
+    getSubcategorySlug(product) {
+      // Acceder al slug de la subcategoría
+      return product.categories?.[0]?.slug || 'sin-subcategoria';
+    },
     checkScreenSize() {
       this.isDesktop = window.innerWidth >= 1024;
       if (this.isDesktop) this.isMenuOpen = true; // En desktop, el menú siempre está abierto
@@ -167,13 +175,6 @@ export default {
     },
   },
   mounted() {
-    
-  if (this.product && this.product.categories) {
-    console.log('Categorías del producto:', this.product.categories);
-    console.log('Categoría principal (padre) de la primera categoría:', this.product.categories?.[0]?.parent);
-  }
-    console.log("📦 Productos recibidos en Vue:", this.products);
-    console.log("🏷 Tags recibidos en Vue:", this.tags);
     this.filteredProducts = [...this.products];
     
     window.addEventListener('resize', this.checkScreenSize);

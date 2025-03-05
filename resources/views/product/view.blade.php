@@ -69,7 +69,7 @@
             <div class="product_body">
                 <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
                 <div class="product_body_content">
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         @if ($product->tags)
                             @foreach($product->tags as $tag)
                             <x-badge badge_title="{{ $tag->name }}" />

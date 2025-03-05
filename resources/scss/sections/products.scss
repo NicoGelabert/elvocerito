@@ -71,7 +71,6 @@
 // FIN VISTA DE PRODUCTOS
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{
-    @apply mt-28 lg:mt-20;
     .product_menu{
         @apply w-full shadow-md bg-white transition-transform duration-300 px-2 pt-4 pb-2 md:pb-4 flex-col sm:flex-row sm:justify-between fixed top-0 left-0 z-10 ;
         transition: top 0.3s, transform 0.3s;

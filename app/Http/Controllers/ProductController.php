@@ -28,10 +28,16 @@ class ProductController extends Controller
         return $this->renderProducts($query);
     }
 
-    public function view($subcategorySlug, Category $category, Product $product)
+    public function view($categorySlug, $subcategorySlug, $productSlug)
     {
-        // Obtener la subcategoría usando el slug
+        // Obtener la categoría usando el slug
+        $category = Category::where('slug', $categorySlug)->firstOrFail();
+
+        // Obtener la subcategoría usando el slug dentro de la categoría
         $subcategory = $category->children()->where('slug', $subcategorySlug)->firstOrFail();
+
+        // Obtener el producto usando el slug
+        $product = Product::where('slug', $productSlug)->firstOrFail();
 
         // Cargar las subcategorías relacionadas de la categoría principal
         $subcategories = $category->children()->where('active', 1)->get();
@@ -51,6 +57,7 @@ class ProductController extends Controller
             'tags' => $tags,
         ]);
     }
+
 
     public function urgencies(Product $products, Category $categories)
     {
