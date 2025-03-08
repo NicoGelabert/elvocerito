@@ -53,7 +53,7 @@ header{
 .mobile-menu{
     @apply bg-white text-black dark:bg-black dark:text-white;
     .mobile-menu-inner{
-        @apply my-40 text-secondary;
+        @apply text-secondary;
         .logo svg{
             @apply fill-secondary w-40 h-auto;
         }

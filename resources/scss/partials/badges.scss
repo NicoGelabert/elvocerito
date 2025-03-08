@@ -1,8 +1,8 @@
 //Badge
 .badge{
-    @apply bg-gray_100 font-bold text-gray_600 w-fit rounded-md py-1 px-2 flex items-center gap-1 capitalize;
+    @apply bg-gray_50 font-medium text-gray_700 w-fit rounded-full px-3 flex py-1 items-center gap-1 capitalize;
     p, span{
-        @apply text-text_small lg:text-xs;
+        @apply text-text_small lg:text-xs leading-6;
     }
 }
 .truncate-text {

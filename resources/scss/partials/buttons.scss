@@ -2,7 +2,7 @@
 
 .btn{
     @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans leading-none min-h-8
-    rounded-md sm:rounded-lg
+    rounded-full
     text-xs sm:text-sm md:text-base
     px-4 py-2;
     svg{

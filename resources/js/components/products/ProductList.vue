@@ -39,18 +39,18 @@
           <li 
             @click="toggleTag('all')" 
             :class="{ active: selectedTags.length === tags.length }"
-            class="cursor-pointer badge"
+            class="badge truncate-text"
           >
-            Todos
+            <span>Todos</span>
           </li>
           <li 
             v-for="tag in tags" 
             :key="tag.id" 
             @click="toggleTag(tag.id)"
             :class="{ active: selectedTags.includes(tag.id) }"
-            class="cursor-pointer badge"
+            class="badge truncate-text"
           >
-            {{ tag.name }}
+            <span>{{ tag.name }}</span>
           </li>
         </ul>
       </div>

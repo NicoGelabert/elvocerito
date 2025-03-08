@@ -20,7 +20,6 @@
 
 .categories_index{
     .search_hero{
-        @apply h-[50vh] justify-end pb-16 lg:h-[70vh] lg:justify-center pb-0 pt-8;
         h1, p{
             @apply hidden;
         }

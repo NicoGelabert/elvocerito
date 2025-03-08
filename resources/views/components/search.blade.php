@@ -1,7 +1,7 @@
 <div {{ $attributes->merge(['class' => "search_bar"]) }}>
     <div class="relative">
         <input type="text" name="query" placeholder="Buscá una empresa o servicio" 
-            class="search-input w-full p-3 border-transparent drop-shadow-md rounded-xl">
+            class="search_input">
         <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
             <x-icons.search />
         </div>
@@ -14,7 +14,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    let searchBox = document.querySelector(".search-input");
+    let searchBox = document.querySelector(".search_input");
     let resultsList = document.querySelector(".search-results");
 
     if (searchBox && resultsList) {

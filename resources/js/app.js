@@ -144,7 +144,8 @@ window.onscroll = function () {
     var scrollDifference = Math.abs(prevScrollpos - currentScrollPos);
     var navbarHeight = navbar.offsetHeight; // Altura del navbar
     var searchBar = document.querySelector(".search_bar");
-    var searchTriggerPoint = 325; // Punto donde el search se fija
+    var searchTriggerPoint = 300;
+    var searchTriggerPointII = 1300; // Punto donde el search se fija
     var productMenu = document.querySelector('.product_menu');
     var page = document.body.dataset.page;  
 
@@ -160,22 +161,29 @@ window.onscroll = function () {
 
     // 📌 Lógica para fijar el Search Bar después de 325px de scroll
     if (page !== 'product.view') {
-        // Esta lógica solo se ejecuta en páginas que no sean "product.view"
-        if (currentScrollPos >= searchTriggerPoint) {
-            // Si el navbar está visible (top = 0), colocamos el search bar justo debajo
-            if (navbar.style.top === "0px") {
-                searchBar.classList.add("fixed");
-                searchBar.style.top = `${navbarHeight - 1}px`; // Posicionamos debajo del navbar
-            } else {
-                searchBar.classList.add("fixed");
-                searchBar.style.top = `0px`; // Si el navbar está oculto, el search bar se coloca en la parte superior
-            }
-        } else {
-            // Si el scroll es menor que 325px, el search bar regresa a su posición original
-            searchBar.classList.remove("fixed");
-            searchBar.style.top = ""; // Vuelve a su posición normal
-        }
-    }
+      // Esta lógica solo se ejecuta en páginas que no sean "product.view"
+      if (currentScrollPos >= searchTriggerPoint) {
+          // Si el navbar está visible (top = 0), colocamos el search bar justo debajo
+          if (navbar.style.top === "0px") {
+              searchBar.classList.add("fixed");
+              searchBar.style.top = `${navbarHeight - 1}px`; // Posicionamos debajo del navbar
+          } else {
+              searchBar.classList.add("fixed");
+              searchBar.style.top = `0px`; // Si el navbar está oculto, el search bar se coloca en la parte superior
+          }
+      } else {
+          // Si el scroll es menor que 325px, el search bar regresa a su posición original
+          searchBar.classList.remove("fixed");
+          searchBar.style.top = ""; // Vuelve a su posición normal
+      }
+      if (currentScrollPos >= searchTriggerPointII){
+        searchBar.classList.add("search_circle");
+      }else{
+        searchBar.classList.remove("search_circle");
+      }
+  }
+  
+  
 
     // 📌 Añadir o quitar clase cuando el scroll está cerca del top
     if (currentScrollPos <= 5) {
@@ -199,25 +207,7 @@ window.onscroll = function () {
       }else{
         productMenu.classList.remove("flex", "opacity-100", "translate-y-0");
          productMenu.classList.add("-translate-y-full", "transition-transform", "duration-300");
+         productMenu.style.top = "";
       }
-
-        // var rect = productMenu.getBoundingClientRect();
-        // var navbarTop = parseInt(navbar.style.top, 10) || 0;
-
-        // if (rect.top <= 0) {
-        //     // Mostrar productMenu con animación
-        //     productMenu.classList.remove("opacity-0", "-translate-y-full");
-        //     productMenu.classList.add("flex", "opacity-100", "translate-y-0", "transition-all", "duration-300");
-
-        //     // Asegurarse de que productMenu se mueva abajo con el navbar
-        //     productMenu.style.top = navbarTop >= 0 ? `${navbarHeight}px` : "0px";
-        // } else {
-        //     // Ocultar productMenu con animación
-        //     productMenu.classList.remove("flex", "opacity-100", "translate-y-0");
-        //     productMenu.classList.add("-translate-y-full", "transition-transform", "duration-300");
-
-        //     // Resetear top para evitar posiciones incorrectas
-        //     productMenu.style.top = "";
-        // }
     }
 };

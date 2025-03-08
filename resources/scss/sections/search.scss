@@ -3,23 +3,35 @@
     h-[75vh] lg:h-screen;
     .search_hero_container{
         @apply flex flex-col gap-8 items-center text-center;
+        h1, p{
+            @apply px-4;
+        }
         p{
             @apply text-lg lg:text-2xl font-medium;
         }
     }
 }
 .search_bar {
-    @apply w-full lg:max-w-lg md:px-8 relative z-40;
+    @apply w-full lg:w-[32rem] max-w-xl p-4 md:px-8 lg:px-0 relative z-40 transition-all duration-300 ease-in-out;
+    input{
+        @apply w-full p-3 border-transparent rounded-full drop-shadow-search_input;
+    }
+    
+}
+
+.search_circle{
+    div:first-child{
+        @apply flex justify-end;
+    }
+    input{
+        @apply w-[48px] placeholder:invisible transition-all duration-300 ease-in-out;
+    }
 }
 
 .search_bar.fixed {
-    @apply bg-secondary;
-    left: 50%;
-    max-width: 600px;
-    padding: 1rem 1rem;
     position: fixed;
-    transform: translateX(-50%);
-    transition: top 0.3s, background-color 0.3s;
+    // transition:  ease-in-out;
+    transition: top 0.3s, width 0.3s;
 }
 
 
