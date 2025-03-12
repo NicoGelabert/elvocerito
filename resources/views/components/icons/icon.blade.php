@@ -15,3 +15,11 @@
 @if ($name === 'email')
     <x-icons.mail />
 @endif
+
+@if ($name === 'facebook')
+    <x-icons.facebook />
+@endif
+
+@if ($name === 'instagram')
+    <x-icons.instagram />
+@endif

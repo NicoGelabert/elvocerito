@@ -2,7 +2,7 @@
 .badge{
     @apply bg-gray_50 font-medium text-gray_700 w-fit rounded-full px-3 flex py-1 items-center gap-1 capitalize;
     p, span{
-        @apply text-text_small lg:text-xs leading-6;
+        @apply text-text_small;
     }
 }
 .truncate-text {

@@ -1,6 +1,6 @@
 // VISTA DE LISTADO DE PRODUCTOS
 .product-index{
-    @apply my-28;
+    @apply my-12 md:my-20;
     .product_index_hero{
         @apply flex justify-center py-12 lg:py-6;
         h2{
@@ -8,14 +8,17 @@
         }
     }
     .filter_categories{
-        @apply flex flex-col gap-4 text-text_small lg:text-xs;
+        @apply flex flex-col gap-2 lg:gap-4 text-text_small lg:text-xs ;
         ul{
-            @apply flex flex-col gap-2;
+            @apply flex flex-col gap-2 lg:pr-8;
             li{
-                @apply font-bold text-gray_600;
+                @apply uppercase text-text_small tracking-wide text-gray_600 border-b pb-2;
             }
             li.active{
                 @apply text-primary;
+            }
+            li:last-child{
+                @apply border-none;
             }
         }
     }
@@ -31,13 +34,18 @@
             }
         }
     }
+    .filter_categories, .filter_tags{
+        @apply mt-4;
+    }
     .product-list{
         @apply lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-8 relative;
-        .category_badges{
-            @apply absolute m-2;
-        }
         img{
-            @apply aspect-square object-cover;
+            @apply aspect-square object-cover border border-gray_200 rounded-xl;
+        }
+        .category_badges{
+            img{
+                @apply border-none rounded-none w-5 h-auto;
+            }
         }
     }
     .cursor-pointer {
@@ -72,88 +80,104 @@
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{
     .product_menu{
-        @apply w-full shadow-md bg-white transition-transform duration-300 px-2 pt-4 pb-2 md:pb-4 flex-col sm:flex-row sm:justify-between fixed top-0 left-0 z-10 ;
+        @apply w-full shadow-md bg-white transition-transform duration-300 px-2 md:px-4 py-2 fixed z-10 flex justify-between;
         transition: top 0.3s, transform 0.3s;
-        .product_menu_header{
-            @apply flex gap-4 items-center w-full;
-            h2{
-                @apply text-lg;
+        h2{
+            @apply text-lg;
+        }
+        img{
+            @apply max-w-16 w-full h-full aspect-square border-2 rounded-full shadow-xl;
+        }
+        .open, .closed{
+            @apply absolute top-0 -right-4 bg-transparent;
+            svg{
+                @apply w-4;
             }
-            img{
-                @apply max-w-16 w-full h-full aspect-square border-2 rounded-full shadow-xl;
-            }
-            .open, .closed{
-                @apply absolute top-0 -right-3 bg-transparent;
-                svg{
-                    @apply w-5;
-                }
-                span, p{
-                    @apply hidden;
-                }
+            span, p{
+                @apply hidden;
             }
         }
         .contact-icons{
-            @apply w-auto flex justify-center gap-12
-            sm:-translate-y-1/2 lg:-translate-y-0;
+            @apply flex justify-end items-center gap-2 md:gap-5;
             span, p{
                 @apply sm:hidden lg:block;
             }
             svg{
                 @apply fill-gray_500 border rounded-lg bg-gray_50 p-1 drop-shadow-sm
-                w-8 h-8;
+                w-6 h-6 md:w-10 md:h-10;
             }
         }
     }
-    .product-view-hero{
-        @apply flex items-center justify-center h-96 bg-gray_200 relative;
-        .splide__track{
-            @apply h-full;
-        }
-        img{
-            @apply w-full h-full aspect-square object-cover;
-        }
-        .bg-layer{
-            @apply absolute inset-0 pointer-events-none bg-gray_50 opacity-50;
-        }
-    }
     .product{
-        @apply relative;
+        @apply relative flex flex-col gap-4;
         .product_header{
-            @apply flex relative flex-col lg:flex-row lg:flex-wrap gap-4 items-center lg:items-end gap-8 transition-all duration-300 ;
+            @apply flex relative flex-col md:flex-row flex-wrap gap-8 items-center transition-all duration-300 rounded-xl shadow-product_view mt-24 p-8;
             h2{
                 @apply text-center lg:text-left;
             }
             img{
-                @apply relative -translate-y-1/2 max-w-36 aspect-square rounded-full;
+                @apply relative max-w-36 aspect-square rounded-full shadow-product_view;
             }
             .product_header_texts{
-                @apply relative -translate-y-20 flex flex-col items-center lg:items-start gap-2;
+                @apply relative flex flex-col items-center md:items-start lg:items-start gap-2 md:gap-0;
+            }
+            .contact-icons{
+                @apply sm:w-auto flex justify-center gap-12;
+                div{
+                    svg{
+                        @apply fill-gray_700 w-6 h-6 drop-shadow-sm;
+                    }
+                }
             }
         }
         .product_body{
-            .contact-icons{
-                @apply sm:w-auto lg:w-1/4 lg:absolute  -translate-y-20 lg:-translate-y-[30%] flex lg:flex-col right-0 shadow-md p-8 rounded-lg bg-white justify-center gap-12;
-                div{
-                    svg{
-                        @apply fill-gray_500 border rounded-lg bg-gray_50 w-12 h-12 p-2 drop-shadow-sm;
+            @apply relative flex flex-col gap-4 mb-12;
+            h5{
+                @apply text-sm font-bold;
+            }
+            .product_short_description, .product_tags, .product_opening_hours, .product_description, .product_map, .product_gallery, .product_rating, .product_rrss{
+                @apply shadow-product_view p-4 rounded-xl;
+            }
+            .product_tags{
+                @apply flex flex-col gap-4;
+                .tags{
+                    @apply flex flex-wrap gap-2;  
+                }
+            }
+            .product_opening_hours{
+                @apply flex flex-col gap-4;
+                .product_opening_hours_content{
+                    @apply flex justify-around items-center;
+                    .open, .closed{
+                        @apply bg-transparent px-0;
+                        svg{
+                            @apply w-4;
+                        }
+                        span, p{
+                            @apply hidden;
+                        }
                     }
                 }
             }
-            @apply relative lg:flex flex-col gap-4;
-            .product_body_content{
-                @apply flex flex-col gap-8 mb-12 lg:w-3/4 -translate-y-10 lg:translate-y-0 lg:pr-4;
-                .product_short_description{
+            .product_map{
+                @apply w-full flex flex-col gap-4;
+                iframe{
+                    @apply w-full rounded-xl;
                 }
-                .product_opening_hours{
-                }
-                .product_description{
-                    @apply w-full lg:w-3/4;
-                }
-                .product_map{
-                    @apply w-full flex flex-col gap-4;
-                    iframe{
-                        @apply w-full;
+            }
+            .product_rating{
+                @apply flex flex-col gap-4;
+                .product_rating_content{
+                    @apply flex justify-around items-center;
+                    svg{
+                        @apply w-4;
                     }
+                }
+            }
+            .product_rrss{
+                @apply flex flex-col gap-4;
+                .product-social-icons{
+                    @apply flex gap-4;
                 }
             }
         }

@@ -57,11 +57,32 @@
 
 .category_view{
     .category_view_header{
-        @apply flex justify-center py-12 lg:py-6;
+        @apply flex justify-center py-12 lg:py-10 bg-gray_100 mb-12;
         h2{
             @apply text-center
         }
     }
+    .modal-overlay {
+        @apply fixed top-0 left-0 w-full h-full bg-gray_900/50 flex justify-center items-center z-50;
+      }
+      
+      .modal-content {
+        background: white;
+        border-radius: 8px;
+        max-height: 500px;
+        max-width: 400px;
+        overflow: scroll;
+        padding: 20px;
+        position: relative;
+        width: 80%;
+        z-index: 100; /* Más alto que el overlay */
+      }
+      
+      /* Ajuste extra por si el contenedor principal tiene un z-index alto */
+      .container {
+        position: relative;
+        z-index: 1;
+      }
     .category_view_product_list{
     }
 }
