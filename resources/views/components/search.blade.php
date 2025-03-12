@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function() {
                                 li.textContent = product.title;
                                 li.classList.add("p-2", "cursor-pointer", "hover:bg-gray-200", "text-left");
 
-                                li.addEventListener("click", () => {
-                                    window.location.href = `/product/${product.id}`;
+                                    li.addEventListener("click", () => {
+                                        window.location.href = `/categorias/${product.categories?.[0]?.parent?.slug || 'sin-categoria'}/${product.categories?.[0]?.slug || 'sin-subcategoria'}/${product.slug}`;
                                 });
 
                                 resultsList.appendChild(li);

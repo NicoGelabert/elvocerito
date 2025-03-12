@@ -24,7 +24,13 @@ class SearchController extends Controller
             ->orWhereHas('tags', function ($q) use ($query) {
                 $q->where('name', 'like', "%{$query}%");
             })
-            ->select('id', 'title', 'slug')  // Seleccionar solo lo necesario
+            ->with([
+                'categories' => function ($q) {
+                    $q->select('categories.id', 'categories.name', 'categories.slug', 'categories.parent_id')
+                      ->with('parent:id,name,slug');
+                }
+            ])
+            ->select('products.id', 'products.title', 'products.slug')
             ->limit(10)  // Limitar la cantidad de resultados
             ->get();
 
