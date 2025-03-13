@@ -1,123 +1,58 @@
 <template>
-  <div class="mb-2 flex justify-between">
+  <div class="mb-2 flex flex-col md:flex-row justify-between">
     <h1 class="text-3xl font-semibold">Dashboard</h1>
-    <div class="flex items-center">
+    <div class="flex flex-col md:flex-row itens-start md:items-center">
       <label class="mr-2">Cambiar período</label>
       <CustomInput type="select" v-model="chosenDate" @change="onDatePickerChange" :select-options="dateOptions"/>
     </div>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
-    <!--    Active Customers-->
-    <!-- <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
-      <label class="text-lg font-semibold block mb-2">Active Customers</label>
-      <template v-if="!loading.customersCount">
-        <span class="text-3xl font-semibold">{{ customersCount }}</span>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div> -->
-    <!--/    Active Customers-->
     <!--    Total Products -->
-    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-         style="animation-delay: 0.1s">
-      <label class="text-lg font-semibold block mb-2">Anunciantes totales</label>
-      <template v-if="!loading.totalProductsCount">
-        <span class="text-3xl font-semibold">{{ totalProductsCount }}</span>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div>
+    <router-link :to="{name: 'app.products'}">
+      <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
+           style="animation-delay: 0.1s">
+        <label class="text-lg font-semibold block mb-2">Anunciantes totales</label>
+        <template v-if="!loading.totalProductsCount">
+          <span class="text-3xl font-semibold">{{ totalProductsCount }}</span>
+        </template>
+        <Spinner v-else text="" class=""/>
+      </div>
+    </router-link>
     <!--/    Total Products -->
     <!--    Active Products -->
-    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-         style="animation-delay: 0.1s">
-      <label class="text-lg font-semibold block mb-2">Anunciantes activos</label>
-      <template v-if="!loading.activeProductsCount">
-        <span class="text-3xl font-semibold">{{ activeProductsCount }}</span>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div>
+    <router-link :to="{name: 'app.products'}">
+      <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
+           style="animation-delay: 0.1s">
+        <label class="text-lg font-semibold block mb-2">Anunciantes activos</label>
+        <template v-if="!loading.activeProductsCount">
+          <span class="text-3xl font-semibold">{{ activeProductsCount }}</span>
+        </template>
+        <Spinner v-else text="" class=""/>
+      </div>
+    </router-link>
     <!--/    Active Products -->
-    <!--    Active Products -->
-    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-         style="animation-delay: 0.1s">
-      <label class="text-lg font-semibold block mb-2">Categorías activas</label>
-      <template v-if="!loading.activeCategoriesCount">
-        <span class="text-3xl font-semibold">{{ activeCategoriesCount }}</span>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div>
-    <!--/    Active Products -->
-    <!--    Paid Orders -->
-    <!-- <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-         style="animation-delay: 0.2s">
-      <label class="text-lg font-semibold block mb-2">Paid Orders</label>
-      <template v-if="!loading.paidOrders">
-        <span class="text-3xl font-semibold">{{ paidOrders }}</span>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div> -->
-    <!--/    Paid Orders -->
-    <!--    Total Income -->
-    <!-- <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center"
-         style="animation-delay: 0.3s">
-      <label class="text-lg font-semibold block mb-2">Total Income</label>
-      <template v-if="!loading.totalIncome">
-        <span class="text-3xl font-semibold">{{ totalIncome }}</span>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div> -->
-    <!--/    Total Income -->
+    <!--    Active Categories -->
+    <router-link :to="{name: 'app.categories'}">
+      <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
+           style="animation-delay: 0.1s">
+        <label class="text-lg font-semibold block mb-2">Categorías activas</label>
+        <template v-if="!loading.activeCategoriesCount">
+          <span class="text-3xl font-semibold">{{ activeCategoriesCount }}</span>
+        </template>
+        <Spinner v-else text="" class=""/>
+      </div>
+    </router-link>
+    <!--/    Active Categories -->
   </div>
 
   <div class="grid grid-rows-1 md:grid-rows-2 md:grid-flow-col grid-cols-1 md:grid-cols-3 gap-3">
-    <!-- <div class="col-span-1 md:col-span-2 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
-      <label class="text-lg font-semibold block mb-2">Latest Orders</label>
-      <template v-if="!loading.latestOrders">
-        <div v-for="o of latestOrders" :key="o.id" class="py-2 px-3 hover:bg-gray-50">
-          <p>
-            <router-link :to="{name: 'app.orders.view', params: {id: o.id}}" class="text-indigo-700 font-semibold">
-              Order #{{ o.id }}
-            </router-link>
-            created {{ o.created_at }}. {{ o.items }} items
-          </p>
-          <p class="flex justify-between">
-            <span>{{ o.first_name }} {{ o.last_name }}</span>
-            <span>{{ $filters.currencyUSD(o.total_price) }}</span>
-          </p>
-        </div>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div> -->
-    <!-- TO FIX -->
-    <!-- <div class="bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center">
-      <label class="text-lg font-semibold block mb-2">Orders by Country</label>
-      <template v-if="!loading.ordersByCountry">
-        <DoughnutChart :width="140" :height="200" :data="ordersByCountry"/>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div> -->
-    <!-- <div class="bg-white py-6 px-5 rounded-lg shadow">
-      <label class="text-lg font-semibold block mb-2">Latest Customers</label>
-      <template v-if="!loading.latestCustomers">
-        <router-link :to="{name: 'app.customers.view', params: {id: c.id}}" v-for="c of latestCustomers" :key="c.id"
-                     class="mb-3 flex">
-          <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded-full mr-2">
-            <UserIcon class="w-5"/>
-          </div>
-          <div>
-            <h3>{{ c.first_name }} {{ c.last_name }}</h3>
-            <p>{{ c.email }}</p>
-          </div>
-        </router-link>
-      </template>
-      <Spinner v-else text="" class=""/>
-    </div> -->
     <div class="col-span-1 md:col-span-1 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
       <label class="text-lg font-semibold block mb-2">Últimos anunciantes</label>
       <template v-if="!loading.latestProducts">
-        <router-link :to="{name: 'app.products.edit', params: {id: p.id}}" v-for="p of latestProducts" :key="p.id"
+        <router-link :to="{name: 'app.products.edit', params: {id: p.id}}" v-for="p of latestProducts" :key="`product-${p.id}`"
                      class="mb-3 flex gap-4">
           <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded-full mr-2">
-            <img :src="p.images.length ? p.images[0].url : '../../assets/noimage.png'" alt="Imagen del producto" class="aspect-square object-cover">
+            <img :src="p.images.length ? p.images[0].url : '../../assets/noimage.png'" alt="Imagen del producto" class="aspect-square object-cover" :key="p.images[0]?.url || 'no-image'">
           </div>
           <div>
             <h3>{{ p.title }}</h3>
@@ -130,7 +65,7 @@
     <div class="col-span-1 md:col-span-1 row-span-1 md:row-span-2 bg-white py-6 px-5 rounded-lg shadow">
       <label class="text-lg font-semibold block mb-2">Categorías Populares</label>
       <template v-if="!loading.popularCategoriesCount">
-        <div class="mb-3 flex gap-4" v-for="c of popularCategoriesCount" :key="c.id">
+        <div class="mb-3 flex gap-4 items-center" v-for="c of popularCategoriesCount" :key="c.id">
           <div class="w-12 h-12 bg-gray-200 flex items-center justify-center rounded-full mr-2">
             <img :src="c.image" alt="Imagen de la categoría" class="aspect-square object-cover">
           </div>

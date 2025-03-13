@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-between mb-3">
+    <div class="flex flex-col md:flex-row justify-between mb-3 w-full gap-4">
       <h1 class="text-3xl font-semibold">Tags</h1>
       <button type="button"
               @click="showAddNewModal()"

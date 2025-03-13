@@ -9,7 +9,7 @@
     <Spinner v-if="loading"
               class="absolute left-0 top-0 bg-white right-0 bottom-0 flex items-center justify-center z-50"/>
     <form v-if="!loading" @submit.prevent="onSubmit">
-      <div class="grid grid-cols-3">
+      <div class="grid grid-cols-1 md:grid-cols-3">
         <div class="col-span-2 px-4 pt-5 pb-4">
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Nombre</h3>
@@ -43,15 +43,15 @@
               <CustomInput 
                 v-model="address.title" 
                 type="text" 
-                class="mb-2 w-7/12" 
+                class="mb-2 md:w-7/12" 
                 label="Title" 
                 :errors="errors[`addresses.${index}.title`]" 
               />
-              <div class="flex gap-1">
+              <div class="flex flex-wrap gap-1">
                 <CustomInput 
                   v-model="address.via" 
                   type="select" 
-                  class="mb-2 w-2/12" 
+                  class="mb-2 w-4/12 md:w-2/12" 
                   label="Tipo de Vía" 
                   :select-options="[
                     { key: 'Av.', text: 'Av.' },
@@ -64,14 +64,14 @@
                 <CustomInput 
                   v-model="address.via_name" 
                   type="text" 
-                  class="mb-2 w-6/12"
+                  class="mb-2 w-7/12 md:w-6/12"
                   label="Nombre de la vía"
                   :errors="errors[`addresses.${index}.via_name`]" 
                 />
                 <CustomInput 
                   v-model="address.via_number"
                   type="number"
-                  class="mb-2 w-2/12"
+                  class="mb-2 w-5/12 md:w-2/12"
                   label="Número"
                   step="1"
                   :errors="errors[`addresses.${index}.via_number`]" 
@@ -79,30 +79,30 @@
                 <CustomInput 
                   v-model="address.address_unit" 
                   type="text" 
-                  class="mb-2 w-2/12"
+                  class="mb-2 w-6/12 md:w-2/12"
                   label="Piso o departamento"
                   :errors="errors[`addresses.${index}.address_unit`]" 
                 />
               </div>
-              <div class="flex gap-1">
+              <div class="flex flex-wrap gap-1">
                 <CustomInput 
                   v-model="address.city" 
                   type="text" 
-                  class="mb-2 w-5/12"
+                  class="mb-2 w-7/12 md:w-5/12"
                   label="Ciudad"
                   :errors="errors[`addresses.${index}.city`]" 
                 />
                 <CustomInput 
                   v-model="address.zip_code" 
                   type="text" 
-                  class="mb-2 w-2/12"
+                  class="mb-2 w-4/12 md:w-2/12"
                   label="Código Postal"
                   :errors="errors[`addresses.${index}.zip_code`]" 
                 />
                 <CustomInput 
                   v-model="address.province" 
                   type="text" 
-                  class="mb-2 w-5/12"
+                  class="mb-2 w-12/12 md:w-5/12"
                   label="Provincia"
                   :errors="errors[`addresses.${index}.province`]" 
                 />
@@ -111,14 +111,14 @@
                 <CustomInput 
                     v-model="address.link" 
                     type="text" 
-                    class="mb-2 w-5/12"
+                    class="mb-2 w-12/12 md:w-5/12"
                     label="Link"
                     :errors="errors[`addresses.${index}.link`]" 
                   />
                   <CustomInput 
                   v-model="address.google_maps" 
                   type="text" 
-                  class="mb-2 w-5/12"
+                  class="mb-2 w-12/12 md:w-5/12"
                   label="Google Maps"
                   :errors="errors[`addresses.${index}.google_maps`]" 
                 />

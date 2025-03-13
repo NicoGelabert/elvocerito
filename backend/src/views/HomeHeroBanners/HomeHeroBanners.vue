@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex justify-between mb-3">
+        <div class="flex flex-col md:flex-row justify-between mb-3 w-full gap-4">
             <h1 class="text-3xl font-semibold">Home Hero Banner</h1>
             <button type="button"
                   @click="showAddNewModal()"

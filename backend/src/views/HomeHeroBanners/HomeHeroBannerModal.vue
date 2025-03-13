@@ -22,7 +22,7 @@
                                     {{ homeHeroBanner.id ? `Update image: "${props.homeHeroBanner.headline}"` : 'Create new image' }}
                                 </DialogTitle>
                                 <div class="flex">
-                                    <Tooltip content="El pie de imagen se encuentra debajo de la foto en un tamaño pequeño. Hace referencia al contenido de la foto. <br><br> El ítem Servicio se encuentra a la derecha de la imagen" />
+                                    <!-- <Tooltip content="El pie de imagen se encuentra debajo de la foto en un tamaño pequeño. Hace referencia al contenido de la foto. <br><br> El ítem Servicio se encuentra a la derecha de la imagen" /> -->
                                     <button
                                         @click="closeModal()"
                                         class="w-8 h-8 flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-[rgba(0,0,0,0.2)]"

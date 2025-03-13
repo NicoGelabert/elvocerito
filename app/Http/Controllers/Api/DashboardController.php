@@ -11,7 +11,6 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Alergen;
 use App\Traits\ReportTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -87,20 +86,18 @@ class DashboardController extends Controller
         return Product::query()
             ->select(['id', 'title', 'created_at'])
             ->with(['images' => function ($query) {
-                $query->select('id', 'product_id', 'url')->orderBy('id')->limit(1);
+                $query->select('id', 'product_id', 'url')->orderBy('id');
             }])
             ->where('published', 1)
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->limit(5)
-            ->get();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function activeAlergens()
-    {
-        return Alegen::all();
+            ->get()
+            ->map(function ($product) {
+                // Si hay imágenes, asignamos la primera
+                $product->image = $product->images->isNotEmpty() ? $product->images->first()->url : '../../assets/noimage.png';
+                unset($product->images); // Eliminamos el array completo de imágenes, si solo usamos una
+                return $product;
+            });
     }
 
     /**

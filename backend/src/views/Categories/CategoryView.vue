@@ -7,7 +7,7 @@
         <Spinner v-if="loading" class="my-4" />
       
         <form v-if="!loading" @submit.prevent="onSubmit">
-            <div class="grid grid-cols-3">
+            <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="col-span-2 px-4 pt-5 pb-4">
                     <div class="flex flex-col gap-2">
                         <h3 class="text-lg font-bold">Category Name</h3>

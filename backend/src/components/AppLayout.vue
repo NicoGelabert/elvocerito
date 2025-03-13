@@ -5,13 +5,13 @@
         <Navbar></Navbar>
         <!-- Navbar content end -->
 
-      <div class="flex" >
+      <div class="flex w-full" >
 
         <!-- Sidebar start -->
-        <Sidebar @toggle-sidebar="toggleSidebar" :class="{'-ml-[19.5%]': !sidebarOpened}"/>
+        <Sidebar @toggle-sidebar="toggleSidebar" :class="{'-ml-[22%] md:-ml-[15%] lg:-ml-[19.5%]': !sidebarOpened}"/>
         <!-- Sidebar end -->
 
-        <main class="p-6 w-full">
+        <main class="p-6 px-2 md:px-6 w-full">
             <router-view></router-view>
         </main>
 
