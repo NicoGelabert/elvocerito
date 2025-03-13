@@ -30,24 +30,32 @@
             <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
         </div>
         <div class="product container">
-            <div class="product_header">
-                <img src="{{ $product->image }}" alt="{{ $product->title }}">
-                <div class="flex flex-col items-center md:items-start gap-4">
-                    <div class="product_header_texts">
-                        <div class="flex flex-wrap gap-2">
-                            @foreach ($product->categories as $category)
-                            <x-badge badge_title="{{ $category->name }}" />
-                            @endforeach
-                            <!-- @foreach ($product->contacts as $contact)
-                            <x-badge class="star" badge_title="{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}" />
-                            @endforeach -->
-                            <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
-                            badge_title="{{ $badge_title }}" />
+            <div class="flex flex-col lg:flex-row mt-24 gap-4">
+                <div class="product_header flex-1">
+                    <img src="{{ $product->image }}" alt="{{ $product->title }}">
+                    <div class="flex flex-col items-center md:items-start gap-4">
+                        <div class="product_header_texts">
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($product->categories as $category)
+                                <x-badge badge_title="{{ $category->name }}" />
+                                @endforeach
+                                <!-- @foreach ($product->contacts as $contact)
+                                <x-badge class="star" badge_title="{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}" />
+                                @endforeach -->
+                                <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
+                                badge_title="{{ $badge_title }}" />
+                            </div>
+                            <h2>{{ $product->title }}</h2>
                         </div>
-                        <h2>{{ $product->title }}</h2>
+                        <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
                     </div>
-                    <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
                 </div>
+                @if ($product->images->count() > 1)
+                <div class="product_gallery flex-1">
+                    <!-- <h5>Galería de imágenes</h5> -->
+                    <x-image-gallery :images="$product->images"></x-image-gallery>
+                </div>
+                @endif
             </div>
             <div class="product_body">
                 @if ($product->tags->isNotEmpty())
@@ -86,12 +94,7 @@
                     <x-addresses :addresses="$product->addresses"></x-addresses>
                 </div>
                 @endif
-                @if ($product->images->count() > 1)
-                <div class="product_gallery">
-                    <h5>Galería de imágenes</h5>
-                    <x-image-gallery :images="$product->images"></x-image-gallery>
-                </div>
-                @endif
+                
                 <div class="grid grid-col-1 md:grid-cols-2 gap-4">
                     <div class="product_rating md:col-span-1">
                         <h5>Reseñas</h5>

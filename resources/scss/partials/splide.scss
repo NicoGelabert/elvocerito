@@ -7,3 +7,12 @@
         }
     }
 }
+
+.product_gallery_images {
+    .splide__arrows{
+        @apply flex justify-end mb-8;
+        .splide__arrow{
+            @apply top-0 translate-y-0;
+        }    
+    }
+}

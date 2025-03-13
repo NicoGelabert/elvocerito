@@ -110,8 +110,11 @@
     }
     .product{
         @apply relative flex flex-col gap-4;
+        .product_header, .product_short_description, .product_tags, .product_opening_hours, .product_description, .product_map, .product_gallery, .product_rating, .product_rrss{
+            @apply shadow-product_view p-4 rounded-xl;
+        }
         .product_header{
-            @apply flex relative flex-col md:flex-row flex-wrap gap-8 items-center transition-all duration-300 rounded-xl shadow-product_view mt-24 p-8;
+            @apply flex relative flex-col md:flex-row flex-wrap gap-8 items-center transition-all duration-300 p-8;
             h2{
                 @apply text-center lg:text-left;
             }
@@ -130,13 +133,21 @@
                 }
             }
         }
+        .product_gallery{
+            @apply flex flex-col gap-4 ;
+            img{
+                @apply aspect-square object-cover max-h-48 mx-auto;
+            }
+
+        }
+        .lightbox {
+            @apply fixed top-0 left-0 w-full h-full bg-black/80 flex justify-center items-center;
+            z-index: 1000;
+        }
         .product_body{
             @apply relative flex flex-col gap-4 mb-12;
             h5{
                 @apply text-sm font-bold;
-            }
-            .product_short_description, .product_tags, .product_opening_hours, .product_description, .product_map, .product_gallery, .product_rating, .product_rrss{
-                @apply shadow-product_view p-4 rounded-xl;
             }
             .product_tags{
                 @apply flex flex-col gap-4;
@@ -164,19 +175,6 @@
                 iframe{
                     @apply w-full rounded-xl;
                 }
-            }
-            .product_gallery{
-                @apply flex flex-col gap-4;
-                .product_gallery_images{
-                    img{
-                        @apply aspect-square max-w-36 rounded-xl;
-                    }
-                }
-
-            }
-            .lightbox {
-                @apply fixed top-0 left-0 w-full h-full bg-black/80 flex justify-center items-center;
-                z-index: 1000;
             }
             .product_rating{
                 @apply flex flex-col gap-4;
