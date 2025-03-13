@@ -138,6 +138,11 @@
             img{
                 @apply aspect-square object-cover max-h-48 mx-auto;
             }
+            #product_lightbox{
+                img{
+                    @apply max-h-full;
+                }
+            }
 
         }
         .lightbox {
