@@ -1,5 +1,5 @@
 #revista{
-    @apply bg-gray_200 bg-cover bg-center relative;
+    @apply bg-gray_200 bg-cover bg-center py-10 lg:py-0 relative;
     .revista_content{
         @apply flex flex-col md:flex-row gap-12 md:gap-0 justify-center w-full md:w-3/4;
         div{
