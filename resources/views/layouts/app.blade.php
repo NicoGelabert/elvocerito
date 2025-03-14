@@ -15,9 +15,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <meta name="description" content="Chimi Creativo es un estudio especializado en diseño gráfico, desarrollo web y branding que transforma tus ideas en experiencias visuales impactantes. Ofrecemos soluciones personalizadas que destacan por su creatividad e innovación. Descubre cómo podemos impulsar tu marca y darle vida a tus proyectos con nuestro equipo de expertos en diseño y desarrollo.">
+        <meta name="description" content="Descubre la guía completa de servicios en la zona sur del Gran Buenos Aires. Encuentra profesionales, educación, construcción y más en un solo lugar.">  
+        <meta name="keywords" content="servicios zona sur Buenos Aires, construcción, educación, profesionales, guía de servicios, comercios, oficios, empresas locales">  
 
-        <meta name="keywords" content="Chimi Creativo, estudio de diseño gráfico, desarrollo web, diseño de marca, branding, diseño web, agencia de diseño, diseño UX/UI, identidad visual, Málaga, diseño creativo, diseño de logotipos, marketing digital, soluciones creativas">
         
         <title inertia>{{ config('app.name', 'El Vocerito') }}</title>
 
