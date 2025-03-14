@@ -15,7 +15,7 @@
             <hr class="divider">
         </div>
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
-        <x-como-buscar-en-la-guia />
+        <x-revista />
         <x-news :articles="$articles" />
     </div>
 </x-app-layout>

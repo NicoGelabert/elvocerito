@@ -1,0 +1,14 @@
+#revista{
+    background: linear-gradient(to bottom right, rgba(132, 220, 207, 0.8), rgba(100, 181, 49, 0.8)),
+    url('/storage/app/public/common/costa_quilmes.jpeg');
+    @apply bg-cover bg-center py-24 relative;
+    .revista_content{
+        @apply flex flex-col md:flex-row gap-12 md:gap-0 justify-center w-full md:w-3/4;
+        div{
+            @apply flex flex-1;
+        }
+        img{
+            @apply aspect-square rounded-lg max-w-60;
+        }
+    }
+}
