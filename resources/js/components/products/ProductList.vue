@@ -126,7 +126,7 @@
         />
         <div class="flex flex-col justify-between py-4 gap-2">
           <a :href="`/categorias/${product.categories?.[0]?.parent?.slug || 'sin-categoria'}/${product.categories?.[0]?.slug || 'sin-subcategoria'}/${product.slug}`">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between mb-2">
               <h5 class="w-fit text-base leading-none">{{ product.title }}</h5>
             </div>
             <p class="text-xs text-gray_500">{{ product.short_description }}</p>

@@ -1,10 +1,33 @@
 <x-app-layout>
     <div class="category_view product-index">
         <div class="category_view_header">
-            <h2>{{ $subcategory->name }}</h2>
+            <div class="container flex gap-2">
+                <a href="/">
+                    <x-icons.home class="fill-gray_400" />
+                </a>
+                <p>/</p>
+                <a href="/categorias">
+                    <p class="hidden md:block">Categorías</p>
+                    <p class="md:hidden">...</p>
+                </a>
+                <p>/</p>
+                <x-button href="{{route ('categories.view', [ 'category' => $category->slug])}}" class="bg-none">
+                    <p>{{ $category->name }}</p>
+                </x-button>
+                <p>/</p>
+                <h2 class="text-small">{{ $subcategory->name }}</h2>
+            </div>
         </div>
         
         @if ($products->isNotEmpty())
+            <div class="flex gap-8 container">
+                <div class="hidden lg:block w-1/4">
+
+                </div>
+                <div class="mb-10 w-full lg:w-3/4">
+                    <h3>{{ $subcategory->name }}</h3>
+                </div>
+            </div>
             <product-list :products='@json($products)' :tags='@json($tags)' />
         @else
             <p class="text-center">No hay Anunciantes para esta categoría</p>
