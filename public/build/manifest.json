@@ -45,16 +45,12 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-5ee6731a.css",
+    "file": "assets/styles-b060b60d.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
   "storage/app/public/common/card.jpg": {
     "file": "assets/card-3be08708.jpg",
     "src": "storage/app/public/common/card.jpg"
-  },
-  "storage/app/public/common/costa_quilmes.jpeg": {
-    "file": "assets/costa_quilmes-a8a001ab.jpeg",
-    "src": "storage/app/public/common/costa_quilmes.jpeg"
   }
 }
