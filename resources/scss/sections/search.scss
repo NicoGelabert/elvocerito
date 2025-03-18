@@ -1,10 +1,12 @@
 .search_hero{
-    @apply bg-gray_100 flex flex-col justify-center items-center
-    h-[75vh] lg:h-screen;
+    @apply bg-[url('../../public/storage/common/hero-banner.jpg')] flex flex-col justify-center bg-cover bg-center h-screen
+    items-center lg:items-end;
     .search_hero_container{
-        @apply flex flex-col gap-8 items-center text-center;
+        @apply flex flex-col gap-8
+        items-center lg:items-end
+        text-center lg:text-right lg:max-w-2xl mx-4 md:mx-16 lg:mr-48;
         h1, p{
-            @apply px-4;
+            @apply px-4 drop-shadow-lg;
         }
         p{
             @apply text-lg lg:text-2xl font-medium;

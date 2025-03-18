@@ -3,7 +3,7 @@
     "file": "assets/splide.esm-688b6f4b.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-2bd67b46.css",
+    "file": "assets/app-c952b5cc.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -45,12 +45,16 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-4361346a.css",
+    "file": "assets/styles-b0a550dd.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
   "storage/app/public/common/card.jpg": {
     "file": "assets/card-3be08708.jpg",
     "src": "storage/app/public/common/card.jpg"
+  },
+  "storage/app/public/common/hero-banner.jpg": {
+    "file": "assets/hero-banner-dbe0776d.jpg",
+    "src": "storage/app/public/common/hero-banner.jpg"
   }
 }
