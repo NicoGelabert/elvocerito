@@ -147,15 +147,16 @@
 
 .pinmaps li:nth-child(1){
     @apply
-    top-[23rem] md:top-[40rem] lg:top-80
-    left-8 lg:left-80;
+    top-[24rem] md:top-[40rem] lg:top-80
+    left-6 lg:left-80;
     animation-delay: 1s;
 }
 
 .pinmaps li:nth-child(2){
     @apply
-    top-40 md:top-[44rem] lg:top-36
-    left-4 md:left-56 lg:left-96;
+    bottom-12 md:bottom-auto
+    md:top-[44rem] lg:top-36
+    left-6 md:left-56 lg:left-96;
     animation-delay: 1.5s;
 }
 
@@ -170,7 +171,7 @@
     @apply
     md:bottom-40 lg:bottom-auto
     top-64 md:top-auto lg:top-64
-    left-20 lg:left-32;
+    left-16 lg:left-32;
     animation-delay: 2.5s;
 }
 
@@ -197,8 +198,8 @@
 .pinmaps li:nth-child(8){
     @apply
     md:bottom-48 lg:bottom-auto
-    top-[17rem] md:top-auto lg:top-48
-    left-56 md:left-36 lg:left-[32rem];
+    top-[24rem] md:top-auto lg:top-48
+    left-[18rem] md:left-36 lg:left-[32rem];
     animation-delay: 4.5s;
 }
 
