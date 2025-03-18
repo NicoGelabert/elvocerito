@@ -140,3 +140,95 @@
     }
 
 }
+
+.pinmaps li{
+    @apply absolute w-10 h-10 opacity-0 animate-fade-in;
+}
+
+.pinmaps li:nth-child(1){
+    @apply
+    top-[23rem] md:top-[40rem] lg:top-80
+    left-8 lg:left-80;
+    animation-delay: 1s;
+}
+
+.pinmaps li:nth-child(2){
+    @apply
+    top-40 md:top-[44rem] lg:top-36
+    left-4 md:left-56 lg:left-96;
+    animation-delay: 1.5s;
+}
+
+.pinmaps li:nth-child(3){
+    @apply
+    bottom-16
+    left-16 lg:left-[40rem];
+    animation-delay: 2s;
+}
+
+.pinmaps li:nth-child(4){
+    @apply
+    md:bottom-40 lg:bottom-auto
+    top-64 md:top-auto lg:top-64
+    left-20 lg:left-32;
+    animation-delay: 2.5s;
+}
+
+.pinmaps li:nth-child(5){
+    @apply  bottom-36
+    left-64 md:left-[36rem] lg:left-64;
+    animation-delay: 3s;
+}
+
+.pinmaps li:nth-child(6){
+    @apply
+    bottom-10
+    left-64 md:left-[30rem] lg:left-96;
+    animation-delay: 3.5s;
+}
+
+.pinmaps li:nth-child(7){
+    @apply
+    bottom-28 md:bottom-40 lg:bottom-36
+    left-40 md:left-[28rem] lg:left-[26rem];
+    animation-delay: 4s;
+}
+
+.pinmaps li:nth-child(8){
+    @apply
+    md:bottom-48 lg:bottom-auto
+    top-[17rem] md:top-auto lg:top-48
+    left-56 md:left-36 lg:left-[32rem];
+    animation-delay: 4.5s;
+}
+
+.pinmaps li:nth-child(9){
+    @apply
+    bottom-8 md:bottom-24 lg:bottom-auto
+    lg:top-64
+    left-32 md:left-80 lg:left-[28rem];
+    animation-delay: 5s;
+}
+
+.pinmaps li:nth-child(10){
+    @apply
+    bottom-28 md:bottom-48 lg:bottom-40
+    left-4 md:left-72 lg:left-[36rem];
+    animation-delay: 5.5s;
+}
+
+.pinmaps li:nth-child(11){
+    @apply
+    bottom-20 lg:bottom-auto
+    lg:top-32
+    left-[13rem] lg:left-60;
+    animation-delay: 6s;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }

@@ -3,7 +3,7 @@
     "file": "assets/splide.esm-688b6f4b.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-c952b5cc.css",
+    "file": "assets/app-e83ace98.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -45,7 +45,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-b0a550dd.css",
+    "file": "assets/styles-36f68d60.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
@@ -54,7 +54,7 @@
     "src": "storage/app/public/common/card.jpg"
   },
   "storage/app/public/common/hero-banner.jpg": {
-    "file": "assets/hero-banner-dbe0776d.jpg",
+    "file": "assets/hero-banner-efed520e.jpg",
     "src": "storage/app/public/common/hero-banner.jpg"
   }
 }
