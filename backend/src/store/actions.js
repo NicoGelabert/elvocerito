@@ -255,6 +255,15 @@ export function createProduct({ commit }, product) {
     });
   }
 
+  // Agregar horarios al FormData
+  if (product.horarios && product.horarios.length) {
+    product.horarios.forEach((horario, index) => {
+      form.append(`horarios[${index}][dia]`, horario.dia || '');
+      form.append(`horarios[${index}][apertura]`, horario.apertura || '');
+      form.append(`horarios[${index}][cierre]`, horario.cierre || '');
+    });
+  }
+
   return axiosClient.post('/products', form);
 }
 
@@ -327,6 +336,15 @@ export function updateProduct({commit}, product) {
   if (product.tags && product.tags.length) {
     product.tags.forEach((tag) => {
       form.append(`tags[]`, tag);
+    });
+  }
+
+  // Agregar horarios al FormData
+  if (product.horarios && product.horarios.length) {
+    product.horarios.forEach((horario, index) => {
+      form.append(`horarios[${index}][dia]`, horario.dia || '');
+      form.append(`horarios[${index}][apertura]`, horario.apertura || '');
+      form.append(`horarios[${index}][cierre]`, horario.cierre || '');
     });
   }
   

@@ -63,6 +63,14 @@ class ProductResource extends JsonResource
                 ];
             }),
             'tags' => $this->tags->map(fn($t) => $t->id),
+            'horarios' => $this->horarios->map(function ($horario) {
+                return [
+                    'id' => $horario->id,
+                    'dia' => $horario->dia,
+                    'apertura' => $horario->apertura,
+                    'cierre' => $horario->cierre,
+                ];
+            }),
         ];
     }
 }

@@ -57,8 +57,7 @@
                :value="props.modelValue"
                @input="emit('update:modelValue', $event.target.value)"
                :class="inputClasses"
-               :placeholder="label"
-               step="0.01"/>
+               :placeholder="label"/>
       </template>
       <span v-if="append"
             class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
@@ -124,7 +123,7 @@ const id = computed(() => {
 })
 const inputClasses = computed(() => {
   const cls = [
-    `block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`,
+    `block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`,
   ];
 
   if (props.append && !props.prepend) {

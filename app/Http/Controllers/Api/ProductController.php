@@ -14,6 +14,7 @@ use App\Models\ProductContact;
 use App\Models\ProductSocial;
 use App\Models\ProductAddress;
 use App\Models\ProductTag;
+use App\Models\ProductHorario;
 use App\Models\Api\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -34,7 +35,7 @@ class ProductController extends Controller
         $search = $request->get('search', '');
         $categorySlug = $request->get('category', '');  // Agregar parámetro category
 
-        $query = Product::query()->with(['categories', 'contacts', 'socials', 'addresses', 'tags'])
+        $query = Product::query()->with(['categories', 'contacts', 'socials', 'addresses', 'tags', 'horarios'])
             ->where('title', 'like', "%{$search}%");
 
         // Filtrar por categoría si se pasa el slug de la categoría
@@ -78,6 +79,8 @@ class ProductController extends Controller
 
         $tags = $data['tags'] ?? [];
 
+        $horarios = $data['horarios'] ?? [];
+
         $product = Product::create($data);
 
         $this->saveCategories($categories, $product);
@@ -86,6 +89,7 @@ class ProductController extends Controller
         $this->saveSocials($socials, $product);
         $this->saveAddresses($addresses, $product);
         $this->saveTags($tags, $product);
+        $this->saveHorarios($horarios, $product);
 
         return new ProductResource($product);
     }
@@ -128,6 +132,8 @@ class ProductController extends Controller
 
         $tags = $data['tags'] ?? [];
 
+        $horarios = $data['horarios'] ?? [];
+
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
         if (count($deletedImages) > 0) {
@@ -137,6 +143,7 @@ class ProductController extends Controller
         $this->saveSocials($socials, $product);
         $this->saveAddresses($addresses, $product);
         $this->saveTags($tags, $product);
+        $this->saveHorarios($horarios, $product);
 
         $product->update($data);
 
@@ -250,6 +257,15 @@ class ProductController extends Controller
         $data = array_map(fn($id) => (['tag_id' => $id, 'product_id' => $product->id]), $tagIds);
 
         ProductTag::insert($data);
+    }
+
+    protected function saveHorarios(array $horarios, Product $product)
+    {
+        $product->horarios()->delete(); 
+
+        foreach ($horarios as $horario) {
+            $product->horarios()->create($horario);
+        }
     }
 
     public function productsByCategory($categorySlug)

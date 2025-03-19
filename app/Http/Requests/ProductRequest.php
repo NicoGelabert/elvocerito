@@ -53,6 +53,10 @@ class ProductRequest extends FormRequest
             'addresses.*.link' => ['nullable', 'string', 'max:500'],
             'addresses.*.google_maps' => ['nullable', 'string', 'max:1000'],
             'tags.*' => ['nullable', 'int', 'exists:tags,id'],
+            'horarios' => ['nullable', 'array'],
+            'horarios.*.dia' => ['required', 'in:lunes,martes,miércoles,jueves,viernes,sábado,domingo'],
+            'horarios.*.apertura' => ['nullable'], 
+            'horarios.*.cierre' => ['nullable', 'after:horarios.*.apertura'], // Debe ser después de apertura
         ];
     }
 }

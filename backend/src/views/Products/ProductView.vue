@@ -36,6 +36,7 @@
             <CustomInput type="richtext" class="mb-2" v-model="product.description" label="Description" :errors="errors['description']"/>
           </div>
 
+          <!-- Inicio Direcciones -->
           <hr class="my-4">
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Dirección</h3>
@@ -140,6 +141,63 @@
               />
             </button>
           </div>
+          <!-- Fin Direcciones -->
+          <hr class="my-4">
+          <!-- Inicio Horarios-->
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Horarios de Atención</h3>
+            <div v-for="(horario, index) in product.horarios" :key="index" class="flex gap-1">
+              <CustomInput 
+                v-model="horario.dia" 
+                type="select" 
+                class="mb-2 md:w-6/12" 
+                label="Dia"
+                :select-options="[
+                  { key: '', text: 'Escoja un día', isDisabled: true },
+                  { key: 'lunes', text: 'Lunes' },
+                  { key: 'martes', text: 'Martes' },
+                  { key: 'miércoles', text: 'Miércoles' },
+                  { key: 'jueves', text: 'Jueves' },
+                  { key: 'viernes', text: 'Viernes' },
+                  { key: 'sábado', text: 'Sábado' },
+                  { key: 'domingo', text: 'Domingo' },
+                ]" 
+                :errors="errors[`horarios.${index}.dia`]"
+                :class="{ 'text-gray-500': horario.dia === '' }" 
+              />
+              <CustomInput
+                v-model="horario.apertura" 
+                type="time"
+                class="mb-2 w-4/12 md:w-3/12" 
+                label="Horario Apertura" 
+                :errors="errors[`horarios.${index}.apertura`]" 
+              />
+              <CustomInput
+                v-model="horario.cierre" 
+                type="time" 
+                class="mb-2 w-4/12 md:w-3/12" 
+                label="Horario Cierre" 
+                :errors="errors[`horarios.${index}.cierre`]" 
+              />
+              
+              <div class="w-1/12 flex items-center justify-center">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="product.horarios.length > 1" @click.prevent="removeHorario(index)">
+                  <TrashIcon
+                    class="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addHorario">
+              <h4 class="text-sm">Crear horario</h4>
+              <PlusCircleIcon
+                class="h-5 w-5 text-black group-hover:text-white"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+          <!-- Fin Horarios-->
 
           <hr class="my-4">
           <div class="flex flex-col gap-2">
@@ -272,7 +330,11 @@
     </form>
   </div>
 </template>
-  
+<style>
+select option[value=""] {
+  color: gray !important; /* Cambia el color a gris */
+}
+</style>
 <script setup>
 import {onMounted, ref} from 'vue'
 import CustomInput from "../../components/core/CustomInput.vue";
@@ -307,6 +369,7 @@ const product = ref({
   socials: [{ rrss: '', link: '' }],
   addresses: [{ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '', link: '', google_maps: '' }],
   tags:[],
+  horarios: [{ dia: '', apertura: '', cierre: ''}],
 })
 
 const errors = ref({});
@@ -332,6 +395,9 @@ onMounted(() => {
         }
         if (!product.value.addresses.length) {
           product.value.addresses.push({ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '', link: '', google_maps: ''  });
+        }
+        if (product.value && Array.isArray(product.value.horarios) && product.value.horarios.length === 0) {
+          product.value.horarios.push({ dia: '', apertura: '', cierre: '' });
         }
       })
   }
@@ -386,6 +452,19 @@ function removeAddress(index) {
 }
 // End Addresses
 
+// Horarios
+function addHorario() {
+  product.value.horarios.push({ dia: '', apertura: '' , cierre: '' });
+}
+
+function removeHorario(index) {
+  product.value.horarios.splice(index, 1);
+  if (product.value.horarios.length === 0) {
+    addHorario(); 
+  }
+}
+// End Horarios
+
 function onSubmit($event, close = false) {
   loading.value = true
   errors.value = {};
@@ -397,6 +476,9 @@ function onSubmit($event, close = false) {
   );
   product.value.addresses = product.value.addresses.filter(
     (address) => Object.values(address).some(value => value !== '')
+  );
+  product.value.horarios = product.value.horarios.filter(
+    (horario) => Object.values(horario).some(value => value !== '')
   );
   if (product.value.id) {
     store.dispatch('updateProduct', product.value)
