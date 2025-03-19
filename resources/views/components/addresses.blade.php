@@ -21,7 +21,6 @@
                 ], fn($value) => !empty($value))) }}
             </a>
         </p>
-        {!! $address->google_maps !!}
         @endforeach
         </div>
     </div>

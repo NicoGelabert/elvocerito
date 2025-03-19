@@ -34,7 +34,7 @@
     <!-- Lightbox -->
     <template x-if="open && images.length">
         <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50" id="product_lightbox">
-            <div class="relative w-full h-full flex items-center">
+            <div class="relative w-full h-full flex items-center justify-center">
                 <!-- Imagen Actual -->
                 <img :src="images[imageIndex]" class="max-w-full max-h-full">
 

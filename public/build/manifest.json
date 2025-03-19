@@ -3,7 +3,7 @@
     "file": "assets/splide.esm-688b6f4b.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-e83ace98.css",
+    "file": "assets/app-84470e8a.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -45,7 +45,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-3710a9ac.css",
+    "file": "assets/styles-bce9ce4c.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
