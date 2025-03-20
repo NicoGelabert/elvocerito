@@ -87,6 +87,7 @@
                         <h5>Horario de atención</h5>
                         <div class="product_opening_hours_content">
                             <div class="flex flex-col gap-3">
+                            
                             @foreach ($product->horarios as $horario)
                                 @php
                                     $apertura = Carbon::parse($horario->apertura)->format('H:i');
@@ -94,12 +95,15 @@
                                 @endphp
                                 <div class="flex gap-2 items-center"
                                     x-data="verificarHorario('{{ strtolower($horario->dia) }}', '{{ $apertura }}', '{{ $cierre }}')">
-                                    <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
-                                        <span x-text="estado"></span> <!-- Pasamos estado como contenido del slot -->
-                                    </x-badge>
                                     <p>{{ ucfirst($horario->dia) }} {{ $apertura }} a {{ $cierre }}</p>
+                                    <template x-if="esHoy">
+                                        <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                            <span x-text="estado"></span> 
+                                        </x-badge>
+                                    </template>
                                 </div>
                             @endforeach
+
                             </div>
                             <x-icons.chevron-down />
                         </div>
