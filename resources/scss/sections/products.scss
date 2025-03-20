@@ -89,13 +89,19 @@
             @apply max-w-16 w-full h-full aspect-square border-2 rounded-full shadow-xl;
         }
         .open, .closed{
-            @apply absolute top-0 -right-4 bg-transparent;
+            @apply absolute top-0 right-0 w-4 h-4 px-0;
             svg{
                 @apply w-4;
             }
             span, p{
                 @apply hidden;
             }
+        }
+        .open{
+            @apply bg-lime-500;
+        }
+        .closed{
+            @apply bg-red-500;
         }
         .contact-icons{
             @apply flex justify-end items-center gap-2 md:gap-5;
@@ -159,15 +165,18 @@
         .product_opening_hours{
             @apply flex flex-col gap-4;
             .product_opening_hours_content{
-                @apply flex gap-8 items-center;
+                @apply flex gap-8 items-start;
                 .open, .closed{
-                    @apply bg-transparent px-0;
-                    svg{
-                        @apply w-2;
-                    }
+                    @apply w-2 h-2 px-0;
                     span, p{
                         @apply hidden;
                     }
+                }
+                .open{
+                    @apply bg-lime-500;
+                }
+                .closed{
+                    @apply bg-red-500;
                 }
                 p{
                     @apply text-small
@@ -203,7 +212,11 @@
             h5{
                 @apply text-sm font-bold;
             }
-            
+            .product_description{
+                ul{
+                    @apply list-disc px-10 flex flex-col gap-4;
+                }
+            }
             .product_map{
                 @apply w-full flex flex-col gap-4;
                 iframe{

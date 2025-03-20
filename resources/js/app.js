@@ -94,6 +94,78 @@ document.addEventListener("alpine:init", () => {
       this.isOpen = true;
     }
   }));
+
+  Alpine.data('verificarEstado', (horarios) => ({
+    estado: 'Cargando...',
+    
+    init() {
+        this.comprobarEstado();
+        setInterval(() => this.comprobarEstado(), 60000); // Actualiza cada minuto
+    },
+    
+    comprobarEstado() {
+        let diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+        let ahora = new Date();
+        let diaActual = diasSemana[ahora.getDay()];
+        let horaActual = ahora.getHours() * 60 + ahora.getMinutes();
+
+        // Filtrar el horario correspondiente al día actual
+        let horarioHoy = horarios.find(h => h.dia.toLowerCase() === diaActual);
+
+        if (horarioHoy) {
+            let aperturaMin = this.convertirAHorasMinutos(horarioHoy.apertura);
+            let cierreMin = this.convertirAHorasMinutos(horarioHoy.cierre);
+
+            if (aperturaMin <= cierreMin) {
+                // Horario normal (ej: 08:00 - 20:00)
+                this.estado = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+            } else {
+                // Cruza la medianoche (ej: 22:00 - 03:00)
+                this.estado = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+            }
+        } else {
+            this.estado = 'Cerrado'; // Si no hay horario para el día, cerramos
+        }
+    },
+    
+    convertirAHorasMinutos(hora) {
+        let [h, m] = hora.split(':').map(Number);
+        return h * 60 + m;
+    }
+  }));
+
+  Alpine.data('verificarHorario', (dia, apertura, cierre) => ({
+      estado: 'Cargando...',
+  
+      init() {
+          this.comprobarEstado();
+          setInterval(() => this.comprobarEstado(), 60000); // Actualiza cada minuto
+      },
+  
+      comprobarEstado() {
+          let diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+          let ahora = new Date();
+          let diaActual = diasSemana[ahora.getDay()];
+          let horaActual = ahora.getHours() * 60 + ahora.getMinutes();
+          let aperturaMin = this.convertirAHorasMinutos(apertura);
+          let cierreMin = this.convertirAHorasMinutos(cierre);
+  
+          if (diaActual.toLowerCase() === dia.toLowerCase()) {
+              if (aperturaMin <= cierreMin) {
+                  this.estado = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+              } else {
+                  this.estado = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+              }
+          } else {
+              this.estado = 'Cerrado';
+          }
+      },
+  
+      convertirAHorasMinutos(hora) {
+          let [h, m] = hora.split(':').map(Number);
+          return h * 60 + m;
+      }
+  }));
 });
 
 window.Alpine = Alpine;

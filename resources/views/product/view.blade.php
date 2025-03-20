@@ -1,7 +1,5 @@
 @php
-    
-    $bgImage = asset('storage/common/impermeabilizacion_de_techos.png');
-    $badge_title = "cerrado";
+    use Carbon\Carbon;
 @endphp
 <x-app-layout>
     <div id="product-view"
@@ -19,7 +17,22 @@
                 <div class="flex gap-4">
                     <div class="relative w-auto">
                         <img src="{{ $product->image }}" alt="{{ $product->title }}">
-                        <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))" badge_title="{{ $badge_title }}" />
+                        
+                        @php
+                            $horarios = $product->horarios->map(function($horario) {
+                                return [
+                                    'dia' => $horario->dia,
+                                    'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
+                                    'cierre' => Carbon::parse($horario->cierre)->format('H:i')
+                                ];
+                            });
+                        @endphp
+                        <div x-data="verificarEstado({{ json_encode($horarios) }})">
+                            <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
+                            </x-badge>
+                        </div>
+
                     </div>
                     <div class="content-center">
                         <h2>{{ $product->title }}</h2>
@@ -69,14 +82,29 @@
                         </div>
                         @endif
                     </div>
+                    @if ($product->horarios->isNotEmpty())
                     <div class="product_opening_hours md:col-span-1">
                         <h5>Horario de atención</h5>
                         <div class="product_opening_hours_content">
-                            <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))" badge_title="{{ $badge_title }}" />
-                            <p>Jueves 9 a 18hs</p>
+                            <div class="flex flex-col gap-3">
+                            @foreach ($product->horarios as $horario)
+                                @php
+                                    $apertura = Carbon::parse($horario->apertura)->format('H:i');
+                                    $cierre = Carbon::parse($horario->cierre)->format('H:i');
+                                @endphp
+                                <div class="flex gap-2 items-center"
+                                    x-data="verificarHorario('{{ strtolower($horario->dia) }}', '{{ $apertura }}', '{{ $cierre }}')">
+                                    <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                        <span x-text="estado"></span> <!-- Pasamos estado como contenido del slot -->
+                                    </x-badge>
+                                    <p>{{ ucfirst($horario->dia) }} {{ $apertura }} a {{ $cierre }}</p>
+                                </div>
+                            @endforeach
+                            </div>
                             <x-icons.chevron-down />
                         </div>
                     </div>
+                    @endif
                     <div class="product_rating md:col-span-1">
                         <div>
                             <h5>Reseñas</h5>
@@ -105,7 +133,7 @@
                     @endif
                 </div>
                 <!-- Inicio Columna derecha -->
-                <div class="w-3/4">
+                <div class="w-3/4 flex flex-col gap-10">
                     <div class="flex flex-col lg:flex-row gap-4">
                         <div class="product_header flex-1">
                             <img src="{{ $product->image }}" alt="{{ $product->title }}">
@@ -118,8 +146,20 @@
                                         <!-- @foreach ($product->contacts as $contact)
                                         <x-badge class="star" badge_title="{{ $contact->number % 1 == 0 ? number_format($contact->number, 0) : number_format($contact->number, 1) }}" />
                                         @endforeach -->
-                                        <x-badge :class="($badge_title === 'cerrado' ? 'closed' : ($badge_title === 'abierto' ? 'open' : ''))"
-                                        badge_title="{{ $badge_title }}" />
+                                        @php
+                                            $horarios = $product->horarios->map(function($horario) {
+                                                return [
+                                                    'dia' => $horario->dia,
+                                                    'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
+                                                    'cierre' => Carbon::parse($horario->cierre)->format('H:i')
+                                                ];
+                                            });
+                                        @endphp
+                                        <div x-data="verificarEstado({{ json_encode($horarios) }})">
+                                            <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                                <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
+                                            </x-badge>
+                                        </div>
                                     </div>
                                 </div>
                                 <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>

@@ -43,7 +43,7 @@ class ProductController extends Controller
         $subcategories = $category->children()->where('active', 1)->get();
 
         // Cargar el producto con sus relaciones
-        $product->load(['categories', 'images', 'contacts', 'socials', 'addresses']);
+        $product->load(['categories', 'images', 'contacts', 'socials', 'addresses', 'horarios']);
 
         // Obtener los productos relacionados (si es necesario)
         $tags = $product->tags()->get();

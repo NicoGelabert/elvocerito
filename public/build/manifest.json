@@ -3,7 +3,7 @@
     "file": "assets/splide.esm-688b6f4b.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-703aa0bc.css",
+    "file": "assets/app-56dcedf0.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -14,7 +14,7 @@
       "resources/js/product-view.js",
       "resources/js/categories-index.js"
     ],
-    "file": "assets/app-1768918d.js",
+    "file": "assets/app-301b4f68.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -45,7 +45,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-bce9ce4c.css",
+    "file": "assets/styles-af5ba134.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
