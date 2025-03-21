@@ -65,79 +65,81 @@
             </div>
 
             <div class="flex gap-8 container">
-                <div class="w-1/4"></div>
-                <div class="mb-10 w-full lg:w-3/4">
+                <div class="hidden lg:block w-1/4"></div>
+                <div class="mb-10 w-full lg:w-3/4 text-center lg:text-left">
                     <h2>{{ $product->title }}</h2>
                 </div>
             </div>
-            <div class="flex gap-8 container">
-                <div class="w-1/4 flex flex-col gap-6">
-                    <div class="product_tags">
-                        @if ($product->tags->isNotEmpty())
-                        <h5>Etiquetas</h5>
-                        <div class="tags">
-                            @foreach($product->tags as $tag)
-                            <x-badge badge_title="{{ $tag->name }}" />
-                            @endforeach
+            <div class="flex flex-col lg:flex-row gap-8 container">
+                <div class="block overflow-x-auto scroll-smooth w-full lg:w-1/4">
+                    <div class="flex lg:flex-col gap-6 horizontal_scrolling_container">
+                        <div class="product_tags">
+                            @if ($product->tags->isNotEmpty())
+                            <h5>Etiquetas</h5>
+                            <div class="tags">
+                                @foreach($product->tags as $tag)
+                                <x-badge badge_title="{{ $tag->name }}" />
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
+                        @if ($product->horarios->isNotEmpty())
+                        <div class="product_opening_hours md:col-span-1">
+                            <h5>Horario de atención</h5>
+                            <div class="product_opening_hours_content">
+                                <div class="flex flex-col gap-3">
+                                
+                                @foreach ($product->horarios as $horario)
+                                    @php
+                                        $apertura = Carbon::parse($horario->apertura)->format('H:i');
+                                        $cierre = Carbon::parse($horario->cierre)->format('H:i');
+                                    @endphp
+                                    <div class="flex gap-2 items-center"
+                                        x-data="verificarHorario('{{ strtolower($horario->dia) }}', '{{ $apertura }}', '{{ $cierre }}')">
+                                        <p>{{ ucfirst($horario->dia) }} {{ $apertura }} a {{ $cierre }}</p>
+                                        <template x-if="esHoy">
+                                            <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                                <span x-text="estado"></span> 
+                                            </x-badge>
+                                        </template>
+                                    </div>
+                                @endforeach
+    
+                                </div>
+                                <x-icons.chevron-down />
+                            </div>
+                        </div>
+                        @endif
+                        <div class="product_rating md:col-span-1">
+                            <div class="hidden lg:block">
+                                <h5>Reseñas</h5>
+                                <p class="text-gray_400">5 Opiniones</p>
+                            </div>
+                            <div class="product_rating_content">
+                                <x-icons.star class="fill-amber-500"/>
+                                <p class="font-bold">4.7</p>
+                                <p class="font-bold">Excelente</p>
+                                <x-icons.chevron-down />
+                            </div>
+                        </div>
+                        @if ($product->addresses->isNotEmpty())
+                        <div class="product_location">
+                            <h5>Ubicación</h5>
+                            <x-addresses :addresses="$product->addresses"></x-addresses>
+                        </div>
+                        @endif
+                        @if ($product->socials->isNotEmpty())
+                        <div class="product_rrss md:col-span-1">
+                            <h5>Redes</h5>
+                            <div class="product_rating_content">
+                                <x-product-social-icons class="product-social-icons" :icons="$product->socials"></x-product-social-icons>
+                            </div>
                         </div>
                         @endif
                     </div>
-                    @if ($product->horarios->isNotEmpty())
-                    <div class="product_opening_hours md:col-span-1">
-                        <h5>Horario de atención</h5>
-                        <div class="product_opening_hours_content">
-                            <div class="flex flex-col gap-3">
-                            
-                            @foreach ($product->horarios as $horario)
-                                @php
-                                    $apertura = Carbon::parse($horario->apertura)->format('H:i');
-                                    $cierre = Carbon::parse($horario->cierre)->format('H:i');
-                                @endphp
-                                <div class="flex gap-2 items-center"
-                                    x-data="verificarHorario('{{ strtolower($horario->dia) }}', '{{ $apertura }}', '{{ $cierre }}')">
-                                    <p>{{ ucfirst($horario->dia) }} {{ $apertura }} a {{ $cierre }}</p>
-                                    <template x-if="esHoy">
-                                        <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
-                                            <span x-text="estado"></span> 
-                                        </x-badge>
-                                    </template>
-                                </div>
-                            @endforeach
-
-                            </div>
-                            <x-icons.chevron-down />
-                        </div>
-                    </div>
-                    @endif
-                    <div class="product_rating md:col-span-1">
-                        <div>
-                            <h5>Reseñas</h5>
-                            <p class="text-gray_400">5 Opiniones</p>
-                        </div>
-                        <div class="product_rating_content">
-                            <x-icons.star class="fill-amber-500"/>
-                            <p class="font-bold">4.7</p>
-                            <p class="font-bold">Excelente</p>
-                            <x-icons.chevron-down />
-                        </div>
-                    </div>
-                    @if ($product->addresses->isNotEmpty())
-                    <div class="product_location">
-                        <h5>Ubicación</h5>
-                        <x-addresses :addresses="$product->addresses"></x-addresses>
-                    </div>
-                    @endif
-                    @if ($product->socials->isNotEmpty())
-                    <div class="product_rrss md:col-span-1">
-                        <h5>Redes</h5>
-                        <div class="product_rating_content">
-                            <x-product-social-icons class="product-social-icons" :icons="$product->socials"></x-product-social-icons>
-                        </div>
-                    </div>
-                    @endif
                 </div>
                 <!-- Inicio Columna derecha -->
-                <div class="w-3/4 flex flex-col gap-10">
+                <div class="w-full lg:w-3/4 flex flex-col gap-10">
                     <div class="flex flex-col lg:flex-row gap-4">
                         <div class="product_header flex-1">
                             <img src="{{ $product->image }}" alt="{{ $product->title }}">
