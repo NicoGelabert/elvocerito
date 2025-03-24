@@ -114,8 +114,8 @@
             }
         }
     }
-    .product_view_header{
-        @apply py-8 lg:py-6 bg-gray_100 mb-10 mt-16;
+    .breadcrumbs{
+        @apply py-8 lg:py-6 bg-gray_100 mb-10 mt-16 lg:mt-20;
         p{
             @apply text-gray_400 text-small hover:text-primary;
         }
@@ -157,7 +157,7 @@
             z-index: 1000;
         }
         .horizontal_scrolling_container{
-            @apply border border-gray_200 lg:border-y-0 lg:border-l-0 lg:border-r-gray_200 max-w-[1000px] p-4 w-auto min-w-max;
+            @apply flex items-center lg:flex-col lg:items-start gap-6 lg:border-r-gray_200 max-w-[1000px] p-4 w-auto min-w-max;
             h5{
                 @apply hidden lg:block;
             }
@@ -171,7 +171,7 @@
         .product_opening_hours{
             @apply flex flex-col gap-4;
             .product_opening_hours_content{
-                @apply flex gap-8 items-start;
+                @apply flex gap-8 items-start relative justify-between;
                 .open, .closed{
                     @apply w-2 h-2 px-0;
                     span, p{
@@ -186,6 +186,36 @@
                 }
                 p{
                     @apply text-small
+                }
+                .horario_modal{
+                    @apply flex justify-center w-full
+                    items-center lg:items-start
+                    bg-black bg-opacity-50 lg:bg-none
+                    fixed lg:absolute
+                    inset-0
+                    z-10;
+                    .horario_modal_content{
+                        @apply bg-white rounded-xl shadow-lg px-4 py-2 -mt-4 flex flex-col gap-6
+                        w-80 lg:w-full;
+                        ul {
+                            @apply w-full flex flex-col;
+                            li{
+                                @apply w-full border-b border-b-gray_200 py-2;
+                            }
+                            li:last-child{
+                                @apply border-none;
+                            }
+                        }
+                        button{
+                            @apply
+                            absolute
+                            w-12 h-12 lg:w-0 lg:h-0
+                            -top-[5.5rem] -right-8 lg:top-0 lg:right-0
+                            bg-gray-800 lg:bg-transparent
+                            text-white lg:text-secondary p-2 rounded-full
+                            lg:text-sm;
+                        }
+                    }
                 }
             }
         }
