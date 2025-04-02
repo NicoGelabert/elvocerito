@@ -159,6 +159,7 @@
                         </div>
                         @endif
                         <!-- FIN HORARIOS -->
+                         
                         <!-- INICIO ADDRESSES -->
                         @if ($product->addresses->isNotEmpty())
                         <div class="product_location">
