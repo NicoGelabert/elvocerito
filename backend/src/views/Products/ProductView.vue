@@ -404,12 +404,12 @@ onMounted(() => {
   
   axiosClient.get('/categories/tree')
   .then(result => {
-    categoriesOptions.value = result.data;
+    categoriesOptions.value = result.data.sort((a, b) => a.label.localeCompare(b.label));
   })
   
   axiosClient.get('/tags/tree')
   .then(result => {
-    tagsOptions.value = result.data
+    tagsOptions.value = result.data.sort((a, b) => a.label.localeCompare(b.label));
   })
 
 })

@@ -22,7 +22,7 @@ class TagTreeResource extends JsonResource
         ];
 
         if ($this->children ?? false) {
-            $data['children'] = $this->children;
+            $data['children'] = $this->children->sortBy('label')->values();
         }
 
         return $data;

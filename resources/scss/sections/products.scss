@@ -157,7 +157,7 @@
             z-index: 1000;
         }
         .horizontal_scrolling_container{
-            @apply flex items-center lg:flex-col lg:items-start gap-6 lg:border-r-gray_200 max-w-[1000px] p-4 w-auto min-w-max;
+            @apply flex items-center lg:flex-col lg:items-start gap-6 lg:border-r-gray_200 max-w-[1000px] p-4 w-auto min-w-max lg:min-w-fit;
             h5{
                 @apply hidden lg:block;
             }

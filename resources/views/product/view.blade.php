@@ -159,18 +159,6 @@
                         </div>
                         @endif
                         <!-- FIN HORARIOS -->
-                        <!-- INICIO TAGS -->
-                        @if ($product->tags->isNotEmpty())
-                        <div class="product_tags">
-                            <h5>Etiquetas</h5>
-                            <div class="tags">
-                                @foreach($product->tags as $tag)
-                                <x-badge badge_title="{{ $tag->name }}" />
-                                @endforeach
-                            </div>
-                        </div>
-                        @endif
-                        <!-- FIN TAGS -->
                         <!-- INICIO ADDRESSES -->
                         @if ($product->addresses->isNotEmpty())
                         <div class="product_location">
@@ -189,6 +177,18 @@
                         </div>
                         @endif
                         <!-- FIN SOCIALS -->
+                        <!-- INICIO TAGS -->
+                        @if ($product->tags->isNotEmpty())
+                        <div class="product_tags">
+                            <h5>Etiquetas</h5>
+                            <div class="tags">
+                                @foreach($product->tags as $tag)
+                                <x-badge badge_title="{{ $tag->name }}" />
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                        <!-- FIN TAGS -->
                     </div>
                     <!-- INICIO CONTENEDOR HORIZONTAL: MOBILE -->
                 </div>
