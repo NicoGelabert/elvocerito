@@ -16,19 +16,19 @@ body{
         @apply text-mobile_h2 sm:text-tablet_h2;
     }
     h3{
-        @apply text-mobile_h3 sm:text-tablet_h3 lg:text-desktop_h3;
+        @apply text-2xl leading-6;
     }
     h4{
-        @apply text-base sm:text-tablet_h4 lg:text-desktop_h4;
+        @apply text-lg leading-6;
     }
     h5{
-        @apply text-lg sm:text-xl lg:text-xl;
+        @apply text-base leading-5;
     }
     h6{
-        @apply text-base sm:text-lg lg:text-xl;
+        @apply text-xs font-medium text-gray_500;
     }
     p{
-        @apply text-sm sm:text-base lg:text-lg;
+        @apply text-sm text-gray_500;
     }
     .text-large{
         @apply text-base sm:text-lg lg:text-xl;

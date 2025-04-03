@@ -54,13 +54,8 @@ categories.mount();
 var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
 if (ultimosAnuncinatesElement) {
     var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
-        type        : 'loop',
-        perPage     : 5,
         arrows      : false,
-        gap         : '1rem',
-        padding     : '2rem',
-        autoplay    : true,
-        interval    : 4000,
+        autoplay    : false,
         breakpoints: {
             1024: {
                 perPage     : 4,
@@ -74,6 +69,12 @@ if (ultimosAnuncinatesElement) {
                 padding     : '1rem',          
             }
         },
+        gap         : '1rem',
+        interval    : 4000,
+        padding     : '2rem',
+        pagination  : false,
+        perPage     : 6,
+        type        : 'loop',
     })
 };
 

@@ -14,9 +14,11 @@
                 .ultimos_anunciantes_card_content{
                     @apply flex flex-col p-2 gap-2;
                     p{
-                        @apply line-clamp-3;
+                        @apply line-clamp-2;
                     }
-                    
+                    .remaining-count{
+                        @apply text-text_small font-bold text-gray_600 py-1 px-2 bg-gray_50 rounded-full;
+                    }
                 }
             }
         }

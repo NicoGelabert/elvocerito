@@ -1,6 +1,6 @@
 <div class="container news splide" aria-label="Latest news">
     <div class="news-title">
-        <h4>News</h4>
+        <h3>News</h3>
         <div class="flex">
             <div class="splide__arrows  splide__arrows--ltr">
             </div>

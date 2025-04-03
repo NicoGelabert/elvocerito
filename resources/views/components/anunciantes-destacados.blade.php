@@ -18,10 +18,22 @@
                     @endif
                     <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
                     <div class="products_card_content">
-                        @foreach ($anunciante_destacado->categories as $category)
-                        <x-badge badge_title="{{ $category->name }}" class="truncate-text" />
-                        @endforeach
-                        
+                        <div class="flex gap-2 items-center justify-between">
+                            @if ($anunciante_destacado->categories->count() > 0)
+                                @php
+                                    $firstCategory = $anunciante_destacado->categories->first();
+                                    $remainingCount = $anunciante_destacado->categories->count() - 1;
+                                @endphp
+                                
+                                <h6 class="truncate-text">{{ $firstCategory->name }}</h6>
+                                
+                                @if ($remainingCount > 0)
+                                    <span class="remaining-count">
+                                        +{{ $remainingCount }}
+                                    </span>
+                                @endif
+                            @endif
+                        </div>
                         <a href="{{ route('product.view', [
                             'category' => $anunciante_destacado->categories->first()->parent ? $anunciante_destacado->categories->first()->parent->slug : 'sin-subcategoria', // Obtiene la categoría principal
                             'subcategory' => $anunciante_destacado->categories->first()->slug, // Obtiene la subcategoría

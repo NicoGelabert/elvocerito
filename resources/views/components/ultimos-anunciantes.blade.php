@@ -9,9 +9,22 @@
                 <li class="splide__slide">
                     <img src="{{ $ultimo_anunciante->image }}" alt="{{ $ultimo_anunciante->title }}">
                     <div class="ultimos_anunciantes_card_content">
-                        @foreach ($ultimo_anunciante->categories as $category)
-                        <x-badge badge_title="{{ $category->name }}" class="truncate-text" />
-                        @endforeach
+                        <div class="flex gap-2 items-center justify-between">
+                            @if ($ultimo_anunciante->categories->count() > 0)
+                                @php
+                                    $firstCategory = $ultimo_anunciante->categories->first();
+                                    $remainingCount = $ultimo_anunciante->categories->count() - 1;
+                                @endphp
+                                
+                                <h6 class="truncate-text">{{ $firstCategory->name }}</h6>
+                                
+                                @if ($remainingCount > 0)
+                                    <span class="remaining-count">
+                                        +{{ $remainingCount }}
+                                    </span>
+                                @endif
+                            @endif
+                        </div>
                         <a href="{{ route('product.view', [
                             'category' => $ultimo_anunciante->categories->first()->parent ? $ultimo_anunciante->categories->first()->parent->slug : 'sin-subcategoria', // Obtiene la categoría principal
                             'subcategory' => $ultimo_anunciante->categories->first()->slug, // Obtiene la subcategoría

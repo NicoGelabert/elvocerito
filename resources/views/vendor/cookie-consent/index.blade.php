@@ -1,6 +1,6 @@
 @if($cookieConsentConfig['enabled'] && ! $alreadyConsentedWithCookies)
     <!-- Banner de cookies -->
-    <div class="js-cookie-consent cookie-consent fixed bottom-0 inset-x-0 shadow-cookie bg-white dark:bg-gray_800 text-black dark:text-white z-10">
+    <div class="js-cookie-consent cookie-consent fixed bottom-0 inset-x-0 shadow-cookie bg-white dark:bg-gray_800 text-black dark:text-white z-30">
         <div class="mx-auto flex items-center flex-wrap gap-4 rounded-lg p-8 max-w-screen-xl">
             <p class="cookie-consent__message">
                 {!! trans('cookie-consent::texts.message') !!}

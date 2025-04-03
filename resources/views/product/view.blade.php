@@ -141,7 +141,7 @@
                                 <div x-show="modalAbierto" class="horario_modal">
                                     <div 
                                         class="horario_modal_content">
-                                        <h4 class="lg:hidden">Horario de atención</h4>
+                                        <h5 class="lg:hidden">Horario de atención</h5>
                                         <div class="flex items-start justify-between gap-4 relative">
                                             <ul>
                                                 @foreach ($product->horarios as $horario)
