@@ -31,11 +31,3 @@
         </div>
     </div>
 </section>
-<style>
-    hr{
-        border:         none;
-        border-left:    1px solid hsla(200, 10%, 50%,100);
-        height:         100%;
-        width:          1px;
-}
-</style>
