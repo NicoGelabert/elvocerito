@@ -6,7 +6,7 @@
         <div class="anunciantes_destacados_card">
             <ul>
                 @foreach ($anunciantes_destacados as $anunciante_destacado)
-                <li class="relative flex flex-col rounded-lg border border-gray_200 justify-between gap-4">
+                <li>
                     @if ($anunciante_destacado->prices)
                         <ul class="absolute top-2 left-2">
                             @foreach ($anunciante_destacado->prices as $price)
@@ -53,9 +53,13 @@
                             </div>
                         </a>
                     </div>
-                    <div class="p-2 flex flex-col gap-2">
+                    <div class="p-2 flex flex-col gap-4">
                         <hr class="divider">
-                        <x-contact-icons class="contact-icons" :icons="[$anunciante_destacado->first_contact]"></x-contact-icons>
+                        <div class="flex justify-between items-center">
+                            <x-contact-icons class="contact-icons" :icons="[$anunciante_destacado->first_contact]"></x-contact-icons>
+                            <x-badge-horarios :anunciante_destacado="$anunciante_destacado"/>
+                        </div>
+                        
                     </div>
                 </li>
                 @endforeach
