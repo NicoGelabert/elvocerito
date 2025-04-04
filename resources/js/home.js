@@ -1,4 +1,5 @@
 import Splide from '@splidejs/splide';
+import { Grid } from '@splidejs/splide-extension-grid';
 
 // SPLIDE
 // // Home Hero Banner
@@ -24,31 +25,36 @@ homeHeroBanner.mount();
 // //Fin Home Hero Banner
 
 // Categories
-var categoriesElement = document.querySelector('#categories');
+var categoriesElement = document.querySelector('.categories');
 if (categoriesElement) {
     var categories = new Splide(categoriesElement, {
         autoplay    : false,
+        gap         : '1rem',
+        pagination  : false,
+        padding     : 0,
+        perMove     : 8,
+        perPage     : 8,
         breakpoints: {
             768: {
                 perPage     : 6,
                 perMove     : 6,
             },
             480: {
-                perPage     : 3,
-                perMove     : 3,
+                perPage     : 1,
+                perMove     : 1,
+                grid       : {
+                    dimensions: [ [ 2, 3 ] ],
+                    gap: {
+                      row: '0.5rem',
+                      col: '0.5rem',
+                    },
+                },
+                
             }
         },
-        classes: {
-            arrows    : 'splide__arrows_custom',
-        },
-        gap         : '1rem',
-        pagination  : false,
-        padding     : 0,
-        perMove     : 8,
-        perPage     : 8,
     })
 };
-categories.mount();
+categories.mount({ Grid });
 // Fin Categories
 // // Últimos anunciantes
 var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
@@ -56,6 +62,12 @@ if (ultimosAnuncinatesElement) {
     var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
         arrows      : false,
         autoplay    : false,
+        gap         : '1rem',
+        interval    : 4000,
+        padding     : '2rem',
+        pagination  : false,
+        perPage     : 6,
+        type        : 'loop',
         breakpoints: {
             1024: {
                 perPage     : 4,
@@ -66,15 +78,9 @@ if (ultimosAnuncinatesElement) {
             480: {
                 perPage     : 2,
                 gap         : '0.5rem',
-                padding     : '1rem',          
+                padding     : '1rem',
             }
         },
-        gap         : '1rem',
-        interval    : 4000,
-        padding     : '2rem',
-        pagination  : false,
-        perPage     : 6,
-        type        : 'loop',
     })
 };
 

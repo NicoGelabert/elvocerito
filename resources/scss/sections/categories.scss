@@ -1,18 +1,23 @@
 #categories{
-    .categories_title{
-        @apply flex justify-between items-center;
-    }
-    .categories_content{
-        ul{
-           @apply flex; 
-            li a{
-                @apply flex flex-col gap-4 items-center w-full;
-                p{
-                    @apply text-xs text-center font-bold;
-                }
-                img{
-                    @apply w-10 h-auto;
-                }
+    .categories{
+        @apply flex flex-col gap-8;
+        .categories_title{
+            @apply flex justify-between items-center;
+        }
+        .categories_content{
+            ul{
+               @apply flex; 
+                li{
+                    a{
+                        @apply flex flex-col items-center gap-2 w-full h-full;
+                        p{
+                            @apply text-xs text-center font-normal text-gray_500;
+                        }
+                        img{
+                            @apply w-8 md:w-10 h-auto;
+                        }
+                    }
+                } 
             }
         }
     }

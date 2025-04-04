@@ -10,7 +10,7 @@ body{
         @apply font-semibold;
     }
     h1{
-        @apply text-mobile_h1 sm:text-tablet_h1 lg:text-desktop_h1;
+        @apply text-3xl;
     }
     h2{
         @apply text-mobile_h2 sm:text-tablet_h2;

@@ -40,9 +40,6 @@ export default {
                 gray_950            : '#030712',
             },
             fontSize: {
-                mobile_h1           : '2rem',
-                tablet_h1           : '2.5rem',
-                desktop_h1          : '3rem',
                 mobile_h2           : '1.625rem',
                 tablet_h2           : '2rem',
                 tablet_h4           : '1.15rem',
