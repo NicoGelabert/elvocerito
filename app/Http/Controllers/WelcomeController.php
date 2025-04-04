@@ -19,7 +19,10 @@ class WelcomeController extends Controller
         $anunciantes_destacados = Product::where([
             ['published', '=', 1],
             ['leading_home', '=', 1]
-        ])->get();
+        ])->get()->map(function ($anunciante) {
+            $anunciante->first_contact = $anunciante->contacts->first(); // Guarda solo el primer contacto
+            return $anunciante;
+        });
         $ultimos_anunciantes = Product::where('published', 1)->get();
         $articles = Article::all();
         // $features = Feature::all();

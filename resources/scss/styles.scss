@@ -28,7 +28,7 @@ body{
         @apply text-xs font-medium text-gray_500;
     }
     p{
-        @apply text-sm text-gray_500;
+        @apply text-sm;
     }
     .text-large{
         @apply text-base sm:text-lg lg:text-xl;

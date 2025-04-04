@@ -120,16 +120,23 @@
     <!-- Productos -->
     <div v-if="filteredProducts.length > 0" class="product-list">
       <div v-for="product in filteredProducts" :key="product.id" class="p-2">
-        <img 
-          :src="product.images?.[0]?.url || '/images/default-product.jpg'" 
-          alt="Imagen del producto" 
-        />
+        <div class="relative">
+          <img 
+            :src="product.images?.[0]?.url || '/images/default-product.jpg'" 
+            alt="Imagen del producto" 
+          />
+          <div class="absolute flex gap-2 top-2 right-2">
+            <div v-for="category in product.categories" :key="category.id" class="bg-gray_50 border border-primary rounded-full p-1 fill-white">
+              <img :src="category.image" alt="" class="border-none w-4 fill-white">
+            </div>
+          </div>
+        </div>
         <div class="flex flex-col justify-between py-4 gap-2">
           <a :href="`/categorias/${product.categories?.[0]?.parent?.slug || 'sin-categoria'}/${product.categories?.[0]?.slug || 'sin-subcategoria'}/${product.slug}`">
             <div class="flex items-center justify-between mb-2">
               <h5 class="w-fit text-base leading-none">{{ product.title }}</h5>
             </div>
-            <p class="text-xs text-gray_500">{{ product.short_description }}</p>
+            <p class="text-xs text-gray_500 overflow-hidden line-clamp-2">{{ product.short_description }}</p>
           </a>
         </div>
       </div>

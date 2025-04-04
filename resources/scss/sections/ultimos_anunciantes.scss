@@ -7,14 +7,26 @@
         ul{
             li{
                 @apply flex flex-col rounded-lg border border-gray_200;
+                a{
+                    @apply flex flex-col flex-1 justify-between;
+                }
                 img{
                     @apply rounded-t-lg object-cover
                     aspect-square lg:aspect-video;
                 }
                 .ultimos_anunciantes_card_content{
-                    @apply flex flex-col p-2 gap-2;
+                    @apply flex flex-col flex-1 px-2 py-4 gap-4 justify-between;
+                    .header{
+                        @apply flex flex-col;
+                        h5{
+                            @apply overflow-hidden line-clamp-1;
+                        }
+                        h6{
+                            @apply py-1;
+                        }
+                    }
                     p{
-                        @apply line-clamp-2;
+                        @apply line-clamp-2 text-gray_500;
                     }
                     .remaining-count{
                         @apply text-text_small font-bold text-gray_600 py-1 px-2 bg-gray_50 rounded-full;
