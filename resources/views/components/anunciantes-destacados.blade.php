@@ -53,7 +53,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="p-2 flex flex-col gap-4">
+                    <div class="footer">
                         <hr class="divider">
                         <div class="flex justify-between items-center">
                             <x-contact-icons class="contact-icons" :icons="[$anunciante_destacado->first_contact]"></x-contact-icons>
