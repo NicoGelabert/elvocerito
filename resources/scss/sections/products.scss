@@ -38,13 +38,32 @@
         @apply mt-4 lg:mt-0;
     }
     .product-list{
-        @apply lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-8 relative;
-        img{
-            @apply aspect-square object-cover border border-gray_200 rounded-xl;
-        }
-        .category_badges{
+        @apply h-fit lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-8 relative;
+        .product_card{
+            @apply flex flex-col rounded-lg border border-gray_200 h-auto;
             img{
-                @apply border-none rounded-none w-5 h-auto;
+                @apply aspect-video object-cover rounded-t-lg;
+            }
+            .categories_badges{
+                @apply flex gap-2;
+                .category_badge{
+                    @apply bg-gray_50 border border-primary rounded-full p-1 fill-white;
+                    img{
+                        @apply aspect-square border-none w-4 fill-white;
+                    }
+                }
+            }
+            .footer{
+                @apply px-2 pb-4 flex flex-col gap-4;
+                    span{
+                        @apply hidden;
+                    }
+                    p{
+                        @apply text-xs text-gray_600 tracking-wide;
+                    }
+                    svg{
+                        @apply fill-gray_600;
+                    }
             }
         }
     }
