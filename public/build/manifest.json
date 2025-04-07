@@ -14,12 +14,12 @@
       "resources/js/product-view.js",
       "resources/js/categories-index.js"
     ],
-    "file": "assets/app-b4a9339a.js",
+    "file": "assets/app-dff4cc0d.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-0b3bf08d.js",
+    "file": "assets/catalog-e61c6612.js",
     "isDynamicEntry": true,
     "src": "resources/js/catalog.js"
   },

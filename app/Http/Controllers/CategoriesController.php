@@ -22,7 +22,7 @@ class CategoriesController extends Controller
             $query->whereIn('categories.id', $subcategories->pluck('id'));
         })->where('published', 1)->with(['images', 'categories', 'tags', 'categories.parent'])->get();
         // dd($products);
-        $tags = $products->pluck('tags')->flatten()->unique('id');
+        $tags = $products->pluck('tags')->flatten()->unique('id')->values()->all();
         return view('categories.view', compact('category', 'subcategories', 'products', 'tags'));
     }
 

@@ -240,8 +240,8 @@ window.onscroll = function () {
   prevScrollpos = currentScrollPos;
 
   // 📌 Lógica para fijar el Search Bar después de 325px de scroll
-  if (page !== 'product.view') {
-  // Esta lógica solo se ejecuta en páginas que no sean "product.view"
+  if (page !== 'product.view' && page !== 'categories.view' && page !== 'categories.view.subcategory') {
+  // Esta lógica solo se ejecuta en páginas que no sean la de producto, categoría o subcategoría
     if (currentScrollPos >= searchTriggerPoint) {
       // Si el navbar está visible (top = 0), colocamos el search bar justo debajo
       if (navbar.style.top === "0px") {

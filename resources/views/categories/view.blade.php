@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="category_view product-index">
+        <!-- INICIO BREADCRUMBS -->
         <div class="category_view_header">
             <div class="container flex gap-2">
                 <a href="/">
@@ -14,6 +15,7 @@
                 <h2 class="text-small">{{ $category->name }}</h2>
             </div>
         </div>
+        <!-- FIN BREADCRUMBS -->
 
         @if ($products->isNotEmpty())
             <div class="flex gap-8 container">

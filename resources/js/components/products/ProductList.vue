@@ -156,9 +156,18 @@
 import FilterIcon from '@/icons/FilterIcon.vue';
 export default {
   props: {
-    products: Array,
-    categories: Array,
-    tags: Array,
+    products: {
+      type: Array,
+      required: true
+    },
+    categories: {
+      type: Array,
+      default: () => []
+    },
+    tags: {
+      type: Array,
+      default: () => []
+    }
   },
   components: {
     FilterIcon,
