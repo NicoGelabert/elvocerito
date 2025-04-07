@@ -1,5 +1,5 @@
 .search_hero{
-    @apply bg-[url('../../public/storage/common/hero-banner.jpg')] flex flex-col justify-center bg-cover bg-center h-[50vh] mt-16 lg:mt-20;
+    @apply bg-[url('../../public/storage/common/hero-banner.jpg')] flex flex-col justify-center bg-cover bg-center h-[45vh] mt-16 lg:mt-20;
     .search_hero_container{
         @apply flex flex-col gap-4 z-30 lg:pr-12
         items-center lg:items-end
@@ -143,6 +143,7 @@
 }
 
 .pinmaps{
+    @apply relative;
 }
 .pinmaps li {
     @apply absolute w-10 h-10 opacity-0;
@@ -152,80 +153,78 @@
 
 .pinmaps li:nth-child(1){
     @apply
-    top-[13rem] md:top-64 lg:top-40
+    top-0 md:top-28 lg:top-16
     left-6 lg:left-80;
     --delay: 1s;
 }
 
 .pinmaps li:nth-child(2){
     @apply
-    top-[21rem] md:top-[18rem] lg:top-24
+    top-28 md:top-24 lg:top-0
     left-6 md:left-56 lg:left-96;
     --delay: 1.5s;
 }
 
 .pinmaps li:nth-child(3){
     @apply
-    top-40 lg:top-auto bottom-60
+    top-4 lg:top-auto bottom-0
     left-16 lg:left-[40rem];
     --delay: 2s;
 }
 
 .pinmaps li:nth-child(4){
     @apply
-    md:bottom-[34rem] lg:bottom-auto
-    top-24 md:top-auto lg:top-28
+    bottom-4 md:bottom-32 lg:bottom-auto
+    lg:bottom-16
     left-12 lg:left-32;
     --delay: 2.5s;
 }
 
 .pinmaps li:nth-child(5){
-    @apply top-60 md:top-[26.5rem] lg:top-auto lg:bottom-64
+    @apply top-24 md:top-40 lg:top-auto lg:bottom-8
     left-64 md:left-[24rem] lg:left-48;
     --delay: 3s;
 }
 
 .pinmaps li:nth-child(6){
     @apply
-    bottom-[19.5rem] md:bottom-[30.5rem] lg:bottom-60
+    top-4 md:top-24 lg:top-auto lg:bottom-20
     left-64 md:left-[30rem] lg:left-72;
     --delay: 3.5s;
 }
 
 .pinmaps li:nth-child(7){
     @apply
-    top-64 md:top-auto md:bottom-[37rem] lg:bottom-[17rem]
+    top-24 md:top-48 lg:top-auto lg:bottom-4
     left-40 md:left-[28rem] lg:left-[26rem];
     --delay: 4s;
 }
 
 .pinmaps li:nth-child(8){
     @apply
-    md:bottom-[30rem] lg:bottom-auto
-    top-[21.5rem] md:top-auto lg:top-48
+    top-7 md:top-32 lg:top-8
     left-[18rem] md:left-36 lg:left-44;
     --delay: 4.5s;
 }
 
 .pinmaps li:nth-child(9){
     @apply
-    top-[22rem] md:top-auto md:bottom-[30rem] lg:bottom-auto
-    lg:top-44
+    top-20 md:top-28 lg:top-16
     left-32 md:left-80 lg:left-20;
     --delay: 5s;
 }
 
 .pinmaps li:nth-child(10){
     @apply
-    top-[17rem] md:top-auto md:bottom-[33rem] lg:bottom-[19rem]
-    left-4 md:left-72 lg:left-[36rem];
+    top-20 md:top-44 lg:top-auto lg:bottom-16
+    left-0 md:left-72 lg:left-[36rem];
     --delay: 5.5s;
 }
 
 .pinmaps li:nth-child(11){
     @apply
-    top-[21rem] md:top-auto md:bottom-[34rem] lg:bottom-auto
-    lg:top-24
+    top-6 md:top-40 lg:top-auto lg:bottom-auto
+    lg:top-20
     left-[13rem] lg:left-60;
     --delay: 6s;
 }
