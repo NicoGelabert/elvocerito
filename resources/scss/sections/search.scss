@@ -147,7 +147,7 @@
 .pinmaps li {
     @apply absolute w-10 h-10 opacity-0;
     animation: fade-in 1s ease-out forwards, fade-to-blend 0.5s ease-out forwards;
-    animation-delay: var(--delay, 0s), calc(var(--delay, 0s) + 2s);
+    animation-delay: var(--delay, 0s), calc(var(--delay, 0s) + 0.5s);
 }
 
 .pinmaps li:nth-child(1){
@@ -249,5 +249,5 @@
 
 .apply-blend {
     animation: fade-to-blend 0.5s ease-out forwards;
-    animation-delay: 1s;
+    animation-delay: 0.5s;
 }

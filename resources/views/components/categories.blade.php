@@ -1,6 +1,6 @@
 <section id="categories">
-    <div class="categories splide">
-        <div class="container flex flex-col gap-12">
+    <div class="categories container splide">
+        <div class="flex flex-col gap-12">
             <div class="categories_title">
                 <h3>Categorías</h3>
                 <div class="flex">

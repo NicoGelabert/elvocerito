@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 md:gap-12 mb-16">
+    <div class="flex flex-col gap-8 mb-16">
         <x-search-hero />
         <!-- <x-backgrounds.circulos /> -->
         <x-categories :categories="$categories"/>
