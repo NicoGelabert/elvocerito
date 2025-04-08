@@ -290,6 +290,9 @@ export default {
   mounted() {
     this.filteredProducts = [...this.products];
     window.addEventListener('resize', this.checkScreenSize);
+    setTimeout(() => {
+      initTooltips();
+    }, 0);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.checkScreenSize);

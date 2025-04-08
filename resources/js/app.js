@@ -1,8 +1,8 @@
+import 'flowbite';
 import './bootstrap';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import { get, post } from "./http.js";
-import 'flowbite';
 
 Alpine.plugin(collapse);
 

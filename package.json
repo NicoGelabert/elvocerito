@@ -23,6 +23,7 @@
     "dependencies": {
         "@alpinejs/collapse": "^3.12.3",
         "@flaticon/flaticon-uicons": "^2.4.0",
+        "@popperjs/core": "^2.11.8",
         "@splidejs/splide": "^4.1.4",
         "@splidejs/splide-extension-auto-scroll": "^0.5.3",
         "@splidejs/splide-extension-grid": "^0.4.1",
