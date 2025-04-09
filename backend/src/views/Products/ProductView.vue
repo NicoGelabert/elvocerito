@@ -146,56 +146,42 @@
           <!-- Inicio Horarios-->
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Horarios de Atención</h3>
-            <div v-for="(horario, index) in product.horarios" :key="index" class="flex gap-1">
-              <CustomInput 
-                v-model="horario.dia" 
-                type="select" 
-                class="mb-2 md:w-6/12" 
-                label="Dia"
-                :select-options="[
-                  { key: '', text: 'Escoja un día', isDisabled: true },
-                  { key: 'lunes', text: 'Lunes' },
-                  { key: 'martes', text: 'Martes' },
-                  { key: 'miércoles', text: 'Miércoles' },
-                  { key: 'jueves', text: 'Jueves' },
-                  { key: 'viernes', text: 'Viernes' },
-                  { key: 'sábado', text: 'Sábado' },
-                  { key: 'domingo', text: 'Domingo' },
-                ]" 
-                :errors="errors[`horarios.${index}.dia`]"
-                :class="{ 'text-gray-500': horario.dia === '' }" 
-              />
-              <CustomInput
-                v-model="horario.apertura" 
-                type="time"
-                class="mb-2 w-4/12 md:w-3/12" 
-                label="Horario Apertura" 
-                :errors="errors[`horarios.${index}.apertura`]" 
-              />
-              <CustomInput
-                v-model="horario.cierre" 
-                type="time" 
-                class="mb-2 w-4/12 md:w-3/12" 
-                label="Horario Cierre" 
-                :errors="errors[`horarios.${index}.cierre`]" 
-              />
-              
-              <div class="w-1/12 flex items-center justify-center">
-                <button class="group border-0 rounded-full hover:bg-black" v-if="product.horarios.length > 1" @click.prevent="removeHorario(index)">
-                  <TrashIcon
-                    class="h-5 w-5 text-black group-hover:text-white"
-                    aria-hidden="true"
-                  />
-                </button>
-              </div>
+
+            <div
+              v-for="(dia, index) in diasSemana"
+              :key="dia.key"
+              class="flex flex-wrap md:flex-nowrap gap-4 items-center"
+            >
+              <!-- Checkbox del día -->
+              <label class="flex items-center gap-2 w-full md:w-2/12">
+                <input
+                  type="checkbox"
+                  :value="dia.key"
+                  :checked="getHorario(dia.key) !== undefined"
+                  @change="toggleDia(dia.key)"
+                  class="form-checkbox h-4 w-4 text-blue-600"
+                />
+                <span class="text-sm">{{ dia.text }}</span>
+              </label>
+
+              <template v-if="getHorario(dia.key)">
+                <CustomInput
+                  v-model="getHorario(dia.key).apertura"
+                  type="time"
+                  class="w-5/12 md:w-2/12"
+                  label="Apertura"
+                  :errors="errors[`horarios.${index}.apertura`]"
+                />
+                <CustomInput
+                  v-model="getHorario(dia.key).cierre"
+                  type="time"
+                  class="w-5/12 md:w-2/12"
+                  label="Cierre"
+                  :errors="errors[`horarios.${index}.cierre`]"
+                />
+              </template>
             </div>
-            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addHorario">
-              <h4 class="text-sm">Crear horario</h4>
-              <PlusCircleIcon
-                class="h-5 w-5 text-black group-hover:text-white"
-                aria-hidden="true"
-              />
-            </button>
+            
           </div>
           <!-- Fin Horarios-->
 
@@ -371,6 +357,31 @@ const product = ref({
   tags:[],
   horarios: [{ dia: '', apertura: '', cierre: ''}],
 })
+
+const diasSemana = [
+  { key: 'lunes', text: 'Lunes' },
+  { key: 'martes', text: 'Martes' },
+  { key: 'miércoles', text: 'Miércoles' },
+  { key: 'jueves', text: 'Jueves' },
+  { key: 'viernes', text: 'Viernes' },
+  { key: 'sábado', text: 'Sábado' },
+  { key: 'domingo', text: 'Domingo' },
+];
+
+// Buscar un horario por día
+function getHorario(diaKey) {
+  return product.value.horarios.find(h => h.dia === diaKey);
+}
+
+// Alternar selección de día
+function toggleDia(diaKey) {
+  const index = product.value.horarios.findIndex(h => h.dia === diaKey);
+  if (index === -1) {
+    product.value.horarios.push({ dia: diaKey, apertura: '', cierre: '' });
+  } else {
+    product.value.horarios.splice(index, 1);
+  }
+}
 
 const errors = ref({});
 
