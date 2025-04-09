@@ -71,6 +71,18 @@ class ProductResource extends JsonResource
                     'cierre' => $horario->cierre,
                 ];
             }),
+            'webs' => $this->webs->map(function ($web) {
+                return [
+                    'id' => $web->id,
+                    'webpage' => $web->webpage,
+                ];
+            }),
+            'listitems' => $this->listitems->map(function ($listitem) {
+                return [
+                    'id' => $listitem->id,
+                    'item' => $listitem->item,
+                ];
+            }),
         ];
     }
 }

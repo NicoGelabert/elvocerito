@@ -78,5 +78,14 @@ class Product extends Model
         return $this->hasMany(ProductHorario::class);
     }
 
+    public function webs()
+    {
+        return $this->hasMany(ProductWeb::class);
+    }
+
+    public function listitems()
+    {
+        return $this->hasMany(ProductListitem::class);
+    }
 }
 

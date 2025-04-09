@@ -15,6 +15,8 @@ use App\Models\ProductSocial;
 use App\Models\ProductAddress;
 use App\Models\ProductTag;
 use App\Models\ProductHorario;
+use App\Models\ProductWeb;
+use App\Models\ProductListitem;
 use App\Models\Api\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -81,6 +83,10 @@ class ProductController extends Controller
 
         $horarios = $data['horarios'] ?? [];
 
+        $webs = $data['webs'] ?? [];
+
+        $listitems = $data['listitems'] ?? [];
+
         $product = Product::create($data);
 
         $this->saveCategories($categories, $product);
@@ -90,6 +96,8 @@ class ProductController extends Controller
         $this->saveAddresses($addresses, $product);
         $this->saveTags($tags, $product);
         $this->saveHorarios($horarios, $product);
+        $this->saveWebs($webs, $product);
+        $this->saveListitems($listitems, $product);
 
         return new ProductResource($product);
     }
@@ -134,6 +142,10 @@ class ProductController extends Controller
 
         $horarios = $data['horarios'] ?? [];
 
+        $webs = $data['webs'] ?? [];
+
+        $listitems = $data['listitems'] ?? [];
+
         $this->saveCategories($categories, $product);
         $this->saveImages($images, $imagePositions, $product);
         if (count($deletedImages) > 0) {
@@ -144,6 +156,8 @@ class ProductController extends Controller
         $this->saveAddresses($addresses, $product);
         $this->saveTags($tags, $product);
         $this->saveHorarios($horarios, $product);
+        $this->saveWebs($webs, $product);
+        $this->saveListitems($listitems, $product);
 
         $product->update($data);
 
@@ -265,6 +279,24 @@ class ProductController extends Controller
 
         foreach ($horarios as $horario) {
             $product->horarios()->create($horario);
+        }
+    }
+
+    protected function saveWebs(array $webs, Product $product)
+    {
+        $product->webs()->delete(); 
+
+        foreach ($webs as $web) {
+            $product->webs()->create($web);
+        }
+    }
+
+    protected function saveListitems(array $listitems, Product $product)
+    {
+        $product->listitems()->delete(); 
+
+        foreach ($listitems as $listitem) {
+            $product->listitems()->create($listitem);
         }
     }
 

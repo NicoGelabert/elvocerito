@@ -35,7 +35,36 @@
             <h3 class="text-lg font-bold">Descripción larga</h3>
             <CustomInput type="richtext" class="mb-2" v-model="product.description" label="Description" :errors="errors['description']"/>
           </div>
-
+          <!-- Inicio Listado de Items -->
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Listado de Items</h3>
+            <div v-for="(listitem, index) in product.listitems" :key="index" class="flex gap-1">
+              <CustomInput 
+                v-model="listitem.item" 
+                type="text" 
+                class="mb-2 w-7/12" 
+                label="Listado de Items" 
+                :errors="errors[`listitems.${index}.item`]" 
+              />
+              <div class="w-1/12 flex items-center justify-center">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="product.listitems.length > 1" @click.prevent="removeListitem(index)">
+                  <TrashIcon
+                    class="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addListitem">
+              <h4 class="text-sm">Crear nuevo ítem</h4>
+              <PlusCircleIcon
+                class="h-5 w-5 text-black group-hover:text-white"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+          <!-- Fin Listado de Items -->
           <!-- Inicio Direcciones -->
           <hr class="my-4">
           <div class="flex flex-col gap-2">
@@ -185,6 +214,7 @@
           </div>
           <!-- Fin Horarios-->
 
+          <!-- Inicio Información de contacto -->
           <hr class="my-4">
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Información de contacto</h3>
@@ -226,8 +256,39 @@
               />
             </button>
           </div>
+          <!-- Fin información de contacto-->
+          <!-- Inicio Página web -->
           <hr class="my-4">
-
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Página web</h3>
+            <div v-for="(web, index) in product.webs" :key="index" class="flex gap-1">
+              <CustomInput 
+                v-model="web.webpage" 
+                type="text" 
+                class="mb-2 w-7/12" 
+                label="Página web" 
+                :errors="errors[`webs.${index}.webpage`]" 
+              />
+              <div class="w-1/12 flex items-center justify-center">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="product.webs.length > 1" @click.prevent="removeWeb(index)">
+                  <TrashIcon
+                    class="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addWeb">
+              <h4 class="text-sm">Crear nueva página</h4>
+              <PlusCircleIcon
+                class="h-5 w-5 text-black group-hover:text-white"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+          <!-- Fin Página web -->
+          <!-- Inicio RRSS -->
+          <hr class="my-4">
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Redes Sociales</h3>
             <div v-for="(social, index) in product.socials" :key="index" class="flex gap-1">
@@ -268,6 +329,7 @@
               />
             </button>
           </div>
+          <!-- Fin RRSS -->
           
           <hr class="my-4">
           <div class="flex flex-col gap-2">
@@ -356,6 +418,8 @@ const product = ref({
   addresses: [{ title: '', via: '' , via_name: '' , via_number: '' , address_unit: '' , city: '' , zip_code: '' , province: '', link: '', google_maps: '' }],
   tags:[],
   horarios: [{ dia: '', apertura: '', cierre: ''}],
+  webs: [{ webpage: '' }],
+  listitems: [{ item: '' }],
 })
 
 const diasSemana = [
@@ -410,6 +474,12 @@ onMounted(() => {
         if (product.value && Array.isArray(product.value.horarios) && product.value.horarios.length === 0) {
           product.value.horarios.push({ dia: '', apertura: '', cierre: '' });
         }
+        if (!product.value.webs.length) {
+          product.value.webs.push({ webpage: '' });
+        }
+        if (!product.value.listitems.length) {
+          product.value.listitems.push({ item: '' });
+        }
       })
   }
   
@@ -463,18 +533,31 @@ function removeAddress(index) {
 }
 // End Addresses
 
-// Horarios
-function addHorario() {
-  product.value.horarios.push({ dia: '', apertura: '' , cierre: '' });
+// Página web
+function addWeb() {
+  product.value.webs.push({ webpage: '' });
 }
 
-function removeHorario(index) {
-  product.value.horarios.splice(index, 1);
-  if (product.value.horarios.length === 0) {
-    addHorario(); 
+function removeWeb(index) {
+  product.value.webs.splice(index, 1);
+  if (product.value.webs.length === 0) {
+    addWeb(); 
   }
 }
-// End Horarios
+// End Página web
+
+// Listado de Items
+function addListitem() {
+  product.value.listitems.push({ item: '' });
+}
+
+function removeListitem(index) {
+  product.value.listitems.splice(index, 1);
+  if (product.value.listitems.length === 0) {
+    addListitem(); 
+  }
+}
+// End Listado de Items
 
 function onSubmit($event, close = false) {
   loading.value = true
@@ -490,6 +573,12 @@ function onSubmit($event, close = false) {
   );
   product.value.horarios = product.value.horarios.filter(
     (horario) => Object.values(horario).some(value => value !== '')
+  );
+  product.value.webs = product.value.webs.filter(
+    (web) => web.webpage !== ''
+  );
+  product.value.listitems = product.value.listitems.filter(
+    (listitem) => listitem.item !== ''
   );
   if (product.value.id) {
     store.dispatch('updateProduct', product.value)

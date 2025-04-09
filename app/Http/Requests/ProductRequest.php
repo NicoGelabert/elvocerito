@@ -57,6 +57,10 @@ class ProductRequest extends FormRequest
             'horarios.*.dia' => ['required', 'in:lunes,martes,miércoles,jueves,viernes,sábado,domingo'],
             'horarios.*.apertura' => ['nullable'], 
             'horarios.*.cierre' => ['nullable', 'after:horarios.*.apertura'], // Debe ser después de apertura
+            'webs' => ['nullable', 'array'],
+            'webs.*.webpage' => ['nullable', 'string', 'max:200'],
+            'listitems' => ['nullable', 'array'],
+            'listitems.*.item' => ['nullable', 'string', 'max:500'],
         ];
     }
 }

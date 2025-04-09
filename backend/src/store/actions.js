@@ -264,6 +264,20 @@ export function createProduct({ commit }, product) {
     });
   }
 
+  // Agregar página web al FormData
+  if (product.webs && product.webs.length) {
+    product.webs.forEach((web, index) => {
+      form.append(`webs[${index}][webpage]`, web.webpage);
+    });
+  }
+
+  // Agregar Items al FormData
+  if (product.listitems && product.listitems.length) {
+    product.listitems.forEach((listitem, index) => {
+      form.append(`listitems[${index}][item]`, listitem.item);
+    });
+  }
+
   return axiosClient.post('/products', form);
 }
 
@@ -345,6 +359,20 @@ export function updateProduct({commit}, product) {
       form.append(`horarios[${index}][dia]`, horario.dia || '');
       form.append(`horarios[${index}][apertura]`, horario.apertura || '');
       form.append(`horarios[${index}][cierre]`, horario.cierre || '');
+    });
+  }
+
+  // Agregar página web al FormData
+  if (product.webs && product.webs.length) {
+    product.webs.forEach((web, index) => {
+      form.append(`webs[${index}][webpage]`, web.webpage);
+    });
+  }
+
+  // Agregar Items al FormData
+  if (product.listitems && product.listitems.length) {
+    product.listitems.forEach((listitem, index) => {
+      form.append(`listitems[${index}][item]`, listitem.item);
     });
   }
   
