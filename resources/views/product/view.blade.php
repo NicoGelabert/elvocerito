@@ -20,7 +20,7 @@
         'images' => $product->images->pluck('url') 
         ]) }})">
         <!-- INICIO MENU CON IMAGEN, TITLE, BAGDE ABI/CER, CONTACT -->
-        <div class="product_menu md:hidden opacity-0 -translate-y-full">
+        <div class="product_menu lg:hidden opacity-0 -translate-y-full">
             <div class="container flex justify-between">
                 <div class="flex gap-4">
                     <div class="relative w-auto">
@@ -80,64 +80,72 @@
                 <!-- INICIO SF PRIMERA COLUMNA -->
                 <div class="product_header flex-1">
                     <img src="{{ $product->image }}" alt="{{ $product->title }}">
-                    <!-- INICIO CATEGORÍAS Y NOMBRE -->
-                    <div>
-                        <!-- INICIO CATEGORÍAS -->
-                        <div class="contenedor_overflow">
-                            <div class="contendor_overflow_hijo">
-                                @foreach ($product->categories as $category)
-                                <div class="flex items-center gap-1 mx-auto md:mx-0">
-                                    <div class="w-6 h-6 flex wrap justify-center items-center">
-                                        <img src="{{ $category->image }}" alt="{{ $category->name }}" class="cat_image">
+                    <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
+                    <div class="flex flex-col gap-4">
+                        <!-- INICIO CATEGORÍAS Y NOMBRE -->
+                        <div>
+                            <!-- INICIO CATEGORÍAS -->
+                            <div class="contenedor_overflow">
+                                <div class="contendor_overflow_hijo">
+                                    @foreach ($product->categories as $category)
+                                    <div class="flex items-center mx-auto md:mx-0">
+                                        <div class="w-6 h-6 flex wrap items-center">
+                                            <img src="{{ $category->image }}" alt="{{ $category->name }}" class="cat_image">
+                                        </div>
+                                        <div><h6>{{ $category->name }}</h6></div>
                                     </div>
-                                    <div><h6>{{ $category->name }}</h6></div>
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
+                            <!-- FIN CATEGORÍAS -->
+                            <!-- INICIO TITLE -->
+                            <div>
+                                <h2>{{ $product->title }}</h2>
+                            </div>
+                            <!-- FIN TITLE -->
                         </div>
-                        <!-- FIN CATEGORÍAS -->
-                        <!-- INICIO TITLE -->
-                        <div class="text-center lg:text-left">
-                            <h2>{{ $product->title }}</h2>
+                        <!-- FIN CATEGORÍAS Y NOMBRE -->
+                        <!-- INICIO BADGE ABIERTO / CERRADO, SHORT DESCRIPTION, VÍAS DE CONTACTO Y ADDRESSES -->
+                        <div class="flex flex-col gap-4 items-center md:items-start">
+                            <!-- INICIO BADGE ABIERTO / CERRADO -->
+                            @php
+                                $horarios = $product->horarios->map(function($horario) {
+                                    return [
+                                        'dia' => $horario->dia,
+                                        'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
+                                        'cierre' => Carbon::parse($horario->cierre)->format('H:i')
+                                    ];
+                                });
+                            @endphp
+                            <div x-data="verificarEstado({{ json_encode($horarios) }})">
+                                <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                    <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
+                                </x-badge>
+                            </div>
+                            <!-- FIN BADGE ABIERTO / CERRADO -->
+                            <!-- INICIO SHORT DESCRIPTION -->
+                            @if ($product->short_description)
+                            <div class="product_short_description md:col-span-2">
+                                <p class="text-center md:text-left text-gray_500">{{ $product->short_description}}</p>
+                            </div>
+                            @endif
+                            <!-- FIN SHORT DESCRIPTION -->
+                            <!-- INICIO VÍAS DE CONTACTO -->
+                            <div class="flex flex-col items-center md:items-start gap-4">
+                                <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
+                            </div>
+                            <!-- FIN VÍAS DE CONTACTO -->
+                            <!-- INICIO ADDRESSES -->
+                            @if ($product->addresses->isNotEmpty())
+                            <div class="product_location">
+                                <x-addresses :addresses="$product->addresses"></x-addresses>
+                            </div>
+                            @endif
+                            <!-- FIN ADDRESSES -->
                         </div>
-                        <!-- FIN TITLE -->
+                        <!-- FIN BADGE ABIERTO / CERRADO, SHORT DESCRIPTION, VÍAS DE CONTACTO Y ADDRESSES -->
                     </div>
-                    <!-- INICIO CATEGORÍAS Y NOMBRE -->
-                    <!-- INICIO BADGE ABIERTO / CERRADO -->
-                    @php
-                        $horarios = $product->horarios->map(function($horario) {
-                            return [
-                                'dia' => $horario->dia,
-                                'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
-                                'cierre' => Carbon::parse($horario->cierre)->format('H:i')
-                            ];
-                        });
-                    @endphp
-                    <div x-data="verificarEstado({{ json_encode($horarios) }})">
-                        <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
-                            <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
-                        </x-badge>
-                    </div>
-                    <!-- FIN BADGE ABIERTO / CERRADO -->
-                    <!-- INICIO SHORT DESCRIPTION -->
-                    @if ($product->short_description)
-                    <div class="product_short_description md:col-span-2">
-                        <p class="text-center md:text-left text-gray_500">{{ $product->short_description}}</p>
-                    </div>
-                    @endif
-                    <!-- FIN SHORT DESCRIPTION -->
-                    <!-- INICIO VÍAS DE CONTACTO -->
-                    <div class="flex flex-col items-center md:items-start gap-4">
-                        <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
-                    </div>
-                    <!-- FIN VÍAS DE CONTACTO -->
-                    <!-- INICIO ADDRESSES -->
-                    @if ($product->addresses->isNotEmpty())
-                    <div class="product_location">
-                        <x-addresses :addresses="$product->addresses"></x-addresses>
-                    </div>
-                    @endif
-                    <!-- FIN ADDRESSES -->
+                    <!-- FIN CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
                 </div>
                 <!-- FIN SF PRIMERA COLUMNA -->
                 <!-- INICIO SF SEGUNDA COLUMNA -->

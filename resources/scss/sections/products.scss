@@ -124,7 +124,7 @@
         }
     }
     .contact-icons{
-        @apply flex md:flex-col justify-end items-center gap-2 md:gap-5;
+        @apply flex lg:flex-col justify-end items-center md:items-start gap-2 md:gap-5;
         span, p{
             @apply sm:hidden lg:block;
         }
@@ -142,7 +142,7 @@
     .product{
         @apply relative flex flex-col;
         .product_header{
-            @apply flex md:sticky top-8 h-full flex-col flex-wrap gap-6 items-center lg:items-start transition-all duration-300;
+            @apply flex lg:sticky top-8 h-full flex-col md:flex-row lg:flex-col flex-wrap gap-6 items-center md:items-start transition-all duration-300 lg:mb-8;
             .contenedor_overflow{
                 // @apply block md:hidden overflow-x-auto scroll-smooth w-full;
                 .contendor_overflow_hijo{
@@ -153,7 +153,7 @@
                 }
             }
             h2{
-                @apply text-center lg:text-left;
+                @apply text-center md:text-left;
             }
             img{
                 @apply relative max-w-36 aspect-square rounded-full shadow-product_view;
