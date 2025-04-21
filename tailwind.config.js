@@ -40,8 +40,6 @@ export default {
                 gray_950            : '#030712',
             },
             fontSize: {
-                mobile_h2           : '1.625rem',
-                tablet_h2           : '2rem',
                 tablet_h4           : '1.15rem',
                 desktop_h4          : '1.25rem',
                 text_small          : '0.625rem',
@@ -55,6 +53,12 @@ export default {
             }
         },
     },
+    safelist: [
+        'text-primary',
+        'border-primary',
+        'hover:text-primary',
+        'hover:border-primary'
+    ],
     plugins: [
         forms,
         require('flowbite/plugin')

@@ -1,15 +1,9 @@
 @props(['addresses' => []])
-<div {{ $attributes->merge(['class' => '']) }}>
-    <div class="flex flex-col gap-2">
-        @foreach ($addresses as $address)
-        <div class="flex flex-col gap-8">
-        <p>
-            <b>
-                {{ implode(' ', array_filter([
-                 $address->title ? $address->title . ':' : '',
-                ], fn($value) => !empty($value))) }}
-            </b> 
-            <a href="{{ $address->link }}">
+<div {{ $attributes->merge(['class' => 'flex flex-col gap-2']) }}>
+    @foreach ($addresses as $address)
+    <div class="flex gap-2">
+        <a href="{{ $address->link }}">
+            <p>
                 {{ implode(' ', array_filter([
                     $address->via,
                     $address->via_name,
@@ -19,10 +13,12 @@
                     $address->zip_code ? $address->zip_code . ',' : '',
                     $address->province
                 ], fn($value) => !empty($value))) }}
-            </a>
-        </p>
-        @endforeach
-        </div>
+            </p>
+        </a>
+        @if($address->google_maps)
+        <x-icons.map  />
+        @endif
     </div>
+    @endforeach
 </div>
 

@@ -13,7 +13,7 @@ body{
         @apply text-3xl;
     }
     h2{
-        @apply text-mobile_h2 sm:text-tablet_h2;
+        @apply text-2xl;
     }
     h3{
         @apply text-2xl leading-6;
@@ -25,10 +25,10 @@ body{
         @apply text-base leading-5;
     }
     h6{
-        @apply text-xs font-medium text-gray_500;
+        @apply text-xs text-gray_500 font-medium italic;
     }
     p{
-        @apply text-sm;
+        @apply text-xs lg:text-sm;
     }
     .text-large{
         @apply text-base sm:text-lg lg:text-xl;

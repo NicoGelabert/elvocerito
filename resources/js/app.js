@@ -1,5 +1,6 @@
 import 'flowbite';
 import './bootstrap';
+import { Tabs } from 'flowbite';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import { get, post } from "./http.js";
@@ -294,3 +295,14 @@ window.onscroll = function () {
     }
   }
 };
+
+// INICIO TABS DE FLOWBITE EN PRODUCT.VIEW
+const tabEl = document.getElementById('custom-tabs');
+
+if (tabEl) {
+    new Tabs(tabEl, {
+        activeClasses: 'text-primary border-primary',
+        inactiveClasses: 'text-gray-500 border-transparent hover:text-primary hover:border-primary',
+    });
+}
+// FIN TABS DE FLOWBITE EN PRODUCT.VIEW
