@@ -16,7 +16,15 @@
             </p>
         </a>
         @if($address->google_maps)
-        <x-icons.map  />
+        <a href="#" class="" data-popover-target="popover-map">
+            <x-icons.map  />
+        </a>
+        <div data-popover id="popover-map" role="tooltip" class="relative z-10 invisible inline-block w-auto text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+            <div class="google_map">
+                {!! $address->google_maps !!}
+            </div>
+            <div data-popper-arrow></div>
+        </div>
         @endif
     </div>
     @endforeach

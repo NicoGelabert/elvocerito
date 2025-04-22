@@ -46,7 +46,7 @@ export default {
             },
             boxShadow: {
                 cookie: '0 2px 4px 6px rgb(0 0 0 / 0.1)',
-                product_view: '0 0 23px rgba(0,0,0,0.10)',
+                product_view: '0 0 10px rgba(0,0,0,0.10)',
             },
             dropShadow:{
                 search_input: '0 5px 15px rgba(0,0,0,0.10)',

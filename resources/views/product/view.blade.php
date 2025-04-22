@@ -76,12 +76,12 @@
             </div>
             <!-- FIN BREADCRUMBS -->
             <!-- INICIO PRIMERA FILA -->
-            <div class="flex flex-col lg:flex-row gap-8 container">
+            <div class="flex flex-col lg:flex-row gap-6 container">
                 <!-- INICIO PRIMERA COLUMNA -->
                 <div class="product_header custom-scrollbar flex-1">
                     <img src="{{ $product->image }}" alt="{{ $product->title }}">
                     <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
-                    <div class="flex flex-col gap-4 lg:px-2">
+                    <div class="flex flex-col gap-4 lg:pr-4 lg:pl-2">
                         <!-- INICIO CATEGORÍAS Y NOMBRE -->
                         <div>
                             <!-- INICIO CATEGORÍAS -->
@@ -103,6 +103,18 @@
                                 <h2>{{ $product->title }}</h2>
                             </div>
                             <!-- FIN TITLE -->
+                            <!-- INICIO PÁGINA WEB -->
+                            @if ($product->webs->isNotEmpty())
+                            <div class="webpage">
+                                @foreach ($product->webs as $web)
+                                <a href="{{ $web->webpage }}" class="flex gap-2 items-center mt-2">
+                                    <p>{{ $web->webpage }}</p>
+                                    <x-icons.external-link class="w-3 h-3" />
+                                </a>
+                                @endforeach
+                            </div>
+                            @endif
+                            <!-- FIN PÁGINA WEB -->
                         </div>
                         <!-- FIN CATEGORÍAS Y NOMBRE -->
                         <!-- INICIO BADGE ABIERTO / CERRADO, SHORT DESCRIPTION, VÍAS DE CONTACTO Y ADDRESSES -->
@@ -225,13 +237,13 @@
                             <x-image-gallery :images="$product->images"></x-image-gallery>
                         </div>
                         @endif
-                        @if ($product->addresses->isNotEmpty())
+                        <!-- @if ($product->addresses->isNotEmpty())
                         <div class="product_map">
                             @foreach ($product->addresses as $address)
                                 {!! $address->google_maps !!}
                             @endforeach
                         </div>
-                        @endif
+                        @endif -->
                         
                         <div class="grid grid-col-1 md:grid-cols-2 gap-4">
                             
