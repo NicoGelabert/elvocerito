@@ -4,7 +4,7 @@
     'text-color' => 'gray_50',
 ])
 
-<nav {{ $attributes->merge(['class' => "text-gray_50 h-full flex flex-$layout gap-$gap w-full max-w-screen-xl mx-auto items-center justify-between"]) }}>
+<nav {{ $attributes->merge(['class' => "text-gray_50 h-full flex flex-$layout gap-$gap container items-center justify-between"]) }}>
     <div class="logo flex justify-center">
         <x-logo/>
     </div>

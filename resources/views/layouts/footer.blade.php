@@ -1,5 +1,5 @@
 <footer>
-    <div class="footer max-w-screen-xl mx-auto px-4">
+    <div class="footer container">
         <div class="identity">
             <div class="footer-logo">
                 <x-logo />
@@ -118,7 +118,7 @@
             </ul>
         </div>
     </div>
-    <div class="max-w-screen-xl mx-auto px-4">
+    <div class="container">
         <div class="post_footer">
             <p class="text-small">©Todos los derechos reservados.</p>
             <p class="text-small">Diseño y desarrollo por <a href="">Chimi Creativo</a></p>

@@ -1,15 +1,14 @@
 @use '../globals/variables' as *;
 
 .btn{
-    @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans leading-none min-h-8
+    @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans min-h-8
     rounded-full
-    text-xs sm:text-sm md:text-base
+    leading-none sm:leading-none
+    text-xs sm:text-sm
     px-4 py-2;
     svg{
         @apply h-auto
-        w-4
-        sm:w-5
-        md:w-6;
+        w-4;
     }
 }
 .btn-primary{

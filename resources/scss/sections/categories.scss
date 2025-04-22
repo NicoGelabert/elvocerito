@@ -1,6 +1,6 @@
 #categories{
     .categories{
-        @apply flex flex-col gap-8;
+        @apply flex flex-col gap-6;
         .categories_title{
             @apply flex justify-between items-center;
         }
@@ -14,7 +14,7 @@
                             @apply text-xs text-center font-normal text-gray_500;
                         }
                         img{
-                            @apply w-8 md:w-10 h-auto;
+                            @apply w-8 h-auto;
                         }
                     }
                 } 

@@ -1,9 +1,9 @@
 #ultimos_anunciantes{
     .ultimos_anunciantes_title{
-
+        @apply text-center;
     }
     .ultimos_anunciantes_card{
-        @apply w-full max-w-screen-xl mx-auto;
+        @apply w-full mx-auto;
         ul{
             li{
                 @apply flex flex-col rounded-lg border border-gray_200;

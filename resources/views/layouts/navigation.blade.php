@@ -6,7 +6,7 @@
     }"
     @cart-change.window="cartItemsCount = $event.detail.count"
     @scroll.window="showElement = window.scrollY > 375"
-    class="flex flex-col-reverse gap-2 md:gap-0 p-4"
+    class="flex flex-col-reverse gap-2 md:gap-0 py-2 px-4"
     id="navbar"
 >
     <!-- Responsive Menu -->
