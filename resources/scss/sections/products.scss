@@ -1,6 +1,6 @@
 // VISTA DE LISTADO DE PRODUCTOS
 .product-index{
-    @apply my-16 md:my-20;
+    @apply my-12 md:my-14;
     .product_index_hero{
         @apply flex justify-center py-12 lg:py-6;
         h2{
@@ -38,7 +38,7 @@
         @apply mt-4 lg:mt-0;
     }
     .product-list{
-        @apply h-fit lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-8 relative;
+        @apply h-fit lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-4 relative;
         .product_card{
             @apply flex flex-col rounded-lg border border-gray_200 h-auto;
             img{
@@ -140,7 +140,7 @@
         }
     }
     .product{
-        @apply relative flex flex-col;
+        @apply relative flex flex-col mb-16;
         .product_header{
             @apply flex lg:sticky h-full flex-col md:flex-row flex-wrap gap-6 items-center md:items-start transition-all duration-300 lg:mb-8 max-h-[calc(100vh-4rem)] overflow-y-auto;
             .contenedor_overflow{

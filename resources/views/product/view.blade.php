@@ -152,14 +152,14 @@
                 <div class="product_body">
                     <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
-                            <li class="me-2" role="presentation">
-                                <button class="flex gap-1 p-4 border-b-2 rounded-t-lg" id="descripcion-tab" data-tabs-target="#descripcion" type="button" role="tab" aria-controls="descripcion" aria-selected="false">Descripción</button>
+                            <li class="w-1/3" role="presentation">
+                                <button class="w-full flex gap-1 justify-center p-4 border-b-2 rounded-t-lg" id="descripcion-tab" data-tabs-target="#descripcion" type="button" role="tab" aria-controls="descripcion" aria-selected="false">Descripción</button>
                             </li>
-                            <li class="me-2" role="presentation">
-                                <button class="flex gap-1 p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="horarios-tab" data-tabs-target="#horarios" type="button" role="tab" aria-controls="horarios" aria-selected="false">Horarios</button>
+                            <li class="w-1/3" role="presentation">
+                                <button class="w-full flex gap-1 justify-center p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="horarios-tab" data-tabs-target="#horarios" type="button" role="tab" aria-controls="horarios" aria-selected="false">Horarios</button>
                             </li>
-                            <li class="me-2" role="presentation">
-                                <button class="flex gap-1 p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="reviews-tab" data-tabs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                            <li class="w-1/3" role="presentation">
+                                <button class="w-full flex gap-1 justify-center p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="reviews-tab" data-tabs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
                             </li>
                         </ul>
                     </div>
