@@ -23,7 +23,7 @@
         <div class="product_menu lg:hidden opacity-0 -translate-y-full">
             <div class="container flex justify-between">
                 <div class="flex gap-4">
-                    <div class="relative w-auto">
+                    <div class="relative w-auto flex items-center">
                         <img src="{{ $product->image }}" alt="{{ $product->title }}">
                         
                         @php
@@ -42,7 +42,7 @@
                         </div>
 
                     </div>
-                    <div class="content-center">
+                    <div class="content-center overflow-hidden line-clamp-1">
                         <h2>{{ $product->title }}</h2>
                     </div>
                 </div>
@@ -78,10 +78,10 @@
             <!-- INICIO PRIMERA FILA -->
             <div class="flex flex-col lg:flex-row gap-6 container">
                 <!-- INICIO PRIMERA COLUMNA -->
-                <div class="product_header custom-scrollbar flex-1">
+                <div class="product_header custom-scrollbar overflow-x-hidden flex-1">
                     <img src="{{ $product->image }}" alt="{{ $product->title }}">
                     <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
-                    <div class="flex flex-col gap-4 lg:pr-4 lg:pl-2">
+                    <div class="flex flex-col lg:pr-4 lg:pl-2">
                         <!-- INICIO CATEGORÍAS Y NOMBRE -->
                         <div>
                             <!-- INICIO CATEGORÍAS -->
@@ -107,9 +107,19 @@
                             @if ($product->webs->isNotEmpty())
                             <div class="webpage">
                                 @foreach ($product->webs as $web)
-                                <a href="{{ $web->webpage }}" class="flex gap-2 items-center mt-2">
-                                    <p>{{ $web->webpage }}</p>
-                                    <x-icons.external-link class="w-3 h-3" />
+                                @php
+                                    $url = $web->webpage;
+    
+                                    // 🔗 Para el href: agregar https:// si no está
+                                    $link = Str::startsWith($url, ['http://', 'https://']) ? $url : 'https://' . $url;
+    
+                                    // 🧽 Para el texto: eliminar protocolo y barra final
+                                    $display = preg_replace('/^https?:\/\//', '', $url);         // quita http:// o https://
+                                    $display = rtrim($display, '/');                             // quita barra final si existe
+                                @endphp
+                                <a href="{{ $link }}" class="flex gap-2 items-center" target="blank">
+                                    <p>{{ $display }}</p>
+                                    <x-icons.external-link />
                                 </a>
                                 @endforeach
                             </div>
@@ -118,7 +128,7 @@
                         </div>
                         <!-- FIN CATEGORÍAS Y NOMBRE -->
                         <!-- INICIO BADGE ABIERTO / CERRADO, SHORT DESCRIPTION, VÍAS DE CONTACTO Y ADDRESSES -->
-                        <div class="flex flex-col gap-4 items-center md:items-start">
+                        <div class="flex flex-col gap-6 items-center md:items-start">
                             <!-- INICIO BADGE ABIERTO / CERRADO -->
                             @php
                                 $horarios = $product->horarios->map(function($horario) {

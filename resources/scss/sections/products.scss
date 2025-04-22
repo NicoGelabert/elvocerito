@@ -105,7 +105,7 @@
             @apply text-lg;
         }
         img{
-            @apply max-w-16 w-full h-full aspect-square border-2 rounded-full shadow-xl;
+            @apply max-w-16 w-full aspect-square border-2 rounded-full shadow-xl;
         }
         .open, .closed{
             @apply absolute top-0 right-0 w-4 h-4 px-0;
@@ -161,9 +161,15 @@
             .product_header_texts{
                 @apply relative flex flex-col items-center md:items-start lg:items-start gap-2 md:gap-4;
             }
-            .webpage svg{
-                @apply w-4 h-4;
-            }
+            .webpage{
+                @apply flex justify-center lg:justify-start py-4;
+                svg{
+                    @apply w-4 h-4 fill-gray_500;
+                }
+                p{
+                    @apply text-gray_500;
+                }
+            } 
             .google_map{
                 iframe{
                     @apply p-2 w-fit h-auto;
