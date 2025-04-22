@@ -294,6 +294,17 @@ window.onscroll = function () {
       }, 300);
     }
   }
+  // 📌 Lógica para mover product_header en desktop SOLO en product.view
+  if (page === 'product.view' && window.innerWidth >= 1024) {
+    const productHeader = document.querySelector('.product_header');
+    if (productHeader) {
+      if (navbar.style.top === "0px") {
+        productHeader.style.top = "5rem"; // Equivale a top-12 en Tailwind
+      } else {
+        productHeader.style.top = "2rem"; // Equivale a top-8
+      }
+    }
+  }  
 };
 
 // INICIO TABS DE FLOWBITE EN PRODUCT.VIEW

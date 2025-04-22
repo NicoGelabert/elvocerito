@@ -57,7 +57,7 @@
         <div class="product">
             <!-- INICIO BREADCRUMBS -->
             <div class="breadcrumbs">
-                <div class="container flex gap-2">
+                <div class="container flex gap-2 items-center">
                     <a href="/">
                         <x-icons.home class="fill-gray_400" />
                     </a>
@@ -77,11 +77,11 @@
             <!-- FIN BREADCRUMBS -->
             <!-- INICIO PRIMERA FILA -->
             <div class="flex flex-col lg:flex-row gap-8 container">
-                <!-- INICIO SF PRIMERA COLUMNA -->
-                <div class="product_header flex-1">
+                <!-- INICIO PRIMERA COLUMNA -->
+                <div class="product_header custom-scrollbar flex-1">
                     <img src="{{ $product->image }}" alt="{{ $product->title }}">
                     <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
-                    <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-4 lg:px-2">
                         <!-- INICIO CATEGORÍAS Y NOMBRE -->
                         <div>
                             <!-- INICIO CATEGORÍAS -->
@@ -147,8 +147,8 @@
                     </div>
                     <!-- FIN CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
                 </div>
-                <!-- FIN SF PRIMERA COLUMNA -->
-                <!-- INICIO SF SEGUNDA COLUMNA -->
+                <!-- FIN PRIMERA COLUMNA -->
+                <!-- INICIO SEGUNDA COLUMNA -->
                 <div class="product_body">
                     <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
@@ -239,7 +239,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- FIN SF PRIMERA COLUMNA -->
+                <!-- FIN PRIMERA COLUMNA -->
             </div>
             <!-- INICIO PRIMERA FILA -->
         </div>
