@@ -68,6 +68,9 @@ header{
                 @apply fill-gray_200 w-64 h-auto;
             }
         }
+        .divider{
+            @apply border-t-gray_500;
+        }
         .social-icons{
             @apply gap-12 justify-center;
             svg{

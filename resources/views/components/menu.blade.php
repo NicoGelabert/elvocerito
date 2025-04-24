@@ -24,7 +24,7 @@
             <x-button href="/urgencias" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
         </li>
     </ul>
-    <div class="flex flex-col gap-8 w-full md:hidden absolute bottom-12 px-16">
+    <div class="flex flex-col gap-8 w-full lg:hidden absolute bottom-12 px-16">
         <hr class="divider">
         <x-social-icons />
     </div>
