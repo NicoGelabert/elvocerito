@@ -15,7 +15,7 @@
             }
         @endphp
         <a href="{{ $href }}">
-            <div class="flex flex-col md:flex-row items-center md:gap-4">
+            <div class="contacto">
                 <x-icons.icon :name="$iconData['type']" />
                 <div class="text-center mt-2 md:text-left md:mt-0">
                     <span class="text-xs lg:text-sm font-semibold capitalize">{{ $iconData['type'] }}</span>
