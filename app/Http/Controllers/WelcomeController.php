@@ -23,7 +23,9 @@ class WelcomeController extends Controller
             $anunciante->first_contact = $anunciante->contacts->first(); // Guarda solo el primer contacto
             return $anunciante;
         });
-        $ultimos_anunciantes = Product::where('published', 1)->get();
+        $ultimos_anunciantes = Product::where('published', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
         $articles = Article::all();
         // $features = Feature::all();
         // $services = Service::all();

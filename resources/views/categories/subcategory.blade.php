@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="category_view product-index">
-        <div class="category_view_header">
+        <div class="breadcrumbs">
             <div class="container flex gap-2 items-center">
                 <a href="/">
                     <x-icons.home class="fill-gray_400" />

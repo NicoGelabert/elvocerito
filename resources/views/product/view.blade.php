@@ -78,15 +78,15 @@
             <!-- INICIO PRIMERA FILA -->
             <div class="flex flex-col lg:flex-row gap-6 container">
                 <!-- INICIO PRIMERA COLUMNA -->
-                <div class="product_header custom-scrollbar overflow-x-hidden flex-1">
+                <div class="product_header custom-scrollbar lg:overflow-x-hidden flex-1">
                     <img src="{{ $product->image }}" alt="{{ $product->title }}">
                     <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
-                    <div class="flex flex-col lg:pr-4 lg:pl-2">
+                    <div class="flex flex-col lg:pr-4 lg:pl-2 gap-4">
                         <!-- INICIO CATEGORÍAS Y NOMBRE -->
-                        <div>
+                        <div class="flex flex-col gap-4">
                             <!-- INICIO CATEGORÍAS -->
                             <div class="contenedor_overflow">
-                                <div class="contendor_overflow_hijo">
+                                <div class="contenedor_overflow_hijo">
                                     @foreach ($product->categories as $category)
                                     <div class="flex items-center mx-auto md:mx-0">
                                         <div class="w-6 h-6 flex wrap items-center">
@@ -99,9 +99,7 @@
                             </div>
                             <!-- FIN CATEGORÍAS -->
                             <!-- INICIO TITLE -->
-                            <div>
-                                <h2>{{ $product->title }}</h2>
-                            </div>
+                            <h2>{{ $product->title }}</h2>
                             <!-- FIN TITLE -->
                             <!-- INICIO PÁGINA WEB -->
                             @if ($product->webs->isNotEmpty())
@@ -153,9 +151,7 @@
                             @endif
                             <!-- FIN SHORT DESCRIPTION -->
                             <!-- INICIO VÍAS DE CONTACTO -->
-                            <div class="flex flex-col items-center md:items-start gap-4">
-                                <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
-                            </div>
+                            <x-contact-icons class="contact-icons w-full lg:w-auto" :icons="$product->contacts"></x-contact-icons>
                             <!-- FIN VÍAS DE CONTACTO -->
                             <!-- INICIO ADDRESSES -->
                             @if ($product->addresses->isNotEmpty())

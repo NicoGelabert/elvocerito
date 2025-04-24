@@ -15,11 +15,11 @@
             }
         @endphp
         <a href="{{ $href }}">
-            <div class="flex items-center md:gap-4">
+            <div class="flex flex-col md:flex-row items-center md:gap-4">
                 <x-icons.icon :name="$iconData['type']" />
-                <div>
-                    <span class="text-sm font-semibold capitalize hidden md:block">{{ $iconData['type'] }}</span>
-                    <p class="text-xs text-gray-500 hidden md:block">{{ $iconData['info'] }}</p>
+                <div class="text-center mt-2 md:text-left md:mt-0">
+                    <span class="text-xs lg:text-sm font-semibold capitalize">{{ $iconData['type'] }}</span>
+                    <p class="text-xs text-gray-500 -mt-1 lg:mt-0">{{ $iconData['info'] }}</p>
                 </div>
             </div>
         </a>
