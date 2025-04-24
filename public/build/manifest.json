@@ -14,7 +14,7 @@
       "resources/js/product-view.js",
       "resources/js/categories-index.js"
     ],
-    "file": "assets/app-eecc37d8.js",
+    "file": "assets/app-2659c62c.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -45,7 +45,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-87682977.css",
+    "file": "assets/styles-5118b6b3.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },

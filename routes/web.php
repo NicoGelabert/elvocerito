@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
@@ -53,6 +54,9 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])
     ->name('categories.view.subcategory');
 
+    //News
+    Route::get('/articles', [ArticleController::class, 'index'])->name('news.index');
+    Route::get('/articles/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
 
     //Servicios
     Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');

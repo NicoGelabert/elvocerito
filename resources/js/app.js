@@ -241,7 +241,7 @@ window.onscroll = function () {
   prevScrollpos = currentScrollPos;
 
   // 📌 Lógica para fijar el Search Bar después de 325px de scroll
-  if (page !== 'product.view' && page !== 'categories.view' && page !== 'categories.view.subcategory') {
+  if (page !== 'product.view' && page !== 'categories.view' && page !== 'categories.view.subcategory' && page !== 'news.view') {
   // Esta lógica solo se ejecuta en páginas que no sean la de producto, categoría o subcategoría
     if (currentScrollPos >= searchTriggerPoint) {
       // Si el navbar está visible (top = 0), colocamos el search bar justo debajo
@@ -295,16 +295,20 @@ window.onscroll = function () {
     }
   }
   // 📌 Lógica para mover product_header en desktop SOLO en product.view
-  if (page === 'product.view' && window.innerWidth >= 1024) {
-    const productHeader = document.querySelector('.product_header');
-    if (productHeader) {
-      if (navbar.style.top === "0px") {
-        productHeader.style.top = "5rem"; // Equivale a top-12 en Tailwind
-      } else {
-        productHeader.style.top = "2rem"; // Equivale a top-8
+  function moveHeader(pageName, selector) {
+    if (page === pageName && window.innerWidth >= 1024) {
+      const header = document.querySelector(selector);
+      if (header) {
+        if (navbar.style.top === "0px") {
+          header.style.top = "5rem";
+        } else {
+          header.style.top = "2rem";
+        }
       }
     }
-  }  
+  }
+  moveHeader('product.view', '.product_header');
+  moveHeader('news.view', '.article_header');  
 };
 
 // INICIO TABS DE FLOWBITE EN PRODUCT.VIEW

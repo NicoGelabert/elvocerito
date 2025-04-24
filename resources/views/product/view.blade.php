@@ -283,9 +283,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- FIN PRIMERA COLUMNA -->
+                <!-- FIN SEGUNDA COLUMNA -->
             </div>
-            <!-- INICIO PRIMERA FILA -->
+            <!-- FIN PRIMERA FILA -->
         </div>
         <!-- FIN HOJA PRODUCTO -->
     </div>
