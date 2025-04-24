@@ -23,3 +23,11 @@
 @if ($name === 'instagram')
     <x-icons.instagram />
 @endif
+
+@if ($name === 'youtube')
+    <x-icons.youtube />
+@endif
+
+@if ($name === 'tiktok')
+    <x-icons.tiktok />
+@endif

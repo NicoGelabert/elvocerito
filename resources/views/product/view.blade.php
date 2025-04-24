@@ -183,16 +183,41 @@
                         </ul>
                     </div>
                     <div id="default-tab-content">
-                        @if ($product->description)
-                        <div class="hidden text-gray-500" id="descripcion" role="tabpanel" aria-labelledby="descripcion-tab">
+                        @if ($product->description || $product->listitems || $product->tags || $product->socials)
+                        <div class="hidden text-gray-500 flex flex-col gap-8" id="descripcion" role="tabpanel" aria-labelledby="descripcion-tab">
+                            <!-- INICIO DESCRIPCIÓN LARGA -->
+                            @if($product->description)
                             <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit">
                                 {!! $product->description !!}
                             </div>
-                            <ul class="list-disc p-8">
+                            @endif
+                            <!-- FIN DESCRIPCIÓN LARGA -->
+                            <!-- INICIO ITEMS -->
+                            @if($product->listitems->isNotEmpty())
+                            <ul class="list-disc px-8">
                                 @foreach ($product->listitems as $listitem)
                                 <li class="mb-2"><p>{{ $listitem->item}}</p></li>
                                 @endforeach
                             </ul>
+                            @endif
+                            <!-- FIN ITEMS -->
+                            <!-- INICIO TAGS -->
+                            @if($product->tags->isNotEmpty())
+                            <div class="flex flex-wrap gap-4">
+                                @foreach ($product->tags as $tag)
+                                <x-badge badge_title="{{ $tag->name }}"/>
+                                @endforeach
+                            </div>
+                            @endif
+                            <!-- FIN TAGS -->
+                            <!-- INICIO REDES SOCIALES -->
+                            @if($product->socials->isNotEmpty())
+                            <div class="product_rrss">
+                                <h4>Seguí sus redes</h4>
+                                <x-product-social-icons class="product-social-icons" :icons="$product->socials"></x-product-social-icons>
+                            </div>
+                            @endif
+                            <!-- FIN REDES SOCIALES -->
                         </div>
                         @endif
 

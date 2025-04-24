@@ -305,9 +305,18 @@
             }            
         }
         .product_rrss{
-            @apply flex flex-col gap-4;
+            @apply px-4 flex flex-col gap-4;
+            h4{
+                @apply text-secondary
+            }
             .product-social-icons{
                 @apply flex gap-4;
+                a{
+                    @apply bg-gray-100 p-2 rounded-md;
+                    svg{
+                        @apply w-6 h-6 fill-secondary;
+                    }
+                }
             }
         }
         .product_body{
