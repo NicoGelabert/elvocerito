@@ -3,7 +3,7 @@
     "file": "assets/splide-extension-grid.esm-a5b613aa.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-a3ad06b3.css",
+    "file": "assets/app-32f0563f.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -45,7 +45,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-540e4df5.css",
+    "file": "assets/styles-1a5462d9.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
