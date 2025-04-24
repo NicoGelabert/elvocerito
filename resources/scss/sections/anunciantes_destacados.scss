@@ -32,14 +32,17 @@
                 .footer{
                     @apply px-2 py-4 flex flex-col gap-4;
                     .contact-icons{
-                        span{
-                            @apply hidden;
-                        }
-                        p{
-                            @apply text-gray_600 font-semibold tracking-wide;
-                        }
-                        svg{
-                            @apply fill-gray_600;
+                        .contacto{
+                            @apply flex gap-2 items-start text-gray_600;
+                            span{
+                                @apply hidden sm:block;
+                            }
+                            p{
+                                @apply tracking-wide hidden lg:block;
+                            }
+                            svg{
+                                @apply fill-gray_500 h-5 lg:h-8 w-auto;
+                            }
                         }
                     }
                 }
