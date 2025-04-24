@@ -136,7 +136,7 @@
         @apply flex items-center
         justify-evenly md:justify-start
         gap-2 md:gap-10 lg:gap-4
-        lg:flex-col;
+        lg:flex-wrap lg:gap-x-8;
         .contacto{
             @apply flex flex-col md:flex-row items-center md:gap-4;
             svg{

@@ -108,11 +108,12 @@
                                 @php
                                     $url = $web->webpage;
     
-                                    // 🔗 Para el href: agregar https:// si no está
+                                    // Para el href: agregar https:// si no está
                                     $link = Str::startsWith($url, ['http://', 'https://']) ? $url : 'https://' . $url;
     
-                                    // 🧽 Para el texto: eliminar protocolo y barra final
+                                    // Para el texto: eliminar protocolo y barra final
                                     $display = preg_replace('/^https?:\/\//', '', $url);         // quita http:// o https://
+                                    $display = preg_replace('/^www\./', '', $display);           // Quita www. si existe al principio
                                     $display = rtrim($display, '/');                             // quita barra final si existe
                                 @endphp
                                 <a href="{{ $link }}" class="flex gap-2 items-center" target="blank">
