@@ -99,7 +99,7 @@
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{
     .product_menu{
-        @apply w-full shadow-md bg-white transition-transform duration-300 px-2 md:px-4 py-2 fixed z-10;
+        @apply w-full shadow-md bg-white transition-transform duration-300 px-4 py-2 fixed z-10;
         transition: top 0.3s, transform 0.3s;
         .contact-icons{
             @apply justify-end;

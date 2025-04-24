@@ -21,7 +21,7 @@
         ]) }})">
         <!-- INICIO MENU CON IMAGEN, TITLE, BAGDE ABI/CER, CONTACT -->
         <div class="product_menu lg:hidden opacity-0 -translate-y-full">
-            <div class="container flex justify-between">
+            <div class="flex justify-between">
                 <div class="flex gap-2 items-center">
                     <div class="relative w-auto flex items-center">
                         <img src="{{ $product->image }}" alt="{{ $product->title }}">
