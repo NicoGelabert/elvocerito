@@ -4,12 +4,12 @@
     'text-color' => 'gray_50',
 ])
 
-<nav {{ $attributes->merge(['class' => "text-gray_50 h-full flex flex-$layout gap-$gap container items-center justify-between"]) }}>
+<nav {{ $attributes->merge(['class' => "text-gray_50 h-full flex flex-$layout gap-$gap container items-center lg:justify-between"]) }}>
     <div class="logo flex justify-center">
         <x-logo/>
     </div>
 
-    <ul class="grid lg:grid-flow-col items-center justify-end gap-4 text-center">
+    <ul class="flex flex-col lg:flex-row items-center justify-end gap-4 text-center">
         <li>
             <a href="/categorias">
                 Categorías
@@ -24,4 +24,8 @@
             <x-button href="/urgencias" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
         </li>
     </ul>
+    <div class="flex flex-col gap-8 w-full md:hidden absolute bottom-12 px-16">
+        <hr class="divider">
+        <x-social-icons />
+    </div>
 </nav>

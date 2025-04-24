@@ -50,11 +50,29 @@ header{
     }
 }
 .mobile-menu{
-    @apply bg-white text-black dark:bg-black dark:text-white;
+    @apply bg-secondary text-gray_400;
     .mobile-menu-inner{
-        @apply text-secondary;
-        .logo svg{
-            @apply fill-secondary w-40 h-auto;
+        @apply py-20 px-16 gap-20;
+        ul{
+            @apply gap-8 w-full text-left items-start;
+            li a{
+                @apply text-2xl;
+                svg{
+                    @apply w-6 h-6;
+                }
+            }
+        }
+        .logo{
+            @apply justify-start w-full;
+            svg{
+                @apply fill-gray_200 w-64 h-auto;
+            }
+        }
+        .social-icons{
+            @apply gap-12 justify-center;
+            svg{
+                @apply w-6 h-6 fill-gray_400 m-2;
+            }
         }
     }
 }
@@ -104,7 +122,6 @@ header, .mobile-menu{
     }
 
     .openbtn.active span{
-        @apply bg-secondary;
         &:nth-of-type(1) {
             left: 0;
             top: -4px;

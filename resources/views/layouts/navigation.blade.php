@@ -9,7 +9,7 @@
     class="flex flex-col-reverse gap-2 md:gap-0 py-2 px-4"
     id="navbar"
 >
-    <!-- Responsive Menu -->
+    <!-- RESPONSIVE MENU -->
     <div class="flex items-center justify-between w-full">
         <div
             class="block z-20 fixed top-0 bottom-0 h-full w-full transition-all mobile-menu lg:hidden"
@@ -27,19 +27,17 @@
             </div>
             <x-hamburguer />
         </div>
-    </div>
-    
-    <!--/ Responsive Menu -->
+    </div>    
+    <!-- RESPONSIVE MENU -->
 
-    <!-- Main Menu -->   
-    
+    <!-- MAIN MENU -->
     <div
         :class="mobileMenuOpen ? 'hidden' : ''"
         class="hidden lg:flex w-full"
     >
         <x-menu class="desktop-menu-inner" />
     </div>
-    <!--/ Main Menu -->
+    <!-- MAIN MENU -->
     
     
 </header>
