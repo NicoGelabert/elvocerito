@@ -94,7 +94,7 @@ if (newsElement) {
             pagination: 'splide__pagination_custom',
         },
         direction: 'ttb',
-        gap       : '2rem',
+        gap       : '3rem',
         height    : '450px',
         width     : '50%',
         padding   : '2rem',
@@ -102,6 +102,19 @@ if (newsElement) {
         perPage   : 2,
         rewind    : true,
         type      : 'loop',
+        breakpoints: {
+            1024: {
+                
+            },
+            // 768: {
+            //     perPage     : 5,
+            // },
+            480: {
+                gap      : '1rem',
+                height    : '300px',
+                width    : '100%',
+            }
+        },
     });
 }
 news.mount();

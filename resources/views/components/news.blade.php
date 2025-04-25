@@ -9,8 +9,8 @@
             </x-button>
         </div>
     </div>
-    <div class="flex">
-        <div class="w-1/2">
+    <div class="flex flex-col md:flex-row justify-between mt-8">
+        <div class="md:w-1/2">
 
         </div>
         <div class="news splide">
@@ -19,7 +19,7 @@
                     @foreach($articles as $article)
                     <li class="news-card splide__slide">
                         <a href="{{ route('news.view', $article) }}">
-                            <div class="flex gap-4 p-6 bg-white rounded-xl">
+                            <div class="flex gap-4 p-2 md:p-6 bg-white rounded-xl">
                                 <div class="news-card-img">
                                     <img src="{{ $article->image }}" alt="$article->title">
                                 </div>
