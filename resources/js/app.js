@@ -213,8 +213,10 @@ document.addEventListener("DOMContentLoaded", () => {
     import('./product-view.js');
   } else if (page === 'categories.index') {
     import('./categories-index.js');
+  } else if (page === 'news.view') {
+    import('./article-view.js');
   }
-  
+
 });
 
 let prevScrollpos = window.scrollY;

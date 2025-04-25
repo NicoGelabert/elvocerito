@@ -1,6 +1,6 @@
 #categories{
     .categories{
-        @apply flex flex-col gap-6;
+        @apply flex flex-col gap-6 absolute top-[60%] md:top-[45%] lg:top-1/2 left-1/2 bg-white border border-gray_200 rounded-2xl -translate-x-1/2 lg:translate-y-1/2 p-6 max-w-[95%] lg:max-w-screen-lg;
         .categories_title{
             @apply flex justify-between items-center;
         }

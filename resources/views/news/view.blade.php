@@ -23,9 +23,42 @@
             <div class="flex flex-col lg:flex-row gap-6 container">
                 <!-- INICIO PRIMERA COLUMNA -->
                 <div class="article_header custom-scrollbar lg:overflow-x-hidden flex-1">
-                    @foreach($article->images as $image)
-                    <img src="{{$image->url}}" alt="imagen articleo">
-                    @endforeach
+                <section id="main-carousel" class="splide" aria-label="My Awesome Gallery">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                        <li class="splide__slide">
+                            <img src="image1.jpg" alt="">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="image2.jpg" alt="">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="image3.jpg" alt="">
+                        </li>
+                        <li class="splide__slide">
+                            <img src="image4.jpg" alt="">
+                        </li>
+                        </ul>
+                    </div>
+                </section>
+
+
+                <ul id="thumbnails" class="thumbnails">
+                <li class="thumbnail">
+                    <img src="thumbnail1.jpg" alt="">
+                </li>
+                <li class="thumbnail">
+                    <img src="thumbnail2.jpg" alt="">
+                </li>
+                <li class="thumbnail">
+                    <img src="thumbnail3.jpg" alt="">
+                </li>
+                <li class="thumbnail">
+                    <img src="thumbnail4.jpg" alt="">
+                </li>
+                </ul>
+                    
+                    
                     <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
                     <div class="flex flex-col lg:pr-4 lg:pl-2 gap-4">
                         <!-- INICIO TAGS -->
@@ -114,3 +147,27 @@
         <!-- FIN HOJA ARTICULO -->
     </div>
 </x-app-layout>
+<style>
+    .thumbnails {
+  display: flex;
+  margin: 1rem auto 0;
+  padding: 0;
+  justify-content: center;
+}
+
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  list-style: none;
+  margin: 0 0.2rem;
+  cursor: pointer;
+}
+
+
+.thumbnail img {
+  width: 100%;
+  height: auto;
+}
+</style>

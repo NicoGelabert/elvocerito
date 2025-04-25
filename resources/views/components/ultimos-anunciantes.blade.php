@@ -39,9 +39,9 @@
                                     {{ $ultimo_anunciante->title }}
                                 </h5>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <p>{{ $ultimo_anunciante->short_description }}</p>
-                            </div>
+                            </div> -->
                         </div>
                     </a>
                 </li>

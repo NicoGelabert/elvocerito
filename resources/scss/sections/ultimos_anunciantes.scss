@@ -6,20 +6,20 @@
         @apply w-full mx-auto;
         ul{
             li{
-                @apply flex flex-col rounded-lg border border-gray_200;
+                @apply flex flex-col border-r border-r-gray_300;
                 a{
-                    @apply flex flex-col flex-1 justify-between;
+                    @apply flex items-center gap-2;
                 }
                 img{
-                    @apply rounded-t-lg object-cover
-                    aspect-video;
+                    @apply rounded-full object-cover
+                    aspect-square max-w-16 border border-gray_200;
                 }
                 .ultimos_anunciantes_card_content{
                     @apply flex flex-col flex-1 px-2 py-4 gap-4 justify-between;
                     .header{
                         @apply flex flex-col;
                         h5{
-                            @apply overflow-hidden line-clamp-1;
+                            @apply text-sm overflow-hidden line-clamp-2;
                         }
                         h6{
                             @apply py-1;

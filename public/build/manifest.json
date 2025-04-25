@@ -1,9 +1,12 @@
 {
-  "_splide-extension-grid.esm-a5b613aa.js": {
-    "file": "assets/splide-extension-grid.esm-a5b613aa.js"
+  "_splide-extension-grid.esm-c152eb28.js": {
+    "file": "assets/splide-extension-grid.esm-c152eb28.js"
+  },
+  "_splide.esm-688b6f4b.js": {
+    "file": "assets/splide.esm-688b6f4b.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-c22eca91.css",
+    "file": "assets/app-cfeb8381.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -12,11 +15,20 @@
       "resources/js/catalog.js",
       "resources/js/home.js",
       "resources/js/product-view.js",
-      "resources/js/categories-index.js"
+      "resources/js/categories-index.js",
+      "resources/js/article-view.js"
     ],
-    "file": "assets/app-2659c62c.js",
+    "file": "assets/app-cf1220aa.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/article-view.js": {
+    "file": "assets/article-view-cce288d2.js",
+    "imports": [
+      "_splide.esm-688b6f4b.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/article-view.js"
   },
   "resources/js/catalog.js": {
     "file": "assets/catalog-11d13b77.js",
@@ -29,23 +41,25 @@
     "src": "resources/js/categories-index.js"
   },
   "resources/js/home.js": {
-    "file": "assets/home-33a1b0a9.js",
+    "file": "assets/home-f7ad6990.js",
     "imports": [
-      "_splide-extension-grid.esm-a5b613aa.js"
+      "_splide.esm-688b6f4b.js",
+      "_splide-extension-grid.esm-c152eb28.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/home.js"
   },
   "resources/js/product-view.js": {
-    "file": "assets/product-view-e03e3334.js",
+    "file": "assets/product-view-56f88c74.js",
     "imports": [
-      "_splide-extension-grid.esm-a5b613aa.js"
+      "_splide.esm-688b6f4b.js",
+      "_splide-extension-grid.esm-c152eb28.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-5118b6b3.css",
+    "file": "assets/styles-7efbe231.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },

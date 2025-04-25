@@ -62,23 +62,23 @@ if (ultimosAnuncinatesElement) {
     var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
         arrows      : false,
         autoplay    : false,
-        gap         : '1rem',
+        gap         : '2rem',
         interval    : 4000,
         padding     : '2rem',
         pagination  : false,
-        perPage     : 6,
+        perPage     : 3,
         type        : 'loop',
         breakpoints: {
             1024: {
-                perPage     : 4,
-            },
-            768: {
-                perPage     : 3,
-            },
-            480: {
                 perPage     : 2,
-                gap         : '0.5rem',
-                padding     : '1rem',
+            },
+            // 768: {
+            //     perPage     : 5,
+            // },
+            480: {
+                perPage     : 1,
+                gap         : '1rem',
+                padding     : '3rem',
             }
         },
     })
