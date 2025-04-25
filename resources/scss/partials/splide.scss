@@ -16,3 +16,10 @@
         }    
     }
 }
+
+.news .splide__arrows{
+    @apply gap-1 w-auto justify-end;
+    .splide__arrow{
+        @apply top-0 left-0 translate-y-0;
+    }
+}

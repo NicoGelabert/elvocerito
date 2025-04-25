@@ -143,8 +143,8 @@ header, .mobile-menu{
     }
 // Contenedor gral
 .container{
-    @apply w-full max-w-screen-lg mx-auto px-4
-    2xl:px-0;
+    @apply w-full max-w-screen-lg mx-auto px-4;
+    
 }
 // línea divisoria
 .divider{ 
@@ -157,7 +157,7 @@ header, .mobile-menu{
 
 // Breadcrumbs
 .breadcrumbs{
-    @apply py-2 lg:py-4 bg-gray_100 mb-8 mt-12 md:mt-14;
+    @apply py-2 lg:py-4 bg-gray_100 mb-4 mt-12 md:mt-14;
     p{
         @apply text-gray_400 text-small hover:text-primary;
     }

@@ -93,8 +93,13 @@ if (newsElement) {
         classes: {
             pagination: 'splide__pagination_custom',
         },
-        gap       : '1.5rem',
-        pagination: true,
+        direction: 'ttb',
+        gap       : '2rem',
+        height    : '450px',
+        width     : '50%',
+        padding   : '2rem',
+        pagination: false,
+        perPage   : 2,
         rewind    : true,
         type      : 'loop',
     });
