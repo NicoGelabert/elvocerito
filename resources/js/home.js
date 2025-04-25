@@ -86,38 +86,5 @@ if (ultimosAnuncinatesElement) {
 
 ultimosAnuncinates.mount();
 // // Fin Últimos anunciantes
-// // News
-var newsElement = document.querySelector('.news');
-if (newsElement) {
-    var news = new Splide(newsElement, {
-        classes: {
-            pagination: 'splide__pagination_custom',
-        },
-        direction: 'ttb',
-        gap       : '3rem',
-        height    : '450px',
-        width     : '50%',
-        padding   : '2rem',
-        pagination: false,
-        perPage   : 2,
-        rewind    : true,
-        type      : 'loop',
-        breakpoints: {
-            1024: {
-                
-            },
-            // 768: {
-            //     perPage     : 5,
-            // },
-            480: {
-                gap      : '1rem',
-                height    : '300px',
-                width    : '100%',
-            }
-        },
-    });
-}
-news.mount();
-// // Fin News
 // Fin Splide
   

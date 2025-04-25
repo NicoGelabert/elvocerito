@@ -1,5 +1,17 @@
 .news-title{
-    @apply flex justify-between items-center;
+    @apply flex justify-between items-center mb-4;
+}
+.leading_article{
+    @apply w-full bg-white p-4 rounded-xl mb-4 md:mb-0 flex flex-col gap-4;
+    img{
+        @apply rounded-xl;
+    }
+    .author{
+        @apply flex items-center gap-2;
+        img{
+            @apply max-w-12 rounded-full aspect-square object-cover;
+        }
+    }
 }
 .news{
     @apply flex flex-col gap-6 md:w-1/2;
@@ -15,7 +27,7 @@
             .news-card-content{
                 @apply flex flex-col md:gap-2;
                 .news-card-content-header{
-                    @apply flex flex-col md:flex-row md:items-center md:gap-2 justify-between;
+                    @apply flex md:items-center md:gap-2 justify-between;
                     .author{
                         @apply flex gap-2 text-gray_600 items-center;
                         img{

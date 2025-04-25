@@ -9,10 +9,28 @@
             </x-button>
         </div>
     </div>
-    <div class="flex flex-col md:flex-row justify-between mt-8">
-        <div class="md:w-1/2">
-
-        </div>
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+        @php
+        $primerArticulo = $articles->first();
+        @endphp
+        <a href="{{ route('news.view', $primerArticulo) }}" class="w-1/2">
+            <div class="leading_article">
+                <img src="{{ $primerArticulo->image }}" alt="{{ $primerArticulo->title }}">
+                <h4>{{ $primerArticulo->title }}</h4>
+                <p>{{ $primerArticulo->news_lead }}</p>
+                <hr class="divider">
+                <div class="flex justify-between items-center">
+                    @foreach ($primerArticulo->authors as $author)
+                    <div class="author">
+                        <img src="{{ $author->image }}" alt="$author->name">
+                        <h6>{{ $author->name }}</h6>
+                    </div>
+                    @endforeach
+                    <p class="dot-divider">·</p>
+                    <p class="news-date">{{ $primerArticulo->created_at->format('M d, Y') }}</p>
+                </div>
+            </div>
+        </a>
         <div class="news">
             <ul>
                 @foreach($articles as $article)

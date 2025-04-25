@@ -24,6 +24,9 @@
                             h6{
                                 @apply py-1;
                             }
+                            .truncate-text{
+                                @apply max-w-[140px];
+                            }
                         }
                         p{
                             @apply line-clamp-2 text-gray_500 text-xs lg:text-sm;
