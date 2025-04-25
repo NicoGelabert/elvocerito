@@ -20,53 +20,21 @@
             </div>
             <!-- FIN BREADCRUMBS -->
             <!-- INICIO PRIMERA FILA -->
-            <div class="flex flex-col lg:flex-row gap-6 container">
+            <div class="flex flex-col lg:flex-row gap-6 container mt-6">
                 <!-- INICIO PRIMERA COLUMNA -->
                 <div class="article_header custom-scrollbar lg:overflow-x-hidden flex-1">
-                <section id="main-carousel" class="splide" aria-label="My Awesome Gallery">
-                    <div class="splide__track">
-                        <ul class="splide__list">
-                        <li class="splide__slide">
-                            <img src="image1.jpg" alt="">
-                        </li>
-                        <li class="splide__slide">
-                            <img src="image2.jpg" alt="">
-                        </li>
-                        <li class="splide__slide">
-                            <img src="image3.jpg" alt="">
-                        </li>
-                        <li class="splide__slide">
-                            <img src="image4.jpg" alt="">
-                        </li>
-                        </ul>
-                    </div>
-                </section>
-
-
-                <ul id="thumbnails" class="thumbnails">
-                <li class="thumbnail">
-                    <img src="thumbnail1.jpg" alt="">
-                </li>
-                <li class="thumbnail">
-                    <img src="thumbnail2.jpg" alt="">
-                </li>
-                <li class="thumbnail">
-                    <img src="thumbnail3.jpg" alt="">
-                </li>
-                <li class="thumbnail">
-                    <img src="thumbnail4.jpg" alt="">
-                </li>
-                </ul>
-                    
-                    
-                    <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
+                    @php
+                        $primeraImagen = $article->images->first();
+                    @endphp
+                    <img src="{{ $primeraImagen->url }}" alt="">
+                    <!-- INICIO CONTENEDOR ARTICULO HEADER SIN IMAGEN -->
                     <div class="flex flex-col lg:pr-4 lg:pl-2 gap-4">
                         <!-- INICIO TAGS -->
                         <div class="flex flex-wrap gap-4">
                             <x-badge badge_title="#PalabraDeExperto"/>
                         </div>
                         <!-- FIN TAGS -->
-                        <hr class="divider">
+                        <hr class="hidden md:block divider">
                         <!-- INICIO AUTOR -->
                         @if ($article->authors->isNotEmpty())
                         <div class="author">
@@ -83,7 +51,7 @@
                         </div>
                         @endif
                         <!-- FIN AUTOR -->
-                        <hr class="divider">
+                        <hr class="hidden md:block divider">
                         <!-- INICIO REDES SOCIALES -->
                         <div class="article_rrss">
                             <h4>Compartí</h4>
@@ -104,7 +72,7 @@
                         </div>
                         <!-- FIN REDES SOCIALES -->
                     </div>
-                    <!-- FIN CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
+                    <!-- FIN CONTENEDOR ARTICULO HEADER SIN IMAGEN -->
                 </div>
                 <!-- FIN PRIMERA COLUMNA -->
                 <!-- INICIO SEGUNDA COLUMNA -->
