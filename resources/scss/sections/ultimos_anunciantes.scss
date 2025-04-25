@@ -6,7 +6,7 @@
         @apply w-full mx-auto;
         ul{
             li{
-                @apply flex flex-col border-r border-r-gray_300;
+                @apply flex flex-col justify-center border border-gray_300 py-2 px-4 rounded-xl bg-white;
                 a{
                     @apply flex items-center gap-2;
                 }
@@ -15,18 +15,18 @@
                     aspect-square max-w-16 border border-gray_200;
                 }
                 .ultimos_anunciantes_card_content{
-                    @apply flex flex-col flex-1 px-2 py-4 gap-4 justify-between;
+                    @apply flex flex-col flex-1 px-2 py-4 justify-between;
                     .header{
-                        @apply flex flex-col;
+                        @apply flex flex-col gap-1;
                         h5{
-                            @apply text-sm overflow-hidden line-clamp-2;
+                            @apply  overflow-hidden line-clamp-2;
                         }
                         h6{
-                            @apply py-1;
+                            
                         }
-                    }
-                    p{
-                        @apply line-clamp-2 text-gray_500;
+                        p{
+                            @apply text-gray_400 text-xs font-medium;
+                        }
                     }
                     .remaining-count{
                         @apply text-text_small font-bold text-gray_600 py-1 px-2 bg-gray_50 rounded-full;

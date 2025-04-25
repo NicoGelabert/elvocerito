@@ -38,6 +38,7 @@
                                 <h5>
                                     {{ $ultimo_anunciante->title }}
                                 </h5>
+                                <p>{{ $ultimo_anunciante->created_at->translatedFormat('j \d\e F \d\e Y') }}</p>
                             </div>
                             <!-- <div>
                                 <p>{{ $ultimo_anunciante->short_description }}</p>

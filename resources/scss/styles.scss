@@ -5,7 +5,7 @@ html {
     scroll-behavior: smooth;
   }
 body{
-    @apply bg-white text-secondary font-sans_serif;
+    @apply bg-gray_50 text-secondary font-sans_serif;
     h1, h2, h3, h4, h5, h6, .text-small{
         @apply font-semibold;
     }
