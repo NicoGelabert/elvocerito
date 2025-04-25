@@ -13,7 +13,7 @@
         @php
         $primerArticulo = $articles->first();
         @endphp
-        <a href="{{ route('news.view', $primerArticulo) }}" class="w-1/2">
+        <a href="{{ route('news.view', $primerArticulo) }}" class="w-full md:w-1/2">
             <div class="leading_article">
                 <img src="{{ $primerArticulo->image }}" alt="{{ $primerArticulo->title }}">
                 <h4>{{ $primerArticulo->title }}</h4>
