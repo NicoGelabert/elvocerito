@@ -223,37 +223,48 @@
                              </div>
                              @endif
      
-                             @if ($product->horarios->isNotEmpty())
-                             <div class="hidden text-gray-500" id="horarios" role="tabpanel" aria-labelledby="horarios-tab">
-                                 <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit">
+                            @if ($product->horarios->isNotEmpty())
+                            <div class="hidden text-gray-500" id="horarios" role="tabpanel" aria-labelledby="horarios-tab">
+                                <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit mb-4">
                                      <!-- INICIO BADGE ABIERTO / CERRADO -->
-                                     @php
-                                         $horarios = $product->horarios->map(function($horario) {
-                                             return [
-                                                 'dia' => $horario->dia,
-                                                 'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
-                                                 'cierre' => Carbon::parse($horario->cierre)->format('H:i')
-                                             ];
-                                         });
-                                     @endphp
-                                     <div x-data="verificarEstado({{ json_encode($horarios) }})" class="rounded-lg bg-gray-50 flex gap-2 justify-center lg:justify-start items-center">
-                                         <p>En este momento, se encuentra </p>
-                                         <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
-                                             <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
-                                         </x-badge>
-                                     </div>
+                                    @php
+                                        $horarios = $product->horarios->map(function($horario) {
+                                            return [
+                                                'dia' => $horario->dia,
+                                                'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
+                                                'cierre' => Carbon::parse($horario->cierre)->format('H:i')
+                                            ];
+                                        });
+                                    @endphp
+                                    <div x-data="verificarEstado({{ json_encode($horarios) }})" class="rounded-lg bg-gray-50 flex gap-2 justify-center lg:justify-start items-center">
+                                        <p>En este momento, se encuentra </p>
+                                        <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+                                            <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
+                                        </x-badge>
+                                    </div>
                                      <!-- FIN BADGE ABIERTO / CERRADO -->
-                                 </div>
-                                 <ul class="list-disc p-8">
-                                 @foreach ($product->horarios as $horario)
-                                     <li class="mb-2">
-                                         <p class="text-gray-500 capitalize">
-                                             {{ $horario->dia }} {{ $horario->apertura }} - {{ $horario->cierre }}
-                                         </p>
-                                     </li>
-                                     @endforeach
-                                 </ul>
-                             </div>
+                                </div>
+                                <div class="flex gap-8">
+                                    <ul class="list-disc p-8">
+                                    @foreach ($product->horarios as $horario)
+                                        <li class="mb-2">
+                                            <p class="text-gray-500 capitalize">
+                                                {{ $horario->dia }} {{ $horario->apertura }} - {{ $horario->cierre }}
+                                            </p>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="w-1/2">
+                                        @if ($product->addresses->isNotEmpty())
+                                        <div class="product_map max-h-52">
+                                            @foreach ($product->addresses as $address)
+                                            {!! $address->google_maps !!}
+                                            @endforeach
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
      
                              @endif
                              <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 w-full lg:w-fit flex justify-center lg:justify-start items-center" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
