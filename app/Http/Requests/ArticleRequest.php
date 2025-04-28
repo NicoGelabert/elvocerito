@@ -30,6 +30,7 @@ class ArticleRequest extends FormRequest
             'images.*' => ['nullable', 'image'],
             'deleted_images.*' => ['nullable', 'int'],
             'image_positions.*' => ['nullable', 'int'],
+            'tags.*' => ['nullable', 'int', 'exists:tags,id'],
             'published' => ['required', 'boolean'],
         ];
     }

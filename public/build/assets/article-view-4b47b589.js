@@ -1,0 +1,1 @@
+import{S as r,G as a}from"./splide-extension-grid.esm-a5b613aa.js";var e=document.querySelector(".article_gallery_images");if(e){var o=new r(e,{arrows:!0,grid:{dimensions:[[2,3]],gap:{row:"1rem",col:"1rem"}},pagination:!1,perPage:1,perMove:1,type:"loop"});o.mount({Grid:a})}

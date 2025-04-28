@@ -30,6 +30,7 @@ class ArticleResource extends JsonResource
             'image_url' => $this->image,
             'images' => $this->images,
             'authors' => $this->authors->map(fn($a) => $a->id),
+            'tags' => $this->tags->map(fn($t) => $t->id),
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
         ];

@@ -43,4 +43,9 @@ class Article extends Model
     {
         return $this->belongsToMany(Author::class, 'article_authors');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'article_tags');
+    }
 }

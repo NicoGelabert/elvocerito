@@ -1,43 +1,22 @@
 import Splide from '@splidejs/splide';
+import { Grid } from '@splidejs/splide-extension-grid';
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM Loaded");
-    var splide = new Splide( '#main-carousel', {
-        pagination: false,
-      } );
-      
-      
-      var thumbnails = document.getElementsByClassName( 'thumbnail' );
-      var current;
-      
-      
-      for ( var i = 0; i < thumbnails.length; i++ ) {
-        initThumbnail( thumbnails[ i ], i );
-      }
-      
-      
-      function initThumbnail( thumbnail, index ) {
-        thumbnail.addEventListener( 'click', function () {
-          splide.go( index );
-        } );
-      }
-      
-      
-      splide.on( 'mounted move', function () {
-        var thumbnail = thumbnails[ splide.index ];
-      
-      
-        if ( thumbnail ) {
-          if ( current ) {
-            current.classList.remove( 'is-active' );
-          }
-      
-      
-          thumbnail.classList.add( 'is-active' );
-          current = thumbnail;
-        }
-      } );
-      
-      
-      splide.mount();
+var articleGalleryElement = document.querySelector('.article_gallery_images');
+if (articleGalleryElement) {
+    var articleGallery = new Splide(articleGalleryElement, {
+        arrows      : true,
+        grid       : {
+            dimensions: [ [ 2, 3 ] ],
+            gap: {
+              row: '1rem',
+              col: '1rem',
+            },
+        },
+        pagination  : false,
+        perPage     : 1,
+        perMove     : 1,
+        type        : 'loop',
 });
+
+articleGallery.mount({ Grid });
+};

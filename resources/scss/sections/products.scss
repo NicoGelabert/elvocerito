@@ -208,7 +208,6 @@
         }
         .product_gallery{
             @apply flex flex-col gap-4 ;
-            
             #product_lightbox{
                 img{
                     @apply max-h-full;

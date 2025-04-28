@@ -435,6 +435,13 @@ export function createArticle({ commit }, article) {
       form.append(`authors[]`, author);
     });
   }
+
+  // Agregar tags al FormData
+  if (product.tags && product.tags.length) {
+    product.tags.forEach((tag) => {
+      form.append(`tags[]`, tag);
+    });
+  }
   
   return axiosClient.post('/articles', form);
 }
@@ -451,12 +458,20 @@ export function updateArticle({commit}, article) {
     form.append('description', article.description || '');
     form.append('published', article.published ? 1 : 0);
 
-  // Agregar alérgenos al FormData
+  // Agregar authores al FormData
   if (article.authors && article.authors.length) {
     article.authors.forEach((author) => {
       form.append(`authors[]`, author);
     });
   }
+
+  // Agregar tags al FormData
+  if (product.tags && product.tags.length) {
+    product.tags.forEach((tag) => {
+      form.append(`tags[]`, tag);
+    });
+  }
+  
     // Agregar imágenes al FormData
     if (article.images && article.images.length) {
       article.images.forEach((im) => {

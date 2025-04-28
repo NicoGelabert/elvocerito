@@ -33,6 +33,11 @@ class Tag extends Model
         return $this->belongsToMany(Product::class);
     }
 
+    public function article()
+    {
+        return $this->belongsToMany(Article::class);
+    }
+
     public static function getActiveAsTree($resourceClassName = null)
     {
         $tags = Tag::where('active', true)->orderBy('parent_id')->get();

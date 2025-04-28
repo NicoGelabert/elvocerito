@@ -38,6 +38,11 @@
           </div>
           <hr class="my-4">
           <div class="flex flex-col gap-2">
+              <h3 class="text-lg font-bold">Tags</h3>
+              <treeselect v-model="article.tags" :multiple="true" :options="tagsOptions" :errors="errors['tags']"/>
+          </div>
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Published</h3>
             <CustomInput type="checkbox" class="mb-2" v-model="article.published" label="Published" :errors="errors['published']"/>
           </div>
@@ -97,12 +102,14 @@ const article = ref({
   image_positions: {},
   published: false,
   authors: [],
+  tags: [],
 })
 
 const errors = ref({});
 
 const loading = ref(false);
 const authorsOptions = ref([]);
+const tagsOptions = ref([]);
 
 const emit = defineEmits(['update:modelValue', 'close'])
 
@@ -118,6 +125,10 @@ onMounted(() => {
   axiosClient.get('/authors/tree')
   .then(result => {
     authorsOptions.value = result.data;
+  })
+  axiosClient.get('/tags/tree')
+  .then(result => {
+    tagsOptions.value = result.data;
   })
   .catch(error => {
     console.error("Error al obtener los autores:", error);

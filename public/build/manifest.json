@@ -1,9 +1,6 @@
 {
-  "_splide-extension-grid.esm-c152eb28.js": {
-    "file": "assets/splide-extension-grid.esm-c152eb28.js"
-  },
-  "_splide.esm-688b6f4b.js": {
-    "file": "assets/splide.esm-688b6f4b.js"
+  "_splide-extension-grid.esm-a5b613aa.js": {
+    "file": "assets/splide-extension-grid.esm-a5b613aa.js"
   },
   "resources/css/app.css": {
     "file": "assets/app-8183ca19.css",
@@ -18,14 +15,14 @@
       "resources/js/categories-index.js",
       "resources/js/article-view.js"
     ],
-    "file": "assets/app-778da579.js",
+    "file": "assets/app-35497d65.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/article-view.js": {
-    "file": "assets/article-view-cce288d2.js",
+    "file": "assets/article-view-4b47b589.js",
     "imports": [
-      "_splide.esm-688b6f4b.js"
+      "_splide-extension-grid.esm-a5b613aa.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/article-view.js"
@@ -41,25 +38,23 @@
     "src": "resources/js/categories-index.js"
   },
   "resources/js/home.js": {
-    "file": "assets/home-ec630c08.js",
+    "file": "assets/home-1a14a2a2.js",
     "imports": [
-      "_splide.esm-688b6f4b.js",
-      "_splide-extension-grid.esm-c152eb28.js"
+      "_splide-extension-grid.esm-a5b613aa.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/home.js"
   },
   "resources/js/product-view.js": {
-    "file": "assets/product-view-56f88c74.js",
+    "file": "assets/product-view-e03e3334.js",
     "imports": [
-      "_splide.esm-688b6f4b.js",
-      "_splide-extension-grid.esm-c152eb28.js"
+      "_splide-extension-grid.esm-a5b613aa.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-25a71964.css",
+    "file": "assets/styles-fc7d90a4.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },

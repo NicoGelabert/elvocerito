@@ -98,99 +98,10 @@
 // FIN VISTA DE  ARTICULOS
 // VISTA DE  ARTICULO INDIVIDUAL
 #article-view{
-    .article_menu{
-        @apply w-full shadow-md bg-white transition-transform duration-300 px-4 py-2 fixed z-10;
-        transition: top 0.3s, transform 0.3s;
-        .contact-icons{
-            @apply justify-end;
-            .contacto{
-                @apply flex-row;
-                span, p{
-                    @apply hidden;
-                }
-            }
-        }
-        h2{
-            @apply text-lg leading-none;
-        }
-        img{
-            @apply max-w-16 w-full aspect-square border-2 rounded-full shadow-xl;
-        }
-        .open, .closed{
-            @apply absolute top-0 right-0 w-4 h-4 px-0;
-            svg{
-                @apply w-4;
-            }
-            span, p{
-                @apply hidden;
-            }
-        }
-        .open{
-            @apply bg-lime-500;
-        }
-        .closed{
-            @apply bg-red-500;
-        }
-    }
-    .contact-icons{
-        @apply flex items-center
-        justify-evenly md:justify-start
-        gap-2 md:gap-10 lg:gap-4
-        lg:flex-wrap lg:gap-x-8;
-        .contacto{
-            @apply flex flex-col md:flex-row items-center md:gap-4;
-            svg{
-                @apply fill-secondary/70 border rounded-lg bg-primary/15 p-1 drop-shadow-sm
-               w-7 h-7;
-            }
-        }
-    }
     .article{
         @apply relative flex flex-col mb-16;
         h4{
             @apply text-secondary
-        }
-        .article_header{
-            @apply h-full gap-6 transition-all duration-300 max-h-[calc(100vh-4rem)] overflow-y-auto
-            flex flex-col
-            md:flex-row md:items-start
-            lg:sticky lg:flex-col;
-            .author{
-                @apply flex flex-col gap-2 bg-white py-2 px-4 rounded-xl;
-                img{
-                    @apply max-w-12 aspect-square object-cover rounded-full;
-                }
-                h5{
-                    @apply text-sm font-medium;
-                }
-                p{
-                    @apply text-xs text-gray_500;
-                }
-            }
-            h2{
-                @apply text-center md:text-left;
-            }
-            img{
-                @apply relative w-auto aspect-video object-cover md:max-w-64 rounded-xl;
-            }
-            .article_header_texts{
-                @apply relative flex flex-col items-center md:items-start lg:items-start gap-2 md:gap-4;
-            }
-            .webpage{
-                @apply flex
-                justify-center md:justify-start;
-                svg{
-                    @apply w-4 h-4 fill-gray_500;
-                }
-                p{
-                    @apply text-gray_500;
-                }
-            } 
-            .google_map{
-                iframe{
-                    @apply p-2 w-fit h-auto;
-                }
-            }
         }
         .custom-scrollbar::-webkit-scrollbar {
             @apply w-1;
@@ -207,135 +118,73 @@
         .custom-scrollbar::-webkit-scrollbar-button {
             @apply hidden;
         }
-        .article_gallery{
-            @apply flex flex-col gap-4 ;
-            
-            #article_lightbox{
+        .article_header{
+            @apply h-full gap-6 transition-all duration-300 max-h-[calc(100vh-4rem)] overflow-y-auto
+            flex flex-col
+            md:flex-row md:items-start
+            lg:sticky lg:flex-col;
+            .article_tags{
+                @apply flex flex-col gap-2 bg-white rounded-xl;
+            }
+            .author{
+                @apply flex flex-col gap-2 bg-white rounded-xl;
                 img{
-                    @apply max-h-full;
+                    @apply max-w-12 aspect-square object-cover rounded-full;
                 }
-            }
-
-        }
-        .lightbox {
-            @apply fixed top-0 left-0 w-full h-full bg-black/80 flex justify-center items-center;
-            z-index: 1000;
-        }
-        .horizontal_scrolling_container{
-            @apply flex items-center lg:flex-col lg:items-start gap-6 lg:border-r-gray_200 max-w-[1000px] p-4 w-auto min-w-max lg:min-w-fit;
-            h5{
-                @apply hidden lg:block;
-            }
-        }
-        .article_tags{
-            @apply flex flex-col gap-4;
-            .tags{
-                @apply flex flex-wrap gap-2;  
-            }
-        }
-        .article_opening_hours{
-            @apply flex flex-col gap-4;
-            .article_opening_hours_content{
-                @apply flex gap-8 items-start relative justify-between;
-                .open, .closed{
-                    @apply w-2 h-2 px-0;
-                    span, p{
-                        @apply hidden;
-                    }
-                }
-                .open{
-                    @apply bg-lime-500;
-                }
-                .closed{
-                    @apply bg-red-500;
+                h5{
+                    @apply text-sm font-medium;
                 }
                 p{
-                    @apply text-small
+                    @apply text-xs text-gray_500;
                 }
-                .horario_modal{
-                    @apply flex justify-center w-full
-                    items-center lg:items-start
-                    bg-black bg-opacity-50 lg:bg-none
-                    fixed lg:absolute
-                    inset-0
-                    z-10;
-                    .horario_modal_content{
-                        @apply bg-white rounded-xl shadow-lg px-4 py-2 -mt-4 flex flex-col gap-6
-                        w-80 lg:w-full;
-                        ul {
-                            @apply w-full flex flex-col;
-                            li{
-                                @apply w-full border-b border-b-gray_200 py-2;
-                            }
-                            li:last-child{
-                                @apply border-none;
-                            }
-                        }
-                        button{
-                            @apply
-                            absolute
-                            w-12 h-12 lg:w-0 lg:h-0
-                            -top-[5.5rem] -right-8 lg:top-0 lg:right-0
-                            bg-gray-800 lg:bg-transparent
-                            text-white lg:text-secondary p-2 rounded-full
-                            lg:text-sm;
+            }
+            .article_rrss{
+                @apply flex flex-col gap-4 bg-white rounded-xl;
+                .article-social-icons{
+                    @apply flex gap-4;
+                    a{
+                        @apply bg-gray-100 p-1 md:p-2 rounded-md;
+                        svg{
+                            @apply w-4 md:w-6 h-4 md:h-6 fill-secondary;
                         }
                     }
                 }
             }
-        }
-        .article_rating{
-            @apply flex flex-col gap-4;
-            p{
-                @apply text-small
-            }
-            .article_rating_content{
-                @apply flex gap-4 items-center;
-                svg{
-                    @apply w-4 h-auto;
-                }
+            h2{
+                @apply text-center md:text-left;
             }
         }
-        .article_location{
-            @apply flex flex-col gap-4;
-            p{
-                @apply text-gray_500
-            }
-            svg{
-                @apply fill-gray_500 w-4 h-4;
-            }            
-        }
-        .article_rrss{
-            @apply flex flex-col gap-4 bg-white py-2 px-4 rounded-xl;
-            .article-social-icons{
-                @apply flex gap-4;
-                a{
-                    @apply bg-gray-100 p-1 md:p-2 rounded-md;
-                    svg{
-                        @apply w-4 md:w-6 h-4 md:h-6 fill-secondary;
-                    }
-                }
-            }
+        .article_img{
+            @apply relative w-auto aspect-video object-cover md:max-w-64 rounded-xl;
         }
         .article_body{
-            @apply w-full lg:w-4/6 flex flex-col gap-6 bg-white p-4 rounded-xl;
+            @apply w-full lg:w-4/6 flex flex-col gap-6 bg-white rounded-xl;
             h5{
                 @apply text-sm font-bold;
             }
             span{
                 @apply text-xs lg:text-sm;
             }
-            .article_description{
-                // ul{
-                //     @apply list-disc px-6 lg:px-10 flex flex-col gap-4;
-                // }
-            }
-            .article_map{
-                @apply w-full flex flex-col gap-4;
-                iframe{
-                    @apply w-full rounded-xl;
+            .article_gallery{
+                @apply flex flex-col gap-4;
+                ul li{
+                    img{
+                        @apply aspect-square object-cover;
+                    }
                 }
+                #article_lightbox{
+                    img{
+                        @apply max-h-full;
+                    }
+                }
+    
             }
+            .article_description{
+            }
+        }
+        .lightbox {
+            @apply fixed top-0 left-0 w-full h-full bg-black/80 flex justify-center items-center;
+            z-index: 1000;
         }
     }
 }

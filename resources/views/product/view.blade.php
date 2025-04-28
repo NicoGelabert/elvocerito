@@ -244,7 +244,7 @@
                                     </div>
                                      <!-- FIN BADGE ABIERTO / CERRADO -->
                                 </div>
-                                <div class="flex gap-8">
+                                <div class="flex gap-8 items-center">
                                     <ul class="list-disc p-8">
                                     @foreach ($product->horarios as $horario)
                                         <li class="mb-2">
@@ -279,7 +279,7 @@
                              @if ($product->images->count() > 1)
                              <div class="product_gallery">
                                  <!-- <h5>Galería de imágenes</h5> -->
-                                 <x-image-gallery :images="$product->images"></x-image-gallery>
+                                <x-image-gallery :images="$product->images" class="product_gallery_images"></x-image-gallery>
                              </div>
                              @endif
                              <!-- @if ($product->addresses->isNotEmpty())

@@ -9,7 +9,7 @@ class ArticleController extends Controller
 {
     public function view(Article $article)
     {
-        $article->load(['authors', 'images']);
+        $article->load(['authors', 'images', 'tags']);
         // $articles = article::all();
         return view('news.view', [
             'article' => $article,

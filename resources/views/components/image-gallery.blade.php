@@ -17,7 +17,7 @@
     }
 }">
     <!-- Splide Slider -->
-    <div {{ $attributes->merge(['class' => 'product_gallery_images splide']) }}>
+    <div {{ $attributes->merge(['class' => 'splide']) }}>
         <div class="splide__track">
             <ul class="splide__list">
                 @foreach ($filteredImages as $index => $imageUrl)
