@@ -162,3 +162,8 @@ header, .mobile-menu{
         @apply text-gray_400 text-small hover:text-primary;
     }
 }
+
+// Contador de Categorías
+.remaining-count{
+    @apply text-text_small font-bold text-gray_600 py-1 px-2 bg-gray_50 rounded-full;
+}

@@ -43,9 +43,11 @@
                                         @endif
                                     </div>
                                     <!-- FIN CATEGORÍAS -->
-                                    <h5>
-                                        {{ $anunciante_destacado->title}}
-                                    </h5>
+                                     <div class="w-full">
+                                         <h5>
+                                             {{ $anunciante_destacado->title}}
+                                         </h5>
+                                     </div>
                                 </div>
                                 <p>{{ $anunciante_destacado->short_description }}</p>
                                 <x-badge-horarios :anunciante_destacado="$anunciante_destacado"/>
