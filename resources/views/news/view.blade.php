@@ -102,14 +102,11 @@
                             <!-- FIN COPETE O NEWSLEAD -->
                             <!-- INICIO ITEMS -->
                             @if($article->items->isNotEmpty())
-                            <div>
-                                <p class="font-semibold mb-4">En este artículo veremos:</p>
-                                <ul class="list-disc px-8">
-                                    @foreach($article->items as $item)
-                                    <li class="mb-2"><p>{{ $item->texto }}</p></li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                            <ul class="list-disc px-8">
+                                @foreach($article->items as $item)
+                                <li class="mb-2"><p>{{ $item->texto }}</p></li>
+                                @endforeach
+                            </ul>
                             @endif
                             <!-- FIN ITEMS -->
                             <!-- INICIO DESCRIPCIÓN -->

@@ -437,8 +437,8 @@ export function createArticle({ commit }, article) {
   }
 
   // Agregar tags al FormData
-  if (product.tags && product.tags.length) {
-    product.tags.forEach((tag) => {
+  if (article.tags && article.tags.length) {
+    article.tags.forEach((tag) => {
       form.append(`tags[]`, tag);
     });
   }
