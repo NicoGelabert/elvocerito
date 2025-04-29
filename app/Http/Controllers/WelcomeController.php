@@ -26,7 +26,9 @@ class WelcomeController extends Controller
         $ultimos_anunciantes = Product::where('published', 1)
             ->orderBy('created_at', 'desc')
             ->get();
-        $articles = Article::all();
+        $articles = Article::where('published', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
         // $features = Feature::all();
         // $services = Service::all();
         // $tags = Tag::all();
