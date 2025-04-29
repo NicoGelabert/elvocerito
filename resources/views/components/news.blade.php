@@ -17,7 +17,7 @@
             <div class="leading_article">
                 <img src="{{ $primerArticulo->image }}" alt="{{ $primerArticulo->title }}">
                 <h4>{{ $primerArticulo->title }}</h4>
-                <p>{{ $primerArticulo->news_lead }}</p>
+                <p class="news_lead">{{ $primerArticulo->news_lead }}</p>
                 <hr class="divider">
                 <div class="flex justify-between items-center">
                     @foreach ($primerArticulo->authors as $author)
@@ -26,14 +26,13 @@
                         <h6>{{ $author->name }}</h6>
                     </div>
                     @endforeach
-                    <p class="dot-divider">·</p>
                     <p class="news-date">{{ $primerArticulo->created_at->format('M d, Y') }}</p>
                 </div>
             </div>
         </a>
         <div class="news">
             <ul class="flex flex-col gap-4">
-                @foreach($articles->skip(1) as $article)
+                @foreach($articles as $article)
                 <a href="{{ route('news.view', $article) }}">
                     <li class="news-card">
                         <div class="news-card-img">
@@ -50,7 +49,6 @@
                                     </div>
                                     @endforeach
                                 </div>
-                                <p class="dot-divider">·</p>
                                 <p class="news-date">{{ $article->created_at->format('M d, Y') }}</p>
                             </div>
                             <!-- <p class="description">{{ $article->news_lead }}</p> -->
