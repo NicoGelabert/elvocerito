@@ -123,9 +123,6 @@
             flex flex-col
             md:flex-row md:items-start
             lg:sticky lg:flex-col;
-            .article_tags{
-                @apply flex flex-col gap-2 bg-white rounded-xl;
-            }
             .author{
                 @apply flex flex-col gap-2 bg-white rounded-xl;
                 img{
@@ -145,7 +142,7 @@
                     a{
                         @apply bg-gray-100 p-1 md:p-2 rounded-md;
                         svg{
-                            @apply w-4 md:w-6 h-4 md:h-6 fill-secondary;
+                            @apply w-4 h-4 fill-secondary;
                         }
                     }
                 }
@@ -164,6 +161,9 @@
             }
             span{
                 @apply text-xs lg:text-sm;
+            }
+            .article_tags{
+                @apply flex flex-col gap-2 bg-white rounded-xl;
             }
             .article_gallery{
                 @apply flex flex-col gap-4;

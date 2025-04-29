@@ -18,6 +18,7 @@
         <meta name="description" content="Descubre la guía completa de servicios en la zona sur del Gran Buenos Aires. Encuentra profesionales, educación, construcción y más en un solo lugar.">  
         <meta name="keywords" content="servicios zona sur Buenos Aires, construcción, educación, profesionales, guía de servicios, comercios, oficios, empresas locales">  
 
+        @yield('meta')
         
         <title inertia>{{ config('app.name', 'El Vocerito') }}</title>
 

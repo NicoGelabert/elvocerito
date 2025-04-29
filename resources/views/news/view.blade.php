@@ -1,3 +1,11 @@
+@section('meta')
+    <meta property="og:title" content="{{ $article->title }}">
+    <meta property="og:description" content="{{ $article->news_lead }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if ($article->images->isNotEmpty())
+        <meta property="og:image" content="{{ asset($article->images->first()->url) }}">
+    @endif
+@endsection
 <x-app-layout>
     <div id="article-view">
         <!-- INICIO HOJA ARTICULO -->
@@ -28,19 +36,6 @@
                         <img src="{{ $primeraImagen->url }}" alt="" class="hidden md:block article_img">
                         <!-- INICIO CONTENEDOR ARTICULO HEADER SIN IMAGEN -->
                         <div class="flex flex-col lg:pr-4 lg:pl-2 gap-4">
-                            <!-- INICIO TAGS -->
-                            @if($article->tags->isNotEmpty())
-                            <div class="article_tags">
-                                <h4>Tags</h4>
-                                <div class="">
-                                    @foreach($article->tags as $tag)
-                                    <x-badge badge_title="{{ $tag->name }}"/>
-                                    @endforeach
-                                </div>
-                            </div>
-                            @endif
-                            <!-- FIN TAGS -->
-                            <hr class="hidden md:block divider">
                             <!-- INICIO AUTOR -->
                             @if ($article->authors->isNotEmpty())
                             <div class="author">
@@ -50,7 +45,7 @@
                                     <img src="{{ $author->image }}" alt="{{ $author->name }}">
                                     <div class="flex flex-col justify-center">
                                         <h5>{{ $author->name }}</h5>
-                                        <p>Notas publicadas: 5</p>
+                                        <p>Notas publicadas: {{ $author->articles->count() }}</p>
                                     </div>
                                 </div>
                                 @endforeach
@@ -61,18 +56,22 @@
                             <!-- INICIO REDES SOCIALES -->
                             <div class="article_rrss">
                                 <h4>Compartí</h4>
+                                @php
+                                    $shareUrl = urlencode(url()->current());
+                                    $shareText = urlencode($article->title . ' - ' . $article->news_lead);
+                                @endphp
                                 <div class="article-social-icons">
-                                    <a href="#">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}" target="_blank">
                                         <x-icons.facebook />
                                     </a>
-                                    <a href="#">
-                                        <x-icons.instagram />
+                                    <a href="https://api.whatsapp.com/send?text={{ $shareText }}%20{{ $shareUrl }}" target="_blank">
+                                        <x-icons.whatsapp />
                                     </a>
-                                    <a href="#">
-                                        <x-icons.youtube />
+                                    <a href="https://twitter.com/intent/tweet?text={{ $shareText }}&url={{ $shareUrl }}" target="_blank">
+                                        <x-icons.x />
                                     </a>
-                                    <a href="#">
-                                        <x-icons.tiktok />
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl }}" target="_blank">
+                                        <x-icons.linkedin />
                                     </a>
                                 </div>
                             </div>
@@ -102,17 +101,34 @@
                             </div>
                             <!-- FIN COPETE O NEWSLEAD -->
                             <!-- INICIO ITEMS -->
-                            <ul class="list-disc px-8">
-                                <li class="mb-2"><p>Lista item</p></li>
-                                <li class="mb-2"><p>Lista item</p></li>
-                                <li class="mb-2"><p>Lista item</p></li>
-                            </ul>
+                            @if($article->items->isNotEmpty())
+                            <div>
+                                <p class="font-semibold mb-4">En este artículo veremos:</p>
+                                <ul class="list-disc px-8">
+                                    @foreach($article->items as $item)
+                                    <li class="mb-2"><p>{{ $item->texto }}</p></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <!-- FIN ITEMS -->
                             <!-- INICIO DESCRIPCIÓN -->
                             <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit text-gray-500">
                                 <p>{!! $article->description !!}</p>
                             </div>
                             <!-- FIN DESCRIPCIÓN -->
+                            <!-- INICIO TAGS -->
+                            @if($article->tags->isNotEmpty())
+                            <div class="article_tags">
+                                <h4>Tags</h4>
+                                <div class="">
+                                    @foreach($article->tags as $tag)
+                                    <x-badge badge_title="{{ $tag->name }}"/>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                            <!-- FIN TAGS -->
                             <!-- INICIO GALERÍA DE IMÁGENES -->
                             @if ($article->images->count() > 1)
                             <div class="article_gallery">
@@ -130,27 +146,3 @@
         <!-- FIN HOJA ARTICULO -->
     </div>
 </x-app-layout>
-<style>
-    .thumbnails {
-  display: flex;
-  margin: 1rem auto 0;
-  padding: 0;
-  justify-content: center;
-}
-
-
-.thumbnail {
-  width: 70px;
-  height: 70px;
-  overflow: hidden;
-  list-style: none;
-  margin: 0 0.2rem;
-  cursor: pointer;
-}
-
-
-.thumbnail img {
-  width: 100%;
-  height: auto;
-}
-</style>
