@@ -33,7 +33,7 @@
         </a>
         <div class="news">
             <ul class="flex flex-col gap-4">
-                @foreach($articles as $article)
+                @foreach($articles->skip(1) as $article)
                 <a href="{{ route('news.view', $article) }}">
                     <li class="news-card">
                         <div class="news-card-img">
