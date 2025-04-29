@@ -201,6 +201,7 @@ export function createProduct({ commit }, product) {
   form.append('description', product.description || '');
   form.append('leading_home', product.leading_home ? 1 : 0);
   form.append('leading_category', product.leading_category ? 1 : 0);
+  form.append('client_number', product.client_number || '');
   form.append('urgencies', product.urgencies ? 1 : 0);
   form.append('published', product.published ? 1 : 0);
 
@@ -290,6 +291,7 @@ export function updateProduct({commit}, product) {
     form.append('title', product.title);
     form.append('short_description', product.short_description || '');
     form.append('description', product.description || '');
+    form.append('client_number', product.client_number || '');
     form.append('leading_home', product.leading_home ? 1 : 0);
     form.append('leading_category', product.leading_category ? 1 : 0);
     form.append('urgencies', product.urgencies ? 1 : 0);

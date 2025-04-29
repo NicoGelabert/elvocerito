@@ -11,6 +11,11 @@
     <form v-if="!loading" @submit.prevent="onSubmit">
       <div class="grid grid-cols-1 md:grid-cols-3">
         <div class="col-span-2 px-4 pt-5 pb-4">
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Número de Cliente</h3>
+            <CustomInput class="mb-2" v-model="product.client_number" label="Número de Cliente" :errors="errors['client_number']"/>
+          </div>
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Nombre</h3>
             <CustomInput class="mb-2" v-model="product.title" label="Product Title" :errors="errors['title']"/>
@@ -407,6 +412,7 @@ const product = ref({
   description: '',
   leading_home: false,
   leading_category: false,
+  client_number : '',
   urgencies: false,
   published: false,
   categories: [],

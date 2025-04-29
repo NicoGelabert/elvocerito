@@ -244,7 +244,7 @@
                                     </div>
                                      <!-- FIN BADGE ABIERTO / CERRADO -->
                                 </div>
-                                <div class="flex gap-8 items-center">
+                                <div class="flex flex-col md:flex-row gap-8 items-center">
                                     <ul class="list-disc p-8">
                                     @foreach ($product->horarios as $horario)
                                         <li class="mb-2">
@@ -254,7 +254,7 @@
                                         </li>
                                         @endforeach
                                     </ul>
-                                    <div class="w-1/2">
+                                    <div class="md:w-1/2">
                                         @if ($product->addresses->isNotEmpty())
                                         <div class="product_map max-h-52">
                                             @foreach ($product->addresses as $address)

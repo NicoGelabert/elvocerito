@@ -118,7 +118,7 @@
                             @if($article->tags->isNotEmpty())
                             <div class="article_tags">
                                 <h4>Tags</h4>
-                                <div class="">
+                                <div class="flex flex-wrap gap-4">
                                     @foreach($article->tags as $tag)
                                     <x-badge badge_title="{{ $tag->name }}"/>
                                     @endforeach

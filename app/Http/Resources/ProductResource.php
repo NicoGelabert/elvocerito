@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'leading_home' => (bool)$this->leading_home,
             'leading_category' => (bool)$this->leading_category,
             'urgencies' => (bool)$this->urgencies,
+            'client_number' => $this->client_number,
             'published' => (bool)$this->published,
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),

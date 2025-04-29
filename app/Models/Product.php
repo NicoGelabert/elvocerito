@@ -21,6 +21,7 @@ class Product extends Model
         'leading_home',
         'leading_category',
         'urgencies',
+        'client_number',
         'published',
         'created_by',
         'updated_by'

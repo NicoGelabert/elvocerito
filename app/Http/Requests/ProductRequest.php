@@ -30,6 +30,7 @@ class ProductRequest extends FormRequest
             'leading_home' => ['required', 'boolean'],
             'leading_category' => ['required', 'boolean'],
             'urgencies' => ['required', 'boolean'],
+            'client_number' => ['nullable', 'string'],
             'published' => ['required', 'boolean'],
             'categories.*' => ['nullable', 'int', 'exists:categories,id'],
             'images.*' => ['nullable', 'image'],
