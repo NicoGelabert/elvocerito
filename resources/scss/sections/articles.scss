@@ -180,6 +180,10 @@
     
             }
             .article_description{
+                @apply p-4 rounded-lg bg-gray-50 w-full lg:w-fit text-gray-500;
+                ul{
+                    @apply list-disc pl-8 text-sm;
+                }
             }
         }
         .lightbox {

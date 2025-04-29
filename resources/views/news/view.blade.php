@@ -110,7 +110,7 @@
                             @endif
                             <!-- FIN ITEMS -->
                             <!-- INICIO DESCRIPCIÓN -->
-                            <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit text-gray-500">
+                            <div class="article_description">
                                 <p>{!! $article->description !!}</p>
                             </div>
                             <!-- FIN DESCRIPCIÓN -->
