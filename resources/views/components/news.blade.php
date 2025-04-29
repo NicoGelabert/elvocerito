@@ -11,23 +11,23 @@
     </div>
     <div class="flex flex-col md:flex-row justify-between gap-8">
         @php
-        $ultimoArticulo = $articles->last();
+        $primerArticulo = $articles->first();
         @endphp
-        <a href="{{ route('news.view', $ultimoArticulo) }}" class="w-full md:w-1/2">
+        <a href="{{ route('news.view', $primerArticulo) }}" class="w-full md:w-1/2">
             <div class="leading_article">
-                <img src="{{ $ultimoArticulo->image }}" alt="{{ $ultimoArticulo->title }}">
-                <h4>{{ $ultimoArticulo->title }}</h4>
-                <p>{{ $ultimoArticulo->news_lead }}</p>
+                <img src="{{ $primerArticulo->image }}" alt="{{ $primerArticulo->title }}">
+                <h4>{{ $primerArticulo->title }}</h4>
+                <p>{{ $primerArticulo->news_lead }}</p>
                 <hr class="divider">
                 <div class="flex justify-between items-center">
-                    @foreach ($ultimoArticulo->authors as $author)
+                    @foreach ($primerArticulo->authors as $author)
                     <div class="author">
                         <img src="{{ $author->image }}" alt="$author->name">
                         <h6>{{ $author->name }}</h6>
                     </div>
                     @endforeach
                     <p class="dot-divider">·</p>
-                    <p class="news-date">{{ $ultimoArticulo->created_at->format('M d, Y') }}</p>
+                    <p class="news-date">{{ $primerArticulo->created_at->format('M d, Y') }}</p>
                 </div>
             </div>
         </a>
