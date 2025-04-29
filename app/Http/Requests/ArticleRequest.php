@@ -32,6 +32,8 @@ class ArticleRequest extends FormRequest
             'image_positions.*' => ['nullable', 'int'],
             'tags.*' => ['nullable', 'int', 'exists:tags,id'],
             'published' => ['required', 'boolean'],
+            'items' => ['nullable', 'array'],
+            'items.*.texto' => ['nullable', 'string', 'max:500'],
         ];
     }
 }

@@ -31,6 +31,36 @@
             <h3 class="text-lg font-bold">Description</h3>
             <CustomInput type="richtext" class="mb-2" v-model="article.description" label="Description" :errors="errors['description']"/>
           </div>
+          <!-- Inicio Listado de Items -->
+          <hr class="my-4">
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">Listado de Items</h3>
+            <div v-for="(item, index) in article.items" :key="index" class="flex gap-1">
+              <CustomInput 
+                v-model="item.texto" 
+                type="text" 
+                class="mb-2 w-7/12" 
+                label="Listado de Items" 
+                :errors="errors[`items.${index}.item`]" 
+              />
+              <div class="w-1/12 flex items-center justify-center">
+                <button class="group border-0 rounded-full hover:bg-black" v-if="article.items.length > 1" @click.prevent="removeItem(index)">
+                  <TrashIcon
+                    class="h-5 w-5 text-black group-hover:text-white"
+                    aria-hidden="true"
+                  />
+                </button>
+              </div>
+            </div>
+            <button class="group flex items-end gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white" type="button" @click="addItem">
+              <h4 class="text-sm">Crear nuevo ítem</h4>
+              <PlusCircleIcon
+                class="h-5 w-5 text-black group-hover:text-white"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+          <!-- Fin Listado de Items -->
           <hr class="my-4">
           <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Authors</h3>
@@ -103,6 +133,7 @@ const article = ref({
   published: false,
   authors: [],
   tags: [],
+  items: [{ texto: '' }],
 })
 
 const errors = ref({});
@@ -120,6 +151,9 @@ onMounted(() => {
       .then((response) => {
         loading.value = false;
         article.value = response.data;
+        if (!article.value.items.length) {
+          article.value.items.push({ item: '' });
+        }
       })
   }
   axiosClient.get('/authors/tree')
@@ -135,9 +169,25 @@ onMounted(() => {
   });
 })
 
+// Listado de Items
+function addItem() {
+  article.value.items.push({ texto: '' });
+}
+
+function removeItem(index) {
+  article.value.items.splice(index, 1);
+  if (article.value.items.length === 0) {
+    addItem(); 
+  }
+}
+// End Listado de Items
+
 function onSubmit($event, close = false) {
   loading.value = true
   errors.value = {};
+  article.value.items = article.value.items.filter(
+    (item) => item.texto !== ''
+  );
   if (article.value.id) {
     store.dispatch('updateArticle', article.value)
       .then(response => {

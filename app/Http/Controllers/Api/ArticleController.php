@@ -10,6 +10,7 @@ use App\Models\Api\Article;
 use App\Models\ArticleImage;
 use App\Models\ArticleAuthor;
 use App\Models\ArticleTag;
+use App\Models\ArticleItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -56,13 +57,16 @@ class ArticleController extends Controller
         $imagePositions = $data['image_positions'] ?? [];
         $authors = $data['authors'] ?? [];
         $tags = $data['tags'] ?? [];
+        $items = $data['items'] ?? [];
 
         $article = Article::create($data);
+
 
 
         $this->saveImages($images, $imagePositions, $article);
         $this->saveAuthors($authors, $article);
         $this->saveTags($tags, $article);
+        $this->saveItems($items, $article);
 
         return new ArticleResource($article);
     }
@@ -96,6 +100,7 @@ class ArticleController extends Controller
         $deletedImages = $data['deleted_images'] ?? [];
         $imagePositions = $data['image_positions'] ?? [];
         $tags = $data['tags'] ?? [];
+        $items = $data['items'] ?? [];
 
         $this->saveImages($images, $imagePositions, $article);
         if (count($deletedImages) > 0) {
@@ -103,6 +108,7 @@ class ArticleController extends Controller
         }
         $this->saveAuthors($authors, $article);
         $this->saveTags($tags, $article);
+        $this->saveItems($items, $article);
 
         $article->update($data);
 
@@ -136,6 +142,15 @@ class ArticleController extends Controller
         $data = array_map(fn($id) => (['tag_id' => $id, 'article_id' => $article->id]), $tagIds);
 
         ArticleTag::insert($data);
+    }
+
+    private function saveItems(array $items, Article $article)
+    {
+        $article->items()->delete(); 
+
+        foreach ($items as $item) {
+            $article->items()->create($item);
+        }
     }
 
     /**

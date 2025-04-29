@@ -442,6 +442,13 @@ export function createArticle({ commit }, article) {
       form.append(`tags[]`, tag);
     });
   }
+
+  // Agregar Items al FormData
+  if (article.items && article.items.length) {
+    article.items.forEach((item, index) => {
+      form.append(`items[${index}][texto]`, item.texto);
+    });
+  }
   
   return axiosClient.post('/articles', form);
 }
@@ -472,22 +479,30 @@ export function updateArticle({commit}, article) {
     });
   }
   
-    // Agregar imágenes al FormData
-    if (article.images && article.images.length) {
-      article.images.forEach((im) => {
-        form.append(`images[]`, im);
-      });
-    }
-    // Agregar imágenes eliminadas al FormData
-    if (article.deleted_images && article.deleted_images.length) {
-      article.deleted_images.forEach((id) => form.append('deleted_images[]', id));
-    }
-    // Agregar posiciones de imágenes al FormData
-    for (let id in article.image_positions) {
-      form.append(`image_positions[${id}]`, article.image_positions[id]);
-    }
-    form.append('_method', 'PUT');
-    article = form;
+  // Agregar imágenes al FormData
+  if (article.images && article.images.length) {
+    article.images.forEach((im) => {
+      form.append(`images[]`, im);
+    });
+  }
+
+  // Agregar Items al FormData
+  if (article.items && article.items.length) {
+    article.items.forEach((item, index) => {
+      form.append(`items[${index}][texto]`, item.texto);
+    });
+  }
+  
+  // Agregar imágenes eliminadas al FormData
+  if (article.deleted_images && article.deleted_images.length) {
+    article.deleted_images.forEach((id) => form.append('deleted_images[]', id));
+  }
+  // Agregar posiciones de imágenes al FormData
+  for (let id in article.image_positions) {
+    form.append(`image_positions[${id}]`, article.image_positions[id]);
+  }
+  form.append('_method', 'PUT');
+  article = form;
   } else {
     article._method = 'PUT'
   }
