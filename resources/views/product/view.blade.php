@@ -1,5 +1,5 @@
 @section('meta')
-    <meta name="title" content="{{ $product->title }}">
+    <title>{{ $product->title }}, {{ $subcategory->name }}</title>
     <meta name="description" content="{{ $product->short_description }}">
     <meta name="keywords" content="{{ $product->tags->pluck('name')->implode(', ') }}">
     <link rel="canonical" href="{{ url()->current() }}">

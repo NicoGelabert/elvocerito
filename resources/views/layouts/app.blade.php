@@ -15,12 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <meta name="description" content="Descubre la guía completa de servicios en la zona sur del Gran Buenos Aires. Encuentra profesionales, educación, construcción y más en un solo lugar.">  
-        <meta name="keywords" content="servicios zona sur Buenos Aires, construcción, educación, profesionales, guía de servicios, comercios, oficios, empresas locales">  
-
-        @yield('meta')
-        
-        <title inertia>{{ config('app.name', 'El Vocerito') }}</title>
+        @yield('meta', view('partials.meta'))
 
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/common/iso_vocerito.svg') }}">
 

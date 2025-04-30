@@ -1,5 +1,5 @@
 @section('meta')
-    <meta name="title" content="{{ $article->title }}">
+    <title>{{ $article->title }}</title>
     <meta name="description" content="{{ $article->news_lead }}">
     <meta name="keywords" content="{{ $article->tags->pluck('name')->implode(', ') }}">
     <link rel="canonical" href="{{ url()->current() }}">
