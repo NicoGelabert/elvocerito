@@ -159,7 +159,7 @@ header, .mobile-menu{
 .breadcrumbs{
     @apply py-2 lg:py-4 bg-gray_100 mb-4 mt-12 md:mt-14 block w-full overflow-x-auto scroll-smooth;
     >div{
-        @apply w-max;
+        @apply w-max md:w-auto;
     }
     p{
         @apply text-gray_400 text-small hover:text-primary;

@@ -1,3 +1,9 @@
+@section('meta')
+    <meta name="title" content="{{ $product->title }}">
+    <meta name="description" content="{{ $product->short_description }}">
+    <meta name="keywords" content="{{ $product->tags->pluck('name')->implode(', ') }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+@endsection
 @php
     use Carbon\Carbon;
     $hoy = strtolower(Carbon::now()->locale('es')->isoFormat('dddd')); // Día de hoy en minúsculas

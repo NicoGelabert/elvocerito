@@ -1,4 +1,10 @@
 @section('meta')
+    <meta name="title" content="{{ $article->title }}">
+    <meta name="description" content="{{ $article->news_lead }}">
+    <meta name="keywords" content="{{ $article->tags->pluck('name')->implode(', ') }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <meta property="og:type" content="article">
     <meta property="og:title" content="{{ $article->title }}">
     <meta property="og:description" content="{{ $article->news_lead }}">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -6,6 +12,7 @@
         <meta property="og:image" content="{{ asset($article->images->first()->url) }}">
     @endif
 @endsection
+
 <x-app-layout>
     <div id="article-view">
         <!-- INICIO HOJA ARTICULO -->
