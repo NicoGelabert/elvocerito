@@ -5,7 +5,7 @@
         $popoverId = 'popover-map-' . $index;
     @endphp
     <div class="flex gap-2">
-        <a href="{{ $address->link }}">
+        <a href="{{ $address->link }}" target="_blank">
             <p>
                 {{ implode(' ', array_filter([
                     $address->via,

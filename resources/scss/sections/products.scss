@@ -331,7 +331,7 @@
             .product_map{
                 @apply w-full flex flex-col gap-4;
                 iframe{
-                    @apply w-full rounded-xl;
+                    @apply w-full rounded-xl max-h-52;
                 }
             }
         }

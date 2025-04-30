@@ -256,7 +256,7 @@
                                     </ul>
                                     <div class="md:w-1/2">
                                         @if ($product->addresses->isNotEmpty())
-                                        <div class="product_map max-h-52">
+                                        <div class="product_map">
                                             @foreach ($product->addresses as $address)
                                             {!! $address->google_maps !!}
                                             @endforeach
