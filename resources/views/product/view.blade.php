@@ -244,8 +244,8 @@
                                     </div>
                                      <!-- FIN BADGE ABIERTO / CERRADO -->
                                 </div>
-                                <div class="flex flex-col md:flex-row gap-8 items-center">
-                                    <ul class="list-disc p-8">
+                                <div class="flex flex-col md:flex-row gap-8 p-8">
+                                    <ul class="list-disc">
                                     @foreach ($product->horarios as $horario)
                                         <li class="mb-2">
                                             <p class="text-gray-500 capitalize">
