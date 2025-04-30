@@ -26,7 +26,7 @@ class WelcomeController extends Controller
         $ultimos_anunciantes = Product::where('published', 1)
             ->orderBy('created_at', 'desc')
             ->get();
-        $articles = Article::with('author', 'categories')
+        $articles = Article::with('authors', 'categories')
         ->where('published', 1)
         ->orderBy('created_at', 'desc')
         ->limit(5)
