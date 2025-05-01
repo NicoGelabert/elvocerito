@@ -9,7 +9,7 @@
             </x-button>
         </div>
     </div>
-    <div class="flex flex-col md:flex-row justify-between gap-8">
+    <div class="flex flex-col md:flex-row justify-between gap-4">
         @php
         $primerArticulo = $articles->first();
         @endphp
@@ -31,7 +31,7 @@
             </div>
         </a>
         <div class="news">
-            <ul class="flex flex-col gap-4">
+            <ul class="flex flex-col gap-4 justify-between h-full">
                 @foreach($articles->skip(1) as $article)
                 <a href="{{ route('news.view', $article) }}">
                     <li class="news-card">
