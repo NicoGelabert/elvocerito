@@ -4,7 +4,7 @@
     <x-icons.phone-call />
 @endif
 
-@if ($name === 'movil')
+@if ($name === 'móvil')
     <x-icons.smartphone />
 @endif
 

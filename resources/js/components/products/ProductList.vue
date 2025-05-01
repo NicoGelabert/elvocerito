@@ -278,7 +278,7 @@ export default {
           return 'FijoIcon'
         case 'email':
           return 'MailIcon'
-        case 'movil':
+        case 'móvil':
           return 'MovilIcon'
         case 'whatsapp':
           return 'WhatsappIcon'

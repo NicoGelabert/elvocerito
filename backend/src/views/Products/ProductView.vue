@@ -231,7 +231,7 @@
                 label="Contact" 
                 :select-options="[
                   { key: 'fijo', text: 'Teléfono Fijo' },
-                  { key: 'movil', text: 'Teléfono Móvil' },
+                  { key: 'móvil', text: 'Teléfono Móvil' },
                   { key: 'whatsapp', text: 'Whatsapp' },
                   { key: 'email', text: 'E-Mail' }
                 ]" 

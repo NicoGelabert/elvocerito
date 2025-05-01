@@ -4,7 +4,7 @@
         @php
             $href = '#'; // Valor por defecto si no coincide con ninguna condición
             
-            if ($iconData['type'] === 'fijo' || $iconData['type'] === 'movil') {
+            if ($iconData['type'] === 'fijo' || $iconData['type'] === 'móvil') {
                 $href = "tel:{$iconData['info']}";
             } elseif ($iconData['type'] === 'whatsapp') {
                 $href = "https://wa.me/" . preg_replace('/\D/', '', $iconData['info']); // Solo números

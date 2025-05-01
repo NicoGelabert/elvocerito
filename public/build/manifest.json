@@ -15,7 +15,7 @@
       "resources/js/categories-index.js",
       "resources/js/article-view.js"
     ],
-    "file": "assets/app-35497d65.js",
+    "file": "assets/app-719030e7.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -28,7 +28,7 @@
     "src": "resources/js/article-view.js"
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-11d13b77.js",
+    "file": "assets/catalog-089a4e45.js",
     "isDynamicEntry": true,
     "src": "resources/js/catalog.js"
   },
@@ -54,7 +54,7 @@
     "src": "resources/js/product-view.js"
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-3606edaa.css",
+    "file": "assets/styles-d4419bf3.css",
     "isEntry": true,
     "src": "resources/scss/styles.scss"
   },
