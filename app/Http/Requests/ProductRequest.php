@@ -52,7 +52,7 @@ class ProductRequest extends FormRequest
             'addresses.*.zip_code' => ['nullable', 'string', 'max:20'],
             'addresses.*.province' => ['nullable', 'string', 'max:50'],
             'addresses.*.link' => ['nullable', 'string', 'max:500'],
-            'addresses.*.google_maps' => ['nullable', 'string', 'max:1000'],
+            'addresses.*.google_maps' => ['nullable', 'string', 'max:2000'],
             'tags.*' => ['nullable', 'int', 'exists:tags,id'],
             'horarios' => ['nullable', 'array'],
             'horarios.*.dia' => ['required', 'in:lunes,martes,miércoles,jueves,viernes,sábado,domingo'],
