@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::apiResource('homeherobanners', HomeHeroBannerController::class);
     Route::apiResource('categories', CategoryController::class)->except('show');
     Route::get('/categories/tree', [CategoryController::class, 'getAsTree']);
+    Route::get('/export-categories', [CategoryController::class, 'exportCategories']);
     Route::apiResource('products', ProductController::class);
     Route::get('/export-products', [ProductController::class, 'exportProducts']);
     Route::apiResource('articles', ArticleController::class);

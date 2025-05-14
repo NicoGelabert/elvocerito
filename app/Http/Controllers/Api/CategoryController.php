@@ -13,6 +13,9 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class CategoryController extends Controller
 {
@@ -122,4 +125,10 @@ class CategoryController extends Controller
 
         return $path . '/' . $image->getClientOriginalName();
     }
+
+    public function exportCategories()
+    {
+        return Excel::download(new CategoriesExport, 'categorias.xlsx');
+    }
+
 }

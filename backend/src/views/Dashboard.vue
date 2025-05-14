@@ -33,16 +33,17 @@
     </router-link>
     <!--/    Active Products -->
     <!--    Active Categories -->
-    <router-link :to="{name: 'app.categories'}">
-      <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-           style="animation-delay: 0.1s">
+    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow"
+    style="animation-delay: 0.1s">
+      <router-link :to="{name: 'app.categories'}" class="flex flex-col items-center justify-center mb-2">
         <label class="text-lg font-semibold block mb-2">Categorías activas</label>
         <template v-if="!loading.activeCategoriesCount">
           <span class="text-3xl font-semibold">{{ activeCategoriesCount }}</span>
         </template>
         <Spinner v-else text="" class=""/>
-      </div>
-    </router-link>
+      </router-link>
+      <DownloadCategoryList />
+    </div>
     <!--/    Active Categories -->
   </div>
 
@@ -88,6 +89,7 @@ import axiosClient from "../axios.js";
 import {computed, onMounted, ref} from "vue";
 import Spinner from "../components/core/Spinner.vue";
 import DownloadProductList from "./Products/DownloadProductList.vue";
+import DownloadCategoryList from "./Categories/DownloadCategoryList.vue";
 import CustomInput from "../components/core/CustomInput.vue";
 import {useStore} from "vuex";
 
