@@ -8,16 +8,17 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
     <!--    Total Products -->
-    <router-link :to="{name: 'app.products'}">
-      <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-           style="animation-delay: 0.1s">
-        <label class="text-lg font-semibold block mb-2">Anunciantes totales</label>
+    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow "
+    style="animation-delay: 0.1s">
+      <router-link :to="{name: 'app.products'}" class="flex flex-col items-center justify-center mb-2">
+        <label class="text-lg font-semibold block mb-2 text-center">Anunciantes totales</label>
         <template v-if="!loading.totalProductsCount">
           <span class="text-3xl font-semibold">{{ totalProductsCount }}</span>
         </template>
         <Spinner v-else text="" class=""/>
-      </div>
-    </router-link>
+      </router-link>
+      <DownloadProductList/>
+    </div>
     <!--/    Total Products -->
     <!--    Active Products -->
     <router-link :to="{name: 'app.products'}">
@@ -86,6 +87,7 @@ import DoughnutChart from '../components/core/Charts/Doughnut.vue'
 import axiosClient from "../axios.js";
 import {computed, onMounted, ref} from "vue";
 import Spinner from "../components/core/Spinner.vue";
+import DownloadProductList from "./Products/DownloadProductList.vue";
 import CustomInput from "../components/core/CustomInput.vue";
 import {useStore} from "vuex";
 

@@ -1,8 +1,11 @@
 <template>
-  <button @click="downloadExcel">Descargar Excel</button>
+  <div class="flex flex-col items-center justify-center">
+    <button @click="downloadExcel" class="flex items-center gap-2 p-2 text-xs bg-gray-200 border border-gray-300 rounded-md text-gray-700">Descargar Excel <ArrowDownTrayIcon class="h-3 w-3" /></button>
+  </div>
 </template>
 
 <script setup>
+import {ArrowDownTrayIcon} from '@heroicons/vue/24/outline'
 import axiosClient from '../../axios' ;  // <-- Correcto: tu cliente configurado
 
 const downloadExcel = async () => {
