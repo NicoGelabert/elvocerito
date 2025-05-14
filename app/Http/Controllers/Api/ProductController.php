@@ -23,6 +23,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -317,4 +319,8 @@ class ProductController extends Controller
         return ProductListResource::collection($products);
     }
 
+    public function exportProducts()
+    {    
+        return Excel::download(new ProductsExport, 'productos.xlsx');
+    }
 }

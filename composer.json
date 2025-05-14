@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^4.15",
         "laravel/tinker": "^2.8",
+        "maatwebsite/excel": "^3.1",
         "mailersend/laravel-driver": "^2.2",
         "spatie/laravel-cookie-consent": "^3.2",
         "spatie/laravel-sluggable": "^3.5",
