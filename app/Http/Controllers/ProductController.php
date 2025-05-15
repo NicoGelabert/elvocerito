@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ProductController extends Controller
 {
@@ -47,6 +48,21 @@ class ProductController extends Controller
 
         // Obtener los productos relacionados (si es necesario)
         $tags = $product->tags()->get();
+
+        // --- Lógica para la cookie ---
+        $viewedProducts = json_decode(Cookie::get('recently_viewed'), true) ?? [];
+
+        // Remover el producto si ya está en la lista (para evitar duplicados)
+        $viewedProducts = array_filter($viewedProducts, fn($id) => $id != $product->id);
+
+        // Agregar el producto actual al inicio
+        array_unshift($viewedProducts, $product->id);
+
+        // Limitar a los últimos 5 productos
+        $viewedProducts = array_slice($viewedProducts, 0, 5);
+
+        // Guardar la cookie (duración: 7 días)
+        Cookie::queue('recently_viewed', json_encode($viewedProducts), 60 * 24 * 7);
 
         // Retornar la vista con la información necesaria
         return view('product.view', [
@@ -101,4 +117,5 @@ class ProductController extends Controller
         ]);
 
     }
+
 }

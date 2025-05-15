@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class WelcomeController extends Controller
 {
@@ -31,31 +32,24 @@ class WelcomeController extends Controller
         ->orderBy('created_at', 'desc')
         ->limit(5)
         ->get();
-        // $features = Feature::all();
-        // $services = Service::all();
-        // $tags = Tag::all();
-        // $clients = Client::all();
-        // $projects = Project::with('tags', 'clients')->whereHas('services', function($query) {
-        //     $query->where('service_id', 2);
-        // })->get();
-        // $devprojects = Project::with('tags', 'clients')->whereHas('services', function($query) {
-        //     $query->where('service_id', 1);
-        // })->get();
-        // $faqs = Faq::all();
+
+        $viewedProductsIds = json_decode(Cookie::get('recently_viewed'), true) ?? [];
+        if (count($viewedProductsIds) > 0) {
+            $viewedProducts = Product::whereIn('id', $viewedProductsIds)
+                                    ->orderByRaw('FIELD(id, ' . implode(',', $viewedProductsIds) . ')')
+                                    ->get();
+        } else {
+            // Si no hay productos vistos, devolvé una colección vacía para evitar errores en la vista
+            $viewedProducts = collect();
+        }
         return view('welcome', compact(
             'homeherobanners',
             'categories',
             'anunciantes_destacados',
             'ultimos_anunciantes',
             'articles',
-            // 'features',
-            // 'services',
-            // 'tags',
-            // 'clients',
-            // 'projects',
-            // 'devprojects',
-            // 'faqs'
-        )
-    );
+            'viewedProducts'
+        ));
     }
+
 }

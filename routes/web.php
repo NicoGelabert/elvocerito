@@ -81,6 +81,9 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/documentation/php/exportacion-archivos-a-excel', function(){
         return view('documentation/php/exportacion-archivos-a-excel');
     });
+    Route::get('/documentation/php/cookie-productos-vistos-recientemente', function(){
+        return view('documentation/php/cookie-productos-vistos-recientemente');
+    });
 
 });
 

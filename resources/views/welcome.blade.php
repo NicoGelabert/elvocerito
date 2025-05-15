@@ -17,8 +17,12 @@
         <div class="container">
             <hr class="divider">
         </div>
-        <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
+        <x-recently-viewed :viewedProducts="$viewedProducts" />
         <x-revista />
+        <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
+        <div class="container">
+            <hr class="divider">
+        </div>
         <x-news :articles="$articles" />
     </div>
 </x-app-layout>

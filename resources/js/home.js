@@ -57,6 +57,36 @@ if (categoriesElement) {
 categories.mount({ Grid });
 // Fin Categories
 // // Últimos anunciantes
+var recientementeVistosElement = document.querySelector('#recientemente_vistos');
+if (recientementeVistosElement) {
+    var recientementeVistos = new Splide(recientementeVistosElement, {
+        arrows      : false,
+        autoplay    : false,
+        gap         : '2rem',
+        interval    : 4000,
+        padding     : '2rem',
+        pagination  : false,
+        perPage     : 3,
+        type        : 'loop',
+        breakpoints: {
+            1024: {
+                perPage     : 2,
+            },
+            // 768: {
+            //     perPage     : 5,
+            // },
+            480: {
+                perPage     : 1,
+                gap         : '1rem',
+                padding     : '3rem',
+            }
+        },
+    })
+};
+
+recientementeVistos.mount();
+// // Fin Últimos anunciantes
+// // Últimos anunciantes
 var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
 if (ultimosAnuncinatesElement) {
     var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {

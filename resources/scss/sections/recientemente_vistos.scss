@@ -1,0 +1,38 @@
+#recientemente_vistos{
+    .recientemente_vistos_title{
+        @apply text-center;
+    }
+    .recientemente_vistos_card{
+        @apply w-full mx-auto;
+        ul{
+            li{
+                @apply flex flex-col justify-center border border-gray_300 py-2 px-4 rounded-xl bg-white;
+                a{
+                    @apply flex items-center gap-2;
+                }
+                img{
+                    @apply rounded-full object-cover
+                    aspect-square max-w-16 border border-gray_200;
+                }
+                .recientemente_vistos_card_content{
+                    @apply flex flex-col flex-1 px-2 py-4 gap-2 justify-between;
+                    .header{
+                        @apply flex flex-col gap-1;
+                        h5{
+                            @apply  overflow-hidden line-clamp-2;
+                        }
+                        h6{
+                            
+                        }
+                        p{
+                            @apply text-gray_400 text-xs font-medium;
+                        }
+                    }
+                    p{
+                        @apply line-clamp-2 text-gray_500 text-xs;
+                    }
+                }
+            }
+        }
+    }
+}
