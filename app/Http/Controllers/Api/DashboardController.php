@@ -49,15 +49,7 @@ class DashboardController extends Controller
                 $query->whereNull('products.deleted_at'); // Filtrar productos no eliminados
             })
             ->where('active', 1)
-            ->orderByDesc(function ($query) {
-                $query->select('created_at')
-                    ->from('products')
-                    ->join('product_categories', 'product_categories.product_id', '=', 'products.id')
-                    ->whereRaw('product_categories.category_id = categories.id')
-                    ->whereNull('products.deleted_at')
-                    ->latest()
-                    ->limit(1);
-            }) // Ordenar categorías por el último producto creado
+            ->orderByDesc('products_count')
             ->limit(5)
             ->get();
     }
