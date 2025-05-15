@@ -1,4 +1,3 @@
-@if($viewedProducts->count() > 0)
 <section id="recientemente_vistos" class="splide">
     <div class="flex flex-col gap-8">
         <div class="container recientemente_vistos_title">
@@ -56,4 +55,3 @@
         </div>
     </div>
 </section>
-@endif

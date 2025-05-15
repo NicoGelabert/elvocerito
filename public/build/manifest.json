@@ -15,7 +15,7 @@
       "resources/js/categories-index.js",
       "resources/js/article-view.js"
     ],
-    "file": "assets/app-1270c8ae.js",
+    "file": "assets/app-aae0f79d.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -38,7 +38,7 @@
     "src": "resources/js/categories-index.js"
   },
   "resources/js/home.js": {
-    "file": "assets/home-c22309f6.js",
+    "file": "assets/home-69d9a298.js",
     "imports": [
       "_splide-extension-grid.esm-a5b613aa.js"
     ],

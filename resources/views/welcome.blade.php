@@ -14,10 +14,12 @@
             <hr class="divider">
         </div>
         <x-anunciantes-destacados :anunciantes_destacados="$anunciantes_destacados" />
+        @if($viewedProducts->count() > 0)
         <div class="container">
             <hr class="divider">
         </div>
         <x-recently-viewed :viewedProducts="$viewedProducts" />
+        @endif
         <x-revista />
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
         <div class="container">

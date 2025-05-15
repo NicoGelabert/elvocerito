@@ -56,7 +56,7 @@ if (categoriesElement) {
 };
 categories.mount({ Grid });
 // Fin Categories
-// // Últimos anunciantes
+// Vistos recientemente
 var recientementeVistosElement = document.querySelector('#recientemente_vistos');
 if (recientementeVistosElement) {
     var recientementeVistos = new Splide(recientementeVistosElement, {
@@ -67,7 +67,7 @@ if (recientementeVistosElement) {
         padding     : '2rem',
         pagination  : false,
         perPage     : 3,
-        type        : 'loop',
+        type        : 'slide',
         breakpoints: {
             1024: {
                 perPage     : 2,
@@ -82,11 +82,10 @@ if (recientementeVistosElement) {
             }
         },
     })
+    recientementeVistos.mount();
 };
-
-recientementeVistos.mount();
-// // Fin Últimos anunciantes
-// // Últimos anunciantes
+// Fin Vistos recientemente
+// Últimos anunciantes
 var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
 if (ultimosAnuncinatesElement) {
     var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
@@ -115,6 +114,6 @@ if (ultimosAnuncinatesElement) {
 };
 
 ultimosAnuncinates.mount();
-// // Fin Últimos anunciantes
+// Fin Últimos anunciantes
 // Fin Splide
   
