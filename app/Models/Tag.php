@@ -28,9 +28,9 @@ class Tag extends Model
         return $this->belongsTo(Tag::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_tags');
     }
 
     public function article()

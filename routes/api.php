@@ -48,6 +48,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/services/tree', [ServiceController::class, 'getAsTree']);
     Route::apiResource('tags', TagController::class)->except('show');
     Route::get('/tags/tree', [TagController::class, 'getAsTree']);
+    Route::get('/export-tags', [TagController::class, 'exportTags']);
     Route::apiResource('clients', ClientController::class)->except('show');
     Route::get('/clients/tree', [ClientController::class, 'getAsTree']);
     Route::apiResource('projects', ProjectController::class);

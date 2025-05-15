@@ -13,6 +13,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use App\Exports\TagsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TagController extends Controller
 {
@@ -109,5 +111,10 @@ class TagController extends Controller
 
 
         return $path . '/' . $image->getClientOriginalName();
+    }
+    
+    public function exportTags()
+    {
+        return Excel::download(new TagsExport, 'tags.xlsx');
     }
 }
