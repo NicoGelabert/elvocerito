@@ -78,6 +78,9 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/documentation/js/carga-de-scripts', function(){
         return view('documentation/js/carga-de-scripts');
     });
+    Route::get('/documentation/php/exportacion-archivos-a-excel', function(){
+        return view('documentation/php/exportacion-archivos-a-excel');
+    });
 
 });
 

@@ -17,7 +17,11 @@
         </template>
         <Spinner v-else text="" class=""/>
       </router-link>
-      <DownloadProductList/>
+      <ExportButton
+        url="/export-products"
+        filename="anunciantes.xlsx"
+        label="Descargar Anunciantes"
+      />
     </div>
     <!--/    Total Products -->
     <!--    Active Products -->
@@ -42,7 +46,11 @@
         </template>
         <Spinner v-else text="" class=""/>
       </router-link>
-      <DownloadCategoryList />
+      <ExportButton
+        url="/export-categories"
+        filename="categorias.xlsx"
+        label="Descargar Categorías"
+      />
     </div>
     <!--/    Active Categories -->
   </div>
@@ -88,8 +96,7 @@ import DoughnutChart from '../components/core/Charts/Doughnut.vue'
 import axiosClient from "../axios.js";
 import {computed, onMounted, ref} from "vue";
 import Spinner from "../components/core/Spinner.vue";
-import DownloadProductList from "./Products/DownloadProductList.vue";
-import DownloadCategoryList from "./Categories/DownloadCategoryList.vue";
+import ExportButton from "../components/ExportButton.vue";
 import CustomInput from "../components/core/CustomInput.vue";
 import {useStore} from "vuex";
 
