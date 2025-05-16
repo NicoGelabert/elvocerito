@@ -1,99 +1,28 @@
 // VISTA DE LISTADO DE  ARTICULOS
 .article-index{
     @apply my-12 md:my-14;
-    .article_index_hero{
-        @apply flex justify-center py-12 lg:py-6;
-        h2{
-            @apply text-center
-        }
-    }
-    .filter_categories{
-        @apply flex flex-col gap-2 lg:gap-4 text-text_small lg:text-xs ;
-        ul{
-            @apply flex flex-col gap-2 lg:pr-8;
-            li{
-                @apply uppercase text-text_small tracking-wide text-gray_600 border-b pb-2;
-            }
-            li.active{
-                @apply text-primary;
-            }
-            li:last-child{
-                @apply border-none;
+    .articles_list{
+        @apply grid grid-cols-2 lg:grid-cols-4 gap-4 relative w-full overflow-x-hidden box-border;
+        a:hover{
+            p{
+                @apply text-gray_500;
             }
         }
-    }
-    .filter_tags{
-        @apply flex flex-col gap-4 text-text_small lg:text-xs;
-        ul{
-            @apply flex flex-row flex-wrap gap-2;
-            li{
-                @apply w-auto;
-            }
-            li.active{
-                @apply font-bold bg-primary text-secondary;
-            }
-        }
-    }
-    .filter_categories, .filter_tags{
-        @apply mt-4 lg:mt-0;
-    }
-    .article-list{
-        @apply h-fit lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-4 relative;
         .article_card{
-            @apply flex flex-col rounded-lg border border-gray_200 h-auto;
+            @apply flex flex-col gap-2;
             img{
-                @apply aspect-video object-cover rounded-t-lg;
+                @apply rounded-lg;
             }
-            .categories_badges{
-                @apply flex gap-2;
-                .category_badge{
-                    @apply bg-gray_50 border border-primary rounded-full p-1 fill-white;
-                    img{
-                        @apply aspect-square border-none w-4 fill-white;
-                    }
-                }
+            h4{
+                @apply text-lg/6;
             }
-            .footer{
-                @apply px-2 pb-4 flex flex-col gap-4;
-                    span{
-                        @apply hidden;
-                    }
-                    p{
-                        @apply text-xs text-gray_600 tracking-wide;
-                    }
-                    svg{
-                        @apply fill-gray_600;
-                    }
+            p{
+                @apply text-gray_500;
             }
         }
     }
-    .cursor-pointer {
-        cursor: pointer;
-      }
-      .active {
-        @apply font-bold text-primary
-      }
-      
-      /* Spinner */
-      .spinner-overlay {
-        @apply flex items-center justify-center bg-white/80 h-full w-full left-0 top-0 fixed z-50;
-      }
-      
-      .spinner {
-        @apply border-8 border-black/10 rounded-full border-t-primary h-16 w-16;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
     
-    /* Aplicar opacidad reducida al listado de  articulos mientras carga */
-    .loading-opacity {
-        @apply opacity-20;
-    }
+    
 }
 // FIN VISTA DE  ARTICULOS
 // VISTA DE  ARTICULO INDIVIDUAL

@@ -55,8 +55,8 @@ Route::middleware(['guestOrVerified'])->group(function () {
     ->name('categories.view.subcategory');
 
     //News
-    Route::get('/articles', [ArticleController::class, 'index'])->name('news.index');
-    Route::get('/articles/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
+    Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
+    Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
 
     //Servicios
     Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
