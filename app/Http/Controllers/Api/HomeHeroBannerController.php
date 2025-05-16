@@ -7,6 +7,7 @@ use App\Http\Requests\HomeHeroBannerRequest;
 use App\Http\Resources\HomeHeroBannerListResource;
 use App\Http\Resources\HomeHeroBannerResource;
 use App\Models\Api\HomeHeroBanner;
+use App\Models\HomeHeroBannerTag;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -59,7 +60,11 @@ class HomeHeroBannerController extends Controller
             $data['image_size'] = $image->getSize();
         }
 
+        $tags = $data['tags'] ?? [];
+
         $homeherobanner = HomeHeroBanner::create($data);
+
+        $this->saveTags($tags, $homeherobanner);
 
         return new HomeHeroBannerResource($homeherobanner);
     }
@@ -100,6 +105,10 @@ class HomeHeroBannerController extends Controller
             }
         }
 
+        $tags = $data['tags'] ?? [];
+
+        $this->saveTags($tags, $homeherobanner);
+
         $homeherobanner->update($data);
 
         return new HomeHeroBannerResource($homeherobanner);
@@ -128,5 +137,13 @@ class HomeHeroBannerController extends Controller
         }
 
         return $path . '/' . $image->getClientOriginalName();
+    }
+
+    private function saveTags($tagIds, HomeHeroBanner $homeherobanner)
+    {
+        HomeHeroBannerTag::where('home_hero_banner_id', $homeherobanner->id)->delete();
+        $data = array_map(fn($id) => (['tag_id' => $id, 'home_hero_banner_id' => $homeherobanner->id]), $tagIds);
+
+        HomeHeroBannerTag::insert($data);
     }
 }

@@ -25,7 +25,9 @@ class HomeHeroBannerRequest extends FormRequest
             'image' => ['nullable', 'image'],
             'headline' => ['required', 'max:200'],
             'description' => ['nullable', 'string'],
+            'short_description' => ['nullable', 'string'],
             'link' => ['nullable', 'string'],
+            'tags.*' => ['nullable', 'int', 'exists:tags,id'],
         ];
     }
 }

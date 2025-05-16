@@ -88,7 +88,15 @@ export function createHomeHeroBanner({commit}, homeHeroBanner) {
     form.append('image', homeHeroBanner.image);
     form.append('headline', homeHeroBanner.headline);
     form.append('description', homeHeroBanner.description);
+    form.append('short_description', homeHeroBanner.short_description);
     form.append('link', homeHeroBanner.link);
+
+  // Agregar tags al FormData
+  if (homeHeroBanner.tags && homeHeroBanner.tags.length) {
+    homeHeroBanner.tags.forEach((tag) => {
+      form.append(`tags[]`, tag);
+    });
+  }
     homeHeroBanner = form;
   }
   return axiosClient.post('/homeherobanners', homeHeroBanner)
@@ -102,8 +110,15 @@ export function updateHomeHeroBanner({commit}, homeHeroBanner) {
     form.append('image', homeHeroBanner.image);
     form.append('headline', homeHeroBanner.headline);
     form.append('description', homeHeroBanner.description);
+    form.append('short_description', homeHeroBanner.short_description);
     form.append('link', homeHeroBanner.link);
     form.append('_method', 'PUT');
+    // Agregar tags al FormData
+    if (homeHeroBanner.tags && homeHeroBanner.tags.length) {
+      homeHeroBanner.tags.forEach((tag) => {
+        form.append(`tags[]`, tag);
+      });
+    }
     homeHeroBanner = form;
   } else {
     homeHeroBanner._method = 'PUT'

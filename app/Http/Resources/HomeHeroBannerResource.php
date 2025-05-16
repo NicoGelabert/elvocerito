@@ -22,7 +22,9 @@ class HomeHeroBannerResource extends JsonResource
             'image_url' => $this->image ?: null,
             'headline' => $this->headline,
             'description' => $this->description,
+            'short_description' => $this->short_description,
             'link' => $this->link,
+            'tags' => $this->tags->map(fn($t) => $t->id),
             'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
             'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
         ];

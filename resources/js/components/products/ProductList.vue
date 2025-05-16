@@ -54,7 +54,7 @@
               <li 
                 @click="toggleTag('all')" 
                 :class="{ active: selectedTags.length === tags.length }"
-                class="badge truncate-text"
+                class="badge"
               >
                 <span>Todos</span>
               </li>
@@ -63,7 +63,7 @@
                 :key="tag.id" 
                 @click="toggleTag(tag.id)"
                 :class="{ active: selectedTags.includes(tag.id) }"
-                class="badge truncate-text"
+                class="badge"
               >
                 <span>{{ tag.name }}</span>
               </li>

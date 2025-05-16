@@ -46,12 +46,20 @@
                             <form @submit.prevent="onSubmit">
                                 <div class="bg-white px-4 pt-5 pb-4">
                                     <div class="flex flex-col mb-2">
-                                        <h3 class="text-lg font-bold">Headline</h3>
+                                        <h3 class="text-lg font-bold">Nombre Anunciante</h3>
                                         <CustomInput class="mb-2" v-model="homeHeroBanner.headline" label="Image Headline" />
                                     </div>
                                     <div class="flex flex-col mb-2">
-                                        <h3 class="text-lg font-bold">Descripción</h3>
+                                        <h3 class="text-lg font-bold">Titular</h3>
                                         <CustomInput type="textarea" class="mb-2" v-model="homeHeroBanner.description" label="Description" />
+                                    </div>
+                                    <div class="flex flex-col mb-2">
+                                        <h3 class="text-lg font-bold">Descripción</h3>
+                                        <CustomInput type="textarea" class="mb-2" v-model="homeHeroBanner.short_description" label="Short Description" />
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                        <h3 class="text-lg font-bold">Tags</h3>
+                                        <treeselect v-model="homeHeroBanner.tags" :multiple="true" :options="tagsOptions" :errors="errors['tags']"/>
                                     </div>
                                     <div class="flex flex-col mb-2">
                                         <h3 class="text-lg font-bold">Link</h3>
@@ -92,6 +100,11 @@ import CustomInput from "../../components/core/CustomInput.vue";
 import store from "../../store/index.js";
 import Spinner from "../../components/core/Spinner.vue";
 import Tooltip from "../../components/Tooltip.vue";
+// import the component
+import Treeselect from 'vue3-treeselect'
+// import the styles
+import 'vue3-treeselect/dist/vue3-treeselect.css'
+import axiosClient from "../../axios.js";
 
 const props = defineProps({
     modelValue: Boolean,
@@ -100,14 +113,33 @@ const props = defineProps({
         type: Object,
     }
 })
-console.log(props)
+
+const errors = ref({});
+const tagsOptions = ref([]);
+
+onMounted(() => {
+    axiosClient.get('/tags')
+    .then(response => {
+        console.log('Tags response:', response.data)
+        tagsOptions.value = response.data.data.map(tag => ({
+            id: tag.id,
+            label: tag.name,
+            value: tag.id
+        }))
+    })
+    .catch(error => {
+        console.error('Error cargando tags', error)
+    })
+})
 
 const homeHeroBanner = ref({
     id: props.homeHeroBanner.id,
     image: props.homeHeroBanner.image,
     headline: props.homeHeroBanner.headline,
     description: props.homeHeroBanner.description,
-    link: props.homeHeroBanner.link
+    short_description: props.homeHeroBanner.short_description,
+    link: props.homeHeroBanner.link,
+    tags:[],
 })
 console.log(homeHeroBanner)
 const loading = ref(false)
@@ -125,7 +157,9 @@ onUpdated(() => {
         image: props.homeHeroBanner.image,
         headline: props.homeHeroBanner.headline,
         description: props.homeHeroBanner.description,
-        link: props.homeHeroBanner.link
+        short_description: props.homeHeroBanner.short_description,
+        link: props.homeHeroBanner.link,
+        tags:[],
     }
 })
 

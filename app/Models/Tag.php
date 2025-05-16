@@ -33,6 +33,11 @@ class Tag extends Model
         return $this->belongsToMany(Product::class, 'product_tags');
     }
 
+    public function homeherobanners()
+    {
+        return $this->belongsToMany(HomeHeroBanner::class, 'home_hero_banner_tags');
+    }
+
     public function article()
     {
         return $this->belongsToMany(Article::class);

@@ -12,10 +12,10 @@ if (homeHeroBannerElement) {
         arrows      : false,
         pagination  : false,
         interval    : 5000,
+        gap     : '10rem',
         breakpoints: {
           480: {
-            padding : '1.5rem',
-            gap     : '0.75rem',
+            gap     : '5rem',
         }
     },
 });

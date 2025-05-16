@@ -14,7 +14,7 @@ class HomeHeroBanner extends Model
     use HasSlug;
     use SoftDeletes;
 
-    protected $fillable = ['image', 'image_mime', 'image_size', 'headline', 'description', 'link', 'created_by', 'updated_by'];
+    protected $fillable = ['image', 'image_mime', 'image_size', 'headline', 'description', 'short_description', 'link', 'created_by', 'updated_by'];
 
     public function getSlugOptions() : SlugOptions
     {
@@ -28,4 +28,8 @@ class HomeHeroBanner extends Model
         return 'slug';
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'home_hero_banner_tags');
+    }
 }

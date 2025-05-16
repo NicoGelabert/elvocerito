@@ -1,36 +1,23 @@
 .home-hero-banner{
-    @apply bg-primary/10 rounded-xl;
-    ul{
-        li{
-            @apply flex justify-between
-            gap-12 md:gap-4
-            flex-col md:flex-row
-            px-4 py-8 lg:p-16;
-            .home-hero-banner-li_header{
-                @apply lg:w-1/2 flex items-start;
-                h3{
-                    @apply leading-[1.5]
-                }
-                
-            }
-            .home-hero-banner-li-content{
-                @apply lg:w-1/2 flex flex-col items-center mx-auto;
-                .home-hero-banner-li-content_img{
-                    @apply aspect-square md:aspect-video max-w-lg h-auto;
-                    img{
-                        @apply h-full w-full rounded-xl object-cover;
-                    }
-                }
-                .btn{
-                    @apply w-fit hidden md:flex;
-                    svg{
-                        @apply fill-gray_50;
-                    }
-                }
-            }
-        };
+    a:hover{
+        @apply text-secondary;
     }
-    .splide__pagination{
-        display: flex !important;
+    .homeherobanner_img{
+        @apply md:w-1/2;
+        img{
+            @apply w-full h-auto object-cover rounded-lg aspect-[4/3];
+        }
+    }
+    .homeherobanner_content{
+        @apply md:w-1/2 flex flex-col justify-start gap-4 lg:gap-8;
+        h3{
+            @apply text-3xl lg:text-5xl;
+        }
+        h5{
+            @apply text-xl;
+        }
+        p{
+            @apply text-xs;
+        }
     }
 }
