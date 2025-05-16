@@ -2,7 +2,7 @@
 .article-index{
     @apply my-12 md:my-14;
     .articles_list{
-        @apply grid grid-cols-2 lg:grid-cols-4 gap-4 relative w-full overflow-x-hidden box-border;
+        @apply grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 relative w-full overflow-x-hidden box-border;
         a:hover{
             p{
                 @apply text-gray_500;
