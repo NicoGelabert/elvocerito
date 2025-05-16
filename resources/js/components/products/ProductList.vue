@@ -9,9 +9,9 @@
     <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
 
     <!-- INCIO MODAL CON FILTROS EN MOBILE Y TABLET -->
-    <div class="modal-wrapper absolute">
+    <div class="modal-wrapper">
       <transition name="overlay-fade">
-        <div v-if="showModal" class="modal-overlay"></div>
+        <div v-if="showModal" class="modal-overlay pointer-events-auto" @click="showModal = false"></div>
       </transition>
       <transition name="modal-slide-up">
         <div v-if="showModal" class="modal-content">
