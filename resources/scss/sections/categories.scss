@@ -83,7 +83,7 @@
       }
       
       .modal-content {
-        @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-lg px-4 py-8 min-h-[50vh] overflow-y-auto z-[100] mx-auto pointer-events-auto;
+        @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-lg px-4 py-8 min-h-[50vh] max-h-[85vh] overflow-y-auto z-[100] mx-auto pointer-events-auto;
       }
       
       /* Ajuste extra por si el contenedor principal tiene un z-index alto */
