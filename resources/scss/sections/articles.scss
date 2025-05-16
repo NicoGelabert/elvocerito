@@ -11,7 +11,7 @@
         .article_card{
             @apply flex flex-col gap-2;
             img{
-                @apply rounded-lg;
+                @apply w-full h-auto object-cover rounded-lg aspect-[4/3];
             }
             h4{
                 @apply text-lg/6;
