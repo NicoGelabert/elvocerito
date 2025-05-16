@@ -17,7 +17,7 @@
                 <div class="article_card">
                     <img src="{{ $article->image }}" alt="{{ $article->title }}">
                     <h4>{{ $article->title}}</h4>
-                    <p>{!! $article->description !!}</p>
+                    <p>{{ $article->news_lead}}</p>
                 </div>
             </a>
             @endforeach
