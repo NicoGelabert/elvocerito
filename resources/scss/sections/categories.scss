@@ -25,8 +25,12 @@
 
 .categories_index{
     .search_hero{
+        @apply h-[50vh];
         h1, p{
             @apply hidden;
+        }
+        .search_hero_container{
+            @apply mb-0;
         }
     }
     .categories_index_hero{
