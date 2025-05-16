@@ -27,7 +27,7 @@
                 }
             }
             .news-card-content{
-                @apply flex flex-col gap-1 md:gap-2;
+                @apply flex flex-col gap-1 md:gap-2 w-full justify-evenly;
                 h5{
                     @apply line-clamp-2 leading-snug;
                 }

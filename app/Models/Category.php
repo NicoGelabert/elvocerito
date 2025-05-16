@@ -57,16 +57,23 @@ class Category extends Model
     {
         $categoryTree = [];
 
-        foreach ($categories as $category) {
-            if ($category->parent_id === $parentId) {
-                $children = self::buildCategoryTree($categories, $category->id, $resourceClassName);
-                $category->setAttribute('children', collect($children));
-                $categoryTree[] = $resourceClassName ? new $resourceClassName($category) : $category;
-            }
+        // Filtramos las hijas del parentId actual
+        $children = $categories->filter(function ($category) use ($parentId) {
+            return $category->parent_id === $parentId;
+        });
+
+        // Ordenamos las hijas alfabéticamente (insensible a mayúsculas opcionalmente)
+        $children = $children->sortBy(fn($c) => mb_strtolower($c->name));
+
+        foreach ($children as $category) {
+            $childrenTree = self::buildCategoryTree($categories, $category->id, $resourceClassName);
+            $category->setAttribute('children', collect($childrenTree));
+            $categoryTree[] = $resourceClassName ? new $resourceClassName($category) : $category;
         }
 
         return $categoryTree;
     }
+
 
     private static function getCategoriesArray($categories, $parentId, &$result)
     {
