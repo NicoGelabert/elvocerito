@@ -22,7 +22,7 @@ class CategoriesController extends Controller
             $query->whereIn('categories.id', $subcategories->pluck('id'));
         })->where('published', 1)->with(['images', 'categories', 'tags', 'contacts', 'categories.parent'])->get();
         // dd($products);
-        $tags = $products->pluck('tags')->flatten()->unique('id')->values()->all();
+        $tags = $products->pluck('tags')->flatten()->unique('id')->values();
         return view('categories.view', compact('category', 'subcategories', 'products', 'tags'));
     }
 
@@ -34,7 +34,7 @@ class CategoriesController extends Controller
         ->firstOrFail();
         $subcategory->load('products');
         $products = $subcategory->products()->where('published', 1)->with(['images', 'categories', 'tags', 'contacts', 'categories.parent'])->get();
-        $tags = $products->pluck('tags')->flatten()->unique('id');
+        $tags = $products->pluck('tags')->flatten()->unique('id')->values();
         return view('categories.subcategory', compact('category', 'subcategory', 'products', 'tags'));
     }
 }
