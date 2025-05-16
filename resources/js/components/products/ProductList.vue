@@ -9,68 +9,74 @@
     <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
 
     <!-- INCIO MODAL CON FILTROS EN MOBILE Y TABLET -->
-    <div v-if="!isDesktop && showModal" class="modal-overlay">
-      <div class="modal-content">
-        <div class="flex justify-between items-center">
-          <h2>Filtros</h2>
-          <button @click="showModal = false" class="close-btn">✖</button>
+    <div class="modal-wrapper absolute">
+      <transition name="overlay-fade">
+        <div v-if="showModal" class="modal-overlay"></div>
+      </transition>
+      <transition name="modal-slide-up">
+        <div v-if="showModal" class="modal-content">
+          <div class="flex justify-between items-center">
+            <h2>Filtros</h2>
+            <button @click="showModal = false" class="close-btn">✖</button>
+          </div>
+          
+          <!-- Categorías dentro del modal -->
+          <div v-if="categories && categories.length > 0" class="filter_categories">
+            <h4>Categorías</h4>
+            <ul>
+              <li 
+                @click="changeCategory('all')" 
+                :class="{ active: selectedCategory === 'all' }"
+                class="cursor-pointer"
+              >
+                Todos
+              </li>
+              <li 
+                v-for="category in categories" 
+                :key="category.id" 
+                @click="changeCategory(category.id)"
+                :class="{ active: selectedCategory === category.id }"
+                class="cursor-pointer flex items-center gap-2"
+              >
+                <img 
+                  :src="category.image || '/images/default-product.jpg'" 
+                  alt="Imagen del producto" class="w-4 h-auto opacity-50"
+                />
+                {{ category.name }}
+              </li>
+            </ul>
+          </div>
+  
+          <!-- Etiquetas dentro del modal -->
+          <div v-if="tags && tags.length > 0" class="filter_tags">
+            <h4>Etiquetas</h4>
+            <ul>
+              <li 
+                @click="toggleTag('all')" 
+                :class="{ active: selectedTags.length === tags.length }"
+                class="badge truncate-text"
+              >
+                <span>Todos</span>
+              </li>
+              <li 
+                v-for="tag in tags" 
+                :key="tag.id" 
+                @click="toggleTag(tag.id)"
+                :class="{ active: selectedTags.includes(tag.id) }"
+                class="badge truncate-text"
+              >
+                <span>{{ tag.name }}</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        
-        <!-- Categorías dentro del modal -->
-        <div v-if="categories && categories.length > 0" class="filter_categories">
-          <h4>Categorías</h4>
-          <ul>
-            <li 
-              @click="changeCategory('all')" 
-              :class="{ active: selectedCategory === 'all' }"
-              class="cursor-pointer"
-            >
-              Todos
-            </li>
-            <li 
-              v-for="category in categories" 
-              :key="category.id" 
-              @click="changeCategory(category.id)"
-              :class="{ active: selectedCategory === category.id }"
-              class="cursor-pointer flex items-center gap-2"
-            >
-              <img 
-                :src="category.image || '/images/default-product.jpg'" 
-                alt="Imagen del producto" class="w-4 h-auto opacity-50"
-              />
-              {{ category.name }}
-            </li>
-          </ul>
-        </div>
-
-        <!-- Etiquetas dentro del modal -->
-        <div v-if="tags && tags.length > 0" class="filter_tags">
-          <h4>Etiquetas</h4>
-          <ul>
-            <li 
-              @click="toggleTag('all')" 
-              :class="{ active: selectedTags.length === tags.length }"
-              class="badge truncate-text"
-            >
-              <span>Todos</span>
-            </li>
-            <li 
-              v-for="tag in tags" 
-              :key="tag.id" 
-              @click="toggleTag(tag.id)"
-              :class="{ active: selectedTags.includes(tag.id) }"
-              class="badge truncate-text"
-            >
-              <span>{{ tag.name }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      </transition>
     </div>
+      
     <!-- FIN MODAL CON FILTROS EN MOBILE Y TABLET -->
 
     <!-- INICIO FILTROS EN DESKTOP -->
-    <div v-if="isDesktop" class="lg:w-1/4 flex flex-col gap-12">
+    <div v-if="isDesktop" class="lg:w-1/4 flex flex-col gap-12 bg-white p-4 h-fit rounded-lg">
       <div v-if="categories && categories.length > 0" class="filter_categories">
         <h4>Categorías</h4>
         <ul>
@@ -103,7 +109,7 @@
           <li 
             @click="toggleTag('all')" 
             :class="{ active: selectedTags.length === tags.length }"
-            class="badge truncate-text"
+            class="badge"
           >
             <span>Todos</span>
           </li>
@@ -112,7 +118,7 @@
             :key="tag.id" 
             @click="toggleTag(tag.id)"
             :class="{ active: selectedTags.includes(tag.id) }"
-            class="badge truncate-text"
+            class="badge"
           >
             <span>{{ tag.name }}</span>
           </li>

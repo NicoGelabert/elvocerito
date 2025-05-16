@@ -10,7 +10,7 @@
     .filter_categories{
         @apply flex flex-col gap-2 lg:gap-4 text-text_small lg:text-xs ;
         ul{
-            @apply flex flex-col gap-2 lg:pr-8;
+            @apply flex flex-col gap-2;
             li{
                 @apply uppercase text-text_small tracking-wide text-gray_600 border-b pb-2;
             }
@@ -40,9 +40,12 @@
     .product-list{
         @apply h-fit lg:w-3/4 grid grid-cols-2 lg:grid-cols-4 gap-4 relative;
         .product_card{
-            @apply flex flex-col rounded-lg border border-gray_200 h-auto;
+            @apply flex flex-col rounded-lg border border-gray_200 h-auto bg-white;
             img{
                 @apply aspect-video object-cover rounded-t-lg;
+            }
+            h5{
+                @apply text-sm  ;
             }
             .categories_badges{
                 @apply flex gap-2;
