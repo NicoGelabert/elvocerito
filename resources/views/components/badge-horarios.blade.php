@@ -13,7 +13,7 @@
     });
 @endphp
 <div x-data="verificarEstado({{ json_encode($horarios) }})">
-    <x-badge x-bind:class="(estado === 'Cerrado' ? 'closed' : (estado === 'Abierto' ? 'open' : ''))">
+    <x-badge x-bind:class="(estado === 'No Disponible' ? 'closed' : (estado === 'Disponible' ? 'open' : ''))">
         <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
     </x-badge>
 </div>

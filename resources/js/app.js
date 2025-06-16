@@ -119,13 +119,13 @@ document.addEventListener("alpine:init", () => {
 
             if (aperturaMin <= cierreMin) {
                 // Horario normal (ej: 08:00 - 20:00)
-                this.estado = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+                this.estado = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Disponible' : 'No Disponible';
             } else {
                 // Cruza la medianoche (ej: 22:00 - 03:00)
-                this.estado = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+                this.estado = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Disponible' : 'No Disponible';
             }
         } else {
-            this.estado = 'Cerrado'; // Si no hay horario para el día, cerramos
+            this.estado = 'No Disponible'; // Si no hay horario para el día, cerramos
         }
     },
     
@@ -158,13 +158,13 @@ document.addEventListener("alpine:init", () => {
         if (this.esHoy) {
             if (aperturaMin <= cierreMin) {
                 // Verificar si la hora actual está dentro del horario de apertura y cierre
-                this.estado = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+                this.estado = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Disponible' : 'No Disponible';
             } else {
                 // Horario que cruza medianoche
-                this.estado = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Abierto' : 'Cerrado';
+                this.estado = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Disponible' : 'No Disponible';
             }
         } else {
-            this.estado = 'Cerrado'; // Si no es hoy, marcarlo como cerrado
+            this.estado = 'No Disponible'; // Si no es hoy, marcarlo como cerrado
         }
     },
 

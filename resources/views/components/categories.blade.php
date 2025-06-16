@@ -1,4 +1,6 @@
+
 <section id="categories">
+    <x-category-modal :categories="$categories" />
     <div class="categories container splide">
         <div class="flex flex-col gap-12">
             <div class="categories_title">
@@ -6,7 +8,7 @@
                 <div class="flex">
                     <div class="splide__arrows relative splide__arrows--ltr">
                     </div>
-                    <x-button class="see-all" href="{{route ('categories.index')}}" >
+                    <x-button class="see-all" onclick="window.dispatchEvent(new CustomEvent('open-category-modal'))">
                         Ver todas
                     </x-button>
                 </div>
@@ -31,3 +33,12 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        window.addEventListener('category-selected', event => {
+            console.log('Categoría seleccionada:', event.detail);
+            // Podés usar event.detail.id y event.detail.name aquí
+        });
+    });
+</script>
