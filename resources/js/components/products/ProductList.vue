@@ -15,7 +15,10 @@
       <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
       <!-- INICIO FILTROS ACTIVOS -->
       <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-4 flex-wrap">
-        <span class="text-secondary">Filtros activos:</span>
+        <div class="flex justify-between items-center w-full">
+          <span class="text-secondary">Filtros activos:</span>
+          <button @click="clearAllFilters" class="badge clear text-xs"><span>Limpiar todos</span></button>
+        </div>
         <span v-if="selectedCategory !== null" class="badge active-filter text-xs">
           {{ getCategoryName(selectedCategory) }}
           <button @click="clearCategory" class="ml-1 text-xs">✕</button>
@@ -24,7 +27,6 @@
           {{ getTagName(tagId) }}
           <button @click="toggleTag(tagId)" class="ml-1 text-xs">✕</button>
         </span>
-        <button @click="clearAllFilters" class="badge clear text-xs">Limpiar todos</button>
       </div>
       <!-- FIN FILTROS ACTIVOS -->
     </div>
@@ -35,26 +37,28 @@
       </transition>
       <transition name="modal-slide-up">
         <div v-if="showModal" class="modal-content">
-          <div class="flex justify-between items-center">
-            <h2>
-              Filtros
-              <span v-if="filtersCount > 0">({{ filtersCount }} activo{{ filtersCount > 1 ? 's' : '' }})</span>
-            </h2>
+          <div class="flex justify-between items-start">
+            <div >
+              <h2>Filtros</h2>
+              <span class="text-gray_700 text-sm" v-if="filtersCount > 0">({{ filtersCount }} activo{{ filtersCount > 1 ? 's' : '' }})</span>
+            </div>
 
             <button @click="showModal = false" class="close-btn">✖</button>
           </div>
           
           <!-- Categorías dentro del modal -->
           <div v-if="categories && categories.length > 0" class="filter_categories">
-            <h4>Categorías</h4>
+            <div class="flex justify-between items-center mb-4">
+              <h4>Categorías</h4>
+              <x-button 
+                  v-if="selectedCategory !== null" 
+                  @click="clearCategory"
+                  class="badge clear"
+                >
+                  <span class="capitalize">Limpiar Selección</span>
+              </x-button>
+            </div>
             <ul>
-              <li 
-                v-if="selectedCategory !== null" 
-                @click="clearCategory"
-                class="badge clear my-4"
-              >
-                <span class="capitalize">Limpiar Selección</span>
-              </li>
               <li 
                 v-for="category in categories" 
                 :key="category.id" 
@@ -82,15 +86,17 @@
   
           <!-- Etiquetas dentro del modal -->
           <div v-if="tags && tags.length > 0" class="filter_tags">
-            <h4>Etiquetas</h4>
-            <ul>
-              <li 
+            <div class="flex justify-between items-center">
+              <h4>Etiquetas</h4>
+              <x-button 
                 v-if="selectedTags.length > 0"
                 @click="clearTags"
                 class="badge clear"
               >
                 <span>Limpiar Selección</span>
-              </li>
+              </x-button>
+            </div>
+            <ul>
               <li 
                 v-for="tag in tags" 
                 :key="tag.id" 
@@ -124,7 +130,10 @@
       <!-- INICIO FILTROS ACTIVOS -->
       <div v-if="isDesktop">
         <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-2 flex-wrap">
-          <span class="text-secondary">Filtros activos:</span>
+          <div class="flex justify-between items-center w-full">
+            <span class="text-secondary">Filtros activos:</span>
+            <button @click="clearAllFilters" class="badge clear text-xs"><span>Limpiar todos</span></button>
+          </div>
           <span v-if="selectedCategory !== null" class="badge active-filter text-xs">
             {{ getCategoryName(selectedCategory) }}
             <button @click="clearCategory" class="ml-1 text-xs">✕</button>
@@ -133,13 +142,21 @@
             {{ getTagName(tagId) }}
             <button @click="toggleTag(tagId)" class="ml-1 text-xs">✕</button>
           </span>
-          <button @click="clearAllFilters" class="badge clear text-xs">Limpiar todos</button>
         </div>
       </div>
       <!-- FIN FILTROS ACTIVOS -->
       <div class="flex flex-col gap-8">
         <div v-if="categories && categories.length > 0" class="filter_categories">
-          <h4>Categorías</h4>
+          <div class="flex justify-between items-center">
+            <h4>Categorías</h4>
+            <x-button 
+                v-if="selectedCategory !== null" 
+                @click="clearCategory"
+                class="badge clear"
+              >
+                <span class="capitalize">Limpiar Selección</span>
+            </x-button>
+          </div>
           <ul>
             <li 
               v-for="category in categories" 
@@ -163,18 +180,20 @@
                 </span>
               </div>
             </li>
-            <li 
-              v-if="selectedCategory !== null" 
-              @click="clearCategory"
-              class="badge clear mb-2"
-            >
-              <span class="capitalize">Limpiar Selección</span>
-            </li>
           </ul>
         </div>
   
         <div v-if="tags && tags.length > 0" class="filter_tags">
-          <h4>Etiquetas</h4>
+          <div class="flex justify-between items-center">
+            <h4>Etiquetas</h4>
+            <x-button 
+              v-if="selectedTags.length > 0"
+              @click="clearTags"
+              class="badge clear"
+            >
+              <span>Limpiar Selección</span>
+            </x-button>
+          </div>
           <ul>
             <li 
               v-for="tag in tags" 
@@ -196,13 +215,6 @@
                 </span>
                 <span class="rounded-full bg-white/50 px-1">✕</span>
               </div>
-            </li>
-            <li 
-              v-if="selectedTags.length > 0"
-              @click="clearTags"
-              class="badge clear"
-            >
-              <span>Limpiar Selección</span>
             </li>
           </ul>
         </div>
