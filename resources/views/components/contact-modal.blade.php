@@ -18,7 +18,7 @@
       x-transition:leave-start="opacity-100 translate-y-0"
       x-transition:leave-end="opacity-0 translate-y-full"
       @click.stop
-      class="bg-white px-6 pt-6 pb-12 rounded-lg shadow-xl max-w-screen-sm w-full h-auto overflow-auto"
+      class="bg-white px-6 pt-6 pb-12 rounded-t-lg shadow-xl max-w-screen-sm w-full h-auto overflow-auto"
     >
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-xl font-bold">Contacta a {{ $product->title}}</h2>
