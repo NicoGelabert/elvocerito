@@ -12,7 +12,7 @@
         ul{
             @apply flex flex-col gap-2;
             li{
-                @apply uppercase text-text_small tracking-wide text-gray_600 border-b pb-2;
+                @apply uppercase text-text_small tracking-wide border-b;
             }
             li.active{
                 @apply text-primary;
@@ -30,7 +30,7 @@
                 @apply w-auto;
             }
             li.active{
-                @apply font-bold bg-primary text-secondary;
+                @apply font-bold bg-primary/50 text-gray_700;
             }
         }
     }

@@ -25,24 +25,33 @@
             <h4>Categorías</h4>
             <ul>
               <li 
-                @click="changeCategory('all')" 
-                :class="{ active: selectedCategory === 'all' }"
-                class="cursor-pointer"
+                v-if="selectedCategory !== null" 
+                @click="clearCategory"
+                class="badge clear my-4"
               >
-                Todos
+                <span class="capitalize">Limpiar Selección</span>
               </li>
               <li 
                 v-for="category in categories" 
                 :key="category.id" 
                 @click="changeCategory(category.id)"
                 :class="{ active: selectedCategory === category.id }"
-                class="cursor-pointer flex items-center gap-2"
+                class="cursor-pointer flex items-center gap-2 pb-2"
               >
                 <img 
                   :src="category.image || '/images/default-product.jpg'" 
                   alt="Imagen del producto" class="w-4 h-auto opacity-50"
                 />
-                {{ category.name }}
+                <div v-if="selectedCategory === category.id" @click.stop="changeCategory(null)"
+                      title="Quitar selección" class="flex w-full justify-between">
+                  <span>{{ category.name }}</span>
+                  <span class="rounded-full bg-gray_100 px-1">✕</span>
+                </div>
+                <div v-else @click="changeCategory(category.id)">
+                  <span>
+                    {{ category.name }}
+                  </span>
+                </div>
               </li>
             </ul>
           </div>
@@ -52,20 +61,32 @@
             <h4>Etiquetas</h4>
             <ul>
               <li 
-                @click="toggleTag('all')" 
-                :class="{ active: selectedTags.length === tags.length }"
-                class="badge"
+                v-if="selectedTags.length > 0"
+                @click="clearTags"
+                class="badge clear"
               >
-                <span>Todos</span>
+                <span>Limpiar Selección</span>
               </li>
               <li 
                 v-for="tag in tags" 
                 :key="tag.id" 
-                @click="toggleTag(tag.id)"
                 :class="{ active: selectedTags.includes(tag.id) }"
                 class="badge"
               >
-                <span>{{ tag.name }}</span>
+              <div v-if="!selectedTags.includes(tag.id)" @click="toggleTag(tag.id)">
+                <span>
+                  {{ tag.name }}
+                </span>
+              </div>
+              <div v-else class="flex items-center gap-2"
+                @click.stop="toggleTag(tag.id)"
+                title="Quitar">
+                <span
+                    >
+                  {{ tag.name }}
+                </span>
+                <span class="rounded-full bg-white/50 px-1">✕</span>
+              </div>
               </li>
             </ul>
           </div>
@@ -232,7 +253,7 @@ export default {
   },
   data() {
     return {
-      selectedCategory: 'all',
+      selectedCategory: 'null',
       selectedTags: [],
       filteredProducts: [],
       loading: false,
@@ -251,24 +272,28 @@ export default {
       this.selectedCategory = categoryId;
       this.filterProducts();
     },
+    clearCategory() {
+      this.selectedCategory = null;
+      this.filterProducts();
+    },
     toggleTag(tagId) {
-      if (tagId === 'all') {
-        this.selectedTags = this.selectedTags.length === this.tags.length ? [] : this.tags.map(tag => tag.id);
+      const index = this.selectedTags.indexOf(tagId);
+      if (index === -1) {
+        this.selectedTags.push(tagId);
       } else {
-        const index = this.selectedTags.indexOf(tagId);
-        if (index === -1) {
-          this.selectedTags.push(tagId);
-        } else {
-          this.selectedTags.splice(index, 1);
-        }
+        this.selectedTags.splice(index, 1);
       }
+      this.filterProducts();
+    },
+    clearTags() {
+      this.selectedTags = [];
       this.filterProducts();
     },
     filterProducts() {
       this.loading = true;
       setTimeout(() => {
         this.filteredProducts = this.products.filter(product => {
-          let categoryMatch = this.selectedCategory === 'all' || product.categories.some(category => category.id === this.selectedCategory);
+          let categoryMatch = this.selectedCategory === null || product.categories.some(category => category.id === this.selectedCategory);
           let tagMatch = this.selectedTags.length === 0 || product.tags.some(tag => this.selectedTags.includes(tag.id));
           return categoryMatch && tagMatch;
         });
