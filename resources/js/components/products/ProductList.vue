@@ -1,13 +1,33 @@
 <template>
   <!-- INICIO CONTENEDOR FILTROS Y LISTADO DE PRODUCTOS -->
   <div class="container flex flex-col gap-8 lg:flex-row">
-    <!-- INICIO BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
-    <button v-if="!isDesktop" @click="showModal = true" class="btn btn-secondary btn-filtro flex gap-4 items-center w-fit">
-      <p>Filtrar por</p>
-      <FilterIcon class="w-4 h-4 fill-gray_600" />
-    </button>
-    <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
-
+    <div v-if="!isDesktop" class="flex flex-col gap-4">
+      <!-- INICIO BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
+      <button @click="showModal = true" class="btn btn-secondary btn-filtro flex gap-4 items-center w-fit relative">
+        <p>Filtrar por</p>
+        <FilterIcon class="w-4 h-4 fill-gray_600" />
+        <span 
+          v-if="selectedCategory !== null || selectedTags.length > 0" 
+          class="absolute -top-2 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center pb-[0.1rem]"
+        ><span v-if="filtersCount > 0" class="text-sm text-gray_50">{{ filtersCount }}</span>
+      </span>
+      </button>
+      <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
+      <!-- INICIO FILTROS ACTIVOS -->
+      <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-4 flex-wrap">
+        <span class="text-secondary">Filtros activos:</span>
+        <span v-if="selectedCategory !== null" class="badge active-filter text-xs">
+          {{ getCategoryName(selectedCategory) }}
+          <button @click="clearCategory" class="ml-1 text-xs">✕</button>
+        </span>
+        <span v-for="tagId in selectedTags" :key="tagId" class="badge active-filter text-xs">
+          {{ getTagName(tagId) }}
+          <button @click="toggleTag(tagId)" class="ml-1 text-xs">✕</button>
+        </span>
+        <button @click="clearAllFilters" class="badge clear text-xs">Limpiar todos</button>
+      </div>
+      <!-- FIN FILTROS ACTIVOS -->
+    </div>
     <!-- INCIO MODAL CON FILTROS EN MOBILE Y TABLET -->
     <div class="modal-wrapper">
       <transition name="overlay-fade">
@@ -16,7 +36,11 @@
       <transition name="modal-slide-up">
         <div v-if="showModal" class="modal-content">
           <div class="flex justify-between items-center">
-            <h2>Filtros</h2>
+            <h2>
+              Filtros
+              <span v-if="filtersCount > 0">({{ filtersCount }} activo{{ filtersCount > 1 ? 's' : '' }})</span>
+            </h2>
+
             <button @click="showModal = false" class="close-btn">✖</button>
           </div>
           
@@ -97,7 +121,7 @@
     <!-- FIN MODAL CON FILTROS EN MOBILE Y TABLET -->
 
     <!-- INICIO FILTROS EN DESKTOP -->
-    <div v-if="isDesktop" class="lg:w-1/3 flex flex-col gap-12 bg-white p-4 h-fit rounded-lg">
+    <div v-if="isDesktop" class="lg:w-1/4 flex flex-col gap-12 bg-white p-4 h-fit rounded-lg">
       <div v-if="categories && categories.length > 0" class="filter_categories">
         <h4>Categorías</h4>
         <ul>
@@ -167,71 +191,86 @@
         </ul>
       </div>
     </div>
-    <!-- FIN FILTROS EN DESKTOP -->
-
-    <!-- INICIO LISTADO PRODUCTOS -->
-    <div v-if="filteredProducts.length > 0" class="product-list">
-      <!-- INICIO PRODUCTO -->
-      <div v-for="product in filteredProducts" :key="product.id" class="product_card">
-        <!-- INICIO IMAGEN PRODUCTO -->
-        <div class="relative">
-          <img 
-            :src="product.images?.[0]?.url || '/images/default-product.jpg'" 
-            alt="Imagen del producto" 
-          />
-        </div>
-        <!-- FIN IMAGEN PRODUCTO -->
-        <!-- INICIO CONTENIDO PRODUCTO -->
-        <div class="flex flex-col justify-between flex-1">
-          <!-- INICIO PRODUCT NAME, DESCRIPTION -->
-          <div class="flex flex-col justify-between flex-1 py-4 px-2 gap-4">
-            <a :href="`/categorias/${product.categories?.[0]?.parent?.slug || 'sin-categoria'}/${product.categories?.[0]?.slug || 'sin-subcategoria'}/${product.slug}`">
-              <div class="flex items-center justify-between mb-2">
-                <h5 class="w-fit text-base leading-none">{{ product.title }}</h5>
-              </div>
-              <p class="text-xs text-gray_500 overflow-hidden line-clamp-2">{{ product.short_description }}</p>
-            </a>  
-            <!-- INICIO IMAGEN CATEGORÍA -->
-            <div class="categories_badges relative">
-              <div v-for="category in product.categories" :key="category.id" class="category_badge relative w-6 h-6">
-                <img :src="category.image" :alt="category.name" class="" :data-tooltip-target="'tooltip-' + category.id">
-                <!-- INICIO TOOLTIP -->
-                <div :id="'tooltip-' + category.id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-xs text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                  <span class="whitespace-nowrap">{{category.name}}</span>
-                  <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <!-- INICIO TOOLTIP -->
-              </div>
-            </div>
-            <!-- FIN IMAGEN CATEGORÍA -->
-          </div>
-          <!-- FIN PRODUCT NAME, DESCRIPTION -->
-          <!-- INICIO FOOTER DE PRODUCTO -->
-          <div class="footer">
-            <hr class="divider">
-            <div class="flex justify-between items-center">
-              <div v-if="product.contacts && product.contacts.length" class="flex items-center gap-2">
-                <component :is="getIcon(product.contacts[0].type)" class="w-4 h-4" />
-                <p>{{ product.contacts[0].info }}</p>
-              </div>
-              <p v-else>
-                Sin contacto
-              </p>
-            </div>
-          </div>
-          <!-- FIN FOOTER DE PRODUCTO -->
-        </div>
-        <!-- FIN CONTENIDO PRODUCTO -->
+    <!-- FIN FILTROS EN DESKTOP -->    
+    <div class="flex flex-col gap-4 lg:w-3/4 ">
+      <!-- INICIO FILTROS ACTIVOS -->
+      <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-4 flex-wrap">
+        <span class="text-secondary">Filtros activos:</span>
+        <span v-if="selectedCategory !== null" class="badge active-filter text-xs">
+          {{ getCategoryName(selectedCategory) }}
+          <button @click="clearCategory" class="ml-1 text-xs">✕</button>
+        </span>
+        <span v-for="tagId in selectedTags" :key="tagId" class="badge active-filter text-xs">
+          {{ getTagName(tagId) }}
+          <button @click="toggleTag(tagId)" class="ml-1 text-xs">✕</button>
+        </span>
+        <button @click="clearAllFilters" class="badge clear text-xs">Limpiar todos</button>
       </div>
-      <!-- FIN PRODUCTO -->
+      <!-- FIN FILTROS ACTIVOS -->
+      <!-- INICIO LISTADO PRODUCTOS -->
+      <div v-if="filteredProducts.length > 0" class="product-list">
+        <!-- INICIO PRODUCTO -->
+        <div v-for="product in filteredProducts" :key="product.id" class="product_card">
+          <!-- INICIO IMAGEN PRODUCTO -->
+          <div class="relative">
+            <img 
+              :src="product.images?.[0]?.url || '/images/default-product.jpg'" 
+              alt="Imagen del producto" 
+            />
+          </div>
+          <!-- FIN IMAGEN PRODUCTO -->
+          <!-- INICIO CONTENIDO PRODUCTO -->
+          <div class="flex flex-col justify-between flex-1">
+            <!-- INICIO PRODUCT NAME, DESCRIPTION -->
+            <div class="flex flex-col justify-between flex-1 py-4 px-2 gap-4">
+              <a :href="`/categorias/${product.categories?.[0]?.parent?.slug || 'sin-categoria'}/${product.categories?.[0]?.slug || 'sin-subcategoria'}/${product.slug}`">
+                <div class="flex items-center justify-between mb-2">
+                  <h5 class="w-fit text-base leading-none">{{ product.title }}</h5>
+                </div>
+                <p class="text-xs text-gray_500 overflow-hidden line-clamp-2">{{ product.short_description }}</p>
+              </a>  
+              <!-- INICIO IMAGEN CATEGORÍA -->
+              <div class="categories_badges relative">
+                <div v-for="category in product.categories" :key="category.id" class="category_badge relative w-6 h-6">
+                  <img :src="category.image" :alt="category.name" class="" :data-tooltip-target="'tooltip-' + category.id">
+                  <!-- INICIO TOOLTIP -->
+                  <div :id="'tooltip-' + category.id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-xs text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                    <span class="whitespace-nowrap">{{category.name}}</span>
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                  <!-- INICIO TOOLTIP -->
+                </div>
+              </div>
+              <!-- FIN IMAGEN CATEGORÍA -->
+            </div>
+            <!-- FIN PRODUCT NAME, DESCRIPTION -->
+            <!-- INICIO FOOTER DE PRODUCTO -->
+            <div class="footer">
+              <hr class="divider">
+              <div class="flex justify-between items-center">
+                <div v-if="product.contacts && product.contacts.length" class="flex items-center gap-2">
+                  <component :is="getIcon(product.contacts[0].type)" class="w-4 h-4" />
+                  <p>{{ product.contacts[0].info }}</p>
+                </div>
+                <p v-else>
+                  Sin contacto
+                </p>
+              </div>
+            </div>
+            <!-- FIN FOOTER DE PRODUCTO -->
+          </div>
+          <!-- FIN CONTENIDO PRODUCTO -->
+        </div>
+        <!-- FIN PRODUCTO -->
+      </div>
+      <!-- FIN LISTADO PRODUCTOS -->
+      <!-- INICIO MENSAJE NO HAY PRODUCTOS -->
+      <div v-else-if="!loading">
+        <p>No hay anunciantes disponibles.</p>
+      </div>
+      <!-- FIN MENSAJE NO HAY PRODUCTOS -->
     </div>
-    <!-- FIN LISTADO PRODUCTOS -->
 
-    <!-- INICIO MENSAJE NO HAY PRODUCTOS -->
-    <div v-else-if="!loading">
-      <p>No hay productos disponibles.</p>
-    </div>
-    <!-- FIN MENSAJE NO HAY PRODUCTOS -->
 
     <!-- INICIO SPINNER -->
     <div v-if="loading" class="spinner-overlay">
@@ -287,6 +326,9 @@ export default {
     isMobileOrTablet() {
       return !this.isDesktop;
     },
+    filtersCount() {
+      return (this.selectedCategory !== null ? 1 : 0) + this.selectedTags.length;
+    }
   },
   methods: {
     changeCategory(categoryId) {
@@ -307,6 +349,19 @@ export default {
       this.filterProducts();
     },
     clearTags() {
+      this.selectedTags = [];
+      this.filterProducts();
+    },
+    getCategoryName(id) {
+      const category = this.categories.find(c => c.id === id);
+      return category ? category.name : 'Categoría';
+    },
+    getTagName(id) {
+      const tag = this.tags.find(t => t.id === id);
+      return tag ? tag.name : 'Etiqueta';
+    },
+    clearAllFilters() {
+      this.selectedCategory = null;
       this.selectedTags = [];
       this.filterProducts();
     },
