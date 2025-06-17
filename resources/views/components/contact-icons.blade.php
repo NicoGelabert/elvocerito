@@ -15,11 +15,11 @@
             }
         @endphp
         <a href="{{ $href }}">
-            <div class="contacto">
+            <div class="contacto {{ !$loop->last ? 'border-b border-gray-200 pb-4 mb-4' : '' }}"">
                 <x-icons.icon :name="$iconData['type']" />
-                <div class="text-center mt-2 md:text-left md:mt-0">
-                    <span class="text-xs lg:text-sm font-semibold capitalize">{{ $iconData['type'] }}</span>
-                    <p class="text-xs text-gray-500 -mt-1 lg:mt-0">{{ $iconData['info'] }}</p>
+                <div>
+                    <span class="block text-right text-base lg:text-sm font-semibold capitalize">{{ $iconData['type'] }}</span>
+                    <p class="text-right text-base text-gray-500 -mt-1 lg:mt-0">{{ $iconData['info'] }}</p>
                 </div>
             </div>
         </a>

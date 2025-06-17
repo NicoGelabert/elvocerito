@@ -1,7 +1,7 @@
 @use '../globals/variables' as *;
 
 .btn{
-    @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans min-h-8
+    @apply flex gap-2 items-center justify-center font-medium capitalize text-white font-sans h-fit min-h-8
     rounded-full
     leading-none sm:leading-none
     text-xs sm:text-sm
@@ -19,7 +19,7 @@
 }
 
 .btn-secondary{
-    @apply border border-secondary/20 text-secondary hover:bg-gray_100;
+    @apply border border-primary text-primary hover:bg-gray_100;
 }
 
 .btn-terciary{

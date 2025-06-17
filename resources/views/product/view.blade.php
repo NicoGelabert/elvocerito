@@ -27,7 +27,7 @@
         ]) }})">
         <!-- INICIO MENU CON IMAGEN, TITLE, BAGDE ABI/CER, CONTACT -->
         <div class="product_menu lg:hidden opacity-0 -translate-y-full">
-            <div class="flex justify-between">
+            <div class="flex items-center justify-between">
                 <div class="flex gap-2 items-center">
                     <div class="relative w-auto flex items-center">
                         <img src="{{ $product->image }}" alt="{{ $product->title }}">
@@ -55,7 +55,11 @@
                 <!-- <div class="product_header_texts">
                 </div> -->
                 
-                <x-contact-icons class="contact-icons" :icons="$product->contacts"></x-contact-icons>
+                <!-- INICIO VÍAS DE CONTACTO -->
+                <x-button class="btn btn-secondary h-auto" onclick="window.dispatchEvent(new CustomEvent('open-contact-modal'))">
+                    Contactar
+                </x-button>
+                <!-- FIN VÍAS DE CONTACTO -->
             </div>
         </div>
         <!-- FIN MENU CON IMAGEN, TITLE, BAGDE ABI/CER, CONTACT -->
@@ -83,6 +87,7 @@
             <!-- FIN BREADCRUMBS -->
             <!-- INICIO PRIMERA FILA -->
             <div class="container">
+                <x-contact-modal :product="$product" />
                 <div class="flex flex-col lg:flex-row gap-6  bg-white rounded-xl p-4">
                     <!-- INICIO PRIMERA COLUMNA -->
                     <div class="product_header custom-scrollbar lg:overflow-x-hidden flex-1">
@@ -163,7 +168,9 @@
                                 @endif
                                 <!-- FIN SHORT DESCRIPTION -->
                                 <!-- INICIO VÍAS DE CONTACTO -->
-                                <x-contact-icons class="contact-icons w-full lg:w-auto" :icons="$product->contacts"></x-contact-icons>
+                                <x-button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('open-contact-modal'))">
+                                    Contactar
+                                </x-button>
                                 <!-- FIN VÍAS DE CONTACTO -->
                                 <!-- INICIO ADDRESSES -->
                                 @if ($product->addresses->isNotEmpty())
