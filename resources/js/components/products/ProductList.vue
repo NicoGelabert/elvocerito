@@ -1,6 +1,6 @@
 <template>
   <!-- INICIO CONTENEDOR FILTROS Y LISTADO DE PRODUCTOS -->
-  <div class="container flex flex-col gap-8 lg:flex-row">
+  <div class="container flex flex-col gap-6 lg:flex-row">
     <div v-if="!isDesktop" class="flex flex-col gap-4">
       <!-- INICIO BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
       <button @click="showModal = true" class="btn btn-secondary btn-filtro flex gap-4 items-center w-fit relative">
@@ -117,11 +117,10 @@
         </div>
       </transition>
     </div>
-      
     <!-- FIN MODAL CON FILTROS EN MOBILE Y TABLET -->
 
     <!-- INICIO FILTROS EN DESKTOP -->
-    <div v-if="isDesktop" class="lg:w-1/4 flex flex-col gap-12 bg-white p-4 h-fit rounded-lg">
+    <div v-if="isDesktop" class="lg:w-1/3 flex flex-col gap-12 bg-white p-4 h-fit rounded-lg">
       <div v-if="categories && categories.length > 0" class="filter_categories">
         <h4>Categorías</h4>
         <ul>
@@ -192,7 +191,7 @@
       </div>
     </div>
     <!-- FIN FILTROS EN DESKTOP -->    
-    <div class="flex flex-col gap-4 lg:w-3/4 ">
+    <div class="flex flex-col gap-4 lg:w-2/3 ">
       <!-- INICIO FILTROS ACTIVOS -->
       <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-4 flex-wrap">
         <span class="text-secondary">Filtros activos:</span>

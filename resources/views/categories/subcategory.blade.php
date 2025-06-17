@@ -20,11 +20,11 @@
         </div>
         
         @if ($products->isNotEmpty())
-            <div class="flex gap-8 container">
-                <div class="hidden lg:block w-1/4">
+            <div class="flex gap-6 container">
+                <div class="hidden lg:block w-1/3">
 
                 </div>
-                <div class="mb-10 w-full lg:w-3/4">
+                <div class="my-10 w-full lg:w-2/3">
                     <h3>{{ $subcategory->name }}</h3>
                 </div>
             </div>
