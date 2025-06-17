@@ -15,7 +15,7 @@
       "resources/js/categories-index.js",
       "resources/js/article-view.js"
     ],
-    "file": "assets/app-abef1b2a.js",
+    "file": "assets/app-e0dba59e.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -28,7 +28,7 @@
     "src": "resources/js/article-view.js"
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-1e3e7e6c.js",
+    "file": "assets/catalog-ee141212.js",
     "isDynamicEntry": true,
     "src": "resources/js/catalog.js"
   },

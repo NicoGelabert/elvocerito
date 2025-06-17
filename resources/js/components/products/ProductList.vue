@@ -120,92 +120,96 @@
     <!-- FIN MODAL CON FILTROS EN MOBILE Y TABLET -->
 
     <!-- INICIO FILTROS EN DESKTOP -->
-    <div v-if="isDesktop" class="lg:w-1/3 flex flex-col gap-12 bg-white p-4 h-fit rounded-lg">
-      <div v-if="categories && categories.length > 0" class="filter_categories">
-        <h4>Categorías</h4>
-        <ul>
-          <li 
-            v-if="selectedCategory !== null" 
-            @click="clearCategory"
-            class="badge clear mb-2"
-          >
-            <span class="capitalize">Limpiar Selección</span>
-          </li>
-          <li 
-            v-for="category in categories" 
-            :key="category.id" 
-            @click="changeCategory(category.id)"
-            :class="{ active: selectedCategory === category.id }"
-            class="cursor-pointer flex items-center gap-2 pb-2"
-          >
-            <img 
-              :src="category.image || '/images/default-product.jpg'" 
-              alt="Imagen del producto" class="w-4 h-auto opacity-50"
-            />
-            <div v-if="selectedCategory === category.id" @click.stop="changeCategory(null)"
-                  title="Quitar selección" class="flex w-full justify-between">
-              <span>{{ category.name }}</span>
-              <span class="rounded-full bg-gray_100 px-1">✕</span>
-            </div>
-            <div v-else @click="changeCategory(category.id)">
-              <span>
-                {{ category.name }}
-              </span>
-            </div>
-          </li>
-        </ul>
+    <div v-if="isDesktop" class="lg:w-1/3 flex flex-col gap-8 bg-white p-4 h-fit rounded-lg">
+      <!-- INICIO FILTROS ACTIVOS -->
+      <div v-if="isDesktop">
+        <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-2 flex-wrap">
+          <span class="text-secondary">Filtros activos:</span>
+          <span v-if="selectedCategory !== null" class="badge active-filter text-xs">
+            {{ getCategoryName(selectedCategory) }}
+            <button @click="clearCategory" class="ml-1 text-xs">✕</button>
+          </span>
+          <span v-for="tagId in selectedTags" :key="tagId" class="badge active-filter text-xs">
+            {{ getTagName(tagId) }}
+            <button @click="toggleTag(tagId)" class="ml-1 text-xs">✕</button>
+          </span>
+          <button @click="clearAllFilters" class="badge clear text-xs">Limpiar todos</button>
+        </div>
       </div>
-
-      <div v-if="tags && tags.length > 0" class="filter_tags">
-        <h4>Etiquetas</h4>
-        <ul>
-          <li 
-            v-if="selectedTags.length > 0"
-            @click="clearTags"
-            class="badge clear"
-          >
-            <span>Limpiar Selección</span>
-          </li>
-          <li 
-            v-for="tag in tags" 
-            :key="tag.id" 
-            :class="{ active: selectedTags.includes(tag.id) }"
-            class="badge"
-          >
-            <div v-if="!selectedTags.includes(tag.id)" @click="toggleTag(tag.id)">
-              <span>
-                {{ tag.name }}
-              </span>
-            </div>
-            <div v-else class="flex items-center gap-2"
-              @click.stop="toggleTag(tag.id)"
-              title="Quitar">
-              <span
-                  >
-                {{ tag.name }}
-              </span>
-              <span class="rounded-full bg-white/50 px-1">✕</span>
-            </div>
-          </li>
-        </ul>
+      <!-- FIN FILTROS ACTIVOS -->
+      <div class="flex flex-col gap-8">
+        <div v-if="categories && categories.length > 0" class="filter_categories">
+          <h4>Categorías</h4>
+          <ul>
+            <li 
+              v-for="category in categories" 
+              :key="category.id" 
+              @click="changeCategory(category.id)"
+              :class="{ active: selectedCategory === category.id }"
+              class="cursor-pointer flex items-center gap-2 pb-2"
+            >
+              <img 
+                :src="category.image || '/images/default-product.jpg'" 
+                alt="Imagen del producto" class="w-4 h-auto opacity-50"
+              />
+              <div v-if="selectedCategory === category.id" @click.stop="changeCategory(null)"
+                    title="Quitar selección" class="flex w-full justify-between">
+                <span>{{ category.name }}</span>
+                <span class="rounded-full bg-gray_100 px-1">✕</span>
+              </div>
+              <div v-else @click="changeCategory(category.id)">
+                <span>
+                  {{ category.name }}
+                </span>
+              </div>
+            </li>
+            <li 
+              v-if="selectedCategory !== null" 
+              @click="clearCategory"
+              class="badge clear mb-2"
+            >
+              <span class="capitalize">Limpiar Selección</span>
+            </li>
+          </ul>
+        </div>
+  
+        <div v-if="tags && tags.length > 0" class="filter_tags">
+          <h4>Etiquetas</h4>
+          <ul>
+            <li 
+              v-for="tag in tags" 
+              :key="tag.id" 
+              :class="{ active: selectedTags.includes(tag.id) }"
+              class="badge"
+            >
+              <div v-if="!selectedTags.includes(tag.id)" @click="toggleTag(tag.id)">
+                <span>
+                  {{ tag.name }}
+                </span>
+              </div>
+              <div v-else class="flex items-center gap-2"
+                @click.stop="toggleTag(tag.id)"
+                title="Quitar">
+                <span
+                    >
+                  {{ tag.name }}
+                </span>
+                <span class="rounded-full bg-white/50 px-1">✕</span>
+              </div>
+            </li>
+            <li 
+              v-if="selectedTags.length > 0"
+              @click="clearTags"
+              class="badge clear"
+            >
+              <span>Limpiar Selección</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- FIN FILTROS EN DESKTOP -->    
-    <div class="flex flex-col gap-4 lg:w-2/3 ">
-      <!-- INICIO FILTROS ACTIVOS -->
-      <div v-if="selectedCategory !== null || selectedTags.length > 0" class="text-sm text-gray-600 flex items-center gap-4 flex-wrap">
-        <span class="text-secondary">Filtros activos:</span>
-        <span v-if="selectedCategory !== null" class="badge active-filter text-xs">
-          {{ getCategoryName(selectedCategory) }}
-          <button @click="clearCategory" class="ml-1 text-xs">✕</button>
-        </span>
-        <span v-for="tagId in selectedTags" :key="tagId" class="badge active-filter text-xs">
-          {{ getTagName(tagId) }}
-          <button @click="toggleTag(tagId)" class="ml-1 text-xs">✕</button>
-        </span>
-        <button @click="clearAllFilters" class="badge clear text-xs">Limpiar todos</button>
-      </div>
-      <!-- FIN FILTROS ACTIVOS -->
+    <div class="flex flex-col gap-4 lg:w-2/3">
       <!-- INICIO LISTADO PRODUCTOS -->
       <div v-if="filteredProducts.length > 0" class="product-list">
         <!-- INICIO PRODUCTO -->
