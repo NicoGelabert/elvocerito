@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="category_view product-index">
         <div class="breadcrumbs">
-            <div class="container flex gap-2 items-center">
+            <div class="max-w-screen-xl px-4 flex gap-2 items-center">
                 <a href="/">
                     <x-icons.home class="fill-gray_400" />
                 </a>
@@ -20,7 +20,7 @@
         </div>
         
         @if ($products->isNotEmpty())
-            <div class="flex gap-8 container">
+            <div class="flex gap-8 max-w-screen-xl px-4">
                 <div class="hidden lg:block w-1/4">
 
                 </div>
