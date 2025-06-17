@@ -38,7 +38,7 @@
         @apply mt-4 lg:mt-0;
     }
     .product-list{
-        @apply h-fit grid grid-cols-2 lg:grid-cols-4 gap-4 relative w-full overflow-x-hidden box-border;
+        @apply h-fit grid grid-cols-2 md:grid-cols-3 gap-4 relative w-full overflow-x-hidden box-border;
         .product_card{
             @apply flex flex-col rounded-lg border border-gray_200 h-auto bg-white;
             img{

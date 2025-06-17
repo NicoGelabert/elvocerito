@@ -1,6 +1,6 @@
 <template>
   <!-- INICIO CONTENEDOR FILTROS Y LISTADO DE PRODUCTOS -->
-  <div class="max-w-screen-xl px-4 flex flex-col gap-8 lg:flex-row">
+  <div class="container flex flex-col gap-8 lg:flex-row">
     <div v-if="!isDesktop" class="flex flex-col gap-4">
       <!-- INICIO BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
       <button @click="showModal = true" class="btn btn-secondary btn-filtro flex gap-4 items-center w-fit relative">
