@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="current">
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="current" {{ $attributes->merge(['class']) }}>
 <g clip-path="url(#clip0_1541_678)">
 <path d="M13.9962 14V13.9995H13.9997V8.86496C13.9997 6.35313 13.459 4.41821 10.5225 4.41821C9.11083 4.41821 8.16349 5.19288 7.77674 5.9273H7.73591V4.65271H4.95166V13.9995H7.85083V9.3713C7.85083 8.15271 8.08183 6.97438 9.59091 6.97438C11.0778 6.97438 11.1 8.36505 11.1 9.44946V14H13.9962Z" fill="current"/>
 <path d="M0.231445 4.6532H3.13411V13.9999H0.231445V4.6532Z" fill="current"/>

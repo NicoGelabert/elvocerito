@@ -167,11 +167,22 @@
                                 </div>
                                 @endif
                                 <!-- FIN SHORT DESCRIPTION -->
-                                <!-- INICIO VÍAS DE CONTACTO -->
-                                <x-button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('open-contact-modal'))">
-                                    Contactar
-                                </x-button>
-                                <!-- FIN VÍAS DE CONTACTO -->
+                                <div class="flex gap-4">
+                                    <!-- INICIO VÍAS DE CONTACTO -->
+                                    <x-button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
+                                    detail: { type: 'contact' }
+                                    }))">
+                                        Contactar
+                                    </x-button>
+                                    <!-- FIN VÍAS DE CONTACTO -->
+                                    <!-- INICIO VÍAS DE COMPARTIR -->
+                                    <x-button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
+                                    detail: { type: 'share' }
+                                    }))">
+                                        <x-icons.share class="fill-primary" />
+                                    </x-button>
+                                    <!-- FIN VÍAS DE COMPARTIR -->
+                                </div>
                                 <!-- INICIO ADDRESSES -->
                                 @if ($product->addresses->isNotEmpty())
                                 <div class="product_location">
