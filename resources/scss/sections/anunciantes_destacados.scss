@@ -36,24 +36,6 @@
                 }
                 .footer{
                     @apply flex flex-col;
-                    .contact-icons{
-                        @apply w-full;
-                        .contacto{
-                            @apply flex gap-2 text-gray_600 justify-between items-center;
-                            >div{
-                                @apply text-right;
-                                span{
-                                    @apply hidden lg:block;
-                                }
-                                p{
-                                    @apply tracking-wide;
-                                }
-                            }
-                            svg{
-                                @apply fill-gray_500 h-5 lg:h-6 w-auto;
-                            }
-                        }
-                    }
                 }
             }
         }

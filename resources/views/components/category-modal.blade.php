@@ -26,7 +26,7 @@
       </div>
 
       <!-- Contenido -->
-      <ul class="grid grid-cols-2 md:grid-cols-8 gap-y-8 gap-x-2">
+      <ul class="grid grid-cols-3 md:grid-cols-8 gap-y-8 gap-x-2">
         @forelse ($categories as $category)
           <li>
             <x-button class="flex flex-col items-center gap-2 w-full h-full" href="{{ 

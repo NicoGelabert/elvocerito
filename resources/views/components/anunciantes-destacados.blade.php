@@ -1,4 +1,5 @@
 <section id="anunciantes_destacados">
+    
     <div class="container flex flex-col gap-8"">
         <div class="anunciantes_destacados_title">
             <h3>Anunciantes destacados</h3>
@@ -7,6 +8,7 @@
             <ul>
                 @foreach ($anunciantes_destacados as $anunciante_destacado)
                 <li>
+                    <x-contact-modal :product="$anunciante_destacado" />
                     @if ($anunciante_destacado->prices)
                         <ul class="absolute top-2 left-2">
                             @foreach ($anunciante_destacado->prices as $price)
@@ -54,12 +56,30 @@
                             </div>
                         </a>
                     </div>
-                    <div class="footer">
-                        <hr class="divider mx-4">
-                        <div class="flex justify-between items-center p-4">
-                            <x-contact-icons class="contact-icons" :icons="[$anunciante_destacado->first_contact]"></x-contact-icons>
-                        </div>
-                        
+                    <div class="footer mx-2 md:mx-4">
+                        <hr class="divider">
+                        <div class="flex justify-between my-4">
+                            <!-- INICIO VÍAS DE CONTACTO -->
+                            <x-button 
+                                class="btn btn-secondary"
+                                onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
+                                    detail: { type: 'contact', id: {{ $anunciante_destacado->id }} }
+                                }))"
+                                >
+                                Contactar
+                            </x-button>
+                            <!-- FIN VÍAS DE CONTACTO -->
+                            <!-- INICIO VÍAS DE COMPARTIR -->
+                            <x-button 
+                                class="btn btn-secondary"
+                                onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
+                                    detail: { type: 'share', id: {{ $anunciante_destacado->id }} }
+                                }))"
+                                >
+                                <x-icons.share class="fill-primary" />
+                            </x-button>
+                            <!-- FIN VÍAS DE COMPARTIR -->
+                        </div>                        
                     </div>
                 </li>
                 @endforeach

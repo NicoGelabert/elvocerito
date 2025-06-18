@@ -165,7 +165,17 @@ header, .mobile-menu{
         @apply text-gray_400 text-small hover:text-primary;
     }
 }
-
+.contact-icons{
+    @apply flex flex-col 
+    lg:flex-wrap lg:gap-x-8;
+    .contacto{
+        @apply flex flex-row items-center gap-8 justify-between;
+        svg{
+            @apply fill-secondary/70 border rounded-lg bg-primary/15 p-1 drop-shadow-sm
+        w-10 h-10;
+        }
+    }
+}
 // Contador de Categorías
 .remaining-count{
     @apply text-text_small font-bold text-gray_600 py-1 px-2 bg-gray_50 rounded-full;

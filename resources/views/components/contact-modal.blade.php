@@ -7,8 +7,10 @@
 <div 
   x-data="{ isOpen: false, type: null, show:false }" 
   x-init="window.addEventListener('open-contact-modal', e => {
-  type = e.detail.type;
-  isOpen = true;
+    if (!e.detail.id || e.detail.id === {{ $product->id }}) {
+      type = e.detail.type;
+      isOpen = true;
+    }
 })"
 >
   <!-- Fondo + x-show controla todo -->
