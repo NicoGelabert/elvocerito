@@ -46,44 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             li.classList.add("p-2", "text-gray-500");
                             resultsList.appendChild(li);
                         } else {
-                            data.products.forEach(product => {
-                                let li = document.createElement("li");
-                                li.classList.add("py-4", "md:p-4", "cursor-pointer", "hover:bg-gray-200", "text-left", "flex", "items-center", "gap-4");
-
-                                // Imagen
-                                const img = document.createElement("img");
-                                img.src = product.image || '/placeholder.jpg';
-                                img.alt = product.title;
-                                img.classList.add("w-12", "h-12", "object-cover", "rounded", "border", "border-gray_400");
-
-                                // Contenedor de texto
-                                const info = document.createElement("div");
-
-                                // Título
-                                const title = document.createElement("h6");
-                                title.textContent = product.title;
-                                title.classList.add("font-bold");
-
-                                // Categoría (solo la primera)
-                                const category = product.categories?.[0];
-                                const categoryText = document.createElement("p");
-                                categoryText.textContent = category?.name || '';
-                                categoryText.classList.add("text-sm", "text-gray-500");
-
-                                info.appendChild(title);
-                                info.appendChild(categoryText);
-
-                                li.appendChild(img);
-                                li.appendChild(info);
-
-                                li.addEventListener("click", () => {
-                                    const parentSlug = category?.parent?.slug || 'sin-categoria';
-                                    const subcategorySlug = category?.slug || 'sin-subcategoria';
-                                    window.location.href = `/categorias/${parentSlug}/${subcategorySlug}/${product.slug}`;
-                                });
-
-                                resultsList.appendChild(li);
-                            });
                             // Mostrar categorías
                             data.categories.forEach(category => {
                                 let li = document.createElement("li");
@@ -118,6 +80,44 @@ document.addEventListener("DOMContentLoaded", function() {
                                     const parentSlug = category?.parent?.slug || 'sin-categoria';
                                     const subcategorySlug = category?.slug || 'sin-subcategoria';
                                     window.location.href = `/categorias/${parentSlug}/${subcategorySlug}`;
+                                });
+
+                                resultsList.appendChild(li);
+                            });
+                            data.products.forEach(product => {
+                                let li = document.createElement("li");
+                                li.classList.add("py-4", "md:p-4", "cursor-pointer", "hover:bg-gray-200", "text-left", "flex", "items-center", "gap-4");
+
+                                // Imagen
+                                const img = document.createElement("img");
+                                img.src = product.image || '/placeholder.jpg';
+                                img.alt = product.title;
+                                img.classList.add("w-12", "h-12", "object-cover", "rounded", "border", "border-gray_400");
+
+                                // Contenedor de texto
+                                const info = document.createElement("div");
+
+                                // Título
+                                const title = document.createElement("h6");
+                                title.textContent = product.title;
+                                title.classList.add("font-bold");
+
+                                // Categoría (solo la primera)
+                                const category = product.categories?.[0];
+                                const categoryText = document.createElement("p");
+                                categoryText.textContent = category?.name || '';
+                                categoryText.classList.add("text-sm", "text-gray-500");
+
+                                info.appendChild(title);
+                                info.appendChild(categoryText);
+
+                                li.appendChild(img);
+                                li.appendChild(info);
+
+                                li.addEventListener("click", () => {
+                                    const parentSlug = category?.parent?.slug || 'sin-categoria';
+                                    const subcategorySlug = category?.slug || 'sin-subcategoria';
+                                    window.location.href = `/categorias/${parentSlug}/${subcategorySlug}/${product.slug}`;
                                 });
 
                                 resultsList.appendChild(li);

@@ -225,9 +225,7 @@ window.onscroll = function () {
   var currentScrollPos = window.scrollY;
   var scrollDifference = Math.abs(prevScrollpos - currentScrollPos);
   var navbarHeight = navbar.offsetHeight; // Altura del navbar
-  var searchBar = document.querySelector(".search_bar");
   var searchTriggerPoint = 300;
-  var searchTriggerPointII = 1300; // Punto donde el search se fija
   var productMenu = document.querySelector('.product_menu');
   var page = document.body.dataset.page;  
 
@@ -241,37 +239,6 @@ window.onscroll = function () {
   }
     
   prevScrollpos = currentScrollPos;
-
-  // 📌 Lógica para fijar el Search Bar después de 325px de scroll
-  if (page !== 'product.view' && page !== 'categories.view' && page !== 'categories.view.subcategory' && page !== 'news.view') {
-  // Esta lógica solo se ejecuta en páginas que no sean la de producto, categoría o subcategoría
-    if (currentScrollPos >= searchTriggerPoint) {
-      // Si el navbar está visible (top = 0), colocamos el search bar justo debajo
-      if (navbar.style.top === "0px") {
-        searchBar.classList.add("fixed");
-        searchBar.style.top = `${navbarHeight - 1}px`; // Posicionamos debajo del navbar
-      } else {
-        searchBar.classList.add("fixed");searchBar.style.top = `0px`; // Si el navbar está oculto, el search bar se coloca en la parte superior
-      }
-    } else {
-      // Si el scroll es menor que 325px, el search bar regresa a su posición original
-      searchBar.classList.remove("fixed");
-      searchBar.style.top = ""; // Vuelve a su posición normal
-    }
-    
-    if (currentScrollPos >= searchTriggerPointII){
-        searchBar.classList.add("search_circle");
-    } else {
-        searchBar.classList.remove("search_circle");
-    }
-  }
-  
-  // 📌 Añadir o quitar clase cuando el scroll está cerca del top
-  if (currentScrollPos <= 5) {
-    navbar.classList.remove("scrolled-bottom");
-  } else {
-    navbar.classList.add("scrolled-bottom");
-  }
   
   // 📌 Lógica de productMenu (SOLO SI ESTAMOS EN product.view)
   if (page === 'product.view' && productMenu) {
