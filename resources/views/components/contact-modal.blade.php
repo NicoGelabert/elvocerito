@@ -30,13 +30,13 @@
       class="bg-white px-6 pt-6 pb-12 rounded-t-lg md:rounded-lg shadow-xl max-w-screen-sm w-full h-auto overflow-auto relative"
     >
     <!-- INICIO VÍAS DE CONTACTO -->
-      <template x-if="type === 'contact'">
+      <div x-show="type === 'contact'" x-transition>
         <div class="flex items-center justify-between mb-8">
             <h2 class="text-xl font-bold">Contacta a {{ $product->title}}</h2>
             <button @click="isOpen = false" class="font-bold">✖</button>
         </div>
         <x-contact-icons class="contact-icons w-full lg:w-auto" :icons="$product->contacts"></x-contact-icons>
-      </template>
+      </div>
       <!-- FIN VÍAS DE CONTACTO -->
       <div 
         x-show="show" 
