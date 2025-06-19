@@ -8,7 +8,7 @@
     
     class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center pt-8 md:p-6"
   >
-    <!-- Modal sin x-show, solo transición -->
+    <x-close-button class="top-2"/>
     <div 
       x-show="isOpen"
       x-transition:enter="transition transform duration-300"
@@ -20,10 +20,8 @@
       @click.stop
       class="bg-white p-6 rounded-t-lg md:rounded-lg shadow-xl max-w-screen-xl w-full h-full overflow-auto"
     >
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xl font-bold">Categorías</h2>
-        <button @click="isOpen = false" class="font-bold">✖</button>
-      </div>
+
+      <h2 class="text-center text-xl font-bold mb-8">Categorías</h2>
 
       <!-- Contenido -->
       <ul class="grid grid-cols-3 md:grid-cols-8 gap-y-8 gap-x-2">

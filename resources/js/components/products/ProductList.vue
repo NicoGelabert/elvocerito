@@ -37,88 +37,90 @@
       </transition>
       <transition name="modal-slide-up">
         <div v-if="showModal" class="modal-content">
+          <button @click="showModal = false" class="absolute right-2 font-bold w-12 h-12 bg-white border border-gray_300 rounded-full z-50 -top-6">✖</button>
           <div class="flex justify-between items-start">
-            <div >
+            <div class="flex justify-between items-baseline w-full">
               <h2>Filtros</h2>
               <span class="text-gray_700 text-sm" v-if="filtersCount > 0">({{ filtersCount }} activo{{ filtersCount > 1 ? 's' : '' }})</span>
             </div>
 
-            <button @click="showModal = false" class="close-btn">✖</button>
           </div>
           
-          <!-- Categorías dentro del modal -->
-          <div v-if="categories && categories.length > 0" class="filter_categories">
-            <div class="flex justify-between items-center mb-4">
-              <h4>Categorías</h4>
-              <x-button 
-                  v-if="selectedCategory !== null" 
-                  @click="clearCategory"
+          <div class="max-h-[71vh] overflow-y-auto">
+            <!-- Categorías dentro del modal -->
+            <div v-if="categories && categories.length > 0" class="filter_categories">
+              <div class="flex justify-between items-center mb-4">
+                <h4>Categorías</h4>
+                <x-button 
+                    v-if="selectedCategory !== null" 
+                    @click="clearCategory"
+                    class="badge clear"
+                  >
+                    <span class="capitalize">Limpiar Selección</span>
+                </x-button>
+              </div>
+              <ul>
+                <li 
+                  v-for="category in categories" 
+                  :key="category.id" 
+                  @click="changeCategory(category.id)"
+                  :class="{ active: selectedCategory === category.id }"
+                  class="cursor-pointer flex items-center gap-2 pb-2"
+                >
+                  <img 
+                    :src="category.image || '/images/default-product.jpg'" 
+                    alt="Imagen del producto" class="w-4 h-auto opacity-50"
+                  />
+                  <div v-if="selectedCategory === category.id" @click.stop="changeCategory(null)"
+                        title="Quitar selección" class="flex w-full justify-between">
+                    <span>{{ category.name }}</span>
+                    <span class="rounded-full bg-gray_100 px-1">✕</span>
+                  </div>
+                  <div v-else @click="changeCategory(category.id)">
+                    <span>
+                      {{ category.name }}
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+    
+            <!-- Etiquetas dentro del modal -->
+            <div v-if="tags && tags.length > 0" class="filter_tags">
+              <div class="flex justify-between items-center">
+                <h4>Etiquetas</h4>
+                <x-button 
+                  v-if="selectedTags.length > 0"
+                  @click="clearTags"
                   class="badge clear"
                 >
-                  <span class="capitalize">Limpiar Selección</span>
-              </x-button>
-            </div>
-            <ul>
-              <li 
-                v-for="category in categories" 
-                :key="category.id" 
-                @click="changeCategory(category.id)"
-                :class="{ active: selectedCategory === category.id }"
-                class="cursor-pointer flex items-center gap-2 pb-2"
-              >
-                <img 
-                  :src="category.image || '/images/default-product.jpg'" 
-                  alt="Imagen del producto" class="w-4 h-auto opacity-50"
-                />
-                <div v-if="selectedCategory === category.id" @click.stop="changeCategory(null)"
-                      title="Quitar selección" class="flex w-full justify-between">
-                  <span>{{ category.name }}</span>
-                  <span class="rounded-full bg-gray_100 px-1">✕</span>
-                </div>
-                <div v-else @click="changeCategory(category.id)">
+                  <span>Limpiar Selección</span>
+                </x-button>
+              </div>
+              <ul>
+                <li 
+                  v-for="tag in tags" 
+                  :key="tag.id" 
+                  :class="{ active: selectedTags.includes(tag.id) }"
+                  class="badge"
+                >
+                <div v-if="!selectedTags.includes(tag.id)" @click="toggleTag(tag.id)">
                   <span>
-                    {{ category.name }}
+                    {{ tag.name }}
                   </span>
                 </div>
-              </li>
-            </ul>
-          </div>
-  
-          <!-- Etiquetas dentro del modal -->
-          <div v-if="tags && tags.length > 0" class="filter_tags">
-            <div class="flex justify-between items-center">
-              <h4>Etiquetas</h4>
-              <x-button 
-                v-if="selectedTags.length > 0"
-                @click="clearTags"
-                class="badge clear"
-              >
-                <span>Limpiar Selección</span>
-              </x-button>
+                <div v-else class="flex items-center gap-2"
+                  @click.stop="toggleTag(tag.id)"
+                  title="Quitar">
+                  <span
+                      >
+                    {{ tag.name }}
+                  </span>
+                  <span class="rounded-full bg-white/50 px-1">✕</span>
+                </div>
+                </li>
+              </ul>
             </div>
-            <ul>
-              <li 
-                v-for="tag in tags" 
-                :key="tag.id" 
-                :class="{ active: selectedTags.includes(tag.id) }"
-                class="badge"
-              >
-              <div v-if="!selectedTags.includes(tag.id)" @click="toggleTag(tag.id)">
-                <span>
-                  {{ tag.name }}
-                </span>
-              </div>
-              <div v-else class="flex items-center gap-2"
-                @click.stop="toggleTag(tag.id)"
-                title="Quitar">
-                <span
-                    >
-                  {{ tag.name }}
-                </span>
-                <span class="rounded-full bg-white/50 px-1">✕</span>
-              </div>
-              </li>
-            </ul>
           </div>
         </div>
       </transition>
