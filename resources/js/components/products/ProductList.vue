@@ -302,7 +302,11 @@
                 <!-- INICIO MODAL -->
                 <div class="modal-wrapper-product-contact">
                   <transition name="overlay-fade-product-contact">
-                    <div v-if="showModalShare && productToShare" class="w-full h-full bg-black bg-opacity-10 flex justify-center items-end pointer-events-auto" @click="showModalShare = null; productToShare = null"></div>
+                    <div
+                      v-if="showModalShare"
+                      class="w-full h-full bg-black bg-opacity-10 flex justify-center items-end pointer-events-auto"
+                      @click="closeShareModal"
+                    ></div>
                   </transition>
                   <transition name="modal-slide-up">
                     <div v-if="showModalShare && productToShare" class="modal-content">
@@ -433,7 +437,7 @@ export default {
       loading: false,
       showModal: false, // Controla la visibilidad del modal en mobile
       showModalContact: null,
-      showModalShare: null,
+      showModalShare: false,
       productToShare: null,
       copied: false,
       isDesktop: window.innerWidth >= 1024, // Detecta si es desktop
@@ -535,7 +539,11 @@ export default {
     },
     openShareModal(product) {
       this.productToShare = product;
-      this.showModalShare = product.id;
+      this.showModalShare = true;
+    },
+    closeShareModal() {
+      this.showModalShare = false;
+      this.productToShare = null;
     },
     copyToClipboard() {
       navigator.clipboard.writeText(this.copyUrl).then(() => {
