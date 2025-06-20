@@ -219,66 +219,77 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-let prevScrollpos = window.scrollY;
-let scrollThreshold = 5;
-window.onscroll = function () {
-  var currentScrollPos = window.scrollY;
-  var scrollDifference = Math.abs(prevScrollpos - currentScrollPos);
-  var navbarHeight = navbar.offsetHeight; // Altura del navbar
-  var searchTriggerPoint = 300;
-  var productMenu = document.querySelector('.product_menu');
-  var page = document.body.dataset.page;  
+// MOVIMIENTO DEL NAVBAR
+let prevScrollPos = window.scrollY;
+const scrollThreshold = 15;
+const navbar = document.getElementById("navbar");
+const productMenu = document.querySelector(".product_menu");
+const page = document.body.dataset.page;
+const productHeader = document.querySelector(".product_header");
+const articleHeader = document.querySelector(".article_header");
 
-    // 📌 Lógica de Navbar (Se ejecuta siempre)
+function toggleNavbar(currentScrollPos) {
+  const scrollDifference = Math.abs(prevScrollPos - currentScrollPos);
   if (scrollDifference >= scrollThreshold) {
-    if (prevScrollpos > currentScrollPos) {
-      navbar.style.top = "0"; // Navbar vuelve a aparecer
-    } else {
-      navbar.style.top = `-${navbarHeight}px`;  // Navbar desaparece
-    }
+    const isScrollingUp = prevScrollPos > currentScrollPos;
+    navbar.style.top = isScrollingUp ? "0" : `-${navbar.offsetHeight}px`;
+    prevScrollPos = currentScrollPos;
   }
-    
-  prevScrollpos = currentScrollPos;
-  
-  // 📌 Lógica de productMenu (SOLO SI ESTAMOS EN product.view)
-  if (page === 'product.view' && productMenu) {
-    if (currentScrollPos >= searchTriggerPoint) {
-      if (navbar.style.top === "0px") {
-        productMenu.classList.remove("opacity-0", "-translate-y-full");
-        productMenu.classList.add("opacity-100", "translate-y-0", "transition-all", "duration-300");
-        productMenu.style.top = `${navbarHeight}px`;
-      } else {
-        productMenu.classList.remove("opacity-0", "-translate-y-full");
-        productMenu.classList.add("opacity-100", "translate-y-0", "transition-all", "duration-300");
-        productMenu.style.top = "0px";
-      }
-    } else {
-      // Asegurar que la transición se aplique correctamente
-      productMenu.classList.remove("translate-y-0", "opacity-100");
-      productMenu.classList.add("-translate-y-full");
-      // Opcional: Resetear "top" después de la animación
-      setTimeout(() => {
-        productMenu.style.top = "";
-        productMenu.classList.add("opacity-0");
-      }, 300);
-    }
+}
+
+function toggleProductMenu(currentScrollPos) {
+  if (page !== "product.view" || !productMenu) return;
+
+  const searchTriggerPoint = 300;
+  const isNavbarVisible = navbar.style.top === "0px";
+
+  if (currentScrollPos >= searchTriggerPoint) {
+    productMenu.classList.remove("opacity-0", "-translate-y-full");
+    productMenu.classList.add("opacity-100", "translate-y-0", "transition-all", "duration-300");
+    productMenu.style.top = isNavbarVisible ? `${navbar.offsetHeight}px` : "0px";
+  } else {
+    productMenu.classList.remove("translate-y-0", "opacity-100");
+    productMenu.classList.add("-translate-y-full");
+    setTimeout(() => {
+      productMenu.style.top = "";
+      productMenu.classList.add("opacity-0");
+    }, 300);
   }
-  // 📌 Lógica para mover product_header en desktop SOLO en product.view
-  function moveHeader(pageName, selector) {
-    if (page === pageName && window.innerWidth >= 1024) {
-      const header = document.querySelector(selector);
-      if (header) {
-        if (navbar.style.top === "0px") {
-          header.style.top = "5rem";
-        } else {
-          header.style.top = "2rem";
-        }
-      }
-    }
+}
+
+function adjustHeader(currentScrollPos) {
+  if (window.innerWidth < 1024) return;
+
+  const isNavbarVisible = navbar.style.top === "0px";
+  const offset = isNavbarVisible ? "5rem" : "2rem";
+
+  if (page === "product.view" && productHeader) {
+    productHeader.style.top = offset;
   }
-  moveHeader('product.view', '.product_header');
-  moveHeader('news.view', '.article_header');  
-};
+
+  if (page === "news.view" && articleHeader) {
+    articleHeader.style.top = offset;
+  }
+}
+
+// Usar requestAnimationFrame para mejorar rendimiento
+let ticking = false;
+
+window.addEventListener("scroll", () => {
+  const currentScrollPos = window.scrollY;
+
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      toggleNavbar(currentScrollPos);
+      toggleProductMenu(currentScrollPos);
+      adjustHeader(currentScrollPos);
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// FIN MOVIMIENTO DEL NAVBAR
 
 // INICIO TABS DE FLOWBITE EN PRODUCT.VIEW
 const tabEl = document.getElementById('custom-tabs');

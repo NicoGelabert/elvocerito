@@ -19,7 +19,7 @@
     
     class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end md:items-center justify-center md:p-6"
   >
-    <div class="relative h-auto w-full">
+    <div class="relative h-auto w-full flex justify-center">
       <x-close-button class="-top-6"/>
           
       <div 

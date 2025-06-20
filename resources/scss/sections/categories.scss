@@ -75,15 +75,15 @@
     .btn-filtro{
         @apply bg-white;
     }
-    .modal-wrapper{
+    .modal-wrapper, .modal-wrapper-product-contact{
         @apply fixed inset-0 z-50 pointer-events-none;
     }
-    .modal-overlay {
-        @apply fixed top-0 left-0 w-full h-full bg-gray_900/50 flex justify-center items-end z-50;
+    .modal-overlay, .modal-overlay-product-contact {
+        @apply top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-end md:items-center z-50;
       }
       
       .modal-content {
-        @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-lg px-4 py-8 min-h-[50vh] max-h-[85vh] overflow-visible z-[100] mx-auto pointer-events-auto;
+        @apply fixed bottom-0 md:bottom-1/2 md:translate-y-1/2 left-0 right-0 bg-white rounded-t-xl md:rounded-xl shadow-lg pt-6 pb-12 px-6 h-auto max-h-[85vh] max-w-screen-sm overflow-visible z-[100] mx-auto pointer-events-auto;
       }
       
       /* Ajuste extra por si el contenedor principal tiene un z-index alto */
@@ -94,19 +94,35 @@
     .category_view_product_list{
     }
 
-    /* Animación del fondo (overlay) */
-    .overlay-fade-enter-active,
-    .overlay-fade-leave-active {
+    /* Animación del fondo contacto (overlay) */
+    .overlay-fade-product-contact-enter-active,
+    .overlay-fade-product-contact-leave-active {
     transition: opacity 0.3s ease;
     }
 
-    .overlay-fade-enter-from,
-    .overlay-fade-leave-to {
+    .overlay-fade-product-contact-enter-from,
+    .overlay-fade-product-contact-leave-to {
     opacity: 0;
     }
 
-    .overlay-fade-enter-to,
-    .overlay-fade-leave-from {
+    .overlay-fade-product-contact-enter-to,
+    .overlay-fade-product-contact-leave-from {
+    opacity: 1;
+    }
+
+    /* Animación del fondo (overlay) */
+    .overlay-fade-product-contact-enter-active,
+    .overlay-fade-product-contact-leave-active {
+    transition: opacity 0.3s ease;
+    }
+
+    .overlay-fade-product-contact-enter-from,
+    .overlay-fade-product-contact-leave-to {
+    opacity: 0;
+    }
+
+    .overlay-fade-product-contact-enter-to,
+    .overlay-fade-product-contact-leave-from {
     opacity: 1;
     }
 
@@ -119,13 +135,19 @@
     .modal-slide-up-enter-from,
     .modal-slide-up-leave-to {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(100%)
     }
 
     .modal-slide-up-enter-to,
     .modal-slide-up-leave-from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0)
+    }
+    @media (min-width: 768px) {
+        .modal-slide-up-enter-to,
+        .modal-slide-up-leave-from {
+            transform: translateY(50%);
+        }
     }
 
 }

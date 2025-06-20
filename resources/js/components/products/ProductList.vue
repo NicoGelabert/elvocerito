@@ -265,13 +265,103 @@
             <div class="footer">
               <hr class="divider">
               <div class="flex justify-between items-center">
-                <div v-if="product.contacts && product.contacts.length" class="flex items-center gap-2">
-                  <component :is="getIcon(product.contacts[0].type)" class="w-4 h-4" />
-                  <p>{{ product.contacts[0].info }}</p>
+
+                <!-- INICIO BOTÓN PARA ABRIR MODAL DE CONTACTO EN MOBILE Y TABLET  -->
+                <button @click="showModalContact = product.id" class="btn btn-secondary flex gap-4 items-center w-fit relative">
+                  Contactar
+                </button>
+                <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
+                <!-- INICIO MODAL -->
+                <div class="modal-wrapper-product-contact">
+                  <transition name="overlay-fade-product-contact">
+                    <div v-if="showModalContact === product.id" class="w-full h-full bg-black bg-opacity-50 flex justify-center items-end pointer-events-auto" @click="showModalContact = null"></div>
+                  </transition>
+                  <transition name="modal-slide-up">
+                    <div v-if="showModalContact === product.id" class="modal-content">
+                      <button @click="showModalContact = null" class="absolute right-2 font-bold w-12 h-12 bg-white border border-gray_300 rounded-full z-50 -top-6">✖</button>
+                      <h2 class="text-center text-xl font-bold mb-8">Contacta a {{ product.title }}</h2>
+                      <div v-if="product.contacts && product.contacts.length" class="contact-icons w-full lg:w-auto">
+                        <div v-for="(contact, index) in product.contacts" :key="index" class="contacto" :class="index !== product.contacts.length - 1 ? 'border-b border-gray-200 pb-4 mb-4' : ''">
+                          <component :is="getIcon(contact.type)" class="w-4 h-4" />
+                          <p class="text-right text-base text-gray-500 -mt-1 lg:mt-0">{{ contact.info }}</p>
+                        </div>
+                      </div>
+                      <p v-else>
+                        Sin contacto
+                      </p>
+                    </div>
+                  </transition>
                 </div>
-                <p v-else>
-                  Sin contacto
-                </p>
+                <!-- FIN BOTÓN PARA ABRIR MODAL DE CONTACTO EN MOBILE Y TABLET  -->
+
+                <!-- INICIO BOTÓN PARA ABRIR MODAL DE COMPARTIR EN MOBILE Y TABLET  -->
+                <button @click="openShareModal(product)" class="btn btn-secondary flex gap-4 items-center w-fit relative">
+                  <ShareIcon class="fill-primary"/>
+                </button>
+                <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
+                <!-- INICIO MODAL -->
+                <div class="modal-wrapper-product-contact">
+                  <transition name="overlay-fade-product-contact">
+                    <div v-if="showModalShare && productToShare" class="w-full h-full bg-black bg-opacity-10 flex justify-center items-end pointer-events-auto" @click="showModalShare = null; productToShare = null"></div>
+                  </transition>
+                  <transition name="modal-slide-up">
+                    <div v-if="showModalShare && productToShare" class="modal-content">
+                      <button @click="showModalShare = null; productToShare = null" class="absolute right-2 font-bold w-12 h-12 bg-white border border-gray_300 rounded-full z-50 -top-6">✖</button>
+                      <div class="flex flex-col gap-8 bg-white rounded-xl p-4">
+                        <h2 class="text-center text-xl font-bold">Compartí a {{ productToShare.title }}</h2>
+              
+                        <div class="flex flex-col items-center md:flex-row md:items-start gap-4">
+                          <img :src="productToShare.images?.[0]?.url" :alt="productToShare.title" class="rounded-lg w-full max-w-24 h-auto object-cover aspect-auto">
+                          <div class="flex flex-col gap-4 items-center md:items-start">
+                            <div v-if="productToShare.categories && productToShare.categories.length"  class="flex items-center flex-col md:flex-row md:items-start gap-2 mx-auto md:mx-0">
+                              <div v-for="(category, index) in productToShare.categories" :key="index" class="flex gap-1">
+                                <img :src="category.image" :alt="category.name" class="w-3 h-3 rounded-none m-0">
+                                <h6>{{ category.name }}</h6>
+                              </div>
+                            </div>
+                            <h4>{{ productToShare.title }}</h4>
+                            <p class="text-center md:text-left">{{ productToShare.short_description }}</p>
+                          </div>
+                        </div>
+              
+                        <div class="flex justify-center gap-4">
+                            <a class="bg-gray-100 p-2 rounded-md" :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`" target="_blank">
+                              <FacebookIcon class="w-5 h-5"/>
+                            </a>
+                            <a class="bg-gray-100 p-2 rounded-md" :href="`https://api.whatsapp.com/send?text=${shareText}%20${shareUrl}`" target="_blank">
+                                <WhatsappIcon class="w-5 h-5"/>
+                            </a>
+                            <a class="bg-gray-100 p-2 rounded-md" :href="`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`" target="_blank">
+                                <LinkedinIcon class="w-5 h-5"/>
+                            </a>
+                            <!-- Copiar enlace -->
+                            <button 
+                              class="bg-gray-100 p-2 rounded-md hover:bg-gray-200" 
+                              title="Copiar enlace"
+                              @click="copyToClipboard"
+                            >
+                              <CopyIcon class="w-5 h-5"/>
+                            </button>
+                            <template>
+                              <transition
+                                name="toast"
+                                @after-enter="startHideTimeout"
+                              >
+                                <div
+                                  v-if="show"
+                                  class="absolute w-max bottom-28 right-1/2 translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded shadow z-50"
+                                  ref="toast"
+                                >
+                                  Enlace copiado al portapapeles
+                                </div>
+                              </transition>
+                            </template>
+                        </div>
+                      </div>
+                    </div>
+                  </transition>
+                </div>
+                <!-- FIN BOTÓN PARA ABRIR MODAL DE COMPARTIR EN MOBILE Y TABLET  -->
               </div>
             </div>
             <!-- FIN FOOTER DE PRODUCTO -->
@@ -288,7 +378,6 @@
       <!-- FIN MENSAJE NO HAY PRODUCTOS -->
     </div>
 
-
     <!-- INICIO SPINNER -->
     <div v-if="loading" class="spinner-overlay">
       <div class="spinner"></div>
@@ -299,10 +388,14 @@
 </template>
 
 <script>
-import FilterIcon from '@/icons/FilterIcon.vue';
+import CopyIcon from '@/icons/CopyIcon.vue';
+import FacebookIcon from '@/icons/FacebookIcon.vue';
 import FijoIcon from '@/icons/FijoIcon.vue';
+import FilterIcon from '@/icons/FilterIcon.vue';
+import LinkedinIcon from '@/icons/LinkedinIcon.vue';
 import MailIcon from '@/icons/MailIcon.vue';
 import MovilIcon from '@/icons/MovilIcon.vue';
+import ShareIcon from '@/icons/ShareIcon.vue';
 import WhatsappIcon from '@/icons/WhatsappIcon.vue';
 import { createPopper } from '@popperjs/core';
 
@@ -319,13 +412,17 @@ export default {
     tags: {
       type: Array,
       default: () => []
-    }
+    },
   },
   components: {
-    FilterIcon,
+    CopyIcon,
+    FacebookIcon,
     FijoIcon,
+    FilterIcon,
+    LinkedinIcon,
     MailIcon,
     MovilIcon,
+    ShareIcon,
     WhatsappIcon,
   },
   data() {
@@ -335,6 +432,10 @@ export default {
       filteredProducts: [],
       loading: false,
       showModal: false, // Controla la visibilidad del modal en mobile
+      showModalContact: null,
+      showModalShare: null,
+      productToShare: null,
+      copied: false,
       isDesktop: window.innerWidth >= 1024, // Detecta si es desktop
       hovered: {},
     };
@@ -345,7 +446,29 @@ export default {
     },
     filtersCount() {
       return (this.selectedCategory !== null ? 1 : 0) + this.selectedTags.length;
-    }
+    },
+    shareUrl() {
+      if (!this.productToShare) return encodeURIComponent(window.location.href);
+      return encodeURIComponent(
+        window.location.origin +
+        `/categorias/${this.productToShare.categories?.[0]?.parent?.slug || 'sin-categoria'}` +
+        `/${this.productToShare.categories?.[0]?.slug || 'sin-subcategoria'}` +
+        `/${this.productToShare.slug}`
+      );
+    },
+    shareText() {
+      if (!this.productToShare) return '';
+      return encodeURIComponent(`${this.productToShare.title} - ${this.productToShare.short_description} - ${this.productToShare.slug}`);
+    },
+    copyUrl() {
+      if (!this.productToShare) return (window.location.href);
+      return (
+        window.location.origin +
+        `/categorias/${this.productToShare.categories?.[0]?.parent?.slug || 'sin-categoria'}` +
+        `/${this.productToShare.categories?.[0]?.slug || 'sin-subcategoria'}` +
+        `/${this.productToShare.slug}`
+      );
+    },
   },
   methods: {
     changeCategory(categoryId) {
@@ -410,6 +533,28 @@ export default {
           return null
       }
     },
+    openShareModal(product) {
+      this.productToShare = product;
+      this.showModalShare = product.id;
+    },
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.copyUrl).then(() => {
+        this.copied = true
+        this.triggerToast();
+        setTimeout(() => this.copied = false, 2000)  // Feedback dura 2 segundos
+      }).catch(err => {
+        console.error('Error copiando al portapapeles:', err)
+      })
+    },
+    triggerToast() {
+      this.show = true;
+    },
+    startHideTimeout() {
+      if (this.hideTimeout) clearTimeout(this.hideTimeout);
+      this.hideTimeout = setTimeout(() => {
+        this.show = false;
+      }, 2000);
+    },
   },
   mounted() {
     this.filteredProducts = [...this.products];
@@ -418,8 +563,27 @@ export default {
       initTooltips();
     }, 0);
   },
+  beforeUnmount() {
+    if (this.hideTimeout) clearTimeout(this.hideTimeout);
+  },
   beforeDestroy() {
     window.removeEventListener('resize', this.checkScreenSize);
   },
 };
 </script>
+<style scoped>
+.toast-enter-active,
+.toast-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.toast-enter-to,
+.toast-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
