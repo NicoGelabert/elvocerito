@@ -19,7 +19,7 @@
     
     class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end md:items-center justify-center md:p-6"
   >
-    <div class="relative h-auto w-full flex justify-center">
+    <div class="relative h-auto w-full max-w-screen-sm flex justify-center">
       <x-close-button class="-top-6"/>
           
       <div 
@@ -31,7 +31,7 @@
         x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-full"
         @click.stop
-        class="bg-white px-6 pt-6 pb-12 rounded-t-lg md:rounded-lg shadow-xl max-w-screen-sm w-full h-auto overflow-auto"
+        class="bg-white px-6 pt-6 pb-12 rounded-t-lg md:rounded-lg shadow-xl w-full h-auto overflow-auto"
       >
         <!-- INICIO VÍAS DE CONTACTO -->
         <div x-show="type === 'contact'" x-transition>

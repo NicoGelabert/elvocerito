@@ -15,7 +15,7 @@
             }
         @endphp
         <a href="{{ $href }}">
-            <div class="contacto {{ !$loop->last ? 'border-b border-gray-200 pb-4 mb-4' : '' }}"">
+            <div class="contacto {{ !$loop->last ? 'border-b border-gray-200 pb-4 mb-4' : '' }}">
                 <x-icons.icon :name="$iconData['type']" />
                 <div>
                     <span class="block text-right text-base lg:text-sm font-semibold capitalize">{{ $iconData['type'] }}</span>

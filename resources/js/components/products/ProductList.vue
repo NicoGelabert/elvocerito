@@ -294,78 +294,11 @@
                 </div>
                 <!-- FIN BOTÓN PARA ABRIR MODAL DE CONTACTO EN MOBILE Y TABLET  -->
 
-                <!-- INICIO BOTÓN PARA ABRIR MODAL DE COMPARTIR EN MOBILE Y TABLET  -->
+                <!-- INICIO BOTÓN PARA ABRIR MODAL DE COMPARTIR  -->
                 <button @click="openShareModal(product)" class="btn btn-secondary flex gap-4 items-center w-fit relative">
                   <ShareIcon class="fill-primary"/>
                 </button>
-                <!-- FIN BOTÓN PARA ABRIR MODAL EN MOBILE Y TABLET  -->
-                <!-- INICIO MODAL -->
-                <div class="modal-wrapper-product-contact">
-                  <transition name="overlay-fade-product-contact">
-                    <div
-                      v-if="showModalShare"
-                      class="w-full h-full bg-black bg-opacity-10 flex justify-center items-end pointer-events-auto"
-                      @click="closeShareModal"
-                    ></div>
-                  </transition>
-                  <transition name="modal-slide-up">
-                    <div v-if="showModalShare && productToShare" class="modal-content">
-                      <button @click="showModalShare = null; productToShare = null" class="absolute right-2 font-bold w-12 h-12 bg-white border border-gray_300 rounded-full z-50 -top-6">✖</button>
-                      <div class="flex flex-col gap-8 bg-white rounded-xl p-4">
-                        <h2 class="text-center text-xl font-bold">Compartí a {{ productToShare.title }}</h2>
-              
-                        <div class="flex flex-col items-center md:flex-row md:items-start gap-4">
-                          <img :src="productToShare.images?.[0]?.url" :alt="productToShare.title" class="rounded-lg w-full max-w-24 h-auto object-cover aspect-auto">
-                          <div class="flex flex-col gap-4 items-center md:items-start">
-                            <div v-if="productToShare.categories && productToShare.categories.length"  class="flex items-center flex-col md:flex-row md:items-start gap-2 mx-auto md:mx-0">
-                              <div v-for="(category, index) in productToShare.categories" :key="index" class="flex gap-1">
-                                <img :src="category.image" :alt="category.name" class="w-3 h-3 rounded-none m-0">
-                                <h6>{{ category.name }}</h6>
-                              </div>
-                            </div>
-                            <h4>{{ productToShare.title }}</h4>
-                            <p class="text-center md:text-left">{{ productToShare.short_description }}</p>
-                          </div>
-                        </div>
-              
-                        <div class="flex justify-center gap-4">
-                            <a class="bg-gray-100 p-2 rounded-md" :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`" target="_blank">
-                              <FacebookIcon class="w-5 h-5"/>
-                            </a>
-                            <a class="bg-gray-100 p-2 rounded-md" :href="`https://api.whatsapp.com/send?text=${shareText}%20${shareUrl}`" target="_blank">
-                                <WhatsappIcon class="w-5 h-5"/>
-                            </a>
-                            <a class="bg-gray-100 p-2 rounded-md" :href="`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`" target="_blank">
-                                <LinkedinIcon class="w-5 h-5"/>
-                            </a>
-                            <!-- Copiar enlace -->
-                            <button 
-                              class="bg-gray-100 p-2 rounded-md hover:bg-gray-200" 
-                              title="Copiar enlace"
-                              @click="copyToClipboard"
-                            >
-                              <CopyIcon class="w-5 h-5"/>
-                            </button>
-                            <template>
-                              <transition
-                                name="toast"
-                                @after-enter="startHideTimeout"
-                              >
-                                <div
-                                  v-if="show"
-                                  class="absolute w-max bottom-28 right-1/2 translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded shadow z-50"
-                                  ref="toast"
-                                >
-                                  Enlace copiado al portapapeles
-                                </div>
-                              </transition>
-                            </template>
-                        </div>
-                      </div>
-                    </div>
-                  </transition>
-                </div>
-                <!-- FIN BOTÓN PARA ABRIR MODAL DE COMPARTIR EN MOBILE Y TABLET  -->
+                <!-- FIN BOTÓN PARA ABRIR MODAL DE COMPARTIR -->
               </div>
             </div>
             <!-- FIN FOOTER DE PRODUCTO -->
@@ -373,6 +306,74 @@
           <!-- FIN CONTENIDO PRODUCTO -->
         </div>
         <!-- FIN PRODUCTO -->
+        <!-- INICIO MODAL COMPARTIR (solo una instancia) -->
+        <div class="modal-wrapper-product-contact">
+          <!-- Fondo oscuro -->
+          <transition name="overlay-fade-product-contact">
+            <div
+              v-if="showModalShare"
+              class="fixed inset-0 bg-black bg-opacity-50 z-40"
+              @click.self="closeShareModal"
+            ></div>
+          </transition>
+
+          <!-- Modal de compartir -->
+          <transition name="modal-slide-up">
+            <div
+              v-if="showModalShare && productToShare"
+              class="modal-content fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-xl p-4 max-w-2xl mx-auto"
+            >
+              <button
+                @click="closeShareModal"
+                class="absolute right-2 -top-6 font-bold w-12 h-12 bg-white border border-gray_300 rounded-full z-50"
+              >✖</button>
+
+              <div class="flex flex-col gap-8 bg-white rounded-xl p-4">
+                <h2 class="text-center text-xl font-bold">Compartí a {{ productToShare.title }}</h2>
+
+                <div class="flex flex-col items-center md:flex-row md:items-start gap-4">
+                  <img :src="productToShare.images?.[0]?.url" :alt="productToShare.title" class="rounded-lg w-full max-w-24 h-auto object-cover" />
+                  <div class="flex flex-col gap-4 items-center md:items-start">
+                    <div v-if="productToShare.categories?.length" class="flex items-center flex-col md:flex-row md:items-start gap-2">
+                      <div v-for="(category, index) in productToShare.categories" :key="index" class="flex gap-1">
+                        <img :src="category.image" :alt="category.name" class="w-3 h-3" />
+                        <h6>{{ category.name }}</h6>
+                      </div>
+                    </div>
+                    <h4>{{ productToShare.title }}</h4>
+                    <p class="text-center md:text-left">{{ productToShare.short_description }}</p>
+                  </div>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                  <a class="bg-gray-100 p-2 rounded-md" :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`" target="_blank">
+                    <FacebookIcon class="w-5 h-5" />
+                  </a>
+                  <a class="bg-gray-100 p-2 rounded-md" :href="`https://api.whatsapp.com/send?text=${shareText}%20${shareUrl}`" target="_blank">
+                    <WhatsappIcon class="w-5 h-5" />
+                  </a>
+                  <a class="bg-gray-100 p-2 rounded-md" :href="`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`" target="_blank">
+                    <LinkedinIcon class="w-5 h-5" />
+                  </a>
+                  <button class="bg-gray-100 p-2 rounded-md hover:bg-gray-200" @click="copyToClipboard">
+                    <CopyIcon class="w-5 h-5" />
+                  </button>
+
+                  <!-- Toast -->
+                  <transition name="toast" @after-enter="startHideTimeout">
+                    <div
+                      v-if="show"
+                      class="absolute w-max bottom-28 right-1/2 translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded shadow z-50"
+                    >
+                      Enlace copiado al portapapeles
+                    </div>
+                  </transition>
+                </div>
+              </div>
+            </div>
+          </transition>
+        </div>
+        <!-- FIN MODAL COMPARTIR -->
       </div>
       <!-- FIN LISTADO PRODUCTOS -->
       <!-- INICIO MENSAJE NO HAY PRODUCTOS -->
