@@ -20,9 +20,8 @@
                     @endif
                     <div class="card_body">
                         <a href="{{ route('product.view', [
-                            'category' => $anunciante_destacado->categories->first()->parent ? $anunciante_destacado->categories->first()->parent->slug : 'sin-subcategoria', // Obtiene la categoría principal
-                            'subcategory' => $anunciante_destacado->categories->first()->slug, // Obtiene la subcategoría
-                            'product' => $anunciante_destacado->slug // Obtiene el producto
+                            'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
+                            'product' => $anunciante_destacado->slug
                         ]) }}">
                         <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
                             <div class="anunciantes_destacados_card_content">

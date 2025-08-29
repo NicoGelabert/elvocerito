@@ -1,5 +1,5 @@
 @section('meta')
-    <title>{{ $product->title }}, {{ $subcategory->name }}</title>
+    <title>{{ $product->title }}, {{ $category->name }}</title>
     <meta name="description" content="{{ $product->short_description }}">
     <meta name="keywords" content="{{ $product->tags->pluck('name')->implode(', ') }}">
     <link rel="canonical" href="{{ url()->current() }}">
@@ -91,8 +91,6 @@
                     <x-button href="{{route ('categories.view', [ 'category' => $category->slug])}}" class="bg-none">
                         <p>{{ $category->name }}</p>
                     </x-button>
-                    <p>/</p>
-                    <h2 class="text-small">{{ $subcategory->name }}</h2>
                 </div>
             </div>
             <!-- FIN BREADCRUMBS -->

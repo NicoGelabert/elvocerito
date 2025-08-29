@@ -8,9 +8,8 @@
                 @foreach ($ultimos_anunciantes as $ultimo_anunciante)
                 <li class="splide__slide">
                     <a href="{{ route('product.view', [
-                        'category' => $ultimo_anunciante->categories->first()->parent ? $ultimo_anunciante->categories->first()->parent->slug : 'sin-subcategoria', // Obtiene la categoría principal
-                        'subcategory' => $ultimo_anunciante->categories->first()->slug, // Obtiene la subcategoría
-                        'product' => $ultimo_anunciante->slug // Obtiene el producto
+                        'category' => optional($ultimo_anunciante->categories->first())->slug ?? 'sin-categoria',
+                        'product' => $ultimo_anunciante->slug
                     ]) }}">
                         <div>
                             <img src="{{ $ultimo_anunciante->image }}" alt="{{ $ultimo_anunciante->title }}">
