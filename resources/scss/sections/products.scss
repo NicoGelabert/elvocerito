@@ -1,66 +1,92 @@
 // VISTA DE LISTADO DE PRODUCTOS
-.product-index{
-    @apply my-12 md:my-14;
-    .product_index_hero{
-        @apply flex justify-center py-12 lg:py-6;
-        h2{
-            @apply text-center
-        }
-    }
-    .filter_categories{
-        @apply flex flex-col gap-2 lg:gap-4 text-text_small lg:text-xs;
-        ul{
-            @apply flex flex-col gap-2;
-            li{
-                @apply uppercase text-text_small tracking-wide border-b;
-            }
-            li.active{
-                @apply text-primary;
-            }
-            li:last-child{
-                @apply border-none;
+    // VISTA DE PRODUCTOS
+    #product-index{
+        .product_index_hero{
+            @apply flex justify-center mt-14 py-12 lg:py-24;
+            h2{
+                @apply text-center
             }
         }
-    }
-    .filter_tags{
-        @apply flex flex-col gap-4 text-text_small lg:text-xs;
-        ul{
-            @apply flex flex-row flex-wrap gap-2;
-            li{
-                @apply w-auto;
+        .product-list{
+            @apply py-12;
+            .error {
+                @apply text-red-600;
             }
-            li.active{
-                @apply font-bold bg-primary/50 text-gray_700;
-            }
-        }
-    }
-    .filter_categories, .filter_tags{
-        @apply mt-4 lg:mt-0;
-    }
-    .product-list{
-        @apply h-fit grid grid-cols-2 md:grid-cols-3 gap-2 relative w-full overflow-x-hidden box-border;
-        .product_card{
-            @apply flex flex-col rounded-lg border border-gray_200 h-auto bg-white;
-            img{
-                @apply aspect-video object-cover rounded-t-lg;
-            }
-            h5{
-                @apply text-sm  ;
-            }
-            .categories_badges{
-                @apply flex gap-2;
-                .category_badge{
-                    @apply bg-gray_50 border border-primary rounded-full p-1 fill-white;
-                    img{
-                        @apply aspect-square border-none w-4 fill-white;
-                    }
+            .inactive-category{
+                button{
+                    @apply text-gray_400;
                 }
             }
-            .footer{
-                @apply px-2 pb-4 flex flex-col gap-4;
+            .active-category {
+                button{
+                    @apply text-gray_700;
+                }
+            }
+            .card-buttons{
+                span{
+                    @apply hidden sm:block;
+                }
+            }
+            .divider-product_list{ 
+                @apply border-t-gray_300;
+            }
+            
+            .spinner-overlay {
+                @apply absolute top-32 md:top-16 left-1/2 -translate-x-1/2 z-10;
+            }
+            
+            .spinner {
+                @apply w-10 h-10 border-4 border-solid border-black/20 border-t-primary rounded-full;
+                animation: spin 0.8s linear infinite;
+            }
+            
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            
+            /* Aplicar opacidad reducida al listado de productos mientras carga */
+            .loading-opacity {
+                @apply opacity-20;
+            }
+            /* Separador de letra */
+            ul li.font-bold {
+                @apply text-primary text-base;
+            }
+
+            /* Margen entre grupos */
+            ul li.mt-4 {
+                @apply border-b-gray_200 mb-1 mt-1 pb-2;
+            }
+
+            /* Contenedor con scroll */
+            .scroll-container {
+                @apply max-h-[400px];
+            }
+
+            /* Scrollbar */
+            .scroll-container::-webkit-scrollbar {
+                @apply w-2;              /* Ancho de la barra */
+            }
+
+            .scroll-container::-webkit-scrollbar-track {
+                @apply bg-gray-200;     /* Color del track */
+                border-radius: 4px;
+            }
+
+            .scroll-container::-webkit-scrollbar-thumb {
+                @apply bg-gray-600;
+                border: 2px solid #F3F4F6; /* Espacio entre el thumb y el track */
+                border-radius: 4px;
+            }
+
+            .scroll-container::-webkit-scrollbar-thumb:hover {
+                @apply bg-gray-700; /* Color al pasar el mouse */
             }
         }
     }
+    // FIN VISTA DE PRODUCTOS
     .cursor-pointer {
         cursor: pointer;
       }
@@ -88,7 +114,6 @@
     .loading-opacity {
         @apply opacity-20;
     }
-}
 // FIN VISTA DE PRODUCTOS
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{

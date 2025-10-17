@@ -1,9 +1,15 @@
 import 'flowbite';
 import './bootstrap';
 import { Tabs } from 'flowbite';
+import { createApp } from 'vue/dist/vue.esm-bundler';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import { get, post } from "./http.js";
+import ProductList from './components/products/ProductList.vue';
+
+const productIndex = createApp({});
+productIndex.component('product-list', ProductList);
+productIndex.mount('#product-index');
 
 Alpine.plugin(collapse);
 

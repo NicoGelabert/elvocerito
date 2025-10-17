@@ -33,24 +33,24 @@ use Inertia\Inertia;
 */
 
 Route::middleware(['guestOrVerified'])->group(function () {
-    Route::get('/underconstruction', function () {
+    Route::get('/', function () {
         return view('underconstruction');
     });
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
     
-    Route::get('/',[WelcomeController::class, 'index'])->name('welcome');
+    Route::get('/home',[WelcomeController::class, 'index'])->name('welcome');
 
     // Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 
     // Anunciantes = Products
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/anunciantes', [ProductController::class, 'index'])->name('products.index');
     Route::get('/{category:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
     Route::get('/urgencias', [ProductController::class, 'urgencies'])->name('product.urgencies');
 
     // Categorías
     Route::get('/categorias', [CategoriesController::class, 'index'])->name('categories.index');
-    Route::get('/categorias/{category:slug}', [CategoriesController::class, 'view'])->name('categories.view');
+    Route::get('/{category:slug}', [CategoriesController::class, 'view'])->name('categories.view');
     Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])
     ->name('categories.view.subcategory');
 

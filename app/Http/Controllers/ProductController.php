@@ -14,7 +14,30 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        return $this->renderProducts($query);
+        if (request()->has('category') && request('category')) {
+            $categorySlug = request('category');
+            $query->whereHas('categories', function ($q) use ($categorySlug) {
+                $q->where('slug', $categorySlug);
+            });
+        }
+
+        return request()->expectsJson()
+            ? response()->json([
+                'products' => $query->where('published', 1)
+                    ->with(['categories', 'images']) // Asegurar que se cargan las relaciones
+                    ->get()
+                    ->map(function ($product) {
+                        return array_merge(
+                            $product->toArray(),
+                            [
+                                'categories' => $product->categories->sortBy('name')->values(),
+                                // 'prices' => $product->prices,
+                                'image_url' => $product->images->first()->url ?? 'storage/common/noimage.png', // Primera imagen o default
+                            ]
+                        );
+                    })
+            ])
+            : $this->renderProducts($query);
     }
 
     public function byCategory(Category $category)

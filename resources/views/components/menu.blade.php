@@ -11,8 +11,8 @@
 
     <ul class="flex flex-col lg:flex-row items-center justify-end gap-4 text-center">
         <li>
-            <a href="/categorias">
-                Categorías
+            <a href="/anunciantes">
+                Ver todo
             </a>
         </li>
         <li>

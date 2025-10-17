@@ -20,11 +20,11 @@
 
     <main class="w-full mx-auto flex flex-col justify-evenly items-center h-screen px-10">
         <div class="enconstruccion">
-            <x-logo class="block fill-current" />
+            <x-logo />
         </div>
         <div class="w-full grid grid-cols-1 mx-16 gap-y-8 text-center">
             <h2 class="text-3xl font-bold sm:text-4xl">Página en construcción</h2>
-            <hr class="h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100" />
+            <!-- <hr class="h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:opacity-100" />
             <p class="text-lg leading-8 text-gray-400">Encontranos en el local de Av. Ramón y Cajal 10, Fuengirola, Málaga</p>
             <div class="flex gap-6 social-icons justify-center">
                 <a href="https://wa.me/34623037048" class="h-10 w-10 aspect-square rounded-md bg-black/5 p-2 ring-1 ring-black/10" target="_blank">
@@ -36,7 +36,7 @@
                 <a href="https://maps.app.goo.gl/22GUnZ2foJeEYud98" class="h-10 w-10 aspect-square rounded-md bg-black/5 p-2 ring-1 ring-black/10" target="_blank">
                     <i class="flex text-2xl leading-none fi fi-rs-map-marker"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
     </main>
     </body>
@@ -45,6 +45,5 @@
     .enconstruccion svg{
         height: auto;
         width: 16rem;
-        fill: #6c4852;
     }
 </style>

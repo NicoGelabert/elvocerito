@@ -10,9 +10,19 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::getActiveAsTree();
-        return view('categories.index', compact('categories'));
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        $grouped = $categories->groupBy(function ($category) {
+            return strtoupper(substr($category->name, 0, 1));
+        })->map(function ($group) {
+            return $group->values(); // Reindexa cada grupo
+        });
+
+        return response()->json([
+            'categories' => $grouped
+        ]);
     }
+
 
     public function view(Category $category)
     {
