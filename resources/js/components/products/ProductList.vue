@@ -14,12 +14,6 @@
                 <hr class="divider-product_list">
                 <h5 class="text-gray_600">Categoría</h5>
                 <ul class="flex flex-col gap-2 scroll-container overflow-auto">
-                    <!-- Mostrar todo -->
-                    <!-- <li :class="{ 'active-category': selectedCategory === null }">
-                        <button @click="filterByCategory(null)" class="btn btn-secondary btn-products_list">
-                            <span>Mostrar todo</span>
-                        </button>
-                    </li> -->
 
                     <!-- Grupos de letras -->
                     <template v-for="group in categories" :key="group.letter">
@@ -68,61 +62,98 @@
         </div>
     </div>
 </template>
-
 <script>
 import axios from 'axios';
 
 export default {
-    components: {
-        // Registra el componente
-        
+    props: {
+        // Categoría inicial (pasada desde Blade, opcional)
+        initialCategory: {
+            type: [String, null],
+            default: null
+        }
     },
     data() {
         return {
-            products: [],  // Para almacenar los productos
+            products: [],
             categories: [],
-            loading: true,  // Para manejar el estado de carga
-            error: null,    // Para manejar errores de la API
-            selectedCategory: null,
-            };
-        },
+            loading: true,
+            error: null,
+            selectedCategory: this.initialCategory,
+        };
+    },
     mounted() {
-        this.fetchProducts();
+        // Escuchar cambios del historial (botón atrás / adelante)
+        window.addEventListener('popstate', this.handlePopState);
+
+        // Leer categoría desde la URL si existe
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryFromUrl = urlParams.get('category');
+
+        if (categoryFromUrl) {
+            this.selectedCategory = categoryFromUrl;
+        } else if (this.initialCategory) {
+            this.selectedCategory = this.initialCategory;
+        }
+
         this.fetchCategories();
+        this.fetchProducts();
+    },
+    beforeUnmount() {
+        window.removeEventListener('popstate', this.handlePopState);
     },
     methods: {
         async fetchProducts() {
-            const categorySlug = this.selectedCategory ? this.selectedCategory : '';  // Si hay categoría seleccionada, la pasamos
+            this.loading = true;
+            const categorySlug = this.selectedCategory || '';
+
             try {
                 const response = await axios.get('/anunciantes', {
-                    params: {
-                        category: categorySlug,  // Filtro por categoría
-                        },
-                    });
+                    params: { category: categorySlug },
+                    headers: { 'Accept': 'application/json' },
+                });
+
                 this.products = response.data.products;
-                this.loading = false;  // Cambiamos el estado de carga
+                this.error = null;
             } catch (error) {
-                console.error('Error fetching products:', error);
-                this.loading = false;  // Cambiamos el estado de carga
+                console.error('Error al cargar productos:', error);
+                this.error = 'No se pudieron cargar los productos.';
+            } finally {
+                this.loading = false;
             }
         },
         async fetchCategories() {
             try {
                 const response = await axios.get('/categorias');
-                // Convertimos el objeto en array de { letter, categories }
                 this.categories = Object.entries(response.data.categories).map(([letter, categories]) => ({
                     letter,
-                    categories
+                    categories,
                 }));
             } catch (error) {
-                console.error('Error fetching categories:', error);
+                console.error('Error al cargar categorías:', error);
             }
         },
         filterByCategory(slug) {
             this.selectedCategory = slug;
-            this.loading = true;  // Activamos el estado de carga
+
+            // 🧭 Actualizar la URL sin recargar
+            const url = new URL(window.location);
+            if (slug) {
+                url.searchParams.set('category', slug);
+            } else {
+                url.searchParams.delete('category');
+            }
+            window.history.pushState({}, '', url);
+
             this.fetchProducts();
-        }
+        },
+        handlePopState() {
+            // Se ejecuta cuando el usuario usa los botones de navegación del navegador
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryFromUrl = urlParams.get('category');
+            this.selectedCategory = categoryFromUrl;
+            this.fetchProducts();
+        },
     }
 };
 </script>

@@ -107,6 +107,7 @@ class ProductController extends Controller
     {
         $search = \request()->get('search');
         $sort = \request()->get('sort', '-updated_at');
+        $categorySlug = request()->get('category');
 
         if ($sort) {
             $sortDirection = 'asc';
@@ -128,7 +129,8 @@ class ProductController extends Controller
             ->paginate(5);
 
         return view('product.index', [
-            'products' => $products
+            'products' => $products,
+            'category' => $categorySlug,
         ]);
 
     }

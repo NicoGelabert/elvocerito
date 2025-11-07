@@ -8,7 +8,7 @@ if (homeHeroBannerElement) {
     var homeHeroBanner = new Splide(homeHeroBannerElement, {
         type        : 'loop',
         rewind      : true,
-        autoplay    : true,
+        autoplay    : false,
         arrows      : false,
         pagination  : false,
         interval    : 5000,

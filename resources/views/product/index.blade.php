@@ -3,7 +3,7 @@
     <div class="product_index_hero">
         <h2>Buscá</h3>
     </div>
-    <product-list>
+    <product-list :initial-category='@json($category)'>
     </product-list>
   </div>
 </x-app-layout>

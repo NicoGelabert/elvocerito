@@ -27,11 +27,7 @@
       <ul class="grid grid-cols-3 md:grid-cols-8 gap-y-8 gap-x-2">
         @forelse ($categories as $category)
           <li>
-            <x-button class="flex flex-col items-center gap-2 w-full h-full" href="{{ 
-              $category->parent_id 
-              ? route('categories.view.subcategory', ['category' => $category->parent->slug, 'subcategory' => $category->slug]) 
-              : route('categories.view', ['category' => $category->slug]) 
-            }}">
+            <x-button class="flex flex-col items-center gap-2 w-full h-full" href="{{ route('products.index', ['category' => $category->slug]) }}">
               <img src="{{ $category->image }}" alt="{{ $category->name }}" class="w-8 h-auto">
               <p class="text-xs text-center font-normal text-gray_500">{{ $category->name }}</p>
             </x-button>

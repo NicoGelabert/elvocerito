@@ -19,11 +19,7 @@
             <ul class="splide__list">
                 @foreach ($categories as $category)
                 <li class="splide__slide">
-                    <x-button class="bg-transparent" href="{{ 
-                        $category->parent_id 
-                        ? route('categories.view.subcategory', ['category' => $category->parent->slug, 'subcategory' => $category->slug]) 
-                        : route('categories.view', ['category' => $category->slug]) 
-                    }}">
+                    <x-button class="bg-transparent" href="{{ route('products.index', ['category' => $category->slug]) }}">
                         <img src="{{ $category->image }}" alt="">
                         <p>{{ $category->name }}</p>
                     </x-button>
@@ -33,12 +29,3 @@
         </div>
     </div>
 </section>
-
-<script>
-    document.addEventListener('alpine:init', () => {
-        window.addEventListener('category-selected', event => {
-            console.log('Categoría seleccionada:', event.detail);
-            // Podés usar event.detail.id y event.detail.name aquí
-        });
-    });
-</script>
