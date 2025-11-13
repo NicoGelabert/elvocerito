@@ -5,5 +5,6 @@
     </div>
     <product-list :initial-category='@json($category)'>
     </product-list>
+    <contact-modal></contact-modal>
   </div>
 </x-app-layout>

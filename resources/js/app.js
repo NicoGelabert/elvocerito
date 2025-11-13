@@ -6,9 +6,11 @@ import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import { get, post } from "./http.js";
 import ProductList from './components/products/ProductList.vue';
+import ContactModal from './components/ContactModal.vue'
 
 const productIndex = createApp({});
 productIndex.component('product-list', ProductList);
+productIndex.component('contact-modal', ContactModal)
 productIndex.mount('#product-index');
 
 Alpine.plugin(collapse);

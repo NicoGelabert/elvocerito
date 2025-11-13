@@ -17,7 +17,7 @@
                         <div class="ultimos_anunciantes_card_content">
                             <div class="header">
                                 <!-- INICIO CATEGORÍAS -->
-                                <div class="flex gap-2 items-center justify-between">
+                                <div class="relative flex gap-2 items-center justify-between w-fit">
                                     @if ($ultimo_anunciante->categories->count() > 0)
                                         @php
                                             $firstCategory = $ultimo_anunciante->categories->first();

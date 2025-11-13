@@ -1,4 +1,4 @@
-#anunciantes_destacados{
+.anunciantes_destacados{
     .anunciantes_destacados_title{
         @apply text-center;
 
@@ -22,7 +22,7 @@
                                 @apply overflow-hidden line-clamp-2;
                             }
                             h6{
-                                @apply py-1;
+                                @apply py-1 z-[1];
                             }
                             .truncate-text{
                                 @apply max-w-[110px] lg:max-w-[180px];

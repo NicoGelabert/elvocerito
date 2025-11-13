@@ -1,6 +1,6 @@
 //Badge
 .badge{
-    @apply cursor-pointer bg-gray_200 font-medium text-gray_700 flex w-fit rounded-full px-3 py-1 items-center gap-1;
+    @apply cursor-pointer bg-gray_200 font-medium text-gray_700 flex w-fit rounded-md px-3 py-1 items-center gap-1;
     p, span{
         @apply text-text_small;
     }

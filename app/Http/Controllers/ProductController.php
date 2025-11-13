@@ -24,15 +24,29 @@ class ProductController extends Controller
         return request()->expectsJson()
             ? response()->json([
                 'products' => $query->where('published', 1)
-                    ->with(['categories', 'images']) // Asegurar que se cargan las relaciones
+                    ->with(['categories', 'images', 'contacts', 'socials', 'horarios'])
                     ->get()
                     ->map(function ($product) {
                         return array_merge(
                             $product->toArray(),
                             [
                                 'categories' => $product->categories->sortBy('name')->values(),
-                                // 'prices' => $product->prices,
                                 'image_url' => $product->images->first()->url ?? 'storage/common/noimage.png', // Primera imagen o default
+                                'contacts' => $product->contacts->map(fn($c) => [
+                                    'id' => $c->id,
+                                    'type' => $c->type,
+                                    'info' => $c->info,
+                                ]),
+                                'socials' => $product->socials->map(fn($s) => [
+                                    'id' => $s->id,
+                                    'type' => $s->rrss,
+                                    'info' => $s->link,
+                                ]),
+                                'horarios' => $product->horarios->map(fn($h) => [
+                                    'dia' => mb_strtolower($h->dia),       // convertir a minúscula para JS
+                                    'apertura' => \Carbon\Carbon::parse($h->apertura)->format('H:i'),
+                                    'cierre' => \Carbon\Carbon::parse($h->cierre)->format('H:i'),
+                                ])->values(),
                             ]
                         );
                     })

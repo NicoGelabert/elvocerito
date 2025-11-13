@@ -1,4 +1,4 @@
-<section id="anunciantes_destacados">
+<section class="anunciantes_destacados">
     
     <div class="container flex flex-col gap-8"">
         <div class="anunciantes_destacados_title">
@@ -23,11 +23,11 @@
                             'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
                             'product' => $anunciante_destacado->slug
                         ]) }}">
-                        <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
+                            <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
                             <div class="anunciantes_destacados_card_content">
                                 <div class="header">
                                     <!-- INICIO CATEGORÍAS -->
-                                    <div class="flex gap-2 items-center justify-between">
+                                    <div class="relative flex gap-2 items-center justify-between w-fit mx-auto">
                                         @if ($anunciante_destacado->categories->count() > 0)
                                             @php
                                                 $firstCategory = $anunciante_destacado->categories->first();
