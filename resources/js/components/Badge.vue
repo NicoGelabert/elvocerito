@@ -20,6 +20,8 @@ const badgeClass = computed(() => {
       return 'open'
     case 'No Disponible':
       return 'closed'
+    case 'Urgencias':
+      return 'urgencies'
     default:
       return ''
   }
@@ -28,12 +30,12 @@ const badgeClass = computed(() => {
 
 <style scoped>
 .badge {
-  @apply inline-flex items-center justify-center px-2 py-1 rounded-md text-sm font-semibold min-w-[80px] transition-all;
+  @apply inline-flex items-center justify-center px-2 py-1 rounded-md text-sm leading-none font-semibold transition-all shadow-sm;
 }
 
 /* OPEN */
 .open {
-  @apply bg-lime-200 shadow-2xl;
+  @apply bg-lime-200;
 }
 
 .open svg {
@@ -42,7 +44,11 @@ const badgeClass = computed(() => {
 
 /* CLOSED */
 .closed {
-  @apply bg-red-200 shadow-md text-red-800;
+  @apply bg-red-200 text-red-800;
+}
+
+.urgencies{
+  @apply bg-red-200 text-red-800;
 }
 
 /* Animaciones */
