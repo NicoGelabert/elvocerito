@@ -77,9 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
                                 li.appendChild(label);
 
                                 li.addEventListener("click", () => {
-                                    const parentSlug = category?.parent?.slug || 'sin-categoria';
-                                    const subcategorySlug = category?.slug || 'sin-subcategoria';
-                                    window.location.href = `/categorias/${parentSlug}/${subcategorySlug}`;
+                                    const anunciantes = "{{ route('products.index') }}";
+                                    window.location.href = `${anunciantes}?category=${category.slug}`;
                                 });
 
                                 resultsList.appendChild(li);
@@ -115,9 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 li.appendChild(info);
 
                                 li.addEventListener("click", () => {
-                                    const parentSlug = category?.parent?.slug || 'sin-categoria';
-                                    const subcategorySlug = category?.slug || 'sin-subcategoria';
-                                    window.location.href = `/categorias/${parentSlug}/${subcategorySlug}/${product.slug}`;
+                                    window.location.href = `/${category.slug}/${product.slug}`;
                                 });
 
                                 resultsList.appendChild(li);
