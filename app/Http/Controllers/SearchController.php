@@ -18,9 +18,10 @@ class SearchController extends Controller
         }
 
         // Obtener productos basados en la búsqueda
-        $products = Product::where(function ($q) use ($query) {
-            $q->where('title', 'like', "%{$query}%")
-              ->orWhere('client_number', 'like', "%{$query}%");
+        $products = Product::where('published', 1) // <-- filtro agregado
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                ->orWhere('client_number', 'like', "%{$query}%");
             })
             ->orWhereHas('categories', function ($q) use ($query) {
                 $q->where('name', 'like', "%{$query}%");
