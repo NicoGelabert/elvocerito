@@ -1,5 +1,5 @@
 <template>
-    <Badge :status="estado">
+    <Badge v-if="estado === 'Disponible'" :status="estado">
         <span>{{ estado }}</span>
     </Badge>
 </template>
@@ -29,25 +29,25 @@ function comprobarEstado() {
   const diaActual = diasSemana[ahora.getDay()]
   const horaActual = ahora.getHours() * 60 + ahora.getMinutes()
 
-  // Filtrar horario del día actual
   const horarioHoy = props.horarios.find(h => h.dia.toLowerCase() === diaActual.toLowerCase())
+
+  let disponible = false
 
   if (horarioHoy) {
     const aperturaMin = convertirAHorasMinutos(horarioHoy.apertura)
     const cierreMin = convertirAHorasMinutos(horarioHoy.cierre)
 
     if (aperturaMin <= cierreMin) {
-      estado.value = (horaActual >= aperturaMin && horaActual < cierreMin) ? 'Disponible' : 'No Disponible'
+      disponible = horaActual >= aperturaMin && horaActual < cierreMin
     } else {
-      // Cruza la medianoche
-      estado.value = (horaActual >= aperturaMin || horaActual < cierreMin) ? 'Disponible' : 'No Disponible'
+      disponible = horaActual >= aperturaMin || horaActual < cierreMin
     }
-  } else {
-    estado.value = 'No Disponible'
   }
 
-  estadoClass.value = estado.value === 'Disponible' ? 'open' : 'closed'
+  estado.value = disponible ? 'Disponible' : ''
+  estadoClass.value = disponible ? 'open' : ''
 }
+
 
 onMounted(() => {
   comprobarEstado()
