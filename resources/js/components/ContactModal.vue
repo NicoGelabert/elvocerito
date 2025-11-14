@@ -27,20 +27,29 @@
                 Contacta a {{ product.title }}
               </h2>
 
-              <div class="flex flex-wrap justify-center gap-4">
+              <div class="flex flex-col justify-center gap-4">
                 <div
                   v-for="(contact, i) in product.contacts || []"
                   :key="i"
-                  class="flex items-center gap-2"
+                  :class="[
+                    'flex items-center justify-between gap-2',
+                    { 'border-b border-gray-200 pb-4 mb-4': i !== (product.contacts.length - 1) }
+                  ]"
                 >
                   <component :is="getIconComponent(contact.type)" class="w-6 h-6" />
 
                   <a
                     :href="contact.type === 'email' ? `mailto:${contact.info}` : contact.info"
                     target="_blank"
-                    class="text-blue-600 hover:underline"
                   >
-                    {{ contact.info }}
+                    <div class="flex flex-col gap-2 text-right">
+                      <span class="block text-right text-base lg:text-sm font-semibold capitalize">
+                        {{ contact.type }}
+                      </span>
+                      <p class="text-right text-base text-gray-500 -mt-1 lg:mt-0">
+                        {{ contact.info }}
+                      </p>
+                    </div>
                   </a>
                 </div>
                 <p v-if="!product.contacts?.length" class="text-gray-500">
@@ -135,6 +144,7 @@ import { ref, computed, onMounted } from 'vue'
 import WhatsappIcon from '@/icons/WhatsappIcon.vue'
 import MailIcon from '@/icons/MailIcon.vue'
 import MovilIcon from '@/icons/MovilIcon.vue'
+import FijoIcon from '@/icons/FijoIcon.vue'
 import CopyIcon from '@/icons/CopyIcon.vue'
 import FacebookIcon from '@/icons/FacebookIcon.vue'
 import LinkedinIcon from '@/icons/LinkedinIcon.vue'
@@ -169,12 +179,24 @@ function copyLink() {
 }
 
 function getIconComponent(type) {
-  switch(type) {
-    case 'email': return MailIcon
-    case 'whatsapp': return WhatsappIcon
-    default: return MovilIcon
+  switch (type) {
+    case 'email':
+      return MailIcon
+
+    case 'whatsapp':
+      return WhatsappIcon
+
+    case 'movil':
+      return MovilIcon
+
+    case 'fijo':
+      return FijoIcon
+
+    default:
+      return MovilIcon   // fallback
   }
 }
+
 
 function getSocialIcon(rrss) {
   if (!rrss) return null  // <-- Protección
