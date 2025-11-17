@@ -1,20 +1,22 @@
 {
-  "_splide-extension-grid.esm-a5b613aa.js": {
-    "file": "assets/splide-extension-grid.esm-a5b613aa.js"
+  "_splide-extension-grid.esm-Wa7g0JHd.js": {
+    "file": "assets/splide-extension-grid.esm-Wa7g0JHd.js",
+    "name": "splide-extension-grid.esm"
   },
   "resources/css/app.css": {
-    "file": "assets/app-40548308.css",
+    "file": "assets/app-BEQ-OJfm.css",
+    "src": "resources/css/app.css",
     "isEntry": true,
-    "src": "resources/css/app.css"
-  },
-  "resources/js/app.css": {
-    "file": "assets/app-f7baf0ef.css",
-    "src": "resources/js/app.css"
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
   },
   "resources/js/app.js": {
-    "css": [
-      "assets/app-f7baf0ef.css"
-    ],
+    "file": "assets/app-CerDwCZu.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
     "dynamicImports": [
       "resources/js/catalog.js",
       "resources/js/home.js",
@@ -22,58 +24,63 @@
       "resources/js/categories-index.js",
       "resources/js/article-view.js"
     ],
-    "file": "assets/app-8ef7904a.js",
-    "isEntry": true,
-    "src": "resources/js/app.js"
+    "css": [
+      "assets/app-BLqf81RA.css"
+    ]
   },
   "resources/js/article-view.js": {
-    "file": "assets/article-view-4b47b589.js",
-    "imports": [
-      "_splide-extension-grid.esm-a5b613aa.js"
-    ],
+    "file": "assets/article-view-DLt9yii2.js",
+    "name": "article-view",
+    "src": "resources/js/article-view.js",
     "isDynamicEntry": true,
-    "src": "resources/js/article-view.js"
+    "imports": [
+      "_splide-extension-grid.esm-Wa7g0JHd.js"
+    ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-fb23b41a.js",
+    "file": "assets/catalog-BA9uj9ca.js",
+    "name": "catalog",
+    "src": "resources/js/catalog.js",
+    "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
-    ],
-    "isDynamicEntry": true,
-    "src": "resources/js/catalog.js"
+    ]
   },
   "resources/js/categories-index.js": {
-    "file": "assets/categories-index-994fa27f.js",
-    "isDynamicEntry": true,
-    "src": "resources/js/categories-index.js"
+    "file": "assets/categories-index-ZuNH0t5P.js",
+    "name": "categories-index",
+    "src": "resources/js/categories-index.js",
+    "isDynamicEntry": true
   },
   "resources/js/home.js": {
-    "file": "assets/home-ebece800.js",
-    "imports": [
-      "_splide-extension-grid.esm-a5b613aa.js"
-    ],
+    "file": "assets/home-B_FdDr03.js",
+    "name": "home",
+    "src": "resources/js/home.js",
     "isDynamicEntry": true,
-    "src": "resources/js/home.js"
+    "imports": [
+      "_splide-extension-grid.esm-Wa7g0JHd.js"
+    ]
   },
   "resources/js/product-view.js": {
-    "file": "assets/product-view-e03e3334.js",
-    "imports": [
-      "_splide-extension-grid.esm-a5b613aa.js"
-    ],
+    "file": "assets/product-view-BiaPqa_I.js",
+    "name": "product-view",
+    "src": "resources/js/product-view.js",
     "isDynamicEntry": true,
-    "src": "resources/js/product-view.js"
+    "imports": [
+      "_splide-extension-grid.esm-Wa7g0JHd.js"
+    ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-3ff76099.css",
+    "file": "assets/styles-CiBgJDVW.css",
+    "src": "resources/scss/styles.scss",
     "isEntry": true,
-    "src": "resources/scss/styles.scss"
+    "name": "styles",
+    "names": [
+      "styles.css"
+    ]
   },
   "storage/app/public/common/card.jpg": {
-    "file": "assets/card-3be08708.jpg",
+    "file": "assets/card-B8wNcK9P.jpg",
     "src": "storage/app/public/common/card.jpg"
-  },
-  "storage/app/public/common/hero-banner.jpg": {
-    "file": "assets/hero-banner-efed520e.jpg",
-    "src": "storage/app/public/common/hero-banner.jpg"
   }
 }

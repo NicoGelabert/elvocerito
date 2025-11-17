@@ -7,11 +7,19 @@ import collapse from '@alpinejs/collapse';
 import { get, post } from "./http.js";
 import ProductList from './components/products/ProductList.vue';
 import ContactModal from './components/ContactModal.vue'
+import ReviewForm from './components/reviews/ReviewForm.vue';
+import ReviewList from './components/reviews/ReviewList.vue';
+
 
 const productIndex = createApp({});
 productIndex.component('product-list', ProductList);
-productIndex.component('contact-modal', ContactModal)
+productIndex.component('contact-modal', ContactModal);
 productIndex.mount('#product-index');
+
+const productViewApp = createApp({});
+productViewApp.component('review-form', ReviewForm);
+productViewApp.component('review-list', ReviewList);
+productViewApp.mount('#product-view-app');
 
 Alpine.plugin(collapse);
 

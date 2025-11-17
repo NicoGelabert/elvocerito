@@ -97,6 +97,7 @@
             <!-- INICIO PRIMERA FILA -->
             <div class="container">
                 <x-contact-modal :product="$product" />
+                
                 <div class="flex flex-col lg:flex-row gap-6  bg-white rounded-xl p-4">
                     <!-- INICIO PRIMERA COLUMNA -->
                     <div class="product_header custom-scrollbar lg:overflow-x-hidden flex-1">
@@ -307,9 +308,16 @@
                             </div>
                             @endif
                             
-                            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 w-full lg:w-fit flex justify-center lg:justify-start items-center" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                                <p class="text-gray-500 text-center lg:text-left">Este anunciante todavía no tiene reviews. Sé el primero!</p>
+                            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 w-full" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                                <div id="product-view-app" class="flex flex-col gap-8">
+                                    <!-- Listado de reviews publicadas -->
+                                    <review-list :product-id="{{$product->id}}"></review-list>
+                                    <!-- Formulario para dejar review -->
+                                    <review-form :product-id="{{$product->id}}"></review-form>
+
+                                </div>
                             </div>
+
                         </div>
                         
                         <div>

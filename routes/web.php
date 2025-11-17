@@ -12,6 +12,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\ReviewController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,13 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/quotation', [QuotationController::class, 'create'])->name('quotation.create');
     Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
 
+    // Crear nueva review
+    Route::post('/reviews', [ReviewController::class, 'store']);
+    // Verificar review por email
+    Route::get('/reviews/verify/{token}', [ReviewController::class, 'verify']);
+    // Listar reviews publicadas para un producto
+    Route::get('/products/{product}/reviews', [ReviewController::class, 'publicReviews']);
+
     // Política de Privacidad
     Route::get('/politica-de-privacidad', function (){
         return view('legal/privacy-policy');
@@ -97,6 +105,12 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/checkout/failure', [CheckoutController::class, 'failure'])->name('checkout.failure');
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
     Route::get('/orders/{order}', [OrderController::class, 'view'])->name('order.view');
+    // Listar reviews pendientes de publicación
+    Route::get('/admin/reviews', [ReviewController::class, 'adminIndex']);
+    // Publicar una review
+    Route::post('/admin/reviews/{id}/publish', [ReviewController::class, 'publish']);
+    // Responder a una review
+    Route::post('/admin/reviews/{id}/respond', [ReviewController::class, 'respond']);
 });
 
 Route::post('/webhook/stripe', [CheckoutController::class, 'webhook']);
