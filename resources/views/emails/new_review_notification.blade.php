@@ -6,6 +6,7 @@ Se ha recibido una nueva review:
 **Nombre:** {{ $review->name }} {{ $review->last_name }}  
 **Email:** {{ $review->email }}  
 **Rating:** {{ $review->rating }}  
+**Título:** {{ $review->title }}
 **Comentario:**  
 {{ $review->comment }}
 

@@ -23,6 +23,7 @@ class ReviewController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'rating' => 'required|numeric|min:0|max:5',
+            'title' => 'required|string|max:255',
             'comment' => 'required|string',
         ]);
 
@@ -34,6 +35,7 @@ class ReviewController extends Controller
             'email' => $request->email,
             'rating' => $request->rating,
             'comment' => $request->comment,
+            'title' => $request->title,
             'token' => Str::uuid(),
         ]);
 

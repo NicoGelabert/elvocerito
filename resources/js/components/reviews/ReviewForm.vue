@@ -56,6 +56,11 @@
       </div>
 
       <div class="mb-4">
+        <label class="block text-gray-500 font-medium text-xs">Título de la Review</label>
+        <input v-model="form.title" type="text" class="input" required>
+      </div>
+
+      <div class="mb-4">
         <label class="block text-gray-500 font-medium text-xs">Comentario</label>
         <textarea 
           v-model="form.comment"
@@ -91,6 +96,7 @@ export default {
         last_name: '',
         email: '',
         rating: 0,
+        title: '',
         comment: '',
         product_id: this.productId
       },

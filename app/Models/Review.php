@@ -15,6 +15,7 @@ class Review extends Model
         'last_name',
         'email',
         'rating',
+        'title',
         'comment',
         'token',
         'email_verified',
