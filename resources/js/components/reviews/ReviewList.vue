@@ -41,8 +41,9 @@
             {{ review.showFull ? 'Ver menos' : 'Ver más' }}
           </button>
         </div>
-        <div v-if="review.admin_response" class="mt-2 p-2 bg-gray-100 rounded text-gray-600">
-          <strong>Respuesta del anunciante:</strong> {{ review.admin_response }}
+        <div v-if="review.admin_response" class="text-xs mt-2 p-2 bg-gray-50 rounded text-gray-600">
+          <strong>Respuesta del Administrador:</strong> 
+          <div class="mt-1 admin_response" v-html="review.admin_response"></div>
         </div>
       </div>
     </div>
@@ -91,3 +92,8 @@ export default {
   }
 };
 </script>
+<style>
+.admin_response p{
+  @apply text-xs;
+}
+</style>

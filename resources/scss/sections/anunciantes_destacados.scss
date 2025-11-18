@@ -17,7 +17,7 @@
                     .anunciantes_destacados_card_content{
                         @apply flex flex-col flex-1 gap-2 justify-between items-center text-center;
                         .header{
-                            @apply flex flex-col items-center;
+                            @apply flex flex-col items-center w-full;
                             h5{
                                 @apply overflow-hidden line-clamp-2;
                             }

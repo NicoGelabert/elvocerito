@@ -78,6 +78,23 @@
                   </ul>
                 </transition>
               </div>
+              
+              <!-- Reviews -->
+              <div>
+                <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
+                <div class="flex items-center gap-2">
+                  <button
+                    @click="toggleHasReviews"
+                    class="relative w-9 h-5 rounded-full transition-all duration-300"
+                    :class="hasReviewsOnly ? 'bg-yellow-500' : 'bg-gray-300'"
+                  >
+                    <span
+                      class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                      :class="hasReviewsOnly ? 'translate-x-4' : ''"
+                    ></span>
+                  </button>
+                </div>
+              </div>
 
               <!-- Urgencias -->
               <div>
@@ -155,6 +172,22 @@
         </div>
 
         <div>
+          <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
+          <div class="flex items-center gap-2">
+            <button
+              @click="toggleHasReviews"
+              class="relative w-7 h-4 rounded-full transition-all"
+              :class="hasReviewsOnly ? 'bg-yellow-500' : 'bg-gray-300'"
+            >
+              <span
+                class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
+                :class="hasReviewsOnly ? 'translate-x-3' : ''"
+              ></span>
+            </button>
+          </div>
+        </div>
+
+        <div>
           <h5 class="text-gray_600 mb-4">Urgencias</h5>
           <div class="flex items-center gap-2">
             <button
@@ -169,6 +202,7 @@
             </button>
           </div>
         </div>
+
       </div>
 
       <!-- Listado -->
@@ -183,16 +217,18 @@
                 <img :src="product.image_url" alt="" />
                 <div v-if="product.categories?.length" class="anunciantes_destacados_card_content">
                   <div class="header">
-                    <div class="flex flex-col gap-2 items-center justify-between">
-                      <div class="relative flex gap-2 items-center justify-between">
-                        <div class="max-w-[140px] z-[1]">
-                          <h6 class="mx-auto">{{ product.categories[0].name }}</h6>
-                        </div>
+                    
+                    <div class="relative flex gap-2 items-center justify-center w-full">
+                      
+                      <div class="relative w-full md:w-auto">
+                        <h6 class="z-[1] relative">{{ product.categories[0].name }}</h6>
                         <span v-if="product.categories.length > 1" class="remaining-count">
                           +{{ product.categories.length - 1 }}
                         </span>
                       </div>
+                      
                     </div>
+                    
                     <h5 class="w-fit mx-auto">{{ product.title }}</h5>
                   </div>
                   <p>{{ product.short_description }}</p>
@@ -270,6 +306,7 @@ export default {
       isOpen: false,
       showUrgenciesOnly: false,
       showMobileFilters: false,
+      hasReviewsOnly: false,
     }
   },
 
@@ -281,8 +318,10 @@ export default {
   },
 
   mounted() {
-    const urlParams = new URLSearchParams(window.location.search)
-    this.selectedCategory = urlParams.get("category") || this.initialCategory
+    const urlParams = new URLSearchParams(window.location.search);
+    this.selectedCategory = urlParams.get("category") || this.initialCategory;
+    this.showUrgenciesOnly = urlParams.get("urgencies") === "true";
+    this.hasReviewsOnly = urlParams.get("has_reviews") === "true";
     this.fetchCategories()
     this.fetchProducts()
   },
@@ -295,6 +334,7 @@ export default {
         page,
         category: this.selectedCategory || undefined,
         urgencies: this.showUrgenciesOnly || undefined,
+        has_reviews: this.hasReviewsOnly || undefined,
       }
 
       try {
@@ -305,19 +345,32 @@ export default {
 
         this.products = response.data.products
 
-        // Filtrar urgencias sobre los datos
-        if (this.showUrgenciesOnly) {
-          this.products.data = this.products.data.filter(p => p.urgencies)
-        }
-
         this.error = null
 
         // Actualizar URL
-        const url = new URL(window.location)
-        url.searchParams.set("page", this.products.current_page)
-        if (this.selectedCategory) url.searchParams.set("category", this.selectedCategory)
-        else url.searchParams.delete("category")
-        window.history.pushState({}, "", url)
+        const url = new URL(window.location);
+        // Actualizar el número de página
+        url.searchParams.set("page", this.products.current_page);
+        // Filtro por categoría
+        if (this.selectedCategory) {
+          url.searchParams.set("category", this.selectedCategory);
+        } else {
+          url.searchParams.delete("category");
+        }
+        // Filtro por urgencias
+        if (this.showUrgenciesOnly) {
+          url.searchParams.set("urgencies", "true");
+        } else {
+          url.searchParams.delete("urgencies");
+        }
+        // Filtro por reviews
+        if (this.hasReviewsOnly) {
+          url.searchParams.set("has_reviews", "true");
+        } else {
+          url.searchParams.delete("has_reviews");
+        }
+        // Actualizar la URL sin recargar la página
+        window.history.pushState({}, "", url);
 
       } catch (err) {
         this.error = "No se pudieron cargar los productos."
@@ -355,9 +408,16 @@ export default {
       this.isOpen = !this.isOpen
     },
 
+    // Toggle de urgencies
     toggleUrgencies() {
       this.showUrgenciesOnly = !this.showUrgenciesOnly
       this.fetchProducts(1)
+    },
+
+    // Toggle de Reviews
+    toggleHasReviews() {
+      this.hasReviewsOnly = !this.hasReviewsOnly;
+      this.fetchProducts(1);
     },
 
     toggleMobileFilters() {

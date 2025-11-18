@@ -20,6 +20,13 @@ class ProductController extends Controller
                 $q->where('slug', $categorySlug);
             });
         }
+        // Filtro por urgencias
+        if (request()->has('urgencies') && request('urgencies') == 'true') {
+            $query->where('urgencies', true); // o el campo que uses, como 'is_urgent'
+        }
+        if (request()->has('has_reviews') && request('has_reviews') == 'true') {
+            $query->whereHas('reviews');
+        }
 
         if (request()->expectsJson()) {
 

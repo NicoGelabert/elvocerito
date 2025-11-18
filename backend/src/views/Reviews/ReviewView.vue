@@ -15,7 +15,7 @@
 
             <!-- PRODUCT TITLE -->
             <div class="flex flex-col gap-2">
-            <h3 class="text-lg font-bold">Product</h3>
+            <h3 class="text-lg font-bold">Anunciante</h3>
             <CustomInput class="mb-2" v-model="review.product_title" label="Product Title" :errors="errors['product_id']" disabled/>
             </div>
 
@@ -25,21 +25,6 @@
             <div class="flex flex-col gap-2">
             <h3 class="text-lg font-bold">Rating</h3>
             <CustomInput type="number" min="0" max="5" step="0.1" class="mb-2" v-model.number="review.rating" label="Rating" :errors="errors['rating']"/>
-            </div>
-
-            <hr class="my-4">
-            <!-- TITLE -->
-            <div class="flex flex-col gap-2">
-                <h3 class="text-lg font-bold">Review Title</h3>
-                <CustomInput class="mb-2" v-model="review.title" label="Review Title" :errors="errors['title']"/>
-            </div>
-
-            <hr class="my-4">
-
-            <!-- COMMENT -->
-            <div class="flex flex-col gap-2">
-                <h3 class="text-lg font-bold">Comment</h3>
-                <CustomInput type="richtext" class="mb-2" v-model="review.comment" label="Comment" :errors="errors['comment']"/>
             </div>
 
             <hr class="my-4">
@@ -59,11 +44,34 @@
             </div>
 
             <hr class="my-4">
+            <!-- TITLE -->
+            <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-bold">Título de la review</h3>
+                <CustomInput class="mb-2" v-model="review.title" label="Review Title" :errors="errors['title']"/>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- COMMENT -->
+            <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-bold">Comentario</h3>
+                <CustomInput type="richtext" class="mb-2" v-model="review.comment" label="Comment" :errors="errors['comment']"/>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- ADMIN REPLY -->
+            <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-bold">Respuesta del administrador</h3>
+                <CustomInput type="richtext" class="mb-2" v-model="review.admin_response" label="Respuesta del Admin" :errors="errors['admin_response']"/>
+            </div>
+
+            <hr class="my-4">
 
             <!-- PUBLISHED -->
             <div class="flex flex-col gap-2">
-                <h3 class="text-lg font-bold">Published</h3>
-                <CustomInput type="checkbox" class="mb-2" v-model="review.published" label="Published" :errors="errors['published']"/>
+                <h3 class="text-lg font-bold">Publicado</h3>
+                <CustomInput type="checkbox" class="mb-2" v-model="review.published" label="Publicado" :errors="errors['published']"/>
             </div>
 
         </div>
@@ -72,17 +80,17 @@
       <footer class="bg-gray-50 rounded-b-lg px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
         <button type="submit"
           class="bg-black text-base font-medium text-white border rounded-md w-full inline-flex justify-center mt-3 px-4 py-2 hover:bg-black/10 hover:text-black sm:w-auto sm:mt-0 sm:ml-3 sm:text-sm">
-          Save
+          Guardar
         </button>
 
         <button type="button" @click="onSubmit($event, true)"
           class="bg-black text-base font-medium text-white border rounded-md w-full inline-flex justify-center mt-3 px-4 py-2 hover:bg-black/10 hover:text-black sm:w-auto sm:mt-0 sm:ml-3 sm:text-sm">
-          Save & Close
+          Guardar & Cerrar
         </button>
 
         <router-link :to="{name: 'app.reviews'}"
           class="bg-white text-base font-medium text-gray-700 border rounded-md w-full inline-flex justify-center mt-3 px-4 py-2 hover:bg-gray-50 sm:w-auto sm:mt-0 sm:ml-3 sm:text-sm">
-          Cancel
+          Cancelar
         </router-link>
       </footer>
 
@@ -110,6 +118,7 @@ const review = ref({
   rating: 0,
   title: "",
   comment: "",
+  admin_response:"",
   published: false,
 })
 

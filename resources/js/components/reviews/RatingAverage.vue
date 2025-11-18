@@ -1,5 +1,5 @@
 <template>
-  <div v-if="average" class="flex items-center space-x-1">
+  <div v-if="average" class="flex items-center justify-center md:justify-start space-x-1">
 
       
       <!-- Estrellas -->
