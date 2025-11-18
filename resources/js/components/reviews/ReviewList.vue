@@ -9,11 +9,10 @@
         <div class="flex justify-between items-center mb-2">
           <div class="flex items-center relative">
             <p class="text-base font-semibold capitalize">{{ review.name }} {{ review.last_name }}</p>
-
             <div v-if="review.email_verified" class="ml-2 relative">
               <!-- Check icon -->
               <check-icon 
-                class="w-5 h-5 text-green-500 cursor-pointer"
+                class="w-5 h-5 text-primary cursor-pointer"
                 @click="tooltipVisible[review.id] = !tooltipVisible[review.id]"
               />
 
@@ -27,12 +26,21 @@
               </div>
             </div>
           </div>
-          
-          <p class="text-yellow-400">{{ Number(review.rating).toFixed(1) }} ★</p>
+          <p class="text-yellow-400">{{ Number(review.rating).toFixed(1) }} ★</p>          
         </div>
+        <p class="text-xs text-gray-400 mb-2">{{ formatDate(review.created_at) }}</p>
         <hr class="mb-2 font-semibold">
         <p class="mb-2 font-medium">{{ review.title }}</p>
-        <p class="text-xs text-gray-700">{{ review.comment }}</p>
+        <p class="text-xs text-gray-700 line-clamp-2" :class="{ 'line-clamp-none': review.showFull }">{{ review.comment }}</p>
+        <div v-if="review.comment.length > 200">
+          <hr class="mt-4 mb-2">
+          <button
+            @click="review.showFull = !review.showFull"
+            class="text-primary text-xs"
+          >
+            {{ review.showFull ? 'Ver menos' : 'Ver más' }}
+          </button>
+        </div>
         <div v-if="review.admin_response" class="mt-2 p-2 bg-gray-100 rounded text-gray-600">
           <strong>Respuesta del anunciante:</strong> {{ review.admin_response }}
         </div>
@@ -65,14 +73,20 @@ export default {
         const response = await axios.get(`/products/${this.productId}/reviews`);
         this.reviews = response.data.map(r => ({
           ...r,
-          rating: Number(r.rating)
-        }));
+          rating: Number(r.rating),
+          showFull: false
+        }))
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
       } catch (err) {
         console.error('Error al cargar las reviews:', err);
       }
     },
     toggle(id) {
       this.$set(this.tooltipVisible, id, !this.tooltipVisible[id]);
+    },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('es-ES'); // → dd/mm/aaaa
     }
   }
 };

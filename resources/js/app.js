@@ -9,6 +9,7 @@ import ProductList from './components/products/ProductList.vue';
 import ContactModal from './components/ContactModal.vue'
 import ReviewForm from './components/reviews/ReviewForm.vue';
 import ReviewList from './components/reviews/ReviewList.vue';
+import RatingAverage from './components/reviews/RatingAverage.vue';
 
 
 const productIndex = createApp({});
@@ -20,6 +21,19 @@ const productViewApp = createApp({});
 productViewApp.component('review-form', ReviewForm);
 productViewApp.component('review-list', ReviewList);
 productViewApp.mount('#product-view-app');
+
+document.querySelectorAll('.product-rating-average').forEach(el => {
+  const productId = el.dataset.productId;
+
+  createApp({
+    data() {
+      return { productId };
+    },
+    components: { RatingAverage },
+    template: `<rating-average :product-id="productId"/>`
+  }).mount(el);
+});
+
 
 Alpine.plugin(collapse);
 

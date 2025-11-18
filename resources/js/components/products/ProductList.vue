@@ -200,6 +200,7 @@
                     <BadgeHorarios :horarios="product.horarios || []" />
                     <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
                   </div>
+                  <RatingAverage :product-id="product.id" />
                 </div>
               </a>
             </div>
@@ -247,9 +248,10 @@ import { ShareIcon } from "@heroicons/vue/24/outline"
 import FilterIcon from "@/icons/FilterIcon.vue"
 import BadgeHorarios from "../BadgeHorarios.vue"
 import Badge from "../Badge.vue"
+import RatingAverage from "../reviews/RatingAverage.vue"
 
 export default {
-  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon },
+  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, RatingAverage },
 
   props: {
     initialCategory: {

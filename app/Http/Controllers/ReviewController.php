@@ -132,4 +132,16 @@ class ReviewController extends Controller
         return response()->json($reviews);
     }
 
+    public function averageRating($productId)
+    {
+        $average = Review::where('product_id', $productId)
+                        ->where('published', true)
+                        ->where('email_verified', true)
+                        ->avg('rating');
+
+        return response()->json([
+            'average' => $average ? round($average, 1) : null
+        ]);
+    }
+
 }

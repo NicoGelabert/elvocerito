@@ -75,6 +75,8 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/reviews/verify/{token}', [ReviewController::class, 'verify']);
     // Listar reviews publicadas para un producto
     Route::get('/products/{product}/reviews', [ReviewController::class, 'publicReviews']);
+    // Promedio de ratings para un producto
+    Route::get('/products/{product}/rating-average', [ReviewController::class, 'averageRating']);
 
     // Política de Privacidad
     Route::get('/politica-de-privacidad', function (){

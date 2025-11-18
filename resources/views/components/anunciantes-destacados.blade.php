@@ -9,15 +9,6 @@
                 @foreach ($anunciantes_destacados as $anunciante_destacado)
                 <li>
                     <x-contact-modal :product="$anunciante_destacado" />
-                    @if ($anunciante_destacado->prices)
-                        <ul class="absolute top-2 left-2">
-                            @foreach ($anunciante_destacado->prices as $price)
-                                <li>
-                                    <x-badge class="star" badge_title="{{ $price->number }}" />
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
                     <div class="card_body">
                         <a href="{{ route('product.view', [
                             'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
@@ -52,6 +43,7 @@
                                 </div>
                                 <p>{{ $anunciante_destacado->short_description }}</p>
                                 <x-badge-horarios :anunciante_destacado="$anunciante_destacado"/>
+                                <div class="product-rating-average" data-product-id="{{ $anunciante_destacado->id }}"></div>
                             </div>
                         </a>
                     </div>
