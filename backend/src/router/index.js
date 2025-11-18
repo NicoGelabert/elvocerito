@@ -11,6 +11,8 @@ import Categories from "../views/Categories/Categories.vue";
 import CategoryView from "../views/Categories/CategoryView.vue";
 import Products from "../views/Products/Products.vue";
 import ProductView from "../views/Products/ProductView.vue";
+import Reviews from "../views/Reviews/Reviews.vue";
+import ReviewView from "../views/Reviews/ReviewView.vue";
 import Articles from "../views/Articles/Articles.vue";
 import ArticleView from "../views/Articles/ArticleView.vue";
 import Authors from "../views/Authors/Authors.vue";
@@ -83,6 +85,24 @@ const routes = [
         path: 'products/:id',
         name: 'app.products.edit',
         component: ProductView,
+        props: {
+          id: (value) => /^\d+$/.test(value)
+        }
+      },
+      {
+        path: 'reviews',
+        name: 'app.reviews',
+        component: Reviews
+      },
+      {
+        path: 'reviews/create',
+        name: 'app.reviews.create',
+        component: ReviewView
+      },
+      {
+        path: 'reviews/:id',
+        name: 'app.reviews.edit',
+        component: ReviewView,
         props: {
           id: (value) => /^\d+$/.test(value)
         }

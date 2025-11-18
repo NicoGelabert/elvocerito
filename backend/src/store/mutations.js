@@ -58,6 +58,23 @@ export function setProducts(state, [loading, data = null]) {
   state.products.loading = loading;
 }
 
+export function setReviews(state, [loading, data = null]) {
+
+  if (data) {
+    state.reviews = {
+      ...state.reviews,
+      data: data.data,
+      links: data.meta?.links,
+      page: data.meta.current_page,
+      limit: data.meta.per_page,
+      from: data.meta.from,
+      to: data.meta.to,
+      total: data.meta.total,
+    }
+  }
+  state.reviews.loading = loading;
+}
+
 export function setArticles(state, [loading, data = null]) {
 
   if (data) {

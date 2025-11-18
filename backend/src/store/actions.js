@@ -297,7 +297,6 @@ export function createProduct({ commit }, product) {
   return axiosClient.post('/products', form);
 }
 
-
 export function updateProduct({commit}, product) {
   const id = product.id
   if (product.images && product.images.length) {
@@ -403,6 +402,78 @@ export function updateProduct({commit}, product) {
 
 export function deleteProduct({commit}, id) {
   return axiosClient.delete(`/products/${id}`)
+}
+
+// REVIEWS
+export function getReviews({commit, state}, {url = null, search = '', per_page, sort_field, sort_direction} = {}) {
+  commit('setReviews', [true])
+  url = url || '/reviews'
+  const params = {
+    per_page: state.reviews.limit,
+  }
+  return axiosClient.get(url, {
+    params: {
+      ...params,
+      search, per_page, sort_field, sort_direction
+    }
+  })
+    .then((response) => {
+      commit('setReviews', [false, response.data])
+    })
+    .catch(() => {
+      commit('setReviews', [false])
+    })
+}
+
+export function getReview({commit}, id) {
+  return axiosClient.get(`/reviews/${id}`)
+}
+
+export function creatReview({commit}, review) {
+    const form = new FormData();
+    form.append('product_id', review.product_id);
+    form.append('name', review.name);
+    form.append('last_name', review.last_name);
+    form.append('email', review.email);
+    form.append('rating', review.rating);
+    form.append('title', review.title || '');
+    form.append('comment', review.comment || '');
+    form.append('token', review.token || '');
+    form.append('email_verified', review.email_verified ? 1 : 0);
+    form.append('published', review.published ? 1 : 0);
+    form.append('created_by', review.created_by || '');
+    form.append('updated_by', review.updated_by || '');
+    form.append('admin_response', review.admin_response || '');
+    review = form;
+
+  return axiosClient.post('/reviews', review)
+}
+
+export function updateReview({ commit }, review) {
+  const id = review.id;
+  const form = new FormData();
+    form.append('product_id', review.product_id);
+    form.append('name', review.name);
+    form.append('last_name', review.last_name);
+    form.append('email', review.email);
+    form.append('rating', review.rating);
+    form.append('title', review.title || '');
+    form.append('comment', review.comment || '');
+    form.append('token', review.token || '');
+    form.append('email_verified', review.email_verified ? 1 : 0);
+    form.append('published', review.published ? 1 : 0);
+    form.append('created_by', review.created_by || '');
+    form.append('updated_by', review.updated_by || '');
+    form.append('admin_response', review.admin_response || '');
+    form.append('_method', 'PUT');
+  // Agregamos el método override para que Laravel lo interprete como PUT
+  review._method = 'PUT';
+
+  return axiosClient.post(`/reviews/${id}`, review);
+}
+
+export function deleteReview({commit}, id) {
+  return axiosClient.delete(`/reviews/${id}`)
 }
 
 // ARTICLES

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\HomeHeroBannerController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\AlergenController;
@@ -39,6 +40,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/export-categories', [CategoryController::class, 'exportCategories']);
     Route::apiResource('products', ProductController::class);
     Route::get('/export-products', [ProductController::class, 'exportProducts']);
+    Route::apiResource('reviews', ReviewController::class);
     Route::apiResource('articles', ArticleController::class);
     Route::apiResource('authors', AuthorController::class)->except('show');
     Route::get('/authors/tree', [AuthorController::class, 'getAsTree']);
