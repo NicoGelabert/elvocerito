@@ -78,38 +78,40 @@
                   </ul>
                 </transition>
               </div>
-              
-              <!-- Reviews -->
-              <div>
-                <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
-                <div class="flex items-center gap-2">
-                  <button
-                    @click="toggleHasReviews"
-                    class="relative w-9 h-5 rounded-full transition-all duration-300"
-                    :class="hasReviewsOnly ? 'bg-yellow-500' : 'bg-gray-300'"
-                  >
-                    <span
-                      class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
-                      :class="hasReviewsOnly ? 'translate-x-4' : ''"
-                    ></span>
-                  </button>
-                </div>
-              </div>
 
-              <!-- Urgencias -->
-              <div>
-                <h5 class="text-gray_600 mb-4">Urgencias</h5>
-                <div class="flex items-center gap-2">
-                  <button
-                    @click="toggleUrgencies"
-                    class="relative w-9 h-5 rounded-full transition-all duration-300"
-                    :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
-                  >
-                    <span
-                      class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
-                      :class="showUrgenciesOnly ? 'translate-x-4' : ''"
-                    ></span>
-                  </button>
+              <div class="flex gap-8">
+                <!-- Reviews -->
+                <div>
+                  <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
+                  <div class="flex items-center gap-2">
+                    <button
+                      @click="toggleHasReviews"
+                      class="relative w-9 h-5 rounded-full transition-all duration-300"
+                      :class="hasReviewsOnly ? 'bg-yellow-500' : 'bg-gray-300'"
+                    >
+                      <span
+                        class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                        :class="hasReviewsOnly ? 'translate-x-4' : ''"
+                      ></span>
+                    </button>
+                  </div>
+                </div>
+  
+                <!-- Urgencias -->
+                <div>
+                  <h5 class="text-gray_600 mb-4">Urgencias</h5>
+                  <div class="flex items-center gap-2">
+                    <button
+                      @click="toggleUrgencies"
+                      class="relative w-9 h-5 rounded-full transition-all duration-300"
+                      :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
+                    >
+                      <span
+                        class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                        :class="showUrgenciesOnly ? 'translate-x-4' : ''"
+                      ></span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
