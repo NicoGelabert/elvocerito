@@ -37,7 +37,7 @@ class ProductController extends Controller
             // Transformar cada item manteniendo la metadata
             $products->getCollection()->transform(function ($product) {
                 return array_merge($product->toArray(), [
-                    'categories' => $product->categories->sortBy('name')->values(),
+                    'categories' => $product->categories->sortBy('id')->values(),
                     'image_url' => $product->images->first()->url ?? 'storage/common/noimage.png',
                     'contacts' => $product->contacts->map(fn($c) => [
                         'id' => $c->id,

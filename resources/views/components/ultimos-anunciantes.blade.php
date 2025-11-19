@@ -24,7 +24,7 @@
                                             $remainingCount = $ultimo_anunciante->categories->count() - 1;
                                         @endphp
                                         
-                                        <h6 class="truncate-text">{{ $firstCategory->name }}</h6>
+                                        <h6 class="truncate-text z-[1]">{{ $firstCategory->name }}</h6>
                                         
                                         @if ($remainingCount > 0)
                                             <span class="remaining-count">

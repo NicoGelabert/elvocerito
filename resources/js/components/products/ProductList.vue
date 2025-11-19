@@ -216,6 +216,10 @@
                 :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug"
                 class="aspect-w-3 aspect-h-2 block overflow-hidden relative"
               >
+              <div class="w-full flex justify-end">
+                <span class="text-text_small text-gray-500">{{product.client_number}}</span>
+
+              </div>
                 <img :src="product.image_url" alt="" />
                 <div v-if="product.categories?.length" class="anunciantes_destacados_card_content">
                   <div class="header">
@@ -230,8 +234,8 @@
                       </div>
                       
                     </div>
-                    
                     <h5 class="w-fit mx-auto">{{ product.title }}</h5>
+                    
                   </div>
                   <p>{{ product.short_description }}</p>
                   <div class="my-2 flex gap-2">

@@ -18,14 +18,14 @@
                         <div class="recientemente_vistos_card_content">
                             <div class="header">
                                 <!-- INICIO CATEGORÍAS -->
-                                <div class="flex gap-2 items-center justify-between">
+                                <div class="relative flex gap-2 items-center justify-between md:w-fit ">
                                     @if ($viewedProduct->categories->count() > 0)
                                         @php
                                             $firstCategory = $viewedProduct->categories->first();
                                             $remainingCount = $viewedProduct->categories->count() - 1;
                                         @endphp
                                         
-                                        <h6 class="truncate-text">{{ $firstCategory->name }}</h6>
+                                        <h6 class="truncate-text z-[1]">{{ $firstCategory->name }}</h6>
                                         
                                         @if ($remainingCount > 0)
                                             <span class="remaining-count">
