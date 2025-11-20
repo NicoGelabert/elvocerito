@@ -25,7 +25,9 @@ class ProductController extends Controller
             $query->where('urgencies', true); // o el campo que uses, como 'is_urgent'
         }
         if (request()->has('has_reviews') && request('has_reviews') == 'true') {
-            $query->whereHas('reviews');
+            $query->whereHas('reviews', function ($q){
+                $q->where('published', true);
+            });
         }
 
         if (request()->expectsJson()) {

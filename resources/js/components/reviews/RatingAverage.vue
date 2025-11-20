@@ -1,5 +1,5 @@
 <template>
-  <div v-if="average" class="flex items-center justify-center md:justify-start space-x-1">
+  <div v-if="average" class="flex items-center justify-center space-x-1">
 
       
       <!-- Estrellas -->
@@ -7,7 +7,7 @@
           <StarIcon
           v-for="n in 5"
           :key="n"
-          :fill="getStarFill(n)"
+          :class="getStarFill(n)"
           :half="isHalfStar(n)"
           />
         </div>
@@ -39,9 +39,9 @@ export default {
   methods: {
     // Devuelve color de la estrella según el promedio
     getStarFill(position) {
-      if (this.average >= position) return 'yellow';
-      if (this.average >= position - 0.5) return 'yellow'; // media estrella
-      return 'gray';
+      if (this.average >= position) return 'fill-amber-300';
+      if (this.average >= position - 0.5) return 'fill-amber-300'; // media estrella
+      return 'fill-gray-300';
     },
     isHalfStar(position) {
       return this.average >= position - 0.5 && this.average < position;

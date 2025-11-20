@@ -125,7 +125,7 @@
                                 <!-- INICIO TITLE -->
                                 <h2>{{ $product->title }}</h2>
                                 <!-- Promedio de calificaciones -->
-                                <div class="product-rating-average" data-product-id="{{ $product->id }}"></div>
+                                <div class="product-rating-average product_rating" data-product-id="{{ $product->id }}"></div>
                                 <!-- FIN TITLE -->
                                 <!-- INICIO PÁGINA WEB -->
                                 @if ($product->webs->isNotEmpty())

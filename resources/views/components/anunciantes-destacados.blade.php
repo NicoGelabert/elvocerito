@@ -43,9 +43,9 @@
                                 </div>
                                 <p>{{ $anunciante_destacado->short_description }}</p>
                                 <x-badge-horarios :anunciante_destacado="$anunciante_destacado"/>
-                                <div class="product-rating-average" data-product-id="{{ $anunciante_destacado->id }}"></div>
                             </div>
                         </a>
+                        <div class="product-rating-average" data-product-id="{{ $anunciante_destacado->id }}"></div>
                     </div>
                     <div class="footer mx-2 md:mx-4">
                         <hr class="divider">

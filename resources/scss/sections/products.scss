@@ -279,17 +279,8 @@
                 }
             }
         }
-        .product_rating{
-            @apply flex flex-col gap-4;
-            p{
-                @apply text-small
-            }
-            .product_rating_content{
-                @apply flex gap-4 items-center;
-                svg{
-                    @apply w-4 h-auto;
-                }
-            }
+        .product_rating div{
+            @apply md:justify-start;
         }
         .product_location{
             @apply flex flex-col gap-4;

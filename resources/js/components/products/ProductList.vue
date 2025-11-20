@@ -4,10 +4,34 @@
     <div v-if="loading" class="spinner-overlay"><div class="spinner"></div></div>
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div class="container flex flex-col gap-4 anunciantes_destacados">
-      <!-- Encabezado -->
-      <h4 class="hidden md:block">Filtrar</h4>
-      <hr class="divider-product_list hidden md:block" />
+    <div class="container flex flex-col gap-2 anunciantes_destacados">
+      <div class="w-full">
+        <h3 class="text-center">¿Qué necesitás hacer?</h3>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-2">
+        <!-- Bagde botón filtrado por categorías -->
+        <button
+          class="flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 w-fit text-gray-700"
+          @click="selectCategory(null)"
+          v-if="selectedCategoryName">
+          <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1><span class="text-text_small font-light ml-1">x</span>
+        </button>
+        
+        <!-- Bagde botón filtrado por reviews -->
+        <button
+          class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-amber-300 bg-amber-100 w-fit text-amber-800"
+          @click="toggleHasReviews"
+          :class="hasReviewsOnly ? 'inline-flex' : 'hidden'">
+            Con Reseñas <span class="font-light ml-1">x</span>
+        </button>
+        <!-- Bagde botón filtrado por urgencies -->
+        <button
+          class="items-center justify-center px-2 py-1 rounded-md text-text_small text-red-800 leading-none font-semibold transition-all shadow-sm border border-red-300 bg-red-200 w-fit"
+          @click="toggleUrgencies"
+          :class="showUrgenciesOnly ? 'inline-flex' : 'hidden'">
+            Atiende Urgencias <span class="font-light ml-1">x</span>
+        </button>
+      </div>
 
       <!-- MOBILE: botón de apertura -->
       <div class="block md:hidden">
@@ -87,7 +111,7 @@
                     <button
                       @click="toggleHasReviews"
                       class="relative w-9 h-5 rounded-full transition-all duration-300"
-                      :class="hasReviewsOnly ? 'bg-yellow-500' : 'bg-gray-300'"
+                      :class="hasReviewsOnly ? 'bg-amber-300' : 'bg-gray-300'"
                     >
                       <span
                         class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
@@ -129,9 +153,9 @@
       </div>
 
       <!-- DESKTOP / TABLET -->
+      <hr class="my-2">
       <div class="hidden md:flex w-full relative gap-8">
         <div>
-          <h5 class="text-gray_600 mb-2">Categoría</h5>
           <button
             @click="toggleDropdown"
             class="flex gap-4 text-xs text-gray-500 w-auto justify-between items-center px-4 py-2 bg-white border rounded-lg shadow-sm hover:shadow-md"
@@ -173,36 +197,31 @@
           </transition>
         </div>
 
-        <div>
-          <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
-          <div class="flex items-center gap-2">
-            <button
-              @click="toggleHasReviews"
-              class="relative w-7 h-4 rounded-full transition-all"
-              :class="hasReviewsOnly ? 'bg-yellow-500' : 'bg-gray-300'"
-            >
-              <span
-                class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
-                :class="hasReviewsOnly ? 'translate-x-3' : ''"
-              ></span>
-            </button>
-          </div>
+        <div class="flex items-center gap-2">
+          <p class="text-xs text-gray-700">Sólo con reseñas</p>
+          <button
+            @click="toggleHasReviews"
+            class="relative w-7 h-4 rounded-full transition-all"
+            :class="hasReviewsOnly ? 'bg-amber-300' : 'bg-gray-300'"
+          >
+            <span
+              class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
+              :class="hasReviewsOnly ? 'translate-x-3' : ''"
+            ></span>
+          </button>
         </div>
-
-        <div>
-          <h5 class="text-gray_600 mb-4">Urgencias</h5>
-          <div class="flex items-center gap-2">
-            <button
-              @click="toggleUrgencies"
-              class="relative w-7 h-4 rounded-full transition-all"
-              :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
-            >
-              <span
-                class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
-                :class="showUrgenciesOnly ? 'translate-x-3' : ''"
-              ></span>
-            </button>
-          </div>
+        <div class="flex items-center gap-2">
+          <p class="text-xs text-gray-700">Atiende Urgencias</p>
+          <button
+            @click="toggleUrgencies"
+            class="relative w-7 h-4 rounded-full transition-all"
+            :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
+          >
+            <span
+              class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
+              :class="showUrgenciesOnly ? 'translate-x-3' : ''"
+            ></span>
+          </button>
         </div>
 
       </div>
@@ -216,10 +235,10 @@
                 :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug"
                 class="aspect-w-3 aspect-h-2 block overflow-hidden relative"
               >
-              <div class="w-full flex justify-end">
-                <span class="text-text_small text-gray-500">{{product.client_number}}</span>
+                <div class="w-full flex justify-end">
+                  <span class="text-text_small text-gray-500">{{product.client_number}}</span>
 
-              </div>
+                </div>
                 <img :src="product.image_url" alt="" />
                 <div v-if="product.categories?.length" class="anunciantes_destacados_card_content">
                   <div class="header">
@@ -242,9 +261,9 @@
                     <BadgeHorarios :horarios="product.horarios || []" />
                     <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
                   </div>
-                  <RatingAverage :product-id="product.id" />
                 </div>
               </a>
+              <RatingAverage :product-id="product.id" />
             </div>
 
             <!-- Footer -->
