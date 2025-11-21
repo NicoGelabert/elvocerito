@@ -10,7 +10,7 @@
             li{
                 @apply relative flex flex-col justify-between bg-white rounded-xl border border-gray_200;
                 .card_body{
-                    @apply p-4;
+                    @apply p-4 h-full;
                     img{
                         @apply rounded-full object-cover aspect-square max-w-20 lg:max-w-24 mx-auto border border-gray_200 mb-4;
                     }

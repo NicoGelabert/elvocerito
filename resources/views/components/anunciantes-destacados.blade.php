@@ -14,6 +14,9 @@
                             'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
                             'product' => $anunciante_destacado->slug
                         ]) }}">
+                        <div class="w-full flex justify-end">
+                            <span class="text-text_small text-gray-500">{{ $anunciante_destacado->client_number }}</span>
+                        </div>
                             <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
                             <div class="anunciantes_destacados_card_content">
                                 <div class="header">
@@ -35,7 +38,7 @@
                                         @endif
                                     </div>
                                     <!-- FIN CATEGORÍAS -->
-                                     <div class="w-full">
+                                     <div class="w-full h-4">
                                          <h5>
                                              {{ $anunciante_destacado->title}}
                                          </h5>
