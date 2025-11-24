@@ -38,7 +38,7 @@
                                         @endif
                                     </div>
                                     <!-- FIN CATEGORÍAS -->
-                                     <div class="w-full h-4">
+                                     <div class="w-full">
                                          <h5>
                                              {{ $anunciante_destacado->title}}
                                          </h5>

@@ -8,7 +8,7 @@
       <div class="w-full">
         <h3 class="text-center">¿Qué necesitás hacer?</h3>
       </div>
-      <div class="flex flex-wrap gap-2 mt-2">
+      <div class="flex flex-wrap gap-4 mt-2">
         <!-- Bagde botón filtrado por categorías -->
         <button
           class="flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 w-fit text-gray-700"
@@ -33,6 +33,7 @@
         </button>
       </div>
 
+      <hr class="my-2" v-if="selectedCategoryName || hasReviewsOnly || showUrgenciesOnly" />
       <!-- MOBILE: botón de apertura -->
       <div class="block md:hidden">
         <button
@@ -153,7 +154,6 @@
       </div>
 
       <!-- DESKTOP / TABLET -->
-      <hr class="my-2">
       <div class="hidden md:flex w-full relative gap-8">
         <div>
           <button
