@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HomeHeroBanner;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -42,13 +43,20 @@ class WelcomeController extends Controller
             // Si no hay productos vistos, devolvé una colección vacía para evitar errores en la vista
             $viewedProducts = collect();
         }
+
+        $ultimasReviews = Review::with('product:id,title')  // Solo carga id y name del producto
+            ->orderBy('created_at', 'desc')
+            ->take(20)
+            ->get();
+
         return view('welcome', compact(
             'homeherobanners',
             'categories',
             'anunciantes_destacados',
             'ultimos_anunciantes',
             'articles',
-            'viewedProducts'
+            'viewedProducts',
+            'ultimasReviews'
         ));
     }
 

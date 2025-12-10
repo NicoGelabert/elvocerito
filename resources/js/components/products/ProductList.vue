@@ -264,12 +264,13 @@
                 </div>
               </a>
               <RatingAverage :product-id="product.id" />
+              <div class="mx-auto text-center"><span class="text-text_small text-gray-500">Anuncia desde Marzo 2018</span></div>
             </div>
 
             <!-- Footer -->
             <div class="footer mx-2 md:mx-4">
               <hr class="divider" />
-              <div class="flex justify-between my-4">
+              <div class="flex justify-between mt-4 my-2">
                 <button class="btn btn-secondary" @click="openModal('contact', product)">
                   Contactar
                 </button>
@@ -277,7 +278,9 @@
                   <ShareIcon class="fill-primary" />
                 </button>
               </div>
+              
             </div>
+
           </li>
         </ul>
       </div>

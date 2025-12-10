@@ -115,5 +115,35 @@ if (ultimosAnuncinatesElement) {
 
 ultimosAnuncinates.mount();
 // Fin Últimos anunciantes
+// Últimas reviews
+var ultimasReviewsElement = document.querySelector('#ultimas_reviews');
+if (ultimasReviewsElement) {
+    var ultimasReviews = new Splide(ultimasReviewsElement, {
+        arrows      : false,
+        autoplay    : false,
+        gap         : '2rem',
+        interval    : 4000,
+        padding     : '2rem',
+        pagination  : false,
+        perPage     : 3,
+        type        : 'loop',
+        breakpoints: {
+            1024: {
+                perPage     : 2,
+            },
+            // 768: {
+            //     perPage     : 5,
+            // },
+            480: {
+                perPage     : 1,
+                gap         : '1rem',
+                padding     : '3rem',
+            }
+        },
+    })
+};
+
+ultimasReviews.mount();
+// Fin Últimas reviews
 // Fin Splide
   

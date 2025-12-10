@@ -1,0 +1,35 @@
+#ultimas_reviews{
+    .ultimas_reviews_title{
+        @apply text-center;
+    }
+    .ultimas_reviews_card{
+        @apply w-full mx-auto;
+        ul{
+            li{
+                @apply flex flex-col border border-gray_300 py-2 px-4 rounded-xl bg-white;
+                a{
+                    @apply flex gap-2;
+                }
+                img{
+                    @apply rounded-full object-cover
+                    aspect-square max-w-16 border border-gray_200;
+                }
+                .ultimas_reviews_card_content{
+                    @apply flex flex-col flex-1 px-2 py-4 justify-between;
+                    .header{
+                        @apply flex flex-col gap-1;
+                        h5{
+                            @apply  overflow-hidden line-clamp-2;
+                        }
+                        h6{
+                            
+                        }
+                        p{
+                            @apply text-gray_400 text-xs font-medium;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

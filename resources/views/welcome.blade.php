@@ -21,6 +21,7 @@
         <x-recently-viewed :viewedProducts="$viewedProducts" />
         @endif
         <x-revista />
+        <x-latest-reviews :ultimasReviews="$ultimasReviews" />
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
         <div class="container">
             <hr class="divider">
