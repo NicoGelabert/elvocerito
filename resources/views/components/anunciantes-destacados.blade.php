@@ -48,7 +48,20 @@
                                 <x-badge-horarios :anunciante_destacado="$anunciante_destacado"/>
                             </div>
                         </a>
-                        <div class="product-rating-average" data-product-id="{{ $anunciante_destacado->id }}"></div>
+                        @if ($anunciante_destacado->reviews_count > 0)
+                        <!-- Promedio de calificaciones -->
+                        <div class="flex items-center space-x-2">
+                            <div
+                                class="product-rating-average product_rating"
+                                data-product-id="{{ $anunciante_destacado->id }}">
+                            </div>
+
+                            <span class="text-sm text-gray-500">
+                                ({{ $anunciante_destacado->reviews_count }} 
+                                {{ Str::plural('reseña', $anunciante_destacado->reviews_count) }})
+                            </span>
+                        </div>
+                        @endif
                     </div>
                     <div class="footer mx-2 md:mx-4">
                         <hr class="divider">

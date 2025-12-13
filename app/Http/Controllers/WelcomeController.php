@@ -18,7 +18,7 @@ class WelcomeController extends Controller
         
         $categories = Category::with('children')->orderBy('name', 'asc')->get();
 
-        $anunciantes_destacados = Product::where([
+        $anunciantes_destacados = Product::withCount('reviews')->where([
             ['published', '=', 1],
             ['leading_home', '=', 1]
         ])->get()->map(function ($anunciante) {
@@ -44,7 +44,8 @@ class WelcomeController extends Controller
             $viewedProducts = collect();
         }
 
-        $ultimasReviews = Review::with('product:id,title')  // Solo carga id y name del producto
+        $ultimasReviews = Review::with('product:id,title,slug',
+        'product.categories:id,slug,name')  // Solo carga id y name del producto
             ->orderBy('created_at', 'desc')
             ->take(20)
             ->get();

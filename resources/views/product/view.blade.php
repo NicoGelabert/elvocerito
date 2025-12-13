@@ -125,7 +125,17 @@
                                 <!-- INICIO TITLE -->
                                 <h2>{{ $product->title }}</h2>
                                 <!-- Promedio de calificaciones -->
-                                <div class="product-rating-average product_rating" data-product-id="{{ $product->id }}"></div>
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="product-rating-average product_rating"
+                                        data-product-id="{{ $product->id }}">
+                                    </div>
+
+                                    <span class="text-sm text-gray-500">
+                                        ({{ $product->reviews_count }}
+                                        {{ Str::plural('reseña', $product->reviews_count) }})
+                                    </span>
+                                </div>
                                 <!-- FIN TITLE -->
                                 <!-- INICIO PÁGINA WEB -->
                                 @if ($product->webs->isNotEmpty())

@@ -6,11 +6,6 @@ $body-font: "Inter", sans-serif;
 a{
     @apply hover:text-primary;
 }
-a:hover{
-    svg{
-        @apply fill-primary;
-    }
-} 
 .logo svg{
     @apply transition-all fill-gray_50
     sm:h-10 w-auto;

@@ -84,8 +84,8 @@ class ProductController extends Controller
         // Obtener la categoría usando el slug
         $category = Category::where('slug', $categorySlug)->firstOrFail();
 
-        // Obtener el producto usando el slug
-        $product = Product::where('slug', $productSlug)->firstOrFail();
+        // Obtener el producto con el count de reseñas usando el slug
+        $product = Product::withCount('reviews')->where('slug', $productSlug)->firstOrFail();
 
         // Cargar el producto con sus relaciones
         $product->load(['categories', 'images', 'contacts', 'socials', 'addresses', 'horarios']);
