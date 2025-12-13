@@ -50,7 +50,7 @@
                         </a>
                         @if ($anunciante_destacado->reviews_count > 0)
                         <!-- Promedio de calificaciones -->
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center gap-2 justify-center">
                             <div
                                 class="product-rating-average product_rating"
                                 data-product-id="{{ $anunciante_destacado->id }}">
