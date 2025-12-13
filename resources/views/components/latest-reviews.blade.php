@@ -19,7 +19,7 @@
                                 size="lg"
                             />
                             <div>
-                                <h5>{{ $review->name}} {{ $review->last_name}}</h5>
+                                <h5 class="capitalize">{{ $review->name}} {{ $review->last_name}}</h5>
                                 <x-rating-stars :rating="$review->rating" />
                                 <p class="text-gray_400 text-xs font-medium">{{ $review->created_at->translatedFormat('j \d\e F \d\e Y') }}</p>
                             </div>
