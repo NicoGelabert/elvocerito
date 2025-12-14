@@ -19,8 +19,6 @@ class ArticleController extends Controller
     {
         $article->load(['authors.articles', 'images', 'tags']);
         // $articles = article::all();
-        return view('news.view', [
-            'article' => $article,
-        ]);
+        return view('news.view', compact('article'));
     }
 }

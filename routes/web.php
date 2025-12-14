@@ -43,6 +43,10 @@ Route::middleware(['guestOrVerified'])->group(function () {
 
     // Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    
+    //News
+    Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
+    Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
 
     // Anunciantes = Products
     Route::get('/anunciantes', [ProductController::class, 'index'])->name('products.index');
@@ -54,10 +58,6 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/{category:slug}', [CategoriesController::class, 'view'])->name('categories.view');
     Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])
     ->name('categories.view.subcategory');
-
-    //News
-    Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
-    Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
 
     //Servicios
     Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
