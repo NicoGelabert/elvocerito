@@ -50,7 +50,7 @@ export default {
             },
             dropShadow:{
                 search_input: '0 5px 15px rgba(0,0,0,0.10)',
-            }
+            },
         },
     },
     safelist: [

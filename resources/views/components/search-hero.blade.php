@@ -1,7 +1,7 @@
-<div class="search_hero">
+<div class="search_hero" style="background-image:url('{{ asset('storage/common/hero-banner.jpg') }}')">
     <x-backgrounds.pinmaps />
     <x-search-modal />
-    <div class="max-w-screen-lg w-full flex justify-center lg:justify-end mx-auto">
+    <div class="max-w-screen-lg w-full flex justify-center mx-auto">
         <div class="search_hero_container">
             <h1>Servicios cerca tuyo.</h1>
             <p>Encontrá lo que necesitás fácil y rápido!</p>
