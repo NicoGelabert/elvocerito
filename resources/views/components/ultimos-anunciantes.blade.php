@@ -1,6 +1,6 @@
 <section id="ultimos_anunciantes" class="splide">
-    <div class="flex flex-col gap-8">
-        <div class="container ultimos_anunciantes_title">
+    <div class="container flex flex-col gap-8">
+        <div class="ultimos_anunciantes_title">
             <h3>Últimos anunciantes</h3>
         </div>
         <div class="ultimos_anunciantes_card splide__track">

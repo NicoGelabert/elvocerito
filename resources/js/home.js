@@ -62,9 +62,8 @@ if (recientementeVistosElement) {
     var recientementeVistos = new Splide(recientementeVistosElement, {
         arrows      : false,
         autoplay    : false,
-        gap         : '2rem',
+        gap         : '1rem',
         interval    : 4000,
-        padding     : '2rem',
         pagination  : false,
         perPage     : 3,
         type        : 'slide',
@@ -78,7 +77,7 @@ if (recientementeVistosElement) {
             480: {
                 perPage     : 1,
                 gap         : '1rem',
-                padding     : '3rem',
+                padding     : '1rem',
             }
         },
     })
@@ -91,9 +90,8 @@ if (ultimosAnuncinatesElement) {
     var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
         arrows      : false,
         autoplay    : false,
-        gap         : '2rem',
+        gap         : '1rem',
         interval    : 4000,
-        padding     : '2rem',
         pagination  : false,
         perPage     : 3,
         type        : 'loop',
@@ -107,7 +105,7 @@ if (ultimosAnuncinatesElement) {
             480: {
                 perPage     : 1,
                 gap         : '1rem',
-                padding     : '3rem',
+                padding     : '1rem',
             }
         },
     })
@@ -121,9 +119,8 @@ if (ultimasReviewsElement) {
     var ultimasReviews = new Splide(ultimasReviewsElement, {
         arrows      : false,
         autoplay    : false,
-        gap         : '2rem',
+        gap         : '1rem',
         interval    : 4000,
-        padding     : '2rem',
         pagination  : false,
         perPage     : 3,
         type        : 'loop',
@@ -137,7 +134,7 @@ if (ultimasReviewsElement) {
             480: {
                 perPage     : 1,
                 gap         : '1rem',
-                padding     : '3rem',
+                padding     : '1rem',
             }
         },
     })

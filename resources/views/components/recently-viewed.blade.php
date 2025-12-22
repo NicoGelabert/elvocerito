@@ -1,6 +1,6 @@
 <section id="recientemente_vistos" class="splide">
-    <div class="flex flex-col gap-8">
-        <div class="container recientemente_vistos_title">
+    <div class="container flex flex-col gap-8">
+        <div class="recientemente_vistos_title">
             <h3>Vistos recientemente</h3>
         </div>
         <div class="recientemente_vistos_card splide__track">
