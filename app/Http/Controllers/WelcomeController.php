@@ -31,7 +31,7 @@ class WelcomeController extends Controller
         $articles = Article::with('authors', 'tags')
         ->where('published', 1)
         ->orderBy('created_at', 'desc')
-        ->limit(5)
+        ->limit(6)
         ->get();
 
         $viewedProductsIds = json_decode(Cookie::get('recently_viewed'), true) ?? [];
