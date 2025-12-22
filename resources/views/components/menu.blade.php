@@ -21,7 +21,7 @@
             </a>
         </li>
         <li>
-            <x-button href="/urgencias" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
+            <x-button href="/anunciantes?urgencies=true" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
         </li>
     </ul>
     <div class="flex flex-col gap-8 w-full lg:hidden absolute bottom-12 px-16">

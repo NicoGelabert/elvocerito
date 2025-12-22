@@ -4,7 +4,7 @@
             <x-icons.search />
         </div>
         <input type="text" name="query" placeholder="Buscá una empresa o servicio" 
-            class="search_input">
+            class="search_input" x-ref="searchInput">
         <button type="button" class="clear-search absolute right-2 text-gray-400 hover:text-gray-600 hidden">
             ✖
         </button>

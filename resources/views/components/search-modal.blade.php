@@ -1,6 +1,15 @@
 <div 
   x-data="{ isOpen: false }" 
-  x-init="window.addEventListener('open-search-modal', () => isOpen = true)"
+  x-init="
+    window.addEventListener('open-search-modal', () => {
+      isOpen = true
+      $nextTick(() => {
+        setTimeout(() => {
+          $refs.searchInput?.focus()
+        }, 50)
+      })
+    })
+  "
 >
   <!-- Fondo + x-show controla todo -->
   <div 
