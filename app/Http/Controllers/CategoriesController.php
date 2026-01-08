@@ -10,7 +10,11 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::whereHas('products', function ($q) {
+            $q->where('published', 1);
+        })
+        ->orderBy('name', 'asc')
+        ->get();
 
         $grouped = $categories->groupBy(function ($category) {
             return strtoupper(substr($category->name, 0, 1));

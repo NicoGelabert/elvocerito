@@ -1,7 +1,7 @@
 <section id="ultimos_anunciantes" class="splide">
     <div class="container flex flex-col gap-8">
         <div class="ultimos_anunciantes_title">
-            <h3>Últimos anunciantes</h3>
+            <h3>Últimos ingresos</h3>
         </div>
         <div class="ultimos_anunciantes_card splide__track">
             <ul class="splide__list">

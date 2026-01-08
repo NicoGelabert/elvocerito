@@ -16,7 +16,7 @@ class WelcomeController extends Controller
     {
         $homeherobanners = HomeHeroBanner::all();
         
-        $categories = Category::with('children')->orderBy('name', 'asc')->get();
+        $categories = Category::with('children')->whereHas('products')->orderBy('name', 'asc')->get();
 
         $anunciantes_destacados = Product::withCount('reviews')->where([
             ['published', '=', 1],

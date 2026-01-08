@@ -1,7 +1,7 @@
 <section id="ultimas_reviews" class="splide">
     <div class="container flex flex-col gap-8">
         <div class="ultimas_reviews_title">
-            <h3>Últimas reseñas</h3>
+            <h3>Reseñas sobre nuestros anunciantes</h3>
         </div>
         <div class="ultimas_reviews_list splide__track">
             <ul class="splide__list">

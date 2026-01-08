@@ -9,12 +9,12 @@
             }
         }
         .article_card{
-            @apply flex flex-col gap-2;
+            @apply relative flex flex-col gap-2 p-2 justify-between bg-white rounded-xl shadow-lg hover:bg-gray-50 transition-all duration-300;
             img{
                 @apply w-full h-auto object-cover rounded-lg aspect-[4/3];
             }
             h4{
-                @apply text-lg/6;
+                @apply text-base bg-white;
             }
             p{
                 @apply text-gray_500 text-xs;

@@ -16,9 +16,9 @@
             <a href="{{ route('news.view', $article) }}">
                 <div class="article_card">
                     <img src="{{ $article->image }}" alt="{{ $article->title }}">
-                    <p>{{ $article->subtitle}}</p>
+                    <span class="text-text_small">{{ $article->subtitle}}</span>
                     <h4>{{ $article->title}}</h4>
-                    <!-- <p>{{ $article->news_lead}}</p> -->
+                    <p class="line-clamp-3">{{ $article->news_lead}}</p>
                 </div>
             </a>
             @endforeach
