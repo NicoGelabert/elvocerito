@@ -21,7 +21,10 @@
             </a>
         </li>
         <li>
-            <x-button href="/anunciantes?urgencies=true" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
+            <x-button href="/anunciantes?urgencies=true" class="btn btn-urgencies"><x-icons.urgencies /> urgencias</x-button>
+        </li>
+        <li>
+            <x-button href="/anunciantes?page=1&category=farmacias&on_duty=true" class="btn btn-on-duty"><x-icons.on_duty /> farmacias de turno</x-button>
         </li>
     </ul>
     <div class="flex flex-col gap-8 w-full lg:hidden absolute bottom-12 px-16">

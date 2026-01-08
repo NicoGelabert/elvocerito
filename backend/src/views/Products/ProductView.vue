@@ -218,6 +218,32 @@
             
           </div>
           <!-- Fin Horarios-->
+          <!-- Horarios de Turno -->
+          <div v-if="isPharmacy" class="flex flex-col gap-2">
+            <hr class="my-4">
+            <h3 class="text-lg font-bold">Turnos de Farmacia</h3>
+            <div v-for="(shift, index) in product.pharmacy_shifts" :key="index" class="flex items-center gap-2">
+              <CustomInput
+                type="date"
+                v-model="shift.shift_date"
+                label="Fecha de Turno"
+                class="w-7/12"
+                :errors="errors[`pharmacy_shifts.${index}.shift_date`]"
+              />
+              <button class="group border-0 rounded-full hover:bg-black p-1"
+                      v-if="product.pharmacy_shifts.length > 1"
+                      @click.prevent="removeShift(index)">
+                <TrashIcon class="h-5 w-5 text-black group-hover:text-white" aria-hidden="true" />
+              </button>
+            </div>
+            <button class="group flex items-center gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white mt-2"
+                    type="button"
+                    @click="addShift">
+              <h4 class="text-sm">Crear nuevo turno</h4>
+              <PlusCircleIcon class="h-5 w-5 text-black group-hover:text-white" aria-hidden="true" />
+            </button>
+          </div>
+          <!-- Fin Horario de turno -->
 
           <!-- Inicio Información de contacto -->
           <hr class="my-4">
@@ -401,6 +427,8 @@ import Treeselect from 'vue3-treeselect'
 // import the styles
 import 'vue3-treeselect/dist/vue3-treeselect.css'
 import axiosClient from "../../axios.js";
+import { computed } from 'vue';
+import {PHARMACY_CATEGORY_ID} from "../../constants";
 
 const route = useRoute()
 const router = useRouter()
@@ -426,6 +454,7 @@ const product = ref({
   horarios: [{ dia: '', apertura: '', cierre: ''}],
   webs: [{ webpage: '' }],
   listitems: [{ item: '' }],
+  pharmacy_shifts: [{ shift_date: '' }],
 })
 
 const diasSemana = [
@@ -437,6 +466,22 @@ const diasSemana = [
   { key: 'sábado', text: 'Sábado' },
   { key: 'domingo', text: 'Domingo' },
 ];
+
+
+const isPharmacy = computed(() => {
+  return product.value.categories.includes(PHARMACY_CATEGORY_ID);
+});
+// Turnos de farmacia
+function addShift() {
+  product.value.pharmacy_shifts.push({ shift_date: '' });
+}
+
+function removeShift(index) {
+  product.value.pharmacy_shifts.splice(index, 1);
+  if (product.value.pharmacy_shifts.length === 0) {
+    addShift();
+  }
+}
 
 // Buscar un horario por día
 function getHorario(diaKey) {
@@ -468,6 +513,9 @@ onMounted(() => {
       .then((response) => {
         loading.value = false;
         product.value = response.data;
+        product.value.pharmacy_shifts = response.data.pharmacy_shifts?.length
+          ? response.data.pharmacy_shifts
+          : [{ shift_date: '' }];
         if (!product.value.contacts.length) {
           product.value.contacts.push({ type: '', info: '' });
         }
@@ -586,6 +634,10 @@ function onSubmit($event, close = false) {
   product.value.listitems = product.value.listitems.filter(
     (listitem) => listitem.item !== ''
   );
+  product.value.pharmacy_shifts = product.value.pharmacy_shifts.filter(
+    shift => shift.shift_date !== ''
+  );
+
   if (product.value.id) {
     store.dispatch('updateProduct', product.value)
       .then(response => {

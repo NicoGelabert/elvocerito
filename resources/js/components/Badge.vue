@@ -22,6 +22,8 @@ const badgeClass = computed(() => {
       return 'closed'
     case 'Urgencias':
       return 'urgencies'
+    case 'De Turno':
+      return 'de_turno'
     default:
       return ''
   }
@@ -49,6 +51,10 @@ const badgeClass = computed(() => {
 
 .urgencies{
   @apply bg-red-200 text-red-800;
+}
+
+.de_turno{
+  @apply bg-cyan-200 text-cyan-800;
 }
 
 /* Animaciones */

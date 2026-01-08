@@ -227,7 +227,12 @@ export function createProduct({ commit }, product) {
       form.append(`categories[]`, category);
     });
   }
-  
+  // ✅ Lógica para farmacia
+  const PHARMACY_CATEGORY_ID = 88; // Cambiar al ID real
+  const isPharmacy = product.categories?.some(catId => catId == PHARMACY_CATEGORY_ID);
+  if (isPharmacy && product.pharmacy_turn_date) {
+    form.append('pharmacy_turn_date', product.pharmacy_turn_date);
+  }
   // Agregar imágenes al FormData
   if (product.images && product.images.length) {
     product.images.forEach((im) => {
@@ -316,6 +321,13 @@ export function updateProduct({commit}, product) {
     product.categories.forEach((category) => {
       form.append(`categories[]`, category);
     });
+  }
+
+  // ✅ Lógica para farmacia
+  const PHARMACY_CATEGORY_ID = 88; // Cambiar al ID real
+  const isPharmacy = product.categories?.some(catId => catId == PHARMACY_CATEGORY_ID);
+  if (isPharmacy && product.pharmacy_turn_date) {
+    form.append('pharmacy_turn_date', product.pharmacy_turn_date);
   }
   
   // Agregar imágenes al FormData

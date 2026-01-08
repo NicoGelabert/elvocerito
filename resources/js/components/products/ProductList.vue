@@ -9,31 +9,46 @@
         <h3 class="text-center">¿Qué necesitás hacer?</h3>
       </div>
       <div class="flex flex-wrap gap-4 mt-2">
-        <!-- Bagde botón filtrado por categorías -->
+        <!-- Badge botón categoría -->
         <button
           class="flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 w-fit text-gray-700"
           @click="selectCategory(null)"
-          v-if="selectedCategoryName">
-          <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1><span class="text-text_small font-light ml-1">x</span>
+          v-if="selectedCategoryName"
+        >
+          <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1>
+          <span class="text-text_small font-light ml-1">x</span>
         </button>
-        
-        <!-- Bagde botón filtrado por reviews -->
+
+        <!-- Badge botón filtrado por reviews -->
         <button
           class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-amber-300 bg-amber-100 w-fit text-amber-800"
           @click="toggleHasReviews"
-          :class="hasReviewsOnly ? 'inline-flex' : 'hidden'">
-            Con Reseñas <span class="font-light ml-1">x</span>
+          :class="hasReviewsOnly ? 'inline-flex' : 'hidden'"
+        >
+          Con Reseñas <span class="font-light ml-1">x</span>
         </button>
-        <!-- Bagde botón filtrado por urgencies -->
+
+        <!-- Badge botón filtrado por urgencias -->
         <button
           class="items-center justify-center px-2 py-1 rounded-md text-text_small text-red-800 leading-none font-semibold transition-all shadow-sm border border-red-300 bg-red-200 w-fit"
           @click="toggleUrgencies"
-          :class="showUrgenciesOnly ? 'inline-flex' : 'hidden'">
-            Atiende Urgencias <span class="font-light ml-1">x</span>
+          :class="showUrgenciesOnly ? 'inline-flex' : 'hidden'"
+        >
+          Atiende Urgencias <span class="font-light ml-1">x</span>
+        </button>
+
+        <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
+        <button
+          class="items-center justify-center px-2 py-1 rounded-md text-text_small text-cyan-800 leading-none font-semibold transition-all shadow-sm border border-cyan-300 bg-cyan-200 w-fit"
+          @click="toggleOnDuty"
+          v-if="isFarmaciaSelected && products.data.length"
+          :class="showOnDutyOnly ? 'inline-flex' : 'hidden'"
+        >
+          Hoy de Turno <span class="font-light ml-1">x</span>
         </button>
       </div>
 
-      <hr class="my-2" v-if="selectedCategoryName || hasReviewsOnly || showUrgenciesOnly" />
+      <hr class="my-2" v-if="selectedCategoryName || hasReviewsOnly || showUrgenciesOnly || showOnDutyOnly" />
       <!-- MOBILE: botón de apertura -->
       <div class="block md:hidden">
         <button
@@ -104,7 +119,7 @@
                 </transition>
               </div>
 
-              <div class="flex gap-8">
+              <div class="flex flex-wrap gap-8">
                 <!-- Reviews -->
                 <div>
                   <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
@@ -134,6 +149,23 @@
                       <span
                         class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
                         :class="showUrgenciesOnly ? 'translate-x-4' : ''"
+                      ></span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Farmacia de Turno -->
+                <div v-if="isFarmaciaSelected">
+                  <h5 class="text-gray_600 mb-4">Farmacia de Turno</h5>
+                  <div class="flex items-center gap-2">
+                    <button
+                      @click="toggleOnDuty"
+                      class="relative w-9 h-5 rounded-full transition-all duration-300"
+                      :class="showOnDutyOnly ? 'bg-cyan-400' : 'bg-gray-300'"
+                    >
+                      <span
+                        class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                        :class="showOnDutyOnly ? 'translate-x-4' : ''"
                       ></span>
                     </button>
                   </div>
@@ -223,6 +255,19 @@
             ></span>
           </button>
         </div>
+        <div class="flex items-center gap-2" v-if="isFarmaciaSelected">
+          <p class="text-xs text-gray-700">Farmacia de Turno</p>
+          <button
+            @click="toggleOnDuty"
+            class="relative w-7 h-4 rounded-full transition-all"
+            :class="showOnDutyOnly ? 'bg-cyan-400' : 'bg-gray-300'"
+          >
+            <span
+              class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
+              :class="showOnDutyOnly ? 'translate-x-3' : ''"
+            ></span>
+          </button>
+        </div>
 
       </div>
 
@@ -260,6 +305,10 @@
                   <div class="my-2 flex gap-2">
                     <BadgeHorarios :horarios="product.horarios || []" />
                     <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
+                    <Badge v-if="isOnDutyToday(product)" status="De Turno">
+                      <span>Hoy de turno</span>
+                    </Badge>
+
                   </div>
                 </div>
               </a>
@@ -335,6 +384,7 @@ export default {
       showUrgenciesOnly: false,
       showMobileFilters: false,
       hasReviewsOnly: false,
+      showOnDutyOnly: false,
     }
   },
 
@@ -343,6 +393,10 @@ export default {
       const cat = this.categories.flatMap(g => g.categories).find(c => c.slug === this.selectedCategory)
       return cat ? cat.name : ""
     },
+    isFarmaciaSelected() {
+      const cat = this.categories.flatMap(g => g.categories).find(c => c.slug === this.selectedCategory)
+      return cat?.name?.toLowerCase() === 'farmacias'
+    },
   },
 
   mounted() {
@@ -350,6 +404,7 @@ export default {
     this.selectedCategory = urlParams.get("category") || this.initialCategory;
     this.showUrgenciesOnly = urlParams.get("urgencies") === "true";
     this.hasReviewsOnly = urlParams.get("has_reviews") === "true";
+    this.showOnDutyOnly = urlParams.get("on_duty") === "true";
     this.fetchCategories()
     this.fetchProducts()
   },
@@ -358,11 +413,13 @@ export default {
     async fetchProducts(page = 1) {
       this.loading = true
 
+
       const params = {
         page,
         category: this.selectedCategory || undefined,
         urgencies: this.showUrgenciesOnly || undefined,
         has_reviews: this.hasReviewsOnly || undefined,
+        on_duty: this.showOnDutyOnly || undefined,
       }
 
       try {
@@ -397,6 +454,12 @@ export default {
         } else {
           url.searchParams.delete("has_reviews");
         }
+        // Filtro por farmacias de turno
+        if (this.showOnDutyOnly) {
+          url.searchParams.set("on_duty", "true")
+        } else {
+          url.searchParams.delete("on_duty")
+        }
         // Actualizar la URL sin recargar la página
         window.history.pushState({}, "", url);
 
@@ -405,6 +468,16 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+
+    isOnDutyToday(product) {
+      // Usamos pharmacy.shifts, que es lo que llega del backend
+      const shifts = product.pharmacy?.shifts || []
+      if (!shifts.length) return false
+
+      const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+
+      return shifts.some(shift => shift.shift_date.slice(0, 10) === today)
     },
 
     async goToLink(link) {
@@ -428,6 +501,13 @@ export default {
 
     selectCategory(category) {
       this.selectedCategory = category ? category.slug : null
+
+      // Resetear filtro "Hoy de turno" si existía
+      if (this.showOnDutyOnly) this.showOnDutyOnly = false
+
+      // Vaciar productos para evitar flicker
+      this.products.data = []
+
       this.isOpen = false
       this.fetchProducts(1)
     },
@@ -446,6 +526,12 @@ export default {
     toggleHasReviews() {
       this.hasReviewsOnly = !this.hasReviewsOnly;
       this.fetchProducts(1);
+    },
+
+    // Toggle Farmacias de turno
+    toggleOnDuty() {
+      this.showOnDutyOnly = !this.showOnDutyOnly
+      this.fetchProducts(1)
     },
 
     toggleMobileFilters() {

@@ -93,5 +93,10 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function pharmacy()
+    {
+        return $this->hasOne(Pharmacy::class);
+    }
 }
 

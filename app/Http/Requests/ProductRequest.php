@@ -62,6 +62,8 @@ class ProductRequest extends FormRequest
             'webs.*.webpage' => ['nullable', 'string', 'max:200'],
             'listitems' => ['nullable', 'array'],
             'listitems.*.item' => ['nullable', 'string', 'max:500'],
+            'pharmacy_shifts' => ['nullable', 'array'],
+            'pharmacy_shifts.*.shift_date' => ['required', 'date'],
         ];
     }
 }

@@ -84,6 +84,16 @@ class ProductResource extends JsonResource
                     'item' => $listitem->item,
                 ];
             }),
+            'pharmacy_shifts' => $this->when($this->pharmacy, function () {
+                return $this->pharmacy->shifts->map(function ($shift) {
+                    return [
+                        'id' => $shift->id,
+                        'shift_date' => $shift->shift_date instanceof \Carbon\Carbon
+                            ? $shift->shift_date->format('Y-m-d')
+                            : $shift->shift_date,
+                    ];
+                });
+            }),
         ];
     }
 }

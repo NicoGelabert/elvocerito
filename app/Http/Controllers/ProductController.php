@@ -30,10 +30,17 @@ class ProductController extends Controller
             });
         }
 
+        if (request()->has('on_duty') && request('on_duty') == 'true') {
+            $today = now()->format('Y-m-d'); // fecha actual
+            $query->whereHas('pharmacy.shifts', function ($q) use ($today) {
+                $q->whereDate('shift_date', $today);
+            });
+        }
+
         if (request()->expectsJson()) {
 
             $products = $query->where('published', 1)
-                ->with(['categories', 'images', 'contacts', 'socials', 'horarios'])
+                ->with(['categories', 'images', 'contacts', 'socials', 'horarios', 'pharmacy.shifts'])
                 ->paginate(16); // Número de resultados por página
 
             // Transformar cada item manteniendo la metadata

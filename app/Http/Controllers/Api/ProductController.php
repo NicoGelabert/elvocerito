@@ -28,6 +28,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
+    public const PHARMACY_CATEGORY_ID = 88;
     /**
      * Display a listing of the resource.
      *
@@ -100,8 +101,31 @@ class ProductController extends Controller
         $this->saveHorarios($horarios, $product);
         $this->saveWebs($webs, $product);
         $this->saveListitems($listitems, $product);
+        
+        // Crear registro en pharmacies si pertenece a categoría "Farmacias"
+        if ($product->categories()->where('categories.id', self::PHARMACY_CATEGORY_ID)->exists()) {
+            $pharmacy = $product->pharmacy()->firstOrCreate([]);
+
+            $shiftsData = $data['pharmacy_shifts'] ?? [];
+
+            // Eliminar turnos que no estén en el request
+            $shiftDates = collect($shiftsData)->pluck('shift_date')->filter()->all();
+            $pharmacy->shifts()->whereNotIn('shift_date', $shiftDates)->delete();
+
+            // Crear o actualizar turnos
+            foreach ($shiftsData as $shift) {
+                if (!empty($shift['shift_date'])) {
+                    $pharmacy->shifts()->updateOrCreate(
+                        ['shift_date' => $shift['shift_date']], // criterio
+                        ['shift_date' => $shift['shift_date']]  // atributos a guardar
+                    );
+                }
+            }
+        }
+
 
         return new ProductResource($product);
+
     }
 
     /**
@@ -160,6 +184,27 @@ class ProductController extends Controller
         $this->saveHorarios($horarios, $product);
         $this->saveWebs($webs, $product);
         $this->saveListitems($listitems, $product);
+
+        // Crear registro en pharmacies si pertenece a categoría "Farmacias"
+        if ($product->categories()->where('categories.id', self::PHARMACY_CATEGORY_ID)->exists()) {
+            $pharmacy = $product->pharmacy()->firstOrCreate([]);
+
+            $shiftsData = $data['pharmacy_shifts'] ?? [];
+
+            // Eliminar turnos que no estén en el request
+            $shiftDates = collect($shiftsData)->pluck('shift_date')->filter()->all();
+            $pharmacy->shifts()->whereNotIn('shift_date', $shiftDates)->delete();
+
+            // Crear o actualizar turnos
+            foreach ($shiftsData as $shift) {
+                if (!empty($shift['shift_date'])) {
+                    $pharmacy->shifts()->updateOrCreate(
+                        ['shift_date' => $shift['shift_date']], // criterio
+                        ['shift_date' => $shift['shift_date']]  // atributos a guardar
+                    );
+                }
+            }
+        }
 
         $product->update($data);
 

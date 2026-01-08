@@ -32,6 +32,11 @@
     hover:text-white;
 }
 
+.btn-on-duty{
+    @apply bg-cyan-500 text-white
+    hover:bg-cyan-600 hover:text-white;
+}
+
 .btn-products_list{
     @apply text-xs text-left
 }
