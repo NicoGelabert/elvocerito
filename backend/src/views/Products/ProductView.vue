@@ -222,25 +222,52 @@
           <div v-if="isPharmacy" class="flex flex-col gap-2">
             <hr class="my-4">
             <h3 class="text-lg font-bold">Turnos de Farmacia</h3>
-            <div v-for="(shift, index) in product.pharmacy_shifts" :key="index" class="flex items-center gap-2">
+
+            <div
+              v-for="(shift, index) in product.pharmacy_shifts"
+              :key="index"
+              class="flex flex-wrap items-end gap-3"
+            >
               <CustomInput
                 type="date"
                 v-model="shift.shift_date"
-                label="Fecha de Turno"
-                class="w-7/12"
+                label="Fecha"
+                class="w-3/12"
                 :errors="errors[`pharmacy_shifts.${index}.shift_date`]"
               />
-              <button class="group border-0 rounded-full hover:bg-black p-1"
-                      v-if="product.pharmacy_shifts.length > 1"
-                      @click.prevent="removeShift(index)">
-                <TrashIcon class="h-5 w-5 text-black group-hover:text-white" aria-hidden="true" />
+
+              <CustomInput
+                type="time"
+                v-model="shift.start_time"
+                label="Inicio"
+                class="w-2/12"
+                :errors="errors[`pharmacy_shifts.${index}.start_time`]"
+              />
+
+              <CustomInput
+                type="time"
+                v-model="shift.end_time"
+                label="Fin"
+                class="w-2/12"
+                :errors="errors[`pharmacy_shifts.${index}.end_time`]"
+              />
+
+              <button
+                class="group border-0 rounded-full hover:bg-black p-1 mb-1"
+                v-if="product.pharmacy_shifts.length > 1"
+                @click.prevent="removeShift(index)"
+              >
+                <TrashIcon class="h-5 w-5 text-black group-hover:text-white" />
               </button>
             </div>
-            <button class="group flex items-center gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white mt-2"
-                    type="button"
-                    @click="addShift">
+
+            <button
+              class="group flex items-center gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white mt-2"
+              type="button"
+              @click="addShift"
+            >
               <h4 class="text-sm">Crear nuevo turno</h4>
-              <PlusCircleIcon class="h-5 w-5 text-black group-hover:text-white" aria-hidden="true" />
+              <PlusCircleIcon class="h-5 w-5 text-black group-hover:text-white" />
             </button>
           </div>
           <!-- Fin Horario de turno -->
@@ -473,7 +500,11 @@ const isPharmacy = computed(() => {
 });
 // Turnos de farmacia
 function addShift() {
-  product.value.pharmacy_shifts.push({ shift_date: '' });
+  this.product.pharmacy_shifts.push({
+    shift_date: '',
+    start_time: '08:00',
+    end_time: '20:00'
+  })
 }
 
 function removeShift(index) {

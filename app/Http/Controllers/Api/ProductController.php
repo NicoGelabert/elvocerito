@@ -104,25 +104,37 @@ class ProductController extends Controller
         
         // Crear registro en pharmacies si pertenece a categoría "Farmacias"
         if ($product->categories()->where('categories.id', self::PHARMACY_CATEGORY_ID)->exists()) {
+
             $pharmacy = $product->pharmacy()->firstOrCreate([]);
 
             $shiftsData = $data['pharmacy_shifts'] ?? [];
 
-            // Eliminar turnos que no estén en el request
-            $shiftDates = collect($shiftsData)->pluck('shift_date')->filter()->all();
-            $pharmacy->shifts()->whereNotIn('shift_date', $shiftDates)->delete();
+            // Normalizamos las fechas entrantes
+            $incomingDates = collect($shiftsData)
+                ->pluck('shift_date')
+                ->filter()
+                ->values();
 
-            // Crear o actualizar turnos
+            // Eliminamos los turnos que ya no existen en el request
+            $pharmacy->shifts()
+                ->whereNotIn('shift_date', $incomingDates)
+                ->delete();
+
+            // Creamos o actualizamos
             foreach ($shiftsData as $shift) {
-                if (!empty($shift['shift_date'])) {
-                    $pharmacy->shifts()->updateOrCreate(
-                        ['shift_date' => $shift['shift_date']], // criterio
-                        ['shift_date' => $shift['shift_date']]  // atributos a guardar
-                    );
-                }
+
+                if (empty($shift['shift_date'])) continue;
+
+                $pharmacy->shifts()->updateOrCreate(
+                    ['shift_date' => $shift['shift_date']],   // Clave única
+                    [
+                        'shift_date' => $shift['shift_date'],
+                        'start_time' => $shift['start_time'] ?? null,
+                        'end_time'   => $shift['end_time'] ?? null,
+                    ]
+                );
             }
         }
-
 
         return new ProductResource($product);
 
@@ -187,22 +199,35 @@ class ProductController extends Controller
 
         // Crear registro en pharmacies si pertenece a categoría "Farmacias"
         if ($product->categories()->where('categories.id', self::PHARMACY_CATEGORY_ID)->exists()) {
+
             $pharmacy = $product->pharmacy()->firstOrCreate([]);
 
             $shiftsData = $data['pharmacy_shifts'] ?? [];
 
-            // Eliminar turnos que no estén en el request
-            $shiftDates = collect($shiftsData)->pluck('shift_date')->filter()->all();
-            $pharmacy->shifts()->whereNotIn('shift_date', $shiftDates)->delete();
+            // Normalizamos las fechas entrantes
+            $incomingDates = collect($shiftsData)
+                ->pluck('shift_date')
+                ->filter()
+                ->values();
 
-            // Crear o actualizar turnos
+            // Eliminamos los turnos que ya no existen en el request
+            $pharmacy->shifts()
+                ->whereNotIn('shift_date', $incomingDates)
+                ->delete();
+
+            // Creamos o actualizamos
             foreach ($shiftsData as $shift) {
-                if (!empty($shift['shift_date'])) {
-                    $pharmacy->shifts()->updateOrCreate(
-                        ['shift_date' => $shift['shift_date']], // criterio
-                        ['shift_date' => $shift['shift_date']]  // atributos a guardar
-                    );
-                }
+
+                if (empty($shift['shift_date'])) continue;
+
+                $pharmacy->shifts()->updateOrCreate(
+                    ['shift_date' => $shift['shift_date']],   // Clave única
+                    [
+                        'shift_date' => $shift['shift_date'],
+                        'start_time' => $shift['start_time'] ?? null,
+                        'end_time'   => $shift['end_time'] ?? null,
+                    ]
+                );
             }
         }
 

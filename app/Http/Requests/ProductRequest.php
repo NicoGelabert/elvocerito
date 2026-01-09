@@ -64,6 +64,13 @@ class ProductRequest extends FormRequest
             'listitems.*.item' => ['nullable', 'string', 'max:500'],
             'pharmacy_shifts' => ['nullable', 'array'],
             'pharmacy_shifts.*.shift_date' => ['required', 'date'],
+            'pharmacy_shifts.*.start_time' => ['required', 'date_format:H:i'],
+            'pharmacy_shifts.*.end_time'   => ['required', 'date_format:H:i'],
+            'pharmacy_shifts.*' => function ($attribute, $value, $fail) {
+                if ($value['start_time'] === $value['end_time']) {
+                    $fail('El turno no puede comenzar y terminar a la misma hora.');
+                }
+            },
         ];
     }
 }

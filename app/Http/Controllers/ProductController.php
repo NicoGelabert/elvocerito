@@ -30,10 +30,33 @@ class ProductController extends Controller
             });
         }
 
-        if (request()->has('on_duty') && request('on_duty') == 'true') {
-            $today = now()->format('Y-m-d'); // fecha actual
-            $query->whereHas('pharmacy.shifts', function ($q) use ($today) {
-                $q->whereDate('shift_date', $today);
+        // ───── Farmacias de turno (con horario real) ─────
+        if (request('on_duty') === 'true') {
+
+            $now = \Carbon\Carbon::now();
+
+            $query->whereHas('pharmacy.shifts', function ($q) use ($now) {
+
+                $q->where(function ($sub) use ($now) {
+
+                    // Turnos normales (mismo día)
+                    $sub->whereRaw("
+                        CONCAT(shift_date, ' ', start_time) <= ?
+                        AND
+                        CONCAT(shift_date, ' ', end_time) >= ?
+                    ", [$now, $now]);
+
+                })->orWhere(function ($sub) use ($now) {
+
+                    // Turnos que cruzan de día (end_time < start_time)
+                    $sub->whereRaw("
+                        CONCAT(shift_date, ' ', start_time) <= ?
+                        AND
+                        CONCAT(DATE_ADD(shift_date, INTERVAL 1 DAY), ' ', end_time) >= ?
+                        AND end_time < start_time
+                    ", [$now, $now]);
+
+                });
             });
         }
 

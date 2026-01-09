@@ -91,6 +91,8 @@ class ProductResource extends JsonResource
                         'shift_date' => $shift->shift_date instanceof \Carbon\Carbon
                             ? $shift->shift_date->format('Y-m-d')
                             : $shift->shift_date,
+                        'start_time' => \Carbon\Carbon::parse($shift->start_time)->format('H:i'),
+                        'end_time'   => \Carbon\Carbon::parse($shift->end_time)->format('H:i'),
                     ];
                 });
             }),

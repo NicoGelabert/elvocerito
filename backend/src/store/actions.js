@@ -227,12 +227,18 @@ export function createProduct({ commit }, product) {
       form.append(`categories[]`, category);
     });
   }
-  // ✅ Lógica para farmacia
-  const PHARMACY_CATEGORY_ID = 88; // Cambiar al ID real
-  const isPharmacy = product.categories?.some(catId => catId == PHARMACY_CATEGORY_ID);
-  if (isPharmacy && product.pharmacy_turn_date) {
-    form.append('pharmacy_turn_date', product.pharmacy_turn_date);
+  // Lógica para farmacia
+  const PHARMACY_CATEGORY_ID = 88
+  const isPharmacy = product.categories?.some(catId => catId == PHARMACY_CATEGORY_ID)
+
+  if (isPharmacy && product.pharmacy_shifts?.length) {
+    product.pharmacy_shifts.forEach((shift, index) => {
+      form.append(`pharmacy_shifts[${index}][shift_date]`, shift.shift_date)
+      form.append(`pharmacy_shifts[${index}][start_time]`, shift.start_time)
+      form.append(`pharmacy_shifts[${index}][end_time]`, shift.end_time)
+    })
   }
+
   // Agregar imágenes al FormData
   if (product.images && product.images.length) {
     product.images.forEach((im) => {
@@ -323,11 +329,16 @@ export function updateProduct({commit}, product) {
     });
   }
 
-  // ✅ Lógica para farmacia
-  const PHARMACY_CATEGORY_ID = 88; // Cambiar al ID real
-  const isPharmacy = product.categories?.some(catId => catId == PHARMACY_CATEGORY_ID);
-  if (isPharmacy && product.pharmacy_turn_date) {
-    form.append('pharmacy_turn_date', product.pharmacy_turn_date);
+  // Lógica para farmacia
+  const PHARMACY_CATEGORY_ID = 88
+  const isPharmacy = product.categories?.some(catId => catId == PHARMACY_CATEGORY_ID)
+
+  if (isPharmacy && product.pharmacy_shifts?.length) {
+    product.pharmacy_shifts.forEach((shift, index) => {
+      form.append(`pharmacy_shifts[${index}][shift_date]`, shift.shift_date)
+      form.append(`pharmacy_shifts[${index}][start_time]`, shift.start_time)
+      form.append(`pharmacy_shifts[${index}][end_time]`, shift.end_time)
+    })
   }
   
   // Agregar imágenes al FormData
