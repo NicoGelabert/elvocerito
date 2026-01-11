@@ -117,7 +117,10 @@ import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/vue";
 import {EllipsisVerticalIcon, PencilSquareIcon, TrashIcon} from '@heroicons/vue/24/solid';
 import TagModal from "./TagModal.vue";
 import ActionMenu from "../../components/core/ActionMenu.vue";
+import {TAGS_PER_PAGE} from "../../constants";
 
+const perPage = ref(TAGS_PER_PAGE);
+const search = ref('');
 const tags = computed(() => store.state.tags);
 const sortField = ref('name');
 const sortDirection = ref('asc')
@@ -144,7 +147,9 @@ function getTags(url = null) {
     store.dispatch("getTags", {
         url,
         sort_field: sortField.value,
-        sort_direction: sortDirection.value
+        sort_direction: sortDirection.value,
+        search: search.value,
+        per_page: perPage.value
     });
 }
 

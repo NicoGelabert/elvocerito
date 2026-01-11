@@ -977,11 +977,16 @@ export function deleteProject({commit}, id) {
 }
 
 //TAGS
-export function getTags({commit, state}, {sort_field, sort_direction} = {}) {
+export function getTags({commit, state}, {url = null, search = '', per_page, sort_field, sort_direction} = {}) {
   commit('setTags', [true])
-  return axiosClient.get('/tags', {
+  url = url || '/tags'
+  const params = {
+    per_page: state.tags.limit,
+  }
+  return axiosClient.get(url, {
     params: {
-      sort_field, sort_direction
+      ...params,
+      search, per_page, sort_field, sort_direction
     }
   })
     .then((response) => {

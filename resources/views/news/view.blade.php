@@ -24,7 +24,7 @@
                         <x-icons.home class="fill-gray_400" />
                     </a>
                     <p>/</p>
-                    <x-button href="" class="bg-none">
+                    <x-button href="/novedades" class="bg-none">
                         <p>Artículos</p>
                     </x-button>
                     <p>/</p>

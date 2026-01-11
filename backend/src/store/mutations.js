@@ -210,17 +210,16 @@ export function setProjects(state, [loading, data = null]) {
 }
 
 export function setTags(state, [loading, data = null]) {
-
   if (data) {
     state.tags = {
       ...state.tags,
       data: data.data,
-      links: data.meta?.links,
-      page: data.meta.current_page,
-      limit: data.meta.per_page,
-      from: data.meta.from,
-      to: data.meta.to,
-      total: data.meta.total,
+      links: data.links,
+      page: data.current_page,
+      limit: data.per_page,
+      from: data.from,
+      to: data.to,
+      total: data.total,
     }
   }
 
