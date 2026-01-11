@@ -108,7 +108,7 @@
                             </div>
                             <!-- FIN COPETE O NEWSLEAD -->
                             <!-- INICIO ITEMS -->
-                            @if($article->items->isNotEmpty())
+                            @if($article->items && $article->items->isNotEmpty())
                             <ul class="list-disc px-8">
                                 @foreach($article->items as $item)
                                 <li class="mb-2"><p>{{ $item->texto }}</p></li>
