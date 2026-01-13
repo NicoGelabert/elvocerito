@@ -264,7 +264,7 @@
             <button
               class="group flex items-center gap-2 border rounded-lg px-4 py-2 w-fit hover:bg-black hover:text-white mt-2"
               type="button"
-              @click="addShift(product)"
+              @click="addShift"
             >
               <h4 class="text-sm">Crear nuevo turno</h4>
               <PlusCircleIcon class="h-5 w-5 text-black group-hover:text-white" />
@@ -499,8 +499,8 @@ const isPharmacy = computed(() => {
   return product.value.categories.includes(PHARMACY_CATEGORY_ID);
 });
 // Turnos de farmacia
-function addShift(product) {
-  this.product.pharmacy_shifts.push({
+function addShift() {
+  product.value.pharmacy_shifts.push({
     shift_date: '',
     start_time: '08:00',
     end_time: '20:00'
