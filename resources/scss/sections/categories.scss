@@ -1,6 +1,7 @@
 #categories{
+    @apply relative mb-36 md:mb-0;
     .categories{
-        @apply flex flex-col gap-6 absolute top-[60%] md:top-[45%] lg:top-1/2 left-1/2 bg-white shadow-lg rounded-2xl -translate-x-1/2 lg:translate-y-1/2 p-6 max-w-[95%] lg:max-w-screen-lg;
+        @apply absolute top-1/2 md:top-0 left-1/2 md:left-0 -translate-x-1/2 md:-translate-x-0 -translate-y-1/2 md:-translate-y-0 md:relative flex flex-col gap-6 bg-white shadow-lg rounded-2xl p-6 max-w-[95%] lg:max-w-screen-lg;
         .categories_title{
             @apply flex justify-between items-center;
         }
@@ -25,9 +26,12 @@
 
 .categories_index{
     .search_hero{
-        @apply h-[50vh];
+        @apply h-[50vh] w-screen relative overflow-hidden;
         h1, p{
             @apply hidden;
+        }
+        iframe {
+            @apply absolute top-0 left-0 w-full h-full object-cover;
         }
         .search_hero_container{
             @apply mb-0;

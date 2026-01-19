@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -12,61 +13,60 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $query = Product::query();
+        $query = Product::query()->where('published', 1);
 
-        if (request()->has('category') && request('category')) {
-            $categorySlug = request('category');
+        // ───── Filtro por categoría ─────
+        if ($categorySlug = request('category')) {
             $query->whereHas('categories', function ($q) use ($categorySlug) {
                 $q->where('slug', $categorySlug);
             });
         }
-        // Filtro por urgencias
-        if (request()->has('urgencies') && request('urgencies') == 'true') {
-            $query->where('urgencies', true); // o el campo que uses, como 'is_urgent'
+
+        // ───── Filtro por urgencias ─────
+        if (request('urgencies') === 'true') {
+            $query->where('urgencies', true);
         }
-        if (request()->has('has_reviews') && request('has_reviews') == 'true') {
-            $query->whereHas('reviews', function ($q){
+
+        // ───── Filtro por reviews ─────
+        if (request('has_reviews') === 'true') {
+            $query->whereHas('reviews', function ($q) {
                 $q->where('published', true);
             });
         }
 
-        // ───── Farmacias de turno (con horario real) ─────
+        // ───── Filtro por farmacias de turno ─────
         if (request('on_duty') === 'true') {
-
-            $now = \Carbon\Carbon::now();
+            $now = now(); // Carbon actual
 
             $query->whereHas('pharmacy.shifts', function ($q) use ($now) {
-
                 $q->where(function ($sub) use ($now) {
-
-                    // Turnos normales (mismo día)
-                    $sub->whereRaw("
-                        CONCAT(shift_date, ' ', start_time) <= ?
-                        AND
-                        CONCAT(shift_date, ' ', end_time) >= ?
-                    ", [$now, $now]);
-
+                    // Turnos normales: misma fecha
+                    $sub->whereDate('shift_date', $now->toDateString())
+                        ->where('start_time', '<=', $now->format('H:i:s'))
+                        ->where('end_time', '>=', $now->format('H:i:s'));
                 })->orWhere(function ($sub) use ($now) {
-
-                    // Turnos que cruzan de día (end_time < start_time)
-                    $sub->whereRaw("
-                        CONCAT(shift_date, ' ', start_time) <= ?
-                        AND
-                        CONCAT(DATE_ADD(shift_date, INTERVAL 1 DAY), ' ', end_time) >= ?
-                        AND end_time < start_time
-                    ", [$now, $now]);
-
+                    // Turnos que cruzan medianoche
+                    $sub->whereDate('shift_date', $now->toDateString())
+                        ->where('start_time', '<=', $now->format('H:i:s'))
+                        ->whereRaw('end_time < start_time'); // end < start indica cruce
                 });
             });
         }
 
         if (request()->expectsJson()) {
 
-            $products = $query->where('published', 1)
-                ->with(['categories', 'images', 'contacts', 'socials', 'horarios', 'pharmacy.shifts'])
-                ->paginate(16); // Número de resultados por página
+            // ───── Carga relaciones y paginación ─────
+            $products = $query->with([
+                'categories',
+                'images',
+                'contacts',
+                'socials',
+                'horarios',
+                'pharmacy.shifts'
+            ])->paginate(16);
 
-            // Transformar cada item manteniendo la metadata
+
+            // ───── Transformación de cada producto ─────
             $products->getCollection()->transform(function ($product) {
                 return array_merge($product->toArray(), [
                     'categories' => $product->categories->sortBy('id')->values(),
@@ -86,14 +86,26 @@ class ProductController extends Controller
                         'apertura' => \Carbon\Carbon::parse($h->apertura)->format('H:i'),
                         'cierre' => \Carbon\Carbon::parse($h->cierre)->format('H:i'),
                     ])->values(),
+                    'pharmacy_shifts' => $product->pharmacy 
+                        ? $product->pharmacy->shifts->map(fn($shift) => [
+                            'id' => $shift->id,
+                            'shift_date' => $shift->shift_date->format('Y-m-d'),
+                            'start_time' => substr($shift->start_time, 0, 5),
+                            'end_time' => substr($shift->end_time, 0, 5),
+                        ])
+                        : [],
+                    'is_on_duty_now' => $product->pharmacy
+                        ? $product->pharmacy->shifts->contains(fn($shift) => $shift->isOnDutyNow())
+                        : false,
                 ]);
             });
 
             return response()->json([
                 'products' => $products
             ]);
-        }
 
+        }
+        
         return $this->renderProducts($query);
     }
 

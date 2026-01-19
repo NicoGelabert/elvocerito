@@ -96,7 +96,12 @@ class Product extends Model
 
     public function pharmacy()
     {
-        return $this->hasOne(Pharmacy::class);
+        return $this->hasOne(Pharmacy::class, 'product_id', 'id');
+    }
+
+    public function getIsOnDutyNowAttribute(): bool
+    {
+        return $this->pharmacy?->isOnDutyNow() ?? false;
     }
 }
 

@@ -14,13 +14,15 @@ class PharmacyShift extends Model
         'pharmacy_id',
         'shift_date',
         'start_time',
-        'end_time',  
+        'end_time',
+        'created_by',
+        'updated_by'  
     ];
 
     protected $casts = [
         'shift_date' => 'date',
-        'start_time' => 'datetime:H:i',
-        'end_time'   => 'datetime:H:i',
+        'start_time' => 'string',
+        'end_time'   => 'string',
     ];
 
     public function pharmacy()
@@ -30,10 +32,16 @@ class PharmacyShift extends Model
 
     public function isOnDutyNow()
     {
-        $now = Carbon::now();
+        $now = \Carbon\Carbon::now();
 
-        $start = Carbon::parse($this->shift_date.' '.$this->start_time);
-        $end   = Carbon::parse($this->shift_date.' '.$this->end_time);
+        $date = $this->shift_date->format('Y-m-d');
+
+        // Tomar solo la hora en caso de que venga con fecha incluida
+        $startHour = substr($this->start_time, -8); // HH:MM:SS
+        $endHour   = substr($this->end_time, -8);
+
+        $start = \Carbon\Carbon::parse("$date $startHour");
+        $end   = \Carbon\Carbon::parse("$date $endHour");
 
         // Turno que cruza medianoche
         if ($end->lessThan($start)) {

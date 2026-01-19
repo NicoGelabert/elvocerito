@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\HomeHeroBannerController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\PharmacyShiftController;
+use App\Http\Controllers\Api\PharmacyController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthorController;
@@ -40,6 +42,14 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/export-categories', [CategoryController::class, 'exportCategories']);
     Route::apiResource('products', ProductController::class);
     Route::get('/export-products', [ProductController::class, 'exportProducts']);
+    Route::prefix('pharmacy-shifts')->group(function () {
+        Route::get('/', [PharmacyShiftController::class, 'index']);       // Listar todos los turnos
+        Route::post('/', [PharmacyShiftController::class, 'store']);      // Crear múltiples turnos
+        Route::put('/{id}', [PharmacyShiftController::class, 'update']);
+        Route::delete('/{id}', [PharmacyShiftController::class, 'destroy']); // Eliminar un turno individual
+        Route::delete('/day/{date}', [PharmacyShiftController::class, 'destroyByDate']);
+    });
+    Route::get('/pharmacies-with-products', [PharmacyController::class, 'withProducts']);
     Route::apiResource('reviews', ReviewController::class);
     Route::apiResource('articles', ArticleController::class);
     Route::apiResource('authors', AuthorController::class)->except('show');

@@ -3,19 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 
 class ProductResource extends JsonResource
 {
     public static $wrap = false;
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         return [
@@ -29,73 +21,44 @@ class ProductResource extends JsonResource
             'urgencies' => (bool)$this->urgencies,
             'client_number' => $this->client_number,
             'published' => (bool)$this->published,
-            'created_at' => (new \DateTime($this->created_at))->format('Y-m-d H:i:s'),
-            'updated_at' => (new \DateTime($this->updated_at))->format('Y-m-d H:i:s'),
-            'categories' => $this->categories->map(fn($c) => $c->id),
-            'image_url' => $this->image,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
+
+            'categories' => $this->categories->sortBy('id')->values(),
+
+            'image_url' => $this->images->first()->url ?? 'storage/common/noimage.png',
             'images' => $this->images,
-            'contacts' => $this->contacts->map(function ($contact) {
-                return [
-                    'id' => $contact->id,
-                    'type' => $contact->type,
-                    'info' => $contact->info,
-                ];
-            }),
-            'socials' => $this->socials->map(function ($social) {
-                return [
-                    'id' => $social->id,
-                    'rrss' => $social->rrss,
-                    'link' => $social->link,
-                ];
-            }),
-            'addresses' => $this->addresses->map(function ($address) {
-                return [
-                    'id' => $address->id,
-                    'title' => $address->title,
-                    'via' => $address->via,
-                    'via_name' => $address->via_name,
-                    'via_number' => $address->via_number,
-                    'address_unit' => $address->address_unit,
-                    'city' => $address->city,
-                    'zip_code' => $address->zip_code,
-                    'province' => $address->province,
-                    'link' => $address->link,
-                    'google_maps' => $address->google_maps,
-                ];
-            }),
-            'tags' => $this->tags->map(fn($t) => $t->id),
-            'horarios' => $this->horarios->map(function ($horario) {
-                return [
-                    'id' => $horario->id,
-                    'dia' => $horario->dia,
-                    'apertura' => $horario->apertura,
-                    'cierre' => $horario->cierre,
-                ];
-            }),
-            'webs' => $this->webs->map(function ($web) {
-                return [
-                    'id' => $web->id,
-                    'webpage' => $web->webpage,
-                ];
-            }),
-            'listitems' => $this->listitems->map(function ($listitem) {
-                return [
-                    'id' => $listitem->id,
-                    'item' => $listitem->item,
-                ];
-            }),
+
+            'contacts' => $this->contacts->map(fn($c) => [
+                'id' => $c->id,
+                'type' => $c->type,
+                'info' => $c->info,
+            ]),
+
+            'socials' => $this->socials->map(fn($s) => [
+                'id' => $s->id,
+                'type' => $s->rrss,
+                'info' => $s->link,
+            ]),
+
+            'horarios' => $this->horarios->map(fn($h) => [
+                'dia' => mb_strtolower($h->dia),
+                'apertura' => substr($h->apertura, 0, 5), // HH:MM
+                'cierre' => substr($h->cierre, 0, 5),
+            ])->values(),
+
             'pharmacy_shifts' => $this->when($this->pharmacy, function () {
-                return $this->pharmacy->shifts->map(function ($shift) {
-                    return [
-                        'id' => $shift->id,
-                        'shift_date' => $shift->shift_date instanceof \Carbon\Carbon
-                            ? $shift->shift_date->format('Y-m-d')
-                            : $shift->shift_date,
-                        'start_time' => \Carbon\Carbon::parse($shift->start_time)->format('H:i'),
-                        'end_time'   => \Carbon\Carbon::parse($shift->end_time)->format('H:i'),
-                    ];
-                });
+                return $this->pharmacy->shifts->map(fn($shift) => [
+                    'id'         => $shift->id,
+                    'shift_date' => $shift->shift_date->format('Y-m-d'),
+                    'start_time' => substr($shift->start_time, 0, 5), // HH:MM
+                    'end_time'   => substr($shift->end_time, 0, 5),
+                ]);
             }),
+
+            'is_on_duty_now' => $this->pharmacy
+                ? $this->pharmacy->shifts->contains(fn($shift) => $shift->isOnDutyNow())
+                : false,
         ];
     }
 }

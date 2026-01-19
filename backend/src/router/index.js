@@ -10,6 +10,7 @@ import HomeHeroBanners from "../views/HomeHeroBanners/HomeHeroBanners.vue";
 import Categories from "../views/Categories/Categories.vue";
 import CategoryView from "../views/Categories/CategoryView.vue";
 import Products from "../views/Products/Products.vue";
+import ShiftsTable from "../views/Shifts/ShiftsTable.vue";
 import ProductView from "../views/Products/ProductView.vue";
 import Reviews from "../views/Reviews/Reviews.vue";
 import ReviewView from "../views/Reviews/ReviewView.vue";
@@ -88,6 +89,11 @@ const routes = [
         props: {
           id: (value) => /^\d+$/.test(value)
         }
+      },
+      {
+        path: 'pharmacy-shifts',
+        name: 'app.pharmacy-shifts',
+        component: ShiftsTable,
       },
       {
         path: 'reviews',

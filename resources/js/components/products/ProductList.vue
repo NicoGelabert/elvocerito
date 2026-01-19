@@ -41,7 +41,7 @@
         <button
           class="items-center justify-center px-2 py-1 rounded-md text-text_small text-cyan-800 leading-none font-semibold transition-all shadow-sm border border-cyan-300 bg-cyan-200 w-fit"
           @click="toggleOnDuty"
-          v-if="isFarmaciaSelected && products.data.length"
+          v-if="isFarmaciaSelected && (products.data.length || showOnDutyOnly)"
           :class="showOnDutyOnly ? 'inline-flex' : 'hidden'"
         >
           Hoy de Turno <span class="font-light ml-1">x</span>
@@ -305,7 +305,7 @@
                   <div class="my-2 flex gap-2">
                     <BadgeHorarios :horarios="product.horarios || []" />
                     <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
-                    <Badge v-if="isOnDutyToday(product)" status="De Turno">
+                    <Badge v-if="product.is_on_duty_now" status="De Turno">
                       <span>Hoy de turno</span>
                     </Badge>
 
@@ -468,16 +468,6 @@ export default {
       } finally {
         this.loading = false
       }
-    },
-
-    isOnDutyToday(product) {
-      // Usamos pharmacy.shifts, que es lo que llega del backend
-      const shifts = product.pharmacy?.shifts || []
-      if (!shifts.length) return false
-
-      const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
-
-      return shifts.some(shift => shift.shift_date.slice(0, 10) === today)
     },
 
     async goToLink(link) {

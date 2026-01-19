@@ -23,6 +23,7 @@
 
 import {ArchiveBoxIcon,
         BuildingStorefrontIcon,
+        CalendarDaysIcon,
         ChevronLeftIcon,
         IdentificationIcon,
         MegaphoneIcon,
@@ -47,6 +48,7 @@ const menuItems = ref([
     { name: 'homeherobanners', label: 'Home Hero Banner', route: 'app.homeherobanners', icon: PhotoIcon },
     { name: 'categories', label: 'Categorías', route: 'app.categories', icon: MegaphoneIcon },
     { name: 'products', label: 'Anunciantes', route: 'app.products', icon: ArchiveBoxIcon },
+    { name: 'pharmacy-shifts', label: 'Turnos', route: 'app.pharmacy-shifts', icon: CalendarDaysIcon },
     { name: 'reviews', label: 'Reviews', route: 'app.reviews', icon: StarIcon },
     { name: 'articles', label: 'Artículos', route: 'app.articles', icon: NewspaperIcon },
     { name: 'authors', label: 'Autores', route: 'app.authors', icon: IdentificationIcon },

@@ -1,9 +1,8 @@
 .search_hero{
-    @apply flex flex-col justify-center bg-cover bg-center h-[70vh] md:h-[50vh] lg:h-[75vh] mt-12 md:mt-14;
+    @apply flex items-center bg-cover bg-center h-[50vh] md:h-[75vh] mt-12 md:mt-14;
     .search_hero_container{
-        @apply flex flex-col gap-4 z-30 mb-20
-        items-center
-        text-center lg:text-right mx-4 xl:mx-0;
+        @apply w-full flex flex-col gap-4 z-30
+        items-center md:items-start lg:text-right mx-4 lg:mx-0;
         h1, p{
             @apply drop-shadow-lg;
         }

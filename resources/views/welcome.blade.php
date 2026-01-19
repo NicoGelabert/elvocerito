@@ -6,9 +6,6 @@
             <x-categories :categories="$categories"/>
             
         </div>
-        <div class="container mt-32 md:mt-20">
-            <hr class="border-transparent">
-        </div>
         <x-home-hero-banner :homeherobanners="$homeherobanners" />
         <div class="container">
             <hr class="divider">
