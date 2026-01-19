@@ -21,7 +21,10 @@
                             <div>
                                 <h5 class="capitalize">{{ $review->name}} {{ $review->last_name}}</h5>
                                 <x-rating-stars :rating="$review->rating" />
-                                <p class="text-gray_400 text-xs font-medium">{{ $review->created_at->translatedFormat('j \d\e F \d\e Y') }}</p>
+                                <p class="text-gray_400 text-xs font-medium">
+                                    {{ optional($review->created_at)->translatedFormat('j \d\e F \d\e Y') ?? 'Fecha no disponible' }}
+                                </p>
+
                             </div>
                         </div>
                         <div class="ultimas_reviews_card_content">
