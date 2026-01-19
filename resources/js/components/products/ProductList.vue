@@ -313,7 +313,7 @@
                 </div>
               </a>
               <RatingAverage :product-id="product.id" />
-              <div class="mx-auto text-center"><span class="text-text_small text-gray-500">Anuncia desde Marzo 2018</span></div>
+              <div class="mx-auto text-center"><span class="text-text_small text-gray-500">Anuncia desde {{ formatMonthYear(product.created_at) }}</span></div>
             </div>
 
             <!-- Footer -->
@@ -530,6 +530,15 @@ export default {
 
     openModal(type, product) {
       window.dispatchEvent(new CustomEvent("open-contact-modal", { detail: { type, product } }))
+    },
+
+    formatMonthYear(date) {
+      if (!date) return ''
+      const d = new Date(date)
+      // Formateo en español
+      const formatted = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(d)
+      // Capitalizamos la primera letra
+      return formatted.charAt(0).toUpperCase() + formatted.slice(1)
     },
   },
 }
