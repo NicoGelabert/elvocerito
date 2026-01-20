@@ -6,11 +6,13 @@ use App\Models\Product;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProductsExport implements FromCollection, WithHeadings
+class InactiveProductsExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        $products = Product::with(['categories', 'tags'])->get();
+        $products = Product::with(['categories', 'tags'])
+        ->where('published', false)
+        ->get();
 
         return $products->map(function ($product) {
             return [
@@ -21,7 +23,6 @@ class ProductsExport implements FromCollection, WithHeadings
                 'leading_home' => $product->leading_home ? 'Sí' : 'No',
                 'leading_category' => $product->leading_category ? 'Sí' : 'No',
                 'urgencies' => $product->urgencies ? 'Sí' : 'No',
-                'updated_at' => ( new \DateTime($product->updated_at) )->format('Y-m-d H:i:s'),
                 'categories' => $product->categories->pluck('name')->implode(', '),
                 'tags' => $product->tags->pluck('name')->implode(', '),
             ];
@@ -38,7 +39,6 @@ class ProductsExport implements FromCollection, WithHeadings
             'Lidera en Home',
             'Lidera en categoría',
             'Urgencias',
-            'Últimos cambios',
             'Categorías',
             'Tags',
         ];

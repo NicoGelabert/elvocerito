@@ -25,17 +25,39 @@
     </div>
     <!--/    Total Products -->
     <!--    Active Products -->
-    <router-link :to="{name: 'app.products'}">
-      <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow flex flex-col items-center justify-center"
-           style="animation-delay: 0.1s">
-        <label class="text-lg font-semibold block mb-2">Anunciantes activos</label>
+    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow "
+    style="animation-delay: 0.1s">
+      <router-link :to="{name: 'app.products'}" class="flex flex-col items-center justify-center mb-2">
+        <label class="text-lg font-semibold block mb-2 text-center">Anunciantes activos</label>
         <template v-if="!loading.activeProductsCount">
           <span class="text-3xl font-semibold">{{ activeProductsCount }}</span>
         </template>
         <Spinner v-else text="" class=""/>
-      </div>
-    </router-link>
+      </router-link>
+      <ExportButton
+          url="/export-active-products"
+          filename="anunciantes_activos.xlsx"
+          label="Descargar Anunciantes Activos"
+        />
+    </div>
     <!--/    Active Products -->
+    <!--    Inactive Products -->
+    <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow "
+    style="animation-delay: 0.1s">
+      <router-link :to="{name: 'app.products'}" class="flex flex-col items-center justify-center mb-2">
+        <label class="text-lg font-semibold block mb-2 text-center">Anunciantes Inactivos</label>
+        <template v-if="!loading.inactiveProductsCount">
+          <span class="text-3xl font-semibold">{{ inactiveProductsCount }}</span>
+        </template>
+        <Spinner v-else text="" class=""/>
+      </router-link>
+      <ExportButton
+          url="/export-inactive-products"
+          filename="anunciantes_inactivos.xlsx"
+          label="Descargar Anunciantes Inactivos"
+        />
+    </div>
+    <!--/    Inactive Products -->
     <!--    Active Categories -->
     <div class="animate-fade-in-down bg-white py-6 px-5 rounded-lg shadow"
     style="animation-delay: 0.1s">
@@ -107,6 +129,7 @@ const chosenDate = ref('all')
 const loading = ref({
   totalProductsCount: true,
   activeProductsCount: true,
+  inactiveProductsCount: true,
   latestProducts: true,
   activeCategoriesCount: true,
   popularCategoriesCount: true,
@@ -119,6 +142,7 @@ const loading = ref({
 })
 const totalProductsCount = ref(0);
 const activeProductsCount = ref(0);
+const inactiveProductsCount = ref(0);
 const latestProducts = ref([]);
 const activeCategoriesCount = ref(0);
 const popularCategoriesCount = ref([]);
@@ -134,6 +158,7 @@ function updateDashboard() {
   loading.value = {
     totalProductsCount: true,
     activeProductsCount: true,
+    inactiveProductsCount: true,
     latestProducts: true,
     activeCategoriesCount: true,
     popularCategoriesCount: true,
@@ -151,6 +176,10 @@ function updateDashboard() {
   axiosClient.get(`/dashboard/active-products-count`, {params: {d}}).then(({data}) => {
     activeProductsCount.value = data;
     loading.value.activeProductsCount = false;
+  })
+  axiosClient.get(`/dashboard/inactive-products-count`, {params: {d}}).then(({data}) => {
+    inactiveProductsCount.value = data;
+    loading.value.inactiveProductsCount = false;
   })
   axiosClient.get(`/dashboard/latest-products`, {params: {d}}).then(({data}) => {
     latestProducts.value = data;

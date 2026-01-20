@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use App\Exports\ProductsExport;
+use App\Exports\ActiveProductsExport;
+use App\Exports\InactiveProductsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -40,8 +42,14 @@ class ProductController extends Controller
         $search = $request->get('search', '');
         $categorySlug = $request->get('category', '');  // Agregar parámetro category
 
-        $query = Product::query()->with(['categories'])
-            ->where('title', 'like', "%{$search}%");
+        $query = Product::query()->with(['categories']);
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                ->orWhere('client_number', 'like', "%{$search}%");
+            });
+        }
 
         // Filtrar por categoría si se pasa el slug de la categoría
         if ($categorySlug) {
@@ -392,5 +400,15 @@ class ProductController extends Controller
     public function exportProducts()
     {    
         return Excel::download(new ProductsExport, 'productos.xlsx');
+    }
+
+    public function exportActiveProducts()
+    {    
+        return Excel::download(new ActiveProductsExport, 'anunciantes_activos.xlsx');
+    }
+
+    public function exportInactiveProducts()
+    {    
+        return Excel::download(new InactiveProductsExport, 'anunciantes_inactivos.xlsx');
     }
 }

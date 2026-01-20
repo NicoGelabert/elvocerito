@@ -71,6 +71,14 @@ class DashboardController extends Controller
     }
 
     /**
+     * Anunciantes Inactivos.
+     */
+    public function inactiveProducts()
+    {
+        return Product::where('published', '=', 0)->count();
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function latestProducts()

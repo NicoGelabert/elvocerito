@@ -1,7 +1,7 @@
 <template>
     <Menu as="div" class="relative inline-block text-left">
         <div>
-            <MenuButton class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black bg-opacity-0 hover:bg-opacity-5 focus:outline-none">
+            <MenuButton class="inline-flex items-center justify-center rounded-full bg-black bg-opacity-0 hover:bg-opacity-5 focus:outline-none">
                 <EllipsisVerticalIcon class="h-5 w-5 text-black" aria-hidden="true" />
             </MenuButton>
         </div>

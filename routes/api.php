@@ -42,6 +42,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/export-categories', [CategoryController::class, 'exportCategories']);
     Route::apiResource('products', ProductController::class);
     Route::get('/export-products', [ProductController::class, 'exportProducts']);
+    Route::get('/export-active-products', [ProductController::class, 'exportActiveProducts']);
+    Route::get('/export-inactive-products', [ProductController::class, 'exportInactiveProducts']);
     Route::prefix('pharmacy-shifts')->group(function () {
         Route::get('/', [PharmacyShiftController::class, 'index']);       // Listar todos los turnos
         Route::post('/', [PharmacyShiftController::class, 'store']);      // Crear múltiples turnos
@@ -76,6 +78,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/dashboard/customers-count', [DashboardController::class, 'activeCustomers']);
     Route::get('/dashboard/total-products-count', [DashboardController::class, 'totalProducts']);
     Route::get('/dashboard/active-products-count', [DashboardController::class, 'activeProducts']);
+    Route::get('/dashboard/inactive-products-count', [DashboardController::class, 'inactiveProducts']);
     Route::get('/dashboard/latest-products', [DashboardController::class, 'latestProducts']);
     Route::get('/dashboard/active-categories-count', [DashboardController::class, 'activeCategories']);
     Route::get('/dashboard/popular-categories', [DashboardController::class, 'popularCategories']);

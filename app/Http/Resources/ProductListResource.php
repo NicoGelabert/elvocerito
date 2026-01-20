@@ -19,11 +19,12 @@ class ProductListResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'client_number' => $this->client_number,
             'title' => $this->title,
             'slug' => $this->slug,
+            'published' => $this->published,
             'urgencies' => $this->urgencies,
             'image_url' => $this->image,
-            'updated_at' => ( new \DateTime($this->updated_at) )->format('Y-m-d H:i:s'),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
         ];
     }
