@@ -174,11 +174,33 @@ class ProductController extends Controller
         // Guardar la cookie (duración: 7 días)
         Cookie::queue('recently_viewed', json_encode($viewedProducts), 60 * 24 * 7);
 
+        // --- Cookie de categorías vistas (nuevo) ---
+        $category = $product->categories->first(); // categoría principal
+        if ($category) {
+            $viewedCategories = json_decode(Cookie::get('recently_viewed_categories'), true) ?? [];
+
+            // eliminar duplicados
+            $viewedCategories = array_values(array_diff($viewedCategories, [$category->id]));
+
+            // agregar al inicio
+            array_unshift($viewedCategories, $category->id);
+
+            // limitar a los últimos 5
+            $viewedCategories = array_slice($viewedCategories, 0, 5);
+
+            // guardar cookie (7 días)
+            Cookie::queue('recently_viewed_categories', json_encode($viewedCategories), 60 * 24 * 7);
+        }
+
+        // --- Obtener objetos para la vista ---
+        $viewedCategoriesObjects = Category::whereIn('id', $viewedCategories ?? [])->get();
+
         // Retornar la vista con la información necesaria
         return view('product.view', [
             'product' => $product,
             'category' => $category,
             'tags' => $tags,
+            'viewedCategories' => $viewedCategoriesObjects,
         ]);
     }
 
