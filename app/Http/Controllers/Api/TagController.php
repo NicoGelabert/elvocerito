@@ -33,7 +33,33 @@ class TagController extends Controller
 
     public function getAsTree()
     {
-        return Tag::getActiveAsTree(TagTreeResource::class);
+        // Traer todos los tags activos, ordenados alfabéticamente
+        $tags = Tag::where('active', 1)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        // Construir el árbol recursivo
+        $tree = $this->buildTree($tags);
+
+        // Aplicar el Resource recursivo
+        return TagTreeResource::collection($tree);
+    }
+
+    private function buildTree($tags, $parentId = null)
+    {
+        $branch = [];
+
+        foreach ($tags->where('parent_id', $parentId) as $tag) {
+            $children = $this->buildTree($tags, $tag->id);
+            if ($children) {
+                $tag->setRelation('children', collect($children));
+            } else {
+                $tag->setRelation('children', collect());
+            }
+            $branch[] = $tag;
+        }
+
+        return $branch;
     }
 
     /**

@@ -14,17 +14,22 @@ class TagTreeResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
         $data = [
             'id' => $this->id,
             'label' => $this->name,
+            'children' => [],
         ];
 
-        if ($this->children ?? false) {
-            $data['children'] = $this->children->sortBy('label')->values();
+        if ($this->children && $this->children->isNotEmpty()) {
+            $data['children'] = TagTreeResource::collection(
+                $this->children->sortBy('name')->values()
+            );
         }
 
         return $data;
     }
+
+
 }

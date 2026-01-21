@@ -16,7 +16,11 @@ class WelcomeController extends Controller
     {
         $homeherobanners = HomeHeroBanner::all();
         
-        $categories = Category::with('children')->whereHas('products')->orderBy('name', 'asc')->get();
+        $categories = Category::with('children')
+        ->whereHas('products', function ($q) {
+            $q->where('published', 1);
+        })
+        ->orderBy('name', 'asc')->get();
 
         $anunciantes_destacados = Product::withCount('reviews')->where([
             ['published', '=', 1],
@@ -44,6 +48,19 @@ class WelcomeController extends Controller
             $viewedProducts = collect();
         }
 
+        // Leer la cookie
+        $viewedCategoryIds = json_decode(Cookie::get('recently_viewed_categories'), true) ?? [];
+
+        // Si hay categorías, traerlas de la DB en el mismo orden
+        if (count($viewedCategoryIds) > 0) {
+            $viewedCategories = Category::whereIn('id', $viewedCategoryIds)
+                ->orderByRaw('FIELD(id, ' . implode(',', $viewedCategoryIds) . ')')
+                ->get();
+        } else {
+            // Si no hay nada, devolver colección vacía para evitar errores
+            $viewedCategories = collect();
+        }
+
         $ultimasReviews = Review::with('product:id,title,slug',
         'product.categories:id,slug,name')  // Solo carga id y name del producto
             ->orderBy('created_at', 'desc')
@@ -57,6 +74,7 @@ class WelcomeController extends Controller
             'ultimos_anunciantes',
             'articles',
             'viewedProducts',
+            'viewedCategories',
             'ultimasReviews'
         ));
     }

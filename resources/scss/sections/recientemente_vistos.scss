@@ -1,14 +1,14 @@
-#recientemente_vistos{
-    .recientemente_vistos_title{
-        @apply text-center;
-    }
+.recientemente_vistos{
+    .title{
+            @apply mx-auto;
+        }
     .recientemente_vistos_card{
         @apply w-full mx-auto;
         ul{
             li{
                 @apply flex flex-col justify-center mb-4;
                 a{
-                    @apply flex items-center gap-2 py-2 px-4 rounded-xl bg-white shadow-lg hover:bg-gray-50 transition-all duration-300;
+                    @apply flex items-center gap-2 py-2 px-4 rounded-xl bg-white shadow-lg hover:bg-gray-50 transition-all duration-300 h-full;
                 }
                 img{
                     @apply rounded-full object-cover
@@ -33,6 +33,22 @@
                     }
                 }
             }
+        }
+    }
+    .categorias_recientemente_vistas{
+        @apply flex flex-col gap-4;
+        .cards{
+            ul{
+                li{
+                    @apply flex flex-col mb-4;
+                    a{
+                        @apply flex items-center gap-4 py-2 px-4 rounded-xl bg-white shadow-lg hover:bg-gray-50 transition-all duration-300 w-full h-full;
+                        p{
+                            @apply text-xs text-left;
+                        }
+                    }
+                }
+            } 
         }
     }
 }

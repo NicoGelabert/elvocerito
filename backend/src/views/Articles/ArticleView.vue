@@ -160,13 +160,25 @@ onMounted(() => {
   .then(result => {
     authorsOptions.value = result.data;
   })
-  axiosClient.get('/tags/tree')
-  .then(result => {
-    tagsOptions.value = result.data;
-  })
   .catch(error => {
     console.error("Error al obtener los autores:", error);
   });
+  axiosClient.get('/tags/tree')
+    .then(result => {
+      // El array real está en result.data.data
+      const tagsArray = result.data.data || [];
+
+      // Normalizar children
+      tagsOptions.value = tagsArray.map(tag => ({
+        id: tag.id,
+        label: tag.label,
+        children: tag.children || []
+      }));
+
+      // article.tags ya contiene IDs, asegurarse que sea un array
+      article.value.tags = article.value.tags || [];
+    })
+    .catch(err => console.error("Error al obtener tags:", err));
 })
 
 // Listado de Items

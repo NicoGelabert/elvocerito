@@ -100,7 +100,7 @@
                             <span>{{$article->subtitle}}</span>
                             <!-- FIN TITLE -->
                             <!-- INICIO SUBTITLE -->
-                            <h2>{{$article->title}}</h2>
+                            <h1>{{$article->title}}</h1>
                             <!-- FIN TITLE -->
                             <!-- INICIO COPETE O NEWSLEAD -->
                             <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit">

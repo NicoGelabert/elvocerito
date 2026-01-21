@@ -9,14 +9,16 @@ use Illuminate\View\Component;
 class RecentlyViewed extends Component
 {
     public $viewedProducts;
+    public $viewedCategories;
     /**
      * Create a new component instance.
      * @param  mixed  $viewedProducts
      * @return void
      */
-    public function __construct($viewedProducts)
+    public function __construct($viewedProducts, $viewedCategories)
     {
         $this->viewedProducts = $viewedProducts;
+        $this->viewedCategories = $viewedCategories;
     }
 
     /**

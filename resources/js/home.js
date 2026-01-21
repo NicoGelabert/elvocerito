@@ -56,10 +56,10 @@ if (categoriesElement) {
 };
 categories.mount({ Grid });
 // Fin Categories
-// Vistos recientemente
-var recientementeVistosElement = document.querySelector('#recientemente_vistos');
-if (recientementeVistosElement) {
-    var recientementeVistos = new Splide(recientementeVistosElement, {
+// Productos Vistos recientemente
+var productosRecientementeVistosElement = document.querySelector('#productos_recientemente_vistos');
+if (productosRecientementeVistosElement) {
+    var productosRecientementeVistos = new Splide(productosRecientementeVistosElement, {
         arrows      : false,
         autoplay    : false,
         gap         : '1rem',
@@ -81,9 +81,38 @@ if (recientementeVistosElement) {
             }
         },
     })
-    recientementeVistos.mount();
+    productosRecientementeVistos.mount();
 };
-// Fin Vistos recientemente
+// Fin Productos Vistos recientemente
+
+// Categorías Vistas recientemente
+var categoriasRecientementeVistasElement = document.querySelector('#categorias_recientemente_vistas');
+if (categoriasRecientementeVistasElement) {
+    var categoriasRecientementeVistas = new Splide(categoriasRecientementeVistasElement, {
+        arrows      : false,
+        autoplay    : false,
+        gap         : '1rem',
+        interval    : 4000,
+        pagination  : false,
+        perPage     : 4,
+        type        : 'slide',
+        breakpoints: {
+            1024: {
+                perPage     : 3,
+            },
+            // 768: {
+            //     perPage     : 5,
+            // },
+            480: {
+                perPage     : 2,
+                gap         : '1rem',
+                padding     : '1rem',
+            }
+        },
+    })
+    categoriasRecientementeVistas.mount();
+};
+// Fin Categorías Vistas recientemente
 // Últimos anunciantes
 var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
 if (ultimosAnuncinatesElement) {

@@ -20,6 +20,30 @@ class ProductController extends Controller
             $query->whereHas('categories', function ($q) use ($categorySlug) {
                 $q->where('slug', $categorySlug);
             });
+            $category = Category::where('slug', $categorySlug)->first();
+
+            if ($category) {
+                $viewedCategories = json_decode(
+                    Cookie::get('recently_viewed_categories'),
+                    true
+                ) ?? [];
+
+                // eliminar duplicados
+                $viewedCategories = array_values(array_diff($viewedCategories, [$category->id]));
+
+                // agregar al inicio
+                array_unshift($viewedCategories, $category->id);
+
+                // limitar a los últimos 5
+                $viewedCategories = array_slice($viewedCategories, 0, 5);
+
+                // guardar cookie (30 días)
+                Cookie::queue(
+                    'recently_viewed_categories',
+                    json_encode($viewedCategories),
+                    60 * 24 * 30
+                );
+            }
         }
 
         // ───── Filtro por urgencias ─────

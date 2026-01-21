@@ -13,7 +13,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-DTw1iH-_.js",
+    "file": "assets/app-D1CtJi8W.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -38,7 +38,7 @@
     ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-DAIw7m7H.js",
+    "file": "assets/catalog-BPMO69k4.js",
     "name": "catalog",
     "src": "resources/js/catalog.js",
     "isDynamicEntry": true,
@@ -53,7 +53,7 @@
     "isDynamicEntry": true
   },
   "resources/js/home.js": {
-    "file": "assets/home-BuP77Ani.js",
+    "file": "assets/home-CghGt5GK.js",
     "name": "home",
     "src": "resources/js/home.js",
     "isDynamicEntry": true,
@@ -71,7 +71,7 @@
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-BNtZU3YT.css",
+    "file": "assets/styles-BkC4T153.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",

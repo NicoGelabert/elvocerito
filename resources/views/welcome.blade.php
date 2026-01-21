@@ -6,17 +6,20 @@
             <x-categories :categories="$categories"/>
             
         </div>
+        @if($viewedProducts->count() > 0 || $viewedCategories->count() > 0)
+        <div class="container">
+            <hr class="divider">
+        </div>
+        <x-recently-viewed :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" />
+        <div class="container">
+            <hr class="divider">
+        </div>
+        @endif
         <x-home-hero-banner :homeherobanners="$homeherobanners" />
         <div class="container">
             <hr class="divider">
         </div>
         <x-anunciantes-destacados :anunciantes_destacados="$anunciantes_destacados" />
-        @if($viewedProducts->count() > 0)
-        <div class="container">
-            <hr class="divider">
-        </div>
-        <x-recently-viewed :viewedProducts="$viewedProducts" />
-        @endif
         <x-revista />
         <x-latest-reviews :ultimasReviews="$ultimasReviews" />
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
