@@ -40,6 +40,7 @@ if (categoriesElement) {
                 perMove     : 6,
             },
             480: {
+                height      : '12rem',
                 perPage     : 1,
                 perMove     : 1,
                 grid       : {

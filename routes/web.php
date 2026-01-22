@@ -38,16 +38,23 @@ Route::middleware(['guestOrVerified'])->group(function () {
         return view('underconstruction');
     });
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-    
     Route::get('/home',[WelcomeController::class, 'index'])->name('welcome');
-
+    
     // Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    
+    // Política de Privacidad
+    Route::get('/legal/politica-de-privacidad', function (){
+        return view('legal/privacy-policy');
+    });
+    Route::get('/legal/terminos-y-condiciones', function (){
+        return view('legal/terms-and-conditions');
+    });
     
     //News
     Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
     Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
-
+    
     // Anunciantes = Products
     Route::get('/anunciantes', [ProductController::class, 'index'])->name('products.index');
     Route::get('/{category:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
@@ -78,13 +85,7 @@ Route::middleware(['guestOrVerified'])->group(function () {
     // Promedio de ratings para un producto
     Route::get('/products/{product}/rating-average', [ReviewController::class, 'averageRating']);
 
-    // Política de Privacidad
-    Route::get('/politica-de-privacidad', function (){
-        return view('legal/privacy-policy');
-    });
-    Route::get('/terminos-y-condiciones', function (){
-        return view('legal/terms-and-conditions');
-    });
+    
     Route::get('/documentation/js/carga-de-scripts', function(){
         return view('documentation/js/carga-de-scripts');
     });

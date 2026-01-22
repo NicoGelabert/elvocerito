@@ -45,7 +45,12 @@
                                      </div>
                                 </div>
                                 <p>{{ $anunciante_destacado->short_description }}</p>
-                                <x-badge-horarios :anunciante_destacado="$anunciante_destacado"/>
+                                <div class="flex gap-2 md:gap-4">
+                                    <x-badge-horarios :product="$anunciante_destacado"/>
+                                    @if($anunciante_destacado->urgencies)
+                                    <x-badge-urgencies :product="$anunciante_destacado"/>
+                                    @endif
+                                </div>
                             </div>
                         </a>
                         @if ($anunciante_destacado->reviews_count > 0)
@@ -56,7 +61,7 @@
                                 data-product-id="{{ $anunciante_destacado->id }}">
                             </div>
 
-                            <span class="text-sm text-gray-500">
+                            <span class="text-xs text-gray-500">
                                 ({{ $anunciante_destacado->reviews_count }} 
                                 {{ Str::plural('reseña', $anunciante_destacado->reviews_count) }})
                             </span>

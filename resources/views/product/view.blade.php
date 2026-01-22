@@ -125,17 +125,19 @@
                                 <!-- INICIO TITLE -->
                                 <h2>{{ $product->title }}</h2>
                                 <!-- Promedio de calificaciones -->
+                                @if ($product->reviews_count > 0)
                                 <div class="flex items-center space-x-2">
                                     <div
                                         class="product-rating-average product_rating"
                                         data-product-id="{{ $product->id }}">
                                     </div>
 
-                                    <span class="text-sm text-gray-500">
+                                    <span class="text-xs text-gray-500">
                                         ({{ $product->reviews_count }}
                                         {{ Str::plural('reseña', $product->reviews_count) }})
                                     </span>
                                 </div>
+                                @endif
                                 <!-- FIN TITLE -->
                                 <!-- INICIO PÁGINA WEB -->
                                 @if ($product->webs->isNotEmpty())
@@ -160,28 +162,20 @@
                                 </div>
                                 @endif
                                 <!-- FIN PÁGINA WEB -->
-                                </div>
-                             <!-- FIN CATEGORÍAS Y NOMBRE -->
-                             <!-- INICIO BADGE ABIERTO / CERRADO, SHORT DESCRIPTION, VÍAS DE CONTACTO Y ADDRESSES -->
-                             <div class="flex flex-col gap-6 items-center md:items-start">
-                                 <!-- INICIO BADGE ABIERTO / CERRADO -->
-                                @if($product->horarios->isNotEmpty())
-                                @php
-                                    $horarios = $product->horarios->map(function($horario) {
-                                        return [
-                                            'dia' => $horario->dia,
-                                            'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
-                                            'cierre' => Carbon::parse($horario->cierre)->format('H:i')
-                                        ];
-                                    });
-                                @endphp
-                                <div x-data="verificarEstado({{ json_encode($horarios) }})">
-                                    <x-badge x-bind:class="(estado === 'No Disponible' ? 'closed' : (estado === 'Disponible' ? 'open' : ''))">
-                                        <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
-                                    </x-badge>
-                                </div>
-                                @endif
+                            </div>
+                            <!-- FIN CATEGORÍAS Y NOMBRE -->
+                            
+                            <div class="flex gap-4">
+                                <!-- INICIO BADGE ABIERTO / CERRADO -->
+                                <x-badge-horarios :product="$product"/>
                                 <!-- FIN BADGE ABIERTO / CERRADO -->
+                                <!-- INICIO BADGE URGENCIAS -->
+                                @if($product->urgencies)
+                                <x-badge-urgencies :product="$product" />
+                                @endif
+                                <!-- FIN BADGE URGENCIAS -->
+                            </div>
+                            <div class="flex flex-col gap-6 items-center md:items-start">
                                 <!-- INICIO SHORT DESCRIPTION -->
                                 @if ($product->short_description)
                                 <div class="product_short_description md:col-span-2">
@@ -213,7 +207,7 @@
                                 @endif
                                 <!-- FIN ADDRESSES -->
                             </div>
-                            <!-- FIN BADGE ABIERTO / CERRADO, SHORT DESCRIPTION, VÍAS DE CONTACTO Y ADDRESSES -->
+                            
                         </div>
                         <!-- FIN CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
                     </div>

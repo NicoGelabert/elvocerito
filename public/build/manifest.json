@@ -4,7 +4,7 @@
     "name": "splide-extension-grid.esm"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CtXSPJSZ.css",
+    "file": "assets/app-DwaJE_8U.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -13,7 +13,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-D1CtJi8W.js",
+    "file": "assets/app-D0P54jtm.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -38,7 +38,7 @@
     ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-BPMO69k4.js",
+    "file": "assets/catalog-CpR3eFzO.js",
     "name": "catalog",
     "src": "resources/js/catalog.js",
     "isDynamicEntry": true,
@@ -53,7 +53,7 @@
     "isDynamicEntry": true
   },
   "resources/js/home.js": {
-    "file": "assets/home-CghGt5GK.js",
+    "file": "assets/home-CAIg56dW.js",
     "name": "home",
     "src": "resources/js/home.js",
     "isDynamicEntry": true,
@@ -71,7 +71,7 @@
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-BkC4T153.css",
+    "file": "assets/styles-CWWWTWSM.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",

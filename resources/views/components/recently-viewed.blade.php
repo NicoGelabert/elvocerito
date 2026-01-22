@@ -28,9 +28,8 @@
                     @foreach ($viewedProducts as $viewedProduct)
                     <li class="splide__slide">
                         <a href="{{ route('product.view', [
-                            'category' => $viewedProduct->categories->first()->parent ? $viewedProduct->categories->first()->parent->slug : 'sin-subcategoria', // Obtiene la categoría principal
-                            'subcategory' => $viewedProduct->categories->first()->slug, // Obtiene la subcategoría
-                            'product' => $viewedProduct->slug // Obtiene el producto
+                            'category' => optional($viewedProduct->categories->first())->slug ?? 'sin-categoria',
+                            'product' => $viewedProduct->slug
                         ]) }}">
                             <div>
                                 <img src="{{ $viewedProduct->image }}" alt="{{ $viewedProduct->title }}">

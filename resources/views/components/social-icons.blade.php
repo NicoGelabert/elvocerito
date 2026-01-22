@@ -8,4 +8,7 @@
     <a href="https://www.instagram.com/guiavocerito/" target="_blank">
         <x-icons.instagram />
     </a>
+    <a href="https://www.youtube.com/@guiavocerito9106" target="_blank">
+        <x-icons.youtube />
+    </a>
 </div>

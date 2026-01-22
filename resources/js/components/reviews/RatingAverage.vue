@@ -12,7 +12,7 @@
           />
         </div>
         <!-- Número -->
-        <span class="font-semibold text-sm text-gray-500">{{ average }}</span>
+        <span class="font-semibold text-xs text-gray-500">{{ average }}</span>
 
   </div>
   <!-- Si no hay promedio, no muestra nada -->

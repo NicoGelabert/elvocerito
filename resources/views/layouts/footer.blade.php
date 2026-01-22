@@ -30,10 +30,10 @@
                             class="footer-sub-menu dropdown md:block"
                         >
                             <li>
-                                <a href=""><p>Términos y condiciones</p></a>
+                                <a href="/legal/terminos-y-condiciones"><p>Términos y condiciones</p></a>
                             </li>
                             <li>
-                                <a href=""><p>Política de cookies</p></a>
+                                <a href="/legal/politica-de-privacidad"><p>Política de cookies</p></a>
                             </li>                        
                         </ul>
                     </li>

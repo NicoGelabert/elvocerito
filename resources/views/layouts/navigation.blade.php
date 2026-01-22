@@ -21,12 +21,7 @@
             <x-logo />
         </a>
         </div>
-        <div class="flex items-center gap-4 lg:hidden">
-            <div>
-                <x-button href="#" class="btn btn-urgencies">urgencias <x-icons.urgencies /></x-button>
-            </div>
-            <x-hamburguer />
-        </div>
+        <x-hamburguer />
     </div>    
     <!-- RESPONSIVE MENU -->
 

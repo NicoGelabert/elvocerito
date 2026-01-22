@@ -1,10 +1,10 @@
-@props(['anunciante_destacado' => []])
+@props(['product' => []])
 @php
     use Carbon\Carbon;
-    $horarios = $anunciante_destacado->horarios->sortBy(fn($h) => array_search(strtolower($h->dia), [
+    $horarios = $product->horarios->sortBy(fn($h) => array_search(strtolower($h->dia), [
         "lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"
     ]));
-    $horarios = $anunciante_destacado->horarios->map(function($horario) {
+    $horarios = $product->horarios->map(function($horario) {
         return [
             'dia' => $horario->dia,
             'apertura' => Carbon::parse($horario->apertura)->format('H:i'),

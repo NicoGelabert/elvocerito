@@ -22,6 +22,9 @@
         <x-anunciantes-destacados :anunciantes_destacados="$anunciantes_destacados" />
         <x-revista />
         <x-latest-reviews :ultimasReviews="$ultimasReviews" />
+        <div class="container">
+            <hr class="divider">
+        </div>
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
         <div class="container">
             <hr class="divider">

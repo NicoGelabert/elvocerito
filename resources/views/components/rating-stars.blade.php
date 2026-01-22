@@ -28,7 +28,7 @@
     </div>
 
     <!-- NÚMERO -->
-    <span class="text-sm font-semibold text-gray-600">
+    <span class="text-xs font-semibold text-gray-600">
         {{ number_format($rating, 1) }}
     </span>
 </div>

@@ -1,7 +1,7 @@
 <div class="search_hero" style="background-image:url('{{ asset('storage/common/hero-banner.jpg') }}')">
     <!-- <x-backgrounds.pinmaps /> -->
     <div class="container flex flex-col md:flex-row items-center gap-24 md:gap-4">
-        <div class="md:w-1/2 flex mx-auto">
+        <div class="md:w-1/2 flex flex-col mx-auto gap-8">
             <div class="search_hero_container">
                 <h1>Servicios cerca tuyo.</h1>
                 <p>Encontrá lo que necesitás fácil y rápido!</p>
@@ -15,6 +15,14 @@
                         </div>
                     </div>
                 </x-button>
+            </div>
+            <div class="flex items-center justify-around gap-4 lg:hidden">
+                <div>
+                    <x-button href="/anunciantes?urgencies=true" class="btn btn-urgencies shadow-md"><x-icons.urgencies class="fill-white"/> urgencias</x-button>
+                </div>
+                <div>
+                    <x-button href="/anunciantes?page=1&category=farmacias&on_duty=true" class="btn btn-on-duty shadow-md"><x-icons.on_duty /> farmacias de turno</x-button>
+                </div>
             </div>
         </div>
         <x-search-modal />
