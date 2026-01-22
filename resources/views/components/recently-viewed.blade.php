@@ -37,7 +37,7 @@
                             <div class="recientemente_vistos_card_content">
                                 <div class="header">
                                     <!-- INICIO CATEGORÍAS -->
-                                    <div class="relative flex gap-2 items-center justify-between md:w-fit ">
+                                    <div class="relative flex gap-2 items-center justify-between w-fit ">
                                         @if ($viewedProduct->categories->count() > 0)
                                             @php
                                                 $firstCategory = $viewedProduct->categories->first();
