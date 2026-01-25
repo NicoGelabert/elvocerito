@@ -12,3 +12,4 @@ export const PROJECTS_PER_PAGE = 10
 export const TAGS_PER_PAGE = 10
 export const CUSTOMERS_PER_PAGE = 10
 export const PHARMACY_CATEGORY_ID = 88
+export const FAQS_PER_PAGE = 88

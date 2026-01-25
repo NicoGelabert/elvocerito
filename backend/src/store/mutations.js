@@ -226,6 +226,24 @@ export function setTags(state, [loading, data = null]) {
   state.tags.loading = loading;
 }
 
+export function setFaqs(state, [loading, data = null]) {
+
+  if (data) {
+    state.faqs = {
+      ...state.faqs,
+      data: data.data,
+      links: data.links,
+      page: data.current_page,
+      limit: data.per_page,
+      from: data.from,
+      to: data.to,
+      total: data.total,
+    }
+  }
+  state.faqs.loading = loading;
+}
+
+
 export function setClients(state, [loading, data = null]) {
 
   if (data) {

@@ -113,6 +113,16 @@ export default {
     limit: null,
     total: null
   },
+  faqs: {
+    loading: false,
+    data: [],
+    links: [],
+    from: null,
+    to: null,
+    page: 1,
+    limit: null,
+    total: null
+  },
   clients: {
     loading: false,
     data: [],

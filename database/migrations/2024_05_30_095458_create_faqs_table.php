@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
+            $table->text('category', 200)->nullable();
             $table->text('question', 200)->nullable();
             $table->longText('answer')->nullable();
             $table->boolean('published')->default(true);

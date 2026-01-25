@@ -12,6 +12,6 @@ class Faq extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['question', 'answer', 'published', 'created_by', 'updated_by'];
+    protected $fillable = ['category', 'question', 'answer', 'published', 'created_by', 'updated_by'];
 
 }

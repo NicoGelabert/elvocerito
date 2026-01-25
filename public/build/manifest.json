@@ -4,7 +4,7 @@
     "name": "splide-extension-grid.esm"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BvTDhUKu.css",
+    "file": "assets/app-BxeeBxpt.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -71,16 +71,12 @@
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-B46p7pbX.css",
+    "file": "assets/styles-CZF6hAk1.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",
     "names": [
       "styles.css"
     ]
-  },
-  "storage/app/public/common/card.jpg": {
-    "file": "assets/card-B8wNcK9P.jpg",
-    "src": "storage/app/public/common/card.jpg"
   }
 }

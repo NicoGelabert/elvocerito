@@ -1027,6 +1027,63 @@ export function deleteTag({commit}, tag) {
   return axiosClient.delete(`/tags/${tag.id}`)
 }
 
+//FAQS
+export function getFaqs({commit, state}, {url = null, search = '', per_page, sort_field, sort_direction} = {}) {
+  commit('setFaqs', [true])
+  url = url || '/faqs'
+  const params = {
+    per_page: state.faqs.limit,
+  }
+  return axiosClient.get(url, {
+    params: {
+      ...params,
+      search, per_page, sort_field, sort_direction
+    }
+  })
+    .then((response) => {
+      commit('setFaqs', [false, response.data])
+    })
+    .catch(() => {
+      commit('setFaqs', [false])
+    })
+}
+
+export function getFaq({commit}, id) {
+  return axiosClient.get(`/faqs/${id}`)
+}
+
+export function createFaq({commit}, faq) {
+  if (faq.image instanceof File) {
+    const form = new FormData();
+    form.append('category', faq.category);
+    form.append('question', faq.question);
+    form.append('answer', faq.answer);ç
+    form.append('published', faq.published ? 1 : 0);
+    faq = form;
+  }
+  return axiosClient.post('/faqs', faq)
+}
+
+export function updateFaq({commit}, faq) {
+  const id = faq.id
+  if (faq.image instanceof File) {
+    const form = new FormData();
+    form.append('category', faq.category);
+    form.append('question', faq.question);
+    form.append('answer', faq.answer);ç
+    form.append('published', faq.published ? 1 : 0);
+    form.append('_method', 'PUT');
+    faq = form;
+  } else {
+    faq._method = 'PUT'
+  }
+  return axiosClient.post(`/faqs/${id}`, faq)
+}
+
+export function deleteFaq({commit}, faq) {
+  return axiosClient.delete(`/faqs/${faq.id}`)
+}
+
 //CLIENTS
 export function getClients({commit, state}, {sort_field, sort_direction} = {}) {
   commit('setClients', [true])

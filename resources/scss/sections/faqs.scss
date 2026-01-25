@@ -1,0 +1,19 @@
+.faqs{
+    .questions{
+        @apply flex flex-col w-full gap-2;
+        .question{
+            @apply w-full h-fit border rounded-xl py-2 px-4;
+            h4{
+                @apply text-base;
+            }
+            .answer{
+                ul li{
+                    @apply list-disc ml-16 text-sm;
+                }
+                p{
+                    @apply pl-8;
+                }
+            }
+        }        
+    }
+}

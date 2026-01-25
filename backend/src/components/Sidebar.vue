@@ -24,6 +24,7 @@
 import {ArchiveBoxIcon,
         BuildingStorefrontIcon,
         CalendarDaysIcon,
+        ChatBubbleLeftRightIcon,
         ChevronLeftIcon,
         IdentificationIcon,
         MegaphoneIcon,
@@ -53,6 +54,7 @@ const menuItems = ref([
     { name: 'articles', label: 'Artículos', route: 'app.articles', icon: NewspaperIcon },
     { name: 'authors', label: 'Autores', route: 'app.authors', icon: IdentificationIcon },
     { name: 'tags', label: 'Tags', route: 'app.tags', icon: TagIcon },
+    { name: 'Faqs', label: 'Faqs', route: 'app.faqs', icon: ChatBubbleLeftRightIcon },
     { name: 'users', label: 'Users', route: 'app.users', icon: UsersIcon },
 ]);
 

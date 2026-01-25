@@ -1,22 +1,23 @@
 <x-app-layout>
-    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-32 mx-auto md:px-16 overflow-hidden">
-        <h3>{{ __('Términos y Condiciones') }}</h3>
+    <x-breadcrumbs breadcrumbs_location="Términos y Condiciones" />
+    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-16 mx-auto md:px-16 overflow-hidden">
+        <h1>{{ __('Términos y Condiciones') }}</h1>
         <p>{{ __('Última actualización: 23 de noviembre de 2024') }}</p>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('1. Introducción') }}</h6>
+            <h2>{{ __('1. Introducción') }}</h2>
 
             <p>{{ __('Bienvenido a chimicreativo.es. Al acceder o utilizar este sitio web, aceptas cumplir con estos términos y condiciones. Si no estás de acuerdo con alguna parte de los términos, no utilices este sitio.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('2. Información sobre el titular del sitio') }}</h6>
+            <h2>{{ __('2. Información sobre el titular del sitio') }}</h2>
             
             <p>{{ __('Este sitio web es operado por Chimicreativo, una agencia de diseño gráfico, desarrollo web y branding. Para cualquier consulta, puedes escribirnos a ') }}<a href="mailto:privacidad@chimicreativo.es">privacidad@chimicreativo.es</a>.</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('3. Uso del sitio web') }}</h6>
+            <h2>{{ __('3. Uso del sitio web') }}</h2>
             
             <p>{{ __('Este sitio está destinado a usuarios que buscan información sobre nuestros servicios y trabajos realizados.') }}</p>
 
@@ -30,7 +31,7 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('4. Propiedad intelectual') }}</h6>
+            <h2>{{ __('4. Propiedad intelectual') }}</h2>
             
             <p>{{ __('Todos los contenidos del sitio (diseños, textos, imágenes, logotipos, etc.) son propiedad de Chimicreativo o de sus licenciantes y están protegidos por las leyes de propiedad intelectual.') }}</p>
 
@@ -38,7 +39,7 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('5. Formularios y datos personales') }}</h6>
+            <h2>{{ __('5. Formularios y datos personales') }}</h2>
 
             <p>{{ __('Al utilizar los formularios de contacto o presupuesto, aceptas proporcionar información veraz y completa.') }}</p>
 
@@ -48,13 +49,13 @@
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('6. Uso de cookies') }}</h6>
+            <h2>{{ __('6. Uso de cookies') }}</h2>
 
             <p>{{ __('Utilizamos cookies para mejorar la experiencia del usuario, realizar análisis estadísticos y personalizar anuncios. Puedes gestionar tus preferencias en nuestro banner de cookies.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('7. Limitación de responsabilidad') }}</h6>
+            <h2>{{ __('7. Limitación de responsabilidad') }}</h2>
 
             <p>{{ __('Aunque nos esforzamos por mantener la información del sitio actualizada, no garantizamos la exactitud o integridad de los contenidos.') }}</p>
 
@@ -68,19 +69,19 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('8. Modificaciones') }}</h6>
+            <h2>{{ __('8. Modificaciones') }}</h2>
 
             <p>{{ __('Nos reservamos el derecho de actualizar estos términos en cualquier momento. La fecha de la última modificación se indicará al inicio del documento. Recomendamos revisarlos periódicamente.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('9. Legislación aplicable') }}</h6>
+            <h2>{{ __('9. Legislación aplicable') }}</h2>
 
             <p>{{ __('Estos términos se rigen por las leyes de España. Cualquier disputa relacionada con el sitio se someterá a la jurisdicción de los tribunales españoles.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('10. Contacto') }}</h6>
+            <h2>{{ __('10. Contacto') }}</h2>
 
             <p>{{ __('Para cualquier consulta sobre estos términos, puedes escribirnos a ') }}<a href="mailto:privacidad@chimicreativo.es">privacidad@chimicreativo.es</a>.</p>
         </div>

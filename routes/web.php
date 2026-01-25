@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
@@ -43,14 +44,31 @@ Route::middleware(['guestOrVerified'])->group(function () {
     // Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
     
+    // Beneficios de Publicar en el Vocerito
+    Route::get('/beneficios-de-publicar-en-el-vocerito', function (){
+        return view('about/beneficios_de_publicar');
+    });
+
+    // Un poco de historia
+    Route::get('/un-poco-de-historia', function (){
+        return view('about/un_poco_de_historia');
+    });
+
+    
     // Política de Privacidad
     Route::get('/legal/politica-de-privacidad', function (){
         return view('legal/privacy-policy');
-    });
+        });
     Route::get('/legal/terminos-y-condiciones', function (){
         return view('legal/terms-and-conditions');
-    });
+        });
+            
+    //Faqs
+    Route::get('/preguntas-frecuentes', [FaqController::class, 'index'])->name('faq.index');
     
+    // Cómo usar la guía
+    Route::get('/como-usar-la-guia', [FaqController::class, 'comoUsarLaGuia'])->name('faq.comoUsarLaGuia');
+
     //News
     Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
     Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
@@ -84,7 +102,6 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/products/{product}/reviews', [ReviewController::class, 'publicReviews']);
     // Promedio de ratings para un producto
     Route::get('/products/{product}/rating-average', [ReviewController::class, 'averageRating']);
-
     
     Route::get('/documentation/js/carga-de-scripts', function(){
         return view('documentation/js/carga-de-scripts');

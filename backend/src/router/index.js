@@ -10,8 +10,8 @@ import HomeHeroBanners from "../views/HomeHeroBanners/HomeHeroBanners.vue";
 import Categories from "../views/Categories/Categories.vue";
 import CategoryView from "../views/Categories/CategoryView.vue";
 import Products from "../views/Products/Products.vue";
-import ShiftsTable from "../views/Shifts/ShiftsTable.vue";
 import ProductView from "../views/Products/ProductView.vue";
+import ShiftsTable from "../views/Shifts/ShiftsTable.vue";
 import Reviews from "../views/Reviews/Reviews.vue";
 import ReviewView from "../views/Reviews/ReviewView.vue";
 import Articles from "../views/Articles/Articles.vue";
@@ -19,6 +19,8 @@ import ArticleView from "../views/Articles/ArticleView.vue";
 import Authors from "../views/Authors/Authors.vue";
 import AuthorView from "../views/Authors/AuthorView.vue";
 import Tags from "../views/Tags/Tags.vue";
+import Faqs from "../views/Faqs/Faqs.vue";
+import FaqView from "../views/Faqs/FaqView.vue";
 import Clients from "../views/Clients/Clients.vue";
 import Users from "../views/Users/Users.vue";
 import Customers from "../views/Customers/Customers.vue";
@@ -153,6 +155,24 @@ const routes = [
         path: 'tags',
         name: 'app.tags',
         component: Tags
+      },
+      {
+        path: 'faqs',
+        name: 'app.faqs',
+        component: Faqs
+      },
+      {
+        path: 'faqs/create',
+        name: 'app.faqs.create',
+        component: FaqView
+      },
+      {
+        path: 'faqs/:id',
+        name: 'app.faqs.edit',
+        component: FaqView,
+        props: {
+          id: (value) => /^\d+$/.test(value)
+        }
       },
       {
         path: 'clients',

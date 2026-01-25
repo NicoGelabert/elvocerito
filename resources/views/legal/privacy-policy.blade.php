@@ -1,16 +1,17 @@
 <x-app-layout>
-    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-32 mx-auto md:px-16 overflow-hidden">
-        <h3>{{ __('Política de Privacidad') }}</h3>
+    <x-breadcrumbs breadcrumbs_location="Política de Privacidad" />
+    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-16 mx-auto md:px-16 overflow-hidden">
+        <h1>{{ __('Política de Privacidad') }}</h1>
 
         <p>{{ __('Última actualización: 23 de noviembre de 2024') }}</p>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('1. Información General') }}</h6>
+            <h2>{{ __('1. Información General') }}</h2>
             <p>{{ __('Chimicreativo.es, como responsable del tratamiento de los datos, está comprometido con la privacidad de sus usuarios y garantiza que los datos personales recopilados serán tratados conforme al Reglamento General de Protección de Datos (RGPD) y demás normativas aplicables.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('2. Datos Recopilados') }}</h6>
+            <h2>{{ __('2. Datos Recopilados') }}</h2>
             
             <p>{{ __('Recopilamos los siguientes datos personales a través de nuestros formularios:') }}</p>
 
@@ -46,7 +47,7 @@
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('3. Finalidad del Tratamiento') }}</h6>
+            <h2>{{ __('3. Finalidad del Tratamiento') }}</h2>
             
             <p>{{ __('Los datos personales serán utilizados para:') }}</p>
 
@@ -66,7 +67,7 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('4. Uso de Cookies') }}</h6>
+            <h2>{{ __('4. Uso de Cookies') }}</h2>
             
             <p>{{ __('En Chimicreativo.es utilizamos cookies para:') }}</p>
 
@@ -79,7 +80,7 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('5. Base Legal para el Tratamiento') }}</h6>
+            <h2>{{ __('5. Base Legal para el Tratamiento') }}</h2>
             <ul class="list-disc pl-12">
                 <li>{{ __('Consentimiento explícito del usuario al suscribirse a nuestros boletines o aceptar recibir publicidad personalizada.') }}</li>
                 <li>{{ __('Cumplimiento de obligaciones legales.') }}</li>
@@ -88,12 +89,12 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('6. Conservación de los Datos') }}</h6>
+            <h2>{{ __('6. Conservación de los Datos') }}</h2>
             <p>{{ __('Los datos personales serán conservados mientras sean necesarios para las finalidades descritas, o hasta que el usuario solicite su eliminación.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('7. Derechos de los Usuarios') }}</h6>
+            <h2>{{ __('7. Derechos de los Usuarios') }}</h2>
 
             <p>{{ __('Los usuarios tienen derecho a:') }}</p>
 
@@ -109,7 +110,7 @@
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('8. Medidas de Seguridad') }}</h6>
+            <h2>{{ __('8. Medidas de Seguridad') }}</h2>
 
             <p>{{ __('El sitio está protegido mediante:') }}</p>
 
@@ -121,13 +122,13 @@
         </div>
         
         <div class="flex flex-col gap-4">
-            <h6>{{ __('9. Modificaciones') }}</h6>
+            <h2>{{ __('9. Modificaciones') }}</h2>
 
             <p>{{ __('Nos reservamos el derecho de actualizar esta Política de Privacidad en función de cambios legales o técnicos. La fecha de la última actualización aparecerá al inicio del documento.') }}</p>
         </div>
 
         <div class="flex flex-col gap-4">
-            <h6>{{ __('10. Contacto') }}</h6>
+            <h2>{{ __('10. Contacto') }}</h2>
 
             <p>{{ __('Para consultas o solicitudes relacionadas con esta política, contáctanos en: ') }}<a href="mailto:privacidad@chimicreativo.es">privacidad@chimicreativo.es</a>.</p>
         </div>

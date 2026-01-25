@@ -59,10 +59,10 @@
                             class="footer-sub-menu dropdown md:block"
                         >
                             <li>
-                                <a href=""><p>Beneficios de publicar en El Vocerito</p></a>
+                                <a href="/beneficios-de-publicar-en-el-vocerito"><p>Beneficios de publicar en El Vocerito</p></a>
                             </li>
                             <li>
-                                <a href=""><p>Preguntas Frecuentes</p></a>
+                                <a href="/preguntas-frecuentes"><p>Preguntas Frecuentes</p></a>
                             </li>                        
                         </ul>
                     </li>
@@ -88,10 +88,10 @@
                             class="footer-sub-menu dropdown md:block"
                         >
                             <li>
-                                <a href=""><p>Un poco de historia</p></a>
+                                <a href="/un-poco-de-historia"><p>Un poco de historia</p></a>
                             </li>
                             <li>
-                                <a href=""><p>Cómo usar la guía</p></a>
+                                <a href="/como-usar-la-guia"><p>Cómo usar la guía</p></a>
                             </li>                        
                         </ul>
                     </li>
