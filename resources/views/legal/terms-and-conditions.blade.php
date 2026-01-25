@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-breadcrumbs breadcrumbs_location="Términos y Condiciones" />
-    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-16 mx-auto md:px-16 overflow-hidden">
+    <div class="flex flex-col justify-center gap-12 container py-16">
         <h1>{{ __('Términos y Condiciones') }}</h1>
         <p>{{ __('Última actualización: 23 de noviembre de 2024') }}</p>
 

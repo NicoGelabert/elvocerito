@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-breadcrumbs breadcrumbs_location="Política de Privacidad" />
-    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-16 mx-auto md:px-16 overflow-hidden">
+    <div class="flex flex-col justify-center gap-12 py-16 container">
         <h1>{{ __('Política de Privacidad') }}</h1>
 
         <p>{{ __('Última actualización: 23 de noviembre de 2024') }}</p>

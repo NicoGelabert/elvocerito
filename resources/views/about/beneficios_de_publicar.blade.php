@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-breadcrumbs breadcrumbs_location="Beneficios de publicar en El Vocerito" />
-    <div class="flex flex-col justify-center gap-12 max-w-screen-xl px-4 py-16 mx-auto md:px-16 overflow-hidden">
+    <div class="flex flex-col justify-center gap-12 py-16 container">
         <h1>Beneficios de publicar en El Vocerito</h1>
 
         <p>
