@@ -9,7 +9,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'desc')->paginate(16);
+        $articles = Article::where('published', 1)->orderBy('created_at', 'desc')->paginate(16);
         return view('news.index', [
             'articles' => $articles
         ]);
