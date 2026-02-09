@@ -17,6 +17,7 @@
                             v-model="faq.category"
                             label="Faq category"
                             :select-options="[
+                                { key: 'preguntas_generales', text: 'Preguntas en común (revista y web)'},
                                 { key: 'guia_papel', text: 'Guía Papel' },
                                 { key: 'guia_digital', text: 'Guía Digital' },
                                 { key: 'publicidad', text: 'Publicidad' },

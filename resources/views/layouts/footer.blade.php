@@ -33,7 +33,7 @@
                                 <a href="/legal/terminos-y-condiciones"><p>Términos y condiciones</p></a>
                             </li>
                             <li>
-                                <a href="/legal/politica-de-privacidad"><p>Política de cookies</p></a>
+                                <a href="/legal/politica-de-privacidad"><p>Política de Privacidad</p></a>
                             </li>                        
                         </ul>
                     </li>

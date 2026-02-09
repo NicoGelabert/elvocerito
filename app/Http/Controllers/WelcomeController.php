@@ -61,8 +61,8 @@ class WelcomeController extends Controller
             $viewedCategories = collect();
         }
 
-        $ultimasReviews = Review::with('product:id,title,slug',
-        'product.categories:id,slug,name')  // Solo carga id y name del producto
+        $ultimasReviews = Review::where('published', 1)
+            ->with('product:id,title,slug', 'product.categories:id,slug,name')  // Solo carga id y name del producto
             ->orderBy('created_at', 'desc')
             ->take(20)
             ->get();

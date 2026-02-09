@@ -4,14 +4,9 @@
 
         {{-- TÍTULO DE CATEGORÍA --}}
         <h2 class="text-2xl font-bold mb-6 text-center">
-            @if($category === 'guia_papel' )
-                Guía Papel
-            @elseif ($category === 'guia_digital' )
-                Guía Digital
-            @elseif ($category === 'publicidad' )
-                Publicidad en Google
-            @endif
+            {{ $categoryTitles[$category] ?? ucfirst(str_replace('_', ' ', $category)) }}
         </h2>
+
 
         <div class="questions">
             @foreach ($faqs as $faq)
