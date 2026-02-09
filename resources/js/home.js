@@ -124,7 +124,6 @@ if (ultimosAnuncinatesElement) {
         interval    : 4000,
         pagination  : false,
         perPage     : 3,
-        type        : 'loop',
         breakpoints: {
             1024: {
                 perPage     : 2,
@@ -153,7 +152,6 @@ if (ultimasReviewsElement) {
         interval    : 4000,
         pagination  : false,
         perPage     : 3,
-        type        : 'loop',
         breakpoints: {
             1024: {
                 perPage     : 2,

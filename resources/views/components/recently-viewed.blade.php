@@ -7,7 +7,7 @@
         <div id="categorias_recientemente_vistas" class="categorias_recientemente_vistas splide">
             <h4 class="title">Categorías</h4>
                 <div class="splide__track cards">
-                    <ul class="splide__list">
+                    <ul class="splide__list justify-center">
                         @foreach($viewedCategories as $category)
                             <li class="splide__slide">
                                 <a href="{{ route('products.index', ['category' => $category->slug]) }}">
@@ -24,7 +24,7 @@
         <div id="productos_recientemente_vistos" class="anunciantes_recientemente_vistos splide flex flex-col gap-4">
             <h4 class="title">Anunciantes</h4>
             <div class="recientemente_vistos_card splide__track">
-                <ul class="splide__list">
+                <ul class="splide__list justify-center">
                     @foreach ($viewedProducts as $viewedProduct)
                     <li class="splide__slide">
                         <a href="{{ route('product.view', [

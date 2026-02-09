@@ -15,11 +15,11 @@
             <hr class="divider">
         </div>
         @endif
-        <x-home-hero-banner :homeherobanners="$homeherobanners" />
+        <x-anunciantes-destacados :anunciantes_destacados="$anunciantes_destacados" />
         <div class="container">
             <hr class="divider">
         </div>
-        <x-anunciantes-destacados :anunciantes_destacados="$anunciantes_destacados" />
+        <x-home-hero-banner :homeherobanners="$homeherobanners" />
         <x-revista />
         <x-latest-reviews :ultimasReviews="$ultimasReviews" />
         <div class="container">

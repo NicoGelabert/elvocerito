@@ -16,13 +16,16 @@
                             updateIsMd();
                         "
                         class="relative">
-                        <a
+                        <div
                             @click="if (!isMd) open = !open"
-                            :class="{'w-full': open}"
-                            class="flex justify-between cursor-pointer"
+                            :class="{
+                                'w-full cursor-pointer': !isMd,
+                                'cursor-default pointer-events-none': isMd
+                            }"
+                            class="flex justify-between"
                         >
                             <p>Legales</p><x-icons.chevron-down />
-                        </a>
+                        </div>
                         <ul @click.outside="if (!isMd) open = false"
                             x-show="open || isMd"
                             x-transition
@@ -45,13 +48,17 @@
                             updateIsMd();
                         "
                         class="relative">
-                        <a
+                        <div
                             @click="if (!isMd) open = !open"
-                            :class="{'w-full': open}"
-                            class="flex justify-between cursor-pointer"
+                            :class="{
+                                'w-full cursor-pointer': !isMd,
+                                'cursor-default pointer-events-none': isMd
+                            }"
+                            class="flex justify-between"
                         >
+
                             <p>Publicá con nosotros</p><x-icons.chevron-down />
-                        </a>
+                        </div>
                         <ul @click.outside="if (!isMd) open = false"
                             x-show="open || isMd"
                             x-transition
@@ -74,13 +81,16 @@
                             updateIsMd();
                         "
                         class="relative">
-                        <a
+                        <div
                             @click="if (!isMd) open = !open"
-                            :class="{'w-full': open}"
-                            class="flex justify-between cursor-pointer"
+                            :class="{
+                                'w-full cursor-pointer': !isMd,
+                                'cursor-default pointer-events-none': isMd
+                            }"
+                            class="flex justify-between"
                         >
                             <p>Sobre El Vocerito</p><x-icons.chevron-down />
-                        </a>
+                        </div>
                         <ul @click.outside="if (!isMd) open = false"
                             x-show="open || isMd"
                             x-transition
