@@ -23,7 +23,9 @@
         @apply text-gray_700 text-sm;
     }
 }
-
+.search-modal{
+    @apply w-full h-full max-w-screen-xl relative;
+}
 .search_circle{
     div:first-child{
         @apply flex justify-end;

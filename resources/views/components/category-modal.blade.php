@@ -8,34 +8,36 @@
     
     class="bg-popup flex items-center justify-center pt-8 md:p-6"
   >
-    <x-close-button class="top-2"/>
-    <div 
-      x-show="isOpen"
-      x-transition:enter="transition transform duration-300"
-      x-transition:enter-start="opacity-0 translate-y-full"
-      x-transition:enter-end="opacity-100 translate-y-0"
-      x-transition:leave="transition transform duration-300"
-      x-transition:leave-start="opacity-100 translate-y-0"
-      x-transition:leave-end="opacity-0 translate-y-full"
-      @click.stop
-      class="bg-white p-6 rounded-t-lg md:rounded-lg shadow-xl max-w-screen-xl w-full h-full overflow-auto"
-    >
-
-      <h2 class="text-center text-xl font-bold mb-8">Categorías</h2>
-
-      <!-- Contenido -->
-      <ul class="grid grid-cols-3 md:grid-cols-8 gap-y-8 gap-x-2">
-        @forelse ($categories as $category)
-          <li>
-            <x-button class="flex flex-col items-center gap-2 w-full h-full" href="{{ route('products.index', ['category' => $category->slug]) }}">
-              <img src="{{ $category->image }}" alt="{{ $category->name }}" class="w-8 h-auto">
-              <p class="text-xs text-center font-normal text-gray_500">{{ $category->name }}</p>
-            </x-button>
-          </li>
-        @empty
-          <li class="text-gray-500">No hay categorías disponibles.</li>
-        @endforelse
-      </ul>
+    <div class="category-modal">
+      <x-close-button/>
+      <div 
+        x-show="isOpen"
+        x-transition:enter="transition transform duration-300"
+        x-transition:enter-start="opacity-0 translate-y-full"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition transform duration-300"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-full"
+        @click.stop
+        class="bg-white p-6 rounded-t-lg md:rounded-lg shadow-xl max-w-screen-xl w-full h-full overflow-auto"
+      >
+  
+        <h2 class="text-center text-xl font-bold mb-8">Categorías</h2>
+  
+        <!-- Contenido -->
+        <ul class="grid grid-cols-3 md:grid-cols-8 gap-y-8 gap-x-2">
+          @forelse ($categories as $category)
+            <li>
+              <x-button class="flex flex-col items-center gap-2 w-full h-full" href="{{ route('products.index', ['category' => $category->slug]) }}">
+                <img src="{{ $category->image }}" alt="{{ $category->name }}" class="w-8 h-auto">
+                <p class="text-xs text-center font-normal text-gray_500">{{ $category->name }}</p>
+              </x-button>
+            </li>
+          @empty
+            <li class="text-gray-500">No hay categorías disponibles.</li>
+          @endforelse
+        </ul>
+      </div>
     </div>
   </div>
 </div>
