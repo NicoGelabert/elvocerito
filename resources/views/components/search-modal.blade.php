@@ -13,7 +13,7 @@
   <div 
     x-show="isOpen"
     
-    class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center pt-8 md:p-6"
+    class="bg-popup flex items-center justify-center pt-8 md:p-6"
   >
     <x-close-button class="top-2"/>
     <!-- Modal sin x-show, solo transición -->

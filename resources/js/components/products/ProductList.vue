@@ -63,7 +63,7 @@
         <transition name="fade-slide">
           <div
             v-if="showMobileFilters"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+            class="bg-popup flex items-center justify-center"
           >
             <div class="bg-white w-11/12 max-w-md mx-auto p-6 rounded-2xl shadow-xl relative">
               <button

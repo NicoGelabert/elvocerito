@@ -1,6 +1,6 @@
 <section class="anunciantes_destacados">
     
-    <div class="container flex flex-col gap-8"">
+    <div class="container flex flex-col gap-8">
         <div class="anunciantes_destacados_title">
             <h3>Anunciantes destacados</h3>
         </div>

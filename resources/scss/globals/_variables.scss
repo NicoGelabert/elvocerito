@@ -175,3 +175,8 @@ header, .mobile-menu{
 .remaining-count{
     @apply absolute -top-2 -right-4 md:-right-4 text-text_small font-bold text-lime-800 py-1 px-2 bg-lime-100 rounded-full;
 }
+
+// Background Pop up
+.bg-popup{
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-50;
+}

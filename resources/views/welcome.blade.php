@@ -11,10 +11,10 @@
             <hr class="divider">
         </div>
         <x-recently-viewed :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" />
+        @endif
         <div class="container">
             <hr class="divider">
         </div>
-        @endif
         <x-anunciantes-destacados :anunciantes_destacados="$anunciantes_destacados" />
         <div class="container">
             <hr class="divider">

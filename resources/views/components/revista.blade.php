@@ -15,7 +15,7 @@
                 <div
                     x-show="isOpen"
                     x-transition.opacity
-                    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+                    class="bg-popup"
                     @click="close()"
                     x-cloak
                 ></div>

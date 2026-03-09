@@ -79,7 +79,7 @@
 
             <p>{{ __('De acuerdo con la Ley N.º 25.326, los titulares de los datos tienen derecho a:') }}</p>
 
-            <ul class="list-disc pl-12">
+            <ul class="list-disc">
                 <li>{{ __('Acceder a sus datos personales.') }}</li>
                 <li>{{ __('Solicitar la rectificación, actualización o supresión de los mismos.') }}</li>
                 <li>{{ __('Retirar su consentimiento cuando corresponda.') }}</li>

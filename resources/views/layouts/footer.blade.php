@@ -109,15 +109,39 @@
             </div>
             <div class="footer-subscription">
                 <p>Suscribite a nuestro newsletter</p>
-                <form action="#" class="form">
+                <form 
+                    x-data="newsletterForm()" 
+                    @submit.prevent="submit"
+                    class="form"
+                >
                     @csrf
+                    <!-- Honeypot anti-spam -->
+                    <div style="position:absolute;left:-9999px;">
+                        <input type="text" name="company" x-model="company" tabindex="-1" autocomplete="off">
+                    </div>
+                    
                     <div class="relative w-full">
-                        <input id="nameInput" type="text" name="name" placeholder="Email" required class="pl-10 w-full">
+                        <input 
+                            type="email"
+                            name="email"
+                            x-model="email"
+                            placeholder="Email"
+                            required
+                            class="pl-10 w-full"
+                        >
+
                         <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                             <x-icons.mail />
                         </div>
                     </div>
-                    <x-button class="btn btn-terciary">Suscribirme</x-button>
+
+                    <x-button type="submit" class="btn btn-terciary">
+                        <span x-show="!loading">Suscribirme</span>
+                        <span x-show="loading">Enviando...</span>
+                    </x-button>
+
+                    <p class="text-green-600 mt-2" x-show="success" x-text="success"></p>
+                    <p class="text-red-600 mt-2" x-show="error" x-text="error"></p>
                 </form>
             </div>
         </div>
@@ -135,3 +159,50 @@
         </div>
     </div>
 </footer>
+
+<script>
+function newsletterForm() {
+    return {
+        email: '',
+        company: '', // honeypot
+        loading: false,
+        success: '',
+        error: '',
+
+        async submit() {
+            this.loading = true;
+            this.success = '';
+            this.error = '';
+
+            try {
+                let response = await fetch("{{ route('newsletter.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: this.email,
+                        company: this.company // enviar honeypot
+                    })
+                });
+
+                let data = await response.json();
+
+                if (response.ok) {
+                    this.success = data.message;
+                    this.email = '';
+                } else {
+                    this.error = data.message ?? 'Error al suscribirse';
+                }
+
+            } catch (e) {
+                this.error = 'Error del servidor';
+            }
+
+            this.loading = false;
+        }
+    }
+}
+</script>

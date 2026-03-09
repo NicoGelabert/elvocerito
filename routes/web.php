@@ -14,6 +14,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\NewsletterSubscriberController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,11 @@ Route::middleware(['guestOrVerified'])->group(function () {
     
     // Cómo usar la guía
     Route::get('/como-usar-la-guia', [FaqController::class, 'comoUsarLaGuia'])->name('faq.comoUsarLaGuia');
+    
+    // Newsletter
+    Route::post('/newsletter', [NewsletterSubscriberController::class, 'store'])->name('newsletter.store');
+    Route::get('/newsletter/confirm/{token}', [NewsletterSubscriberController::class, 'confirm'])->name('newsletter.confirm');
+    Route::get('/newsletter/unsubscribe/{token}', [NewsletterSubscriberController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
     //News
     Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');

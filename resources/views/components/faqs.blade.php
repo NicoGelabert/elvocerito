@@ -3,10 +3,11 @@
     <div class="faq-category mb-8">
 
         {{-- TÍTULO DE CATEGORÍA --}}
+        @if ($category !== 'preguntas_generales')
         <h2 class="text-2xl font-bold mb-6 text-center">
             {{ $categoryTitles[$category] ?? ucfirst(str_replace('_', ' ', $category)) }}
         </h2>
-
+        @endif
 
         <div class="questions">
             @foreach ($faqs as $faq)

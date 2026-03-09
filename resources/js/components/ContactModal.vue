@@ -2,7 +2,7 @@
   <transition name="fade">
     <div
       v-if="isOpen"
-      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end md:items-center justify-center md:p-6"
+      class="bg-popup flex items-end md:items-center justify-center md:p-6"
       @click.self="close"
     >
       <div class="relative h-auto w-full max-w-screen-sm flex justify-center">

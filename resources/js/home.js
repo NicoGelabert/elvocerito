@@ -67,7 +67,6 @@ if (productosRecientementeVistosElement) {
         interval    : 4000,
         pagination  : false,
         perPage     : 3,
-        type        : 'slide',
         breakpoints: {
             1024: {
                 perPage     : 2,
