@@ -20,7 +20,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/common/iso_vocerito.svg') }}">
 
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/scss/styles.scss', 'resources/js/app.js'])
     </head>

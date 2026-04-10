@@ -1,0 +1,1 @@
+import{S as e,G as i}from"./grid-cxdqohU_.js";new e(".product_gallery_images",{modules:[i],spaceBetween:20,slidesPerView:3,grid:{rows:2,fill:"row"},slidesOffsetAfter:0,pagination:{el:".swiper-pagination",clickable:!0}});

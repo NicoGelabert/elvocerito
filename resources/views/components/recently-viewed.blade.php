@@ -1,78 +1,68 @@
-<section class="recientemente_vistos">
-    <div class="container flex flex-col gap-6">
-        <div class="title">
-            <h3>Vistos recientemente</h3>
-        </div>
-        @if($viewedCategories->isNotEmpty())
-        <div id="categorias_recientemente_vistas" class="categorias_recientemente_vistas splide">
-            <h4 class="title">Categorías</h4>
-                <div class="splide__track cards">
-                    <ul class="splide__list md:justify-center">
-                        @foreach($viewedCategories as $category)
-                            <li class="splide__slide">
-                                <a href="{{ route('products.index', ['category' => $category->slug]) }}">
-                                    <img src="{{ $category->image }}" alt="{{ $category->name }}" class="w-6 h-6">
-                                    <p>{{ $category->name }}</p>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        @endif
-        @if($viewedProducts->isNotEmpty())
-        <div id="productos_recientemente_vistos" class="anunciantes_recientemente_vistos splide flex flex-col gap-4">
-            <h4 class="title">Anunciantes</h4>
-            <div class="recientemente_vistos_card splide__track">
-                <ul class="splide__list md:justify-center">
-                    @foreach ($viewedProducts as $viewedProduct)
-                    <li class="splide__slide">
-                        <a href="{{ route('product.view', [
-                            'category' => optional($viewedProduct->categories->first())->slug ?? 'sin-categoria',
-                            'product' => $viewedProduct->slug
-                        ]) }}">
-                            <div>
-                                <img src="{{ $viewedProduct->image }}" alt="{{ $viewedProduct->title }}">
-                            </div>
-                            <div class="recientemente_vistos_card_content">
-                                <div class="header">
-                                    <!-- INICIO CATEGORÍAS -->
-                                    <div class="relative flex gap-2 items-center justify-between w-fit ">
-                                        @if ($viewedProduct->categories->count() > 0)
-                                            @php
-                                                $firstCategory = $viewedProduct->categories->first();
-                                                $remainingCount = $viewedProduct->categories->count() - 1;
-                                            @endphp
-                                            
-                                            <h6 class="truncate-text z-[1]">{{ $firstCategory->name }}</h6>
-                                            
-                                            @if ($remainingCount > 0)
-                                                <span class="remaining-count">
-                                                    +{{ $remainingCount }}
-                                                </span>
-                                            @endif
-                                        @endif
+<section id="recientemente_vistos" class="cards__section container">
+    <div class="title">
+        <h3>Vistos recientemente</h3>
+    </div>
+    @if($viewedCategories->isNotEmpty())
+    <div class="categorias_recientemente_vistas">
+        <h4 class="title">Categorías</h4>
+        <div class="cards__list swiper categorias_vistas">
+            <ul class="swiper-wrapper">
+                @foreach($viewedCategories as $category)
+                    <li class="swiper-slide">
+                        <a href="{{ route('products.index', ['category' => $category->slug]) }}">
+                            <div class="card__body">
+                                <div class="card__content card__content--center">
+                                    <div class="card__left">
+                                        <img src="{{ $category->image }}" alt="{{ $category->name }}" class="w-6 h-6">
                                     </div>
-                                    <!-- FIN CATEGORÍAS -->
-                                    <h5>
-                                        {{ $viewedProduct->title }}
-                                    </h5>
+                                    <div class="card__right">
+                                        <p>{{ $category->name }}</p>
+                                    </div>
                                 </div>
-                                <p>{{ $viewedProduct->short_description }}</p>
-                                <!-- @if($viewedProduct->tags->isNotEmpty())
-                                <div class="flex flex-wrap gap-2">
-                                    @foreach ($viewedProduct->tags as $tag)
-                                    <x-badge badge_title="{{ $tag->name }}"/>
-                                    @endforeach
-                                </div>
-                                @endif -->
                             </div>
                         </a>
                     </li>
-                    @endforeach
-                </ul>
-            </div>
+                @endforeach
+            </ul>
         </div>
-        @endif
     </div>
+    @endif
+    @if($viewedProducts->isNotEmpty())
+    <div class="anunciantes_recientemente_vistos">
+        <h4 class="title">Servicios</h4>
+        <div class="cards__list swiper servicios_vistos">
+            <ul class="swiper-wrapper">
+                @foreach ($viewedProducts as $viewedProduct)
+                <li class="swiper-slide">
+                    <a href="{{ route('product.view', [
+                    'category' => optional($viewedProduct->categories->first())->slug ?? 'sin-categoria',
+                    'product' => $viewedProduct->slug
+                    ]) }}">
+                        <div class="card__body">
+                            <div class="card__content">
+                                <div class="card__left">
+                                    <img class="card__img__rounded" src="{{ $viewedProduct->image }}" alt="{{ $viewedProduct->title }}">
+                                </div>
+                                <div class="card__right">
+                                    <div class="card__info">
+                                        <!-- INICIO CATEGORÍA -->
+                                        @php
+                                            $firstCategory = $viewedProduct->categories->first();
+                                        @endphp
+                                        <h6>{{ $firstCategory->name }}</h6>
+                                        <!-- FIN CATEGORÍA -->
+                                        <h5>
+                                            {{ $viewedProduct->title}}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    @endif
 </section>

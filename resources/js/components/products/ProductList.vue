@@ -4,7 +4,7 @@
     <div v-if="loading" class="spinner-overlay"><div class="spinner"></div></div>
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div class="container flex flex-col gap-2 anunciantes_destacados">
+    <div class="container cards__section">
       <div class="w-full">
         <h3 class="text-center">¿Qué necesitás hacer?</h3>
       </div>
@@ -34,7 +34,7 @@
           @click="toggleUrgencies"
           :class="showUrgenciesOnly ? 'inline-flex' : 'hidden'"
         >
-          Atiende Urgencias <span class="font-light ml-1">x</span>
+          Disponible 24hs <span class="font-light ml-1">x</span>
         </button>
 
         <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
@@ -243,7 +243,7 @@
           </button>
         </div>
         <div class="flex items-center gap-2">
-          <p class="text-xs text-gray-700">Atiende Urgencias</p>
+          <p class="text-xs text-gray-700">Disponible 24hs</p>
           <button
             @click="toggleUrgencies"
             class="relative w-7 h-4 rounded-full transition-all"
@@ -272,64 +272,54 @@
       </div>
 
       <!-- Listado -->
-      <div :class="['anunciantes_destacados_card', { 'loading-opacity': loading }]">
-        <ul>
+      <div :class="['cards__list', { 'loading-opacity': loading }]">
+        <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
           <li v-for="product in products.data" :key="product.id">
-            <div class="card_body">
-              <a
-                :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug"
-                class="aspect-w-3 aspect-h-2 block overflow-hidden relative"
-              >
-                <div class="w-full flex justify-end">
-                  <span class="text-text_small text-gray-500">{{product.client_number}}</span>
-
-                </div>
-                <img :src="product.image_url" alt="" />
-                <div v-if="product.categories?.length" class="anunciantes_destacados_card_content">
-                  <div class="header">
-                    
-                    <div class="relative flex gap-2 items-center justify-center w-full">
-                      
-                      <div class="relative w-full md:w-auto">
-                        <h6 class="z-[1] relative">{{ product.categories[0].name }}</h6>
-                        <span v-if="product.categories.length > 1" class="remaining-count">
-                          +{{ product.categories.length - 1 }}
-                        </span>
+            <div class="card__body">
+              <div class="card__content">
+                  <div class="card__left">
+                      <img class="card__img__rounded" :src="product.image_url" alt="product.title">
+                      <div class="badge open">
+                          <span>Desde {{ formatYear(product.created_at) }}</span>
                       </div>
-                      
-                    </div>
-                    <h5 class="w-fit mx-auto">{{ product.title }}</h5>
-                    
                   </div>
-                  <p>{{ product.short_description }}</p>
-                  <div class="my-2 flex gap-2">
-                    <BadgeHorarios :horarios="product.horarios || []" />
-                    <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
-                    <Badge v-if="product.is_on_duty_now" status="De Turno">
-                      <span>Hoy de turno</span>
-                    </Badge>
-
+                  <div class="card__right">
+                      <div class="card__info" v-if="product.categories?.length">
+                          <!-- INICIO CATEGORÍA -->
+                          <h6>{{ product.categories[0].name }}</h6>
+                          <!-- FIN CATEGORÍA -->
+                          <h5>
+                              {{ product.title }}
+                          </h5>
+                          <p class="description" :class="(product.reviews_count > 0 || product.urgencies) ? '!line-clamp-2': 'line-clamp-3'">
+                              {{ product.short_description }}
+                          </p>
+                      </div>
+                      <div class="card__meta">
+                          <div class="card__rating">
+                              <RatingAverage :product-id="product.id" />
+                          </div>
+                          <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
+                          <Badge v-if="product.is_on_duty_now" status="De Turno">
+                            <span>Hoy de turno</span>
+                          </Badge>
+                      </div>
                   </div>
-                </div>
-              </a>
-              <RatingAverage :product-id="product.id" />
-              <div class="mx-auto text-center"><span class="text-text_small text-gray-500">Anuncia desde {{ formatMonthYear(product.created_at) }}</span></div>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer mx-2 md:mx-4">
-              <hr class="divider" />
-              <div class="flex justify-between mt-4 my-2">
-                <button class="btn btn-secondary" @click="openModal('contact', product)">
-                  Contactar
-                </button>
-                <button class="btn btn-secondary" @click="openModal('share', product)">
-                  <ShareIcon class="fill-primary" />
-                </button>
               </div>
-              
-            </div>
-
+              <hr class="divider my-2 w-full">
+              <div class="card__footer card__footer--between">
+                  <!-- INICIO VER SERVICIO -->
+                  <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-primary">
+                    Ver servicio
+                  </a>
+                  <!-- FIN VER SERVICIO -->
+                  <!-- INICIO VÍAS DE CONTACTO -->
+                  <button class="btn btn-secondary" @click="openModal('contact', product)">
+                    Contactar
+                  </button>
+                  <!-- FIN VÍAS DE CONTACTO -->
+              </div>
+          </div>
           </li>
         </ul>
       </div>
@@ -532,14 +522,11 @@ export default {
       window.dispatchEvent(new CustomEvent("open-contact-modal", { detail: { type, product } }))
     },
 
-    formatMonthYear(date) {
+    formatYear(date) {
       if (!date) return ''
       const d = new Date(date)
-      // Formateo en español
-      const formatted = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(d)
-      // Capitalizamos la primera letra
-      return formatted.charAt(0).toUpperCase() + formatted.slice(1)
-    },
+      return d.getFullYear()
+    }
   },
 }
 </script>

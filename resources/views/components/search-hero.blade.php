@@ -1,6 +1,6 @@
 <div class="search_hero" style="background-image:url('{{ asset('storage/common/hero-banner.jpg') }}')">
     <!-- <x-backgrounds.pinmaps /> -->
-    <div class="flex flex-col mx-auto gap-8 mb-40 md:mb-28">
+    <div class="flex flex-col mx-auto gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
         <div class="search_hero_container">
             <h1>Servicios cerca tuyo.</h1>
             <p>Encontrá lo que necesitás fácil y rápido!</p>
@@ -15,12 +15,13 @@
                 </div>
             </x-button>
         </div>
-        <div class="flex items-center justify-around gap-4 lg:hidden">
+        <!-- Botones Urgencias y Farmacias de turno -->
+        <div class="flex items-center justify-around gap-4 hidden">
             <div>
-                <x-button href="/anunciantes?urgencies=true" class="btn btn-urgencies shadow-md"><x-icons.urgencies class="fill-white"/> urgencias</x-button>
+                <x-button href="/servicios?urgencies=true" class="btn btn-urgencies shadow-md"><x-icons.urgencies class="fill-white"/> urgencias</x-button>
             </div>
             <div>
-                <x-button href="/anunciantes?page=1&category=farmacias&on_duty=true" class="btn btn-on-duty shadow-md"><x-icons.on_duty /> farmacias de turno</x-button>
+                <x-button href="/servicios?page=1&category=farmacias&on_duty=true" class="btn btn-on-duty shadow-md"><x-icons.on_duty /> farmacias de turno</x-button>
             </div>
         </div>
     </div>

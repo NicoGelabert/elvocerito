@@ -83,7 +83,7 @@
                         <x-icons.home class="fill-gray_400" />
                     </a>
                     <p>/</p>
-                    <a href="/anunciantes">
+                    <a href="/servicios">
                         <p class="hidden md:block">Categorías</p>
                         <p class="md:hidden">...</p>
                     </a>

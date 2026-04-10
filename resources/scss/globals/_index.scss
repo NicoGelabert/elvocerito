@@ -1,7 +1,6 @@
 @forward '../globals/variables';
 @forward '../partials/header.scss';
 @forward '../partials/home.scss';
-@forward '../partials/splide.scss';
 @forward '../partials/form.scss';
 @forward '../partials/buttons.scss';
 @forward '../partials/badges.scss';
@@ -10,13 +9,9 @@
 @forward '../sections/search.scss';
 @forward '../sections/homeherobanner.scss';
 @forward '../sections/categories.scss';
-@forward '../sections/anunciantes_destacados.scss';
-@forward '../sections/ultimos_anunciantes.scss';
-@forward '../sections/ultimas_reviews.scss';
-@forward '../sections/recientemente_vistos.scss';
+@forward '../sections/cards.scss';
 @forward '../sections/revista.scss';
 @forward '../sections/miscelaneas.scss';
-@forward '../sections/news.scss';
 @forward '../sections/products.scss';
 @forward '../sections/articles.scss';
 @forward '../sections/services.scss';

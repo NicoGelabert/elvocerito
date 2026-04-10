@@ -71,7 +71,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Anunciantes Inactivos.
+     * Servicios Inactivos.
      */
     public function inactiveProducts()
     {

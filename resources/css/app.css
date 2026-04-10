@@ -1,5 +1,4 @@
 /* Flag Icon CSS */
-@import '/node_modules/@splidejs/splide/dist/css/splide.min.css';
 @use url('/node_modules/flag-icon-css/sass/flag-icons.scss');
 @use '../scss/styles.scss';
 @tailwind base;

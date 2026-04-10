@@ -23,7 +23,7 @@ class TagsExport implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['ID', 'Nombre', 'Activo', 'Anunciantes asociados'];
+        return ['ID', 'Nombre', 'Activo', 'Servicios asociados'];
     }
 
     public function map($tag): array

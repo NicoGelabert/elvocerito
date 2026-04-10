@@ -87,6 +87,12 @@ class ProductController extends Controller
                 'socials',
                 'horarios',
                 'pharmacy.shifts'
+            ])
+            ->withCount([
+                'reviews as reviews_count' => function ($q) {
+                    $q->where('published', true)
+                    ->where('email_verified', true);
+                }
             ])->paginate(16);
 
 

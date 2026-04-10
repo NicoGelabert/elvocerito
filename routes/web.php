@@ -79,20 +79,17 @@ Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
     Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
     
-    // Anunciantes = Products
+    // Servicios = Products
     Route::get('/anunciantes', [ProductController::class, 'index'])->name('products.index');
     Route::get('/{category:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
     Route::get('/urgencias', [ProductController::class, 'urgencies'])->name('product.urgencies');
 
     // Categorías
-    Route::get('/categorias', [CategoriesController::class, 'index'])->name('categories.index');
+    Route::get('/categorias', [CategoriesController::class, 'indexJson'])->name('categories.indexJson');
+    Route::get('/servicios', [CategoriesController::class, 'index'])->name('categories.index');
     Route::get('/{category:slug}', [CategoriesController::class, 'view'])->name('categories.view');
     Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])
     ->name('categories.view.subcategory');
-
-    //Servicios
-    Route::get('/servicios', [ServiceController::class, 'index'])->name('service.index');
-    Route::get('/servicios/{service:slug}', [ServiceController::class, 'view'])->name('service.view');
 
     Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

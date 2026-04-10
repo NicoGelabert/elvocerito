@@ -1,8 +1,8 @@
-<section class="home-hero-banner splide container">
-    <div class="splide__track">
-        <ul class="splide__list">
+<section class="home-hero-banner container">
+    <div class="">
+        <ul class="">
             @foreach ($homeherobanners as $homeherobanner)
-            <li class="splide__slide">
+            <li class="">
                 <a href="{{ $homeherobanner->link }}">
                     <div class="flex flex-col md:flex-row gap-8">
                         <div class="homeherobanner_img">

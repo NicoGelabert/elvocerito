@@ -1,22 +1,21 @@
-import Splide from '@splidejs/splide';
-import { Grid } from '@splidejs/splide-extension-grid';
+// import Swiper JS
+import Swiper from 'swiper';
+// import Swiper styles
+import 'swiper/css';
+import { Grid } from 'swiper/modules';
+import 'swiper/css/grid';
 
-var articleGalleryElement = document.querySelector('.article_gallery_images');
-if (articleGalleryElement) {
-    var articleGallery = new Splide(articleGalleryElement, {
-        arrows      : true,
-        grid       : {
-            dimensions: [ [ 2, 3 ] ],
-            gap: {
-              row: '1rem',
-              col: '1rem',
-            },
-        },
-        pagination  : false,
-        perPage     : 1,
-        perMove     : 1,
-        type        : 'loop',
+var article_gallery_images = new Swiper(".article_gallery_images", {
+    modules: [Grid],
+    spaceBetween: 20,
+    slidesPerView: 3,
+    grid: {
+        rows: 2,
+        fill: 'row',
+      },
+    slidesOffsetAfter: 0,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
 });
-
-articleGallery.mount({ Grid });
-};

@@ -1,11 +1,11 @@
 <x-app-layout>
 <div class="mt-28">
     <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center mb-6">Documentación - Optimización de la Carga y Manejo de Scripts (Vue + Alpine + Splide)</h1>
+        <h1 class="text-3xl font-bold text-center mb-6">Documentación - Optimización de la Carga y Manejo de Scripts (Vue + Alpine + Swiper)</h1>
     
         <section class="mb-8">
             <h2 class="text-2xl font-semibold text-blue-600 mb-4">1. Estructura General</h2>
-            <p class="text-lg mb-4">La aplicación utiliza una mezcla de <strong>Vue</strong>, <strong>Alpine.js</strong>, y <strong>Splide.js</strong> para gestionar la interactividad y las galerías de la página. Todo el código JavaScript está organizado en archivos separados y cargado de manera condicional para optimizar la carga según la página actual.</p>
+            <p class="text-lg mb-4">La aplicación utiliza una mezcla de <strong>Vue</strong>, <strong>Alpine.js</strong>, y <strong>Swiper.js</strong> para gestionar la interactividad y las galerías de la página. Todo el código JavaScript está organizado en archivos separados y cargado de manera condicional para optimizar la carga según la página actual.</p>
         </section>
     
         <section class="mb-8">
@@ -129,78 +129,10 @@
     
         <section class="mb-8">
             <h2 class="text-2xl font-semibold text-blue-600 mb-4">Archivo: <code>home.js</code></h2>
-            <p class="text-lg mb-4">Este archivo es específico para la <strong>página de inicio</strong>. En él, se inicializan varias galerías usando <strong>Splide.js</strong> (Home Hero Banner, Últimos Anunciantes, y News).</p>
+            <p class="text-lg mb-4">Este archivo es específico para la <strong>página de inicio</strong>. En él, se inicializan varias galerías usando <strong>Swiper.js</strong> (Home Hero Banner, Últimos Anunciantes, y News).</p>
             <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">
                 <code>
-                    import Splide from '@splidejs/splide';
-                    // SPLIDE
-                    // Home Hero Banner
-                    var homeHeroBannerElement = document.querySelector('.home-hero-banner');
-                    if (homeHeroBannerElement) {
-                        var homeHeroBanner = new Splide(homeHeroBannerElement, {
-                            type        : 'loop',
-                            rewind      : true,
-                            autoplay    : true,
-                            arrows      : false,
-                            padding     : '3rem',
-                            gap         : '1rem',
-                            pagination  : true,
-                            interval    : 5000,
-                            breakpoints: {
-                                480: {
-                                    padding : '1.5rem',
-                                    gap     : '0.75rem',
-                                }
-                            },
-                        });
-
-                        homeHeroBanner.mount();
-                    };
-
-                    // Últimos anunciantes
-                    var ultimosAnuncinatesElement = document.querySelector('#ultimos_anunciantes');
-                    if (ultimosAnuncinatesElement) {
-                        var ultimosAnuncinates = new Splide(ultimosAnuncinatesElement, {
-                            type        : 'loop',
-                            perPage     : 5,
-                            arrows      : false,
-                            gap         : '1rem',
-                            padding     : '2rem',
-                            autoplay    : true,
-                            interval    : 4000,
-                            breakpoints: {
-                                1024: {
-                                    perPage     : 4,
-                                },
-                                768: {
-                                    perPage     : 3,
-                                },
-                                480: {
-                                    perPage     : 2,
-                                    gap         : '0.5rem',
-                                    padding     : '1rem',          
-                                }
-                            },
-                        });
-
-                        ultimosAnuncinates.mount();
-                    };
-
-                    // News
-                    var newsElement = document.querySelector('.news');
-                    if (newsElement) {
-                        var news = new Splide(newsElement, {
-                            classes: {
-                                pagination: 'splide__pagination_custom',
-                                arrows    : 'splide__arrows_custom splide__arrows_custom_news',
-                            },
-                            gap       : '1.5rem',
-                            pagination: true,
-                            rewind    : true,
-                            type      : 'loop',
-                        });
-                    }
-                    news.mount();
+                    
                 </code>
             </pre>
         </section>
@@ -224,7 +156,7 @@
                 <li><strong>Carga condicional de scripts:</strong> Según el nombre de la página (<code>data-page</code>), se cargan los scripts correspondientes:</li>
                     <ul class="list-inside pl-4">
                         <li><code>catalog.js</code> para el catálogo de productos.</li>
-                        <li><code>home.js</code> para la página de inicio, donde se inicializan las galerías con <strong>Splide.js</strong>.</li>
+                        <li><code>home.js</code> para la página de inicio, donde se inicializan las galerías con <strong>Swiper.js</strong>.</li>
                     </ul>
                 <li><strong>Cargar progreso:</strong> Se muestra un progreso de carga mientras se espera que la página se cargue por completo.</li>
             </ul>

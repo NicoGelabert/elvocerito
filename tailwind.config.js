@@ -9,7 +9,6 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
         "./node_modules/flowbite/**/*.js",
-        './node_modules/@splidejs/splide/**/*',
     ],
 
     theme: {
@@ -18,7 +17,7 @@ export default {
                 'sans_serif': ['Inter']
             },
             colors: {
-                primary             : '#64B531',
+                primary             : '#9AC01B',
                 primary_hover       : '#529825',
                 secondary           : '#111827',
                 terciary            : '#84DCCF',

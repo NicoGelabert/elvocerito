@@ -1,24 +1,39 @@
 
 <section id="categories">
     <x-category-modal :categories="$categories" />
-    <div class="categories container splide">
+    <div class="categories container">
         <div class="flex flex-col gap-12">
             <div class="categories_title">
                 <h3>Categorías</h3>
                 <div class="flex">
-                    <div class="splide__arrows relative splide__arrows--ltr">
-                    </div>
+                    
                     <x-button class="see-all" onclick="window.dispatchEvent(new CustomEvent('open-category-modal'))">
                         Ver todas
                     </x-button>
                 </div>
             </div>
         </div>
-    
-        <div class="categories_content splide__track">
-            <ul class="splide__list">
-                @foreach ($categories as $category)
-                <li class="splide__slide">
+        <!-- Orden de categorías
+        1 3 5
+        2 4 6 -->
+        @php
+            $ordered = [];
+            $rows = 2;
+            $cols = ceil(count($categories) / $rows);
+
+            for ($i = 0; $i < $rows; $i++) {
+                for ($j = 0; $j < $cols; $j++) {
+                    $index = $j * $rows + $i;
+                    if (isset($categories[$index])) {
+                        $ordered[] = $categories[$index];
+                    }
+                }
+            }
+        @endphp
+        <div class="categories_content swiper">
+            <ul class="swiper-wrapper">
+                @foreach ($ordered as $category)
+                <li class="swiper-slide">
                     <x-button class="bg-transparent" href="{{ route('products.index', ['category' => $category->slug]) }}">
                         <img src="{{ $category->image }}" alt="">
                         <p>{{ $category->name }}</p>

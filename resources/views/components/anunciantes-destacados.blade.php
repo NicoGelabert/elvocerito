@@ -1,101 +1,106 @@
-<section class="anunciantes_destacados">
-    
-    <div class="container flex flex-col gap-8">
-        <div class="anunciantes_destacados_title">
-            <h3>Anunciantes destacados</h3>
-        </div>
-        <div class="anunciantes_destacados_card">
-            <ul>
-                @foreach ($anunciantes_destacados as $anunciante_destacado)
-                <li>
-                    <x-contact-modal :product="$anunciante_destacado" />
-                    <div class="card_body">
-                        <a href="{{ route('product.view', [
-                            'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
-                            'product' => $anunciante_destacado->slug
-                        ]) }}">
-                        <div class="w-full flex justify-end">
-                            <span class="text-text_small text-gray-500">{{ $anunciante_destacado->client_number }}</span>
+<section id="anunciantes_destacados" class="cards__section container">
+    <div class="title">
+        <h3>Servicios destacados</h3>
+    </div>
+    <div class="cards__list swiper servicios_destacados">
+        <ul class="swiper-wrapper">
+            @foreach ($anunciantes_destacados as $anunciante_destacado)
+            <li class="swiper-slide">
+                <div class="card__body">
+                    <div class="card__content">
+                        <div class="card__left">
+                            <img class="card__img__rounded" src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
+                            <div class="badge open">
+                                <span>Desde {{ optional($anunciante_destacado->created_at)->translatedFormat('Y') ?? 'Fecha no disponible' }}</span>
+                            </div>
                         </div>
-                            <img src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
-                            <div class="anunciantes_destacados_card_content">
-                                <div class="header">
-                                    <!-- INICIO CATEGORÍAS -->
-                                    <div class="relative flex gap-2 items-center justify-between w-fit mx-auto">
-                                        @if ($anunciante_destacado->categories->count() > 0)
-                                            @php
-                                                $firstCategory = $anunciante_destacado->categories->first();
-                                                $remainingCount = $anunciante_destacado->categories->count() - 1;
-                                            @endphp
-                                            
-                                            <h6 class="truncate-text mx-auto">{{ $firstCategory->name }}</h6>
-                                            
-                                            @if ($remainingCount > 0)
-                                                <span class="remaining-count">
-                                                    +{{ $remainingCount }}
-                                                </span>
-                                            @endif
-                                        @endif
-                                    </div>
-                                    <!-- FIN CATEGORÍAS -->
-                                     <div class="w-full">
-                                         <h5>
-                                             {{ $anunciante_destacado->title}}
-                                         </h5>
-                                     </div>
-                                </div>
-                                <p>{{ $anunciante_destacado->short_description }}</p>
-                                <div class="flex gap-2 md:gap-4">
-                                    <x-badge-horarios :product="$anunciante_destacado"/>
-                                    @if($anunciante_destacado->urgencies)
-                                    <x-badge-urgencies :product="$anunciante_destacado"/>
-                                    @endif
-                                </div>
+                        <div class="card__right">
+                            <div class="card__info">
+                                <!-- INICIO CATEGORÍA -->
+                                @php
+                                    $firstCategory = $anunciante_destacado->categories->first();
+                                @endphp
+                                <h6>{{ $firstCategory->name }}</h6>
+                                <!-- FIN CATEGORÍA -->
+                                <h5>
+                                    {{ $anunciante_destacado->title}}
+                                </h5>
+                                <p class="description {{ ($anunciante_destacado->reviews_count > 0 || $anunciante_destacado->urgencies) ? '!line-clamp-2' : 'line-clamp-3' }}">
+                                    {{ $anunciante_destacado->short_description }}
+                                </p>
                             </div>
-                        </a>
-                        @if ($anunciante_destacado->reviews_count > 0)
-                        <!-- Promedio de calificaciones -->
-                        <div class="flex flex-col md:flex-row items-center gap-2 justify-center">
-                            <div
-                                class="product-rating-average product_rating"
-                                data-product-id="{{ $anunciante_destacado->id }}">
-                            </div>
+                            @if ($anunciante_destacado->reviews_count > 0 || $anunciante_destacado->urgencies)
+                            <div class="card__meta">
+                                @if ($anunciante_destacado->reviews_count > 0)
+                                <div class="card__rating">
+                                    @php
+                                        $average = \App\Models\Review::where('product_id', $anunciante_destacado->id)
+                                            ->where('published', true)
+                                            ->where('email_verified', true)
+                                            ->avg('rating');
+                                        $average = $average ? round($average, 1) : null;
+                                    @endphp
 
-                            <span class="text-xs text-gray-500">
-                                ({{ $anunciante_destacado->reviews_count }} 
-                                {{ Str::plural('reseña', $anunciante_destacado->reviews_count) }})
-                            </span>
+                                    @if($average)
+                                        <x-icons.star class="w-4 h-4 fill-amber-300" />
+                                        <span class="font-semibold text-xs text-gray-500">{{ $average }}</span>
+                                    @endif
+
+                                    <span class="text-xs text-gray-500">
+                                        ({{ $anunciante_destacado->reviews_count }})
+                                    </span>
+                                </div>
+                                @endif
+
+                                @if($anunciante_destacado->urgencies)
+                                <div class="card__badges">
+                                    <x-badge-urgencies :product="$anunciante_destacado"/>
+                                </div>
+                                @endif
+                            </div>
+                            @endif
                         </div>
-                        @endif
                     </div>
-                    <div class="footer mx-2 md:mx-4">
-                        <hr class="divider">
-                        <div class="flex justify-between my-4">
-                            <!-- INICIO VÍAS DE CONTACTO -->
-                            <x-button 
-                                class="btn btn-secondary"
-                                onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
-                                    detail: { type: 'contact', id: {{ $anunciante_destacado->id }} }
-                                }))"
-                                >
-                                Contactar
-                            </x-button>
-                            <!-- FIN VÍAS DE CONTACTO -->
-                            <!-- INICIO VÍAS DE COMPARTIR -->
-                            <x-button 
-                                class="btn btn-secondary"
-                                onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
-                                    detail: { type: 'share', id: {{ $anunciante_destacado->id }} }
-                                }))"
-                                >
-                                <x-icons.share class="fill-primary" />
-                            </x-button>
-                            <!-- FIN VÍAS DE COMPARTIR -->
+                    <hr class="divider my-2 w-full">
+                    <div class="card__footer card__footer--between">
+                        <!-- INICIO VÍAS DE CONTACTO -->
+                        <x-button 
+                            class="btn btn-primary"
+                            onclick="window.location.href='{{ route('product.view', [
+                                'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
+                                'product' => $anunciante_destacado->slug
+                            ]) }}'"
+                            >
+                            Ver servicio
+                        </x-button>
+                        <!-- FIN VÍAS DE CONTACTO -->
+                        <!-- INICIO VÍAS DE CONTACTO -->
+                        <x-button 
+                            class="btn btn-secondary"
+                            onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
+                                detail: { type: 'contact', id: {{ $anunciante_destacado->id }} }
+                            }))"
+                            >
+                            Contactar
+                        </x-button>
+                        <!-- FIN VÍAS DE CONTACTO -->
+                    </div>
+                </div>
+            </li>
+            @endforeach
+            <!-- CARD "VER MÁS" -->
+            <li class="swiper-slide card__body--cta">
+                <a href="/anunciantes?page=1">
+                    <div class="card__body">
+                        <div class="card__content card__content--col card__content--center card__content--justify__center">
+                            <div class="card__plus">
+                                +
+                            </div>
+                            <h5>Ver más</h5>
                         </div>                        
                     </div>
-                </li>
-                @endforeach
-            </ul>
-        </div>
+                </a>
+            </li>
+        </ul>
     </div>
 </section>

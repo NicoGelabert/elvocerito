@@ -1,5 +1,5 @@
 .search_hero{
-    @apply flex items-center bg-cover bg-center h-[50vh] md:h-[75vh] mt-12 md:mt-14;
+    @apply flex items-center bg-cover bg-center h-96 mt-12 md:mt-14;
     .search_hero_container{
         @apply w-full flex flex-col gap-4 z-30
         items-center md:min-w-[32rem];

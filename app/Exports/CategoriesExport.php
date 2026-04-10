@@ -23,7 +23,7 @@ class CategoriesExport  implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['ID', 'Nombre', 'Activo', 'Categoría Padre', 'Anunciantes Activos'];
+        return ['ID', 'Nombre', 'Activo', 'Categoría Padre', 'Servicios Activos'];
     }
 
     public function map($category): array

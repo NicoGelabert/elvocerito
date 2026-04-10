@@ -15,17 +15,6 @@
                                     <img src="{{ $category->image }}" alt="">
                                 </div>
                             </x-button>
-                            @if($category->children->isNotEmpty())
-                                <ul>
-                                    @foreach($category->children as $child)
-                                        <li>
-                                            <x-button href="{{route ('categories.view.subcategory', [ 'category' => $category->slug, 'subcategory' => $child->slug])}}">
-                                                <p>{{ $child->name }}</p>
-                                            </x-button>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            @endif
                         </li>
                     @endforeach
                 </ul>

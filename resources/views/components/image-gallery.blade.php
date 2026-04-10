@@ -16,19 +16,17 @@
         this.imageIndex = (this.imageIndex < this.images.length - 1) ? this.imageIndex + 1 : 0;
     }
 }">
-    <!-- Splide Slider -->
-    <div {{ $attributes->merge(['class' => 'splide']) }}>
-        <div class="splide__track">
-            <ul class="splide__list">
-                @foreach ($filteredImages as $index => $imageUrl)
-                <li class="splide__slide">
-                    <img src="{{ $imageUrl }}" 
-                         @click="if (images.length) { open = true; imageIndex = {{ $index }} }" 
-                         class="cursor-pointer">
-                </li>
-                @endforeach
-            </ul>
-        </div>
+    <!-- Swiper Slider -->
+    <div {{ $attributes->merge(['class' => 'swiper']) }}>
+        <ul class="swiper-wrapper">
+            @foreach ($filteredImages as $index => $imageUrl)
+            <li class="swiper-slide">
+                <img src="{{ $imageUrl }}" 
+                        @click="if (images.length) { open = true; imageIndex = {{ $index }} }" 
+                        class="cursor-pointer">
+            </li>
+            @endforeach
+        </ul>
     </div>
 
     <!-- Lightbox -->

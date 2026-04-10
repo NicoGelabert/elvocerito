@@ -1,0 +1,85 @@
+.cards__section{
+    @apply flex flex-col gap-8;
+    .title{
+        }
+    .cards__list{
+        @apply w-full mx-auto pb-4;
+        ul{
+            li{
+                .card__body{
+                    @apply flex flex-col items-center justify-between gap-2 p-4 rounded-xl bg-white shadow-lg hover:bg-gray-50 transition-all duration-300 h-full;
+                    .card__content{
+                        @apply flex gap-2 justify-between w-full h-full;
+                        .description{
+                            @apply text-gray_600 line-clamp-3;
+                        }
+                        .card__left{
+                            @apply flex flex-col items-center justify-between gap-4;
+                            .card__img__rounded{
+                                @apply rounded-full object-cover
+                                aspect-square max-w-16 border border-gray_200;
+                            }
+                        }
+                        .card__right{
+                            @apply flex flex-col flex-1 gap-2 justify-between w-3/4;
+                            .card__info{
+                                @apply flex flex-col gap-2;
+                            }
+                            .card__meta{
+                                @apply flex items-center gap-3;
+                                .card__rating{
+                                    @apply flex items-center gap-1 py-1;
+                                }
+                                .card__badges{
+                                    
+                                }
+                            }
+                        }
+                    }
+                    .card__content--col{
+                        @apply flex-col;
+                        .card__img__rectangle{
+                            @apply rounded-lg;
+                        }
+                    }
+                    .card__content--center{
+                        @apply items-center;
+                    }
+                    .card__content--justify__center{
+                        @apply justify-center;
+                    }
+                    .published__date{
+                        @apply text-small text-gray_500;
+                    }
+                    .card__footer{
+                        @apply w-full flex items-center;
+                        .author{
+                            @apply flex gap-2 items-center;
+                            .author__img{
+                                @apply rounded-full w-6 h-6 border border-gray_200;
+                            }
+                        }
+                    }
+                    .card__footer--between{
+                        @apply justify-between;
+                    }
+                    .card__footer--start{
+                        @apply justify-start gap-2;
+                    }
+                }
+            }
+            .card__body--cta{
+                @apply h-auto;
+                .card__plus{
+                    @apply flex flex-col items-center justify-center p-4 aspect-square bg-gray-300 rounded-full text-gray_600 text-2xl;
+                }
+            }
+        }
+    }
+    .categorias_recientemente_vistas{
+        @apply flex flex-col gap-4;
+    }
+    .anunciantes_recientemente_vistos{
+        @apply flex flex-col gap-4;
+    }
+}

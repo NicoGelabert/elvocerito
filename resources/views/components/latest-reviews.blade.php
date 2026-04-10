@@ -1,50 +1,58 @@
-<section id="ultimas_reviews" class="splide">
-    <div class="container flex flex-col gap-8">
-        <div class="ultimas_reviews_title">
-            <h3>Reseñas sobre nuestros anunciantes</h3>
-        </div>
-        <div class="ultimas_reviews_list splide__track">
-            <ul class="splide__list">
-                @foreach ($ultimasReviews as $review)
-                <li class="splide__slide">
-                    <a href="{{ route('product.view', [
-                            'category' => optional($review->product->categories->first())->slug ?? 'sin-categoria',
-                            'product' => $review->product->slug
-                        ]) }}">
-                        <div class="relative flex gap-2 items-center w-full pt-4">
+<section id="ultimas_reviews" class="cards__section container">
+    <div class="title">
+        <h3>Últimas reseñas</h3>
+    </div>
+    <div class="cards__list swiper ultimas_reviews">
+        <ul class="swiper-wrapper">
+            @foreach ($ultimasReviews as $review)
+            <li class="swiper-slide">
+                <a href="{{ route('product.view', [
+                        'category' => optional($review->product->categories->first())->slug ?? 'sin-categoria',
+                        'product' => $review->product->slug
+                    ]) }}">
+                    
+                    <div class="card__body">
+                        <div class="card__content">
+                            <div class="card__left">
+                                <img class="card__img__rounded" src="{{ $review->product->image }}" alt="{{ $review->product->title }}">
+                            </div>
+                            <div class="card__right">
+                                @php
+                                    $firstCategory = $review->product->categories->first();
+                                @endphp
+                                <h6>{{ optional($firstCategory)->name ?? 'Sin categoría' }}</h6>
+                                <h4 class="capitalize">{{ $review->product->title }}</h4>
+                                <h5 class="review_title">
+                                    {{ $review->title }}
+                                </h5>
+                                    <x-rating-stars :rating="$review->rating" />
+                                <p class="description">{{ $review->comment }}</p>
+                            </div>
+                        </div>
+                        <hr class="divider my-2 w-full">
+                        <div class="card__footer card__footer--start">
                             <!-- <img src="{{ $review->product->image }}" alt="{{ $review->product->title }}"> -->
                             <x-initials-avatar
                                 :name="$review->name"
                                 :last-name="$review->last_name"
-                                size="lg"
+                                size="sm"
                             />
                             <div>
-                                <h5 class="capitalize">{{ $review->name}} {{ $review->last_name}}</h5>
-                                <x-rating-stars :rating="$review->rating" />
-                                <p class="text-gray_400 text-xs font-medium">
+                                <h6>{{ $review->name}} {{ $review->last_name}}</h6>
+                                
+                                <p class="published__date">
                                     {{ optional($review->created_at)->translatedFormat('j \d\e F \d\e Y') ?? 'Fecha no disponible' }}
                                 </p>
-
+    
                             </div>
                         </div>
-                        <div class="ultimas_reviews_card_content">
-                            <div class="header">
-                                <h5 class="review_title">
-                                    {{ $review->title }}
-                                </h5>
-                                <p class="line-clamp-3">{{ $review->comment }}</p>
-                                <hr class="my-2">
-                                <h6>Sobre {{ $review->product->title }}</h6>
-                                @php
-                                    $firstCategory = $review->product->categories->first();
-                                @endphp
-                                <p>Categoría: {{ optional($firstCategory)->name ?? 'Sin categoría' }}</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                @endforeach
-            </ul>
-        </div>
+                    </div>
+                </a>
+            </li>
+            @endforeach
+        </ul>
     </div>
 </section>
+<script>
+      
+    </script>

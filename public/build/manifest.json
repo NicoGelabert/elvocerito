@@ -1,10 +1,17 @@
 {
-  "_splide-extension-grid.esm-Wa7g0JHd.js": {
-    "file": "assets/splide-extension-grid.esm-Wa7g0JHd.js",
-    "name": "splide-extension-grid.esm"
+  "_grid-DrC3x8Vu.css": {
+    "file": "assets/grid-DrC3x8Vu.css",
+    "src": "_grid-DrC3x8Vu.css"
+  },
+  "_grid-cxdqohU_.js": {
+    "file": "assets/grid-cxdqohU_.js",
+    "name": "grid",
+    "css": [
+      "assets/grid-DrC3x8Vu.css"
+    ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-CxmtH24V.css",
+    "file": "assets/app-BAf1b7kh.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -13,7 +20,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-fvbUeNcw.js",
+    "file": "assets/app-C98fiGCE.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -25,20 +32,20 @@
       "resources/js/article-view.js"
     ],
     "css": [
-      "assets/app-B-ucnRH-.css"
+      "assets/app-z8WSO3ip.css"
     ]
   },
   "resources/js/article-view.js": {
-    "file": "assets/article-view-DLt9yii2.js",
+    "file": "assets/article-view-GjDR8Yk6.js",
     "name": "article-view",
     "src": "resources/js/article-view.js",
     "isDynamicEntry": true,
     "imports": [
-      "_splide-extension-grid.esm-Wa7g0JHd.js"
+      "_grid-cxdqohU_.js"
     ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-YqSzpuun.js",
+    "file": "assets/catalog-BoLFS420.js",
     "name": "catalog",
     "src": "resources/js/catalog.js",
     "isDynamicEntry": true,
@@ -53,25 +60,25 @@
     "isDynamicEntry": true
   },
   "resources/js/home.js": {
-    "file": "assets/home-C2MjWbaY.js",
+    "file": "assets/home-By0UsDX2.js",
     "name": "home",
     "src": "resources/js/home.js",
     "isDynamicEntry": true,
     "imports": [
-      "_splide-extension-grid.esm-Wa7g0JHd.js"
+      "_grid-cxdqohU_.js"
     ]
   },
   "resources/js/product-view.js": {
-    "file": "assets/product-view-BiaPqa_I.js",
+    "file": "assets/product-view-BuknIDq-.js",
     "name": "product-view",
     "src": "resources/js/product-view.js",
     "isDynamicEntry": true,
     "imports": [
-      "_splide-extension-grid.esm-Wa7g0JHd.js"
+      "_grid-cxdqohU_.js"
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-VQJ8oPQl.css",
+    "file": "assets/styles-FZ7YYQiY.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",

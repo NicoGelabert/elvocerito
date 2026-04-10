@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                                 li.addEventListener("click", () => {
                                     const anunciantes = "{{ route('products.index') }}";
-                                    window.location.href = `${anunciantes}?category=${category.slug}`;
+                                    window.location.href = `${servicios}?category=${category.slug}`;
                                 });
 
                                 resultsList.appendChild(li);
