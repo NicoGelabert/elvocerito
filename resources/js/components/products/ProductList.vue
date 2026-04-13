@@ -8,8 +8,8 @@
       <div class="w-full">
         <h3 class="text-center">{{ title }}</h3>
       </div>
-      <!-- MOBILE: botón de apertura -->
-      <div class="block md:hidden">
+      <!-- MOBILE: botón de apertura para mostrar en mobile -->
+      <div class="hidden">
         <button
           @click="toggleMobileFilters"
           class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
@@ -145,8 +145,10 @@
       </div>
 
       <!-- DESKTOP / TABLET -->
-      <div class="hidden md:flex items-center w-full relative gap-8">
-        <div v-if="showCategoryFilter">
+      <div class="flex items-center w-full relative gap-4 min-w-0">
+
+        <!-- Dropdown fijo -->
+        <div v-if="showCategoryFilter" class="flex-shrink-0 relative">
           <button
             @click="toggleDropdown"
             class="flex gap-4 text-xs text-gray-500 w-auto justify-between items-center px-4 py-2 bg-white border rounded-lg shadow-sm hover:shadow-md"
@@ -158,7 +160,7 @@
           <transition name="fade-slide">
             <ul
               v-if="isOpen"
-              class="absolute z-10 w-full bg-white border mt-1 max-h-72 overflow-auto rounded-lg shadow-lg"
+              class="absolute z-10 w-56 bg-white border mt-1 max-h-72 overflow-auto rounded-lg shadow-lg"
             >
               <li>
                 <button
@@ -188,10 +190,15 @@
           </transition>
         </div>
 
-        <div class="flex flex-wrap gap-4">
+        <!-- Badges con scroll -->
+         <div class="relative flex-1 min-w-0">
+          <!-- Fade derecha -->
+          <div class="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-gray_50 to-transparent z-10"></div>
+          <div class="flex flex-nowrap gap-4 overflow-x-auto py-1 scrollbar-none">
+
           <!-- Badge botón categoría -->
           <button
-            class="flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 text-gray-70 w-fit"
+            class="flex-shrink-0 flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 text-gray-70 w-fit"
             @click="selectCategory(null)"
             v-if="selectedCategoryName && showCategoryFilter"
           >
@@ -201,7 +208,7 @@
 
           <!-- Badge botón filtrado por reviews -->
           <button
-            class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleHasReviews"
             :class="hasReviewsOnly ? 'bg-gray-200' : 'bg-transparent'"
           >
@@ -210,7 +217,7 @@
 
           <!-- Badge botón filtrado por urgencias -->
           <button
-            class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleUrgencies"
             :class="showUrgenciesOnly ? 'bg-gray-200' : 'bg-transparent'"
           >
@@ -219,13 +226,15 @@
 
           <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
           <button
-            class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleOnDuty"
             v-if="isFarmaciaSelected"
             :class="showOnDutyOnly ? 'bg-gray-200' : 'bg-transparent'"
           >
             Hoy de Turno <span class="font-light ml-1" :class="showOnDutyOnly ? 'inline' : 'hidden'">x</span>
           </button>
+
+          </div>
         </div>
       </div>
 
@@ -522,5 +531,11 @@ export default {
 .fade-slide-leave-to {
   opacity: 0;
   transform: translateY(-5px);
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 </style>
