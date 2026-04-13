@@ -1,5 +1,5 @@
 .cards__section{
-    @apply flex flex-col gap-8;
+    @apply flex flex-col gap-8 my-8;
     .title{
         }
     .cards__list{
@@ -7,11 +7,11 @@
         ul{
             li{
                 .card__body{
-                    @apply flex flex-col items-center justify-between gap-2 p-4 rounded-xl bg-white shadow-lg hover:bg-gray-50 transition-all duration-300 h-full;
+                    @apply flex flex-col items-center justify-between gap-2 p-4 rounded-xl bg-white shadow-lg hover:bg-gray-50 transition-all duration-300;
                     .card__content{
                         @apply flex gap-2 justify-between w-full h-full;
                         .description{
-                            @apply text-gray_600 line-clamp-3;
+                            @apply text-gray_600 line-clamp-2;
                         }
                         .card__left{
                             @apply flex flex-col items-center justify-between gap-4;
@@ -26,7 +26,7 @@
                                 @apply flex flex-col gap-2;
                             }
                             .card__meta{
-                                @apply flex items-center gap-3;
+                                @apply flex flex-col gap-3;
                                 .card__rating{
                                     @apply flex items-center gap-1 py-1;
                                 }

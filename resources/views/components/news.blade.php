@@ -38,7 +38,7 @@
             <!-- CARD "VER MÁS" -->
             <li class="swiper-slide card__body--cta">
                 <a href="{{ route('news.index') }}">
-                    <div class="card__body">
+                    <div class="card__body h-64">
                         <div class="card__content card__content--col card__content--center card__content--justify__center">
                             <div class="card__plus">
                                 +

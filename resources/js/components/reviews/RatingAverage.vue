@@ -1,19 +1,26 @@
 <template>
   <div v-if="average" class="flex items-center justify-center space-x-1">
-
-      
       <!-- Estrellas -->
       <div class="flex">
-          <StarIcon
-          v-for="n in 5"
-          :key="n"
-          :class="getStarFill(n)"
-          :half="isHalfStar(n)"
-          />
-        </div>
-        <!-- Número -->
-        <span class="font-semibold text-xs text-gray-500">{{ average }}</span>
-
+        <StarIcon
+        v-for="n in 5"
+        :key="n"
+        :class="getStarFill(n)"
+        :half="isHalfStar(n)"
+        />
+      </div>
+      <!-- Número -->
+      <span class="font-semibold text-xs text-gray-500">{{ average }}</span>
+  </div>
+  <div v-else class="flex items-center justify-center space-x-1">
+      <!-- Estrellas -->
+      <div class="flex">
+        <StarIcon
+        class="fill-white stroke-amber-300"
+        />
+      </div>
+      <!-- Número -->
+      <span class="font-semibold text-xs text-gray-500">Sin reseñas aún</span>
   </div>
   <!-- Si no hay promedio, no muestra nada -->
 </template>
@@ -45,7 +52,7 @@ export default {
     },
     isHalfStar(position) {
       return this.average >= position - 0.5 && this.average < position;
-    }
+    },
   }
 };
 </script>

@@ -37,11 +37,11 @@ const badgeClass = computed(() => {
 
 /* OPEN */
 .open {
-  @apply bg-lime-200;
+  @apply bg-lime-100;
 }
 
 .open svg {
-  @apply w-3 h-auto fill-lime-400 drop-shadow-[0_0_10px_#a3e635];
+  @apply w-3 h-auto fill-lime-400;
 }
 
 /* CLOSED */

@@ -25,14 +25,13 @@
                                 <h5>
                                     {{ $anunciante_destacado->title}}
                                 </h5>
-                                <p class="description {{ ($anunciante_destacado->reviews_count > 0 || $anunciante_destacado->urgencies) ? '!line-clamp-2' : 'line-clamp-3' }}">
+                                <p class="description">
                                     {{ $anunciante_destacado->short_description }}
                                 </p>
                             </div>
-                            @if ($anunciante_destacado->reviews_count > 0 || $anunciante_destacado->urgencies)
                             <div class="card__meta">
-                                @if ($anunciante_destacado->reviews_count > 0)
                                 <div class="card__rating">
+                                @if ($anunciante_destacado->reviews_count > 0)
                                     @php
                                         $average = \App\Models\Review::where('product_id', $anunciante_destacado->id)
                                             ->where('published', true)
@@ -42,15 +41,18 @@
                                     @endphp
 
                                     @if($average)
-                                        <x-icons.star class="w-4 h-4 fill-amber-300" />
-                                        <span class="font-semibold text-xs text-gray-500">{{ $average }}</span>
+                                        <x-icons.star class="w-4 h-4 text-amber-300" />
+                                        <span class="font-semibold text-xs text-gray-500 leading-none pt-[0.1rem]">{{ $average }}</span>
                                     @endif
 
-                                    <span class="text-xs text-gray-500">
+                                    <span class="text-xs text-gray-500 leading-none pt-[0.1rem]">
                                         ({{ $anunciante_destacado->reviews_count }})
                                     </span>
-                                </div>
+                                @else
+                                    <x-icons.star class="w-4 h-4 text-transparent stroke-amber-300" />
+                                    <span class="text-xs text-gray-500 leading-none pt-[0.1rem]">Sin reseñas aún</span>
                                 @endif
+                                </div>
 
                                 @if($anunciante_destacado->urgencies)
                                 <div class="card__badges">
@@ -58,7 +60,6 @@
                                 </div>
                                 @endif
                             </div>
-                            @endif
                         </div>
                     </div>
                     <hr class="divider my-2 w-full">
@@ -91,7 +92,7 @@
             <!-- CARD "VER MÁS" -->
             <li class="swiper-slide card__body--cta">
                 <a href="/anunciantes?page=1">
-                    <div class="card__body">
+                    <div class="card__body h-48">
                         <div class="card__content card__content--col card__content--center card__content--justify__center">
                             <div class="card__plus">
                                 +

@@ -6,49 +6,8 @@
 
     <div class="container cards__section">
       <div class="w-full">
-        <h3 class="text-center">¿Qué necesitás hacer?</h3>
+        <h3 class="text-center">{{ title }}</h3>
       </div>
-      <div class="flex flex-wrap gap-4 mt-2">
-        <!-- Badge botón categoría -->
-        <button
-          class="flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 w-fit text-gray-700"
-          @click="selectCategory(null)"
-          v-if="selectedCategoryName"
-        >
-          <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1>
-          <span class="text-text_small font-light ml-1">x</span>
-        </button>
-
-        <!-- Badge botón filtrado por reviews -->
-        <button
-          class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-amber-300 bg-amber-100 w-fit text-amber-800"
-          @click="toggleHasReviews"
-          :class="hasReviewsOnly ? 'inline-flex' : 'hidden'"
-        >
-          Con Reseñas <span class="font-light ml-1">x</span>
-        </button>
-
-        <!-- Badge botón filtrado por urgencias -->
-        <button
-          class="items-center justify-center px-2 py-1 rounded-md text-text_small text-red-800 leading-none font-semibold transition-all shadow-sm border border-red-300 bg-red-200 w-fit"
-          @click="toggleUrgencies"
-          :class="showUrgenciesOnly ? 'inline-flex' : 'hidden'"
-        >
-          Disponible 24hs <span class="font-light ml-1">x</span>
-        </button>
-
-        <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
-        <button
-          class="items-center justify-center px-2 py-1 rounded-md text-text_small text-cyan-800 leading-none font-semibold transition-all shadow-sm border border-cyan-300 bg-cyan-200 w-fit"
-          @click="toggleOnDuty"
-          v-if="isFarmaciaSelected && (products.data.length || showOnDutyOnly)"
-          :class="showOnDutyOnly ? 'inline-flex' : 'hidden'"
-        >
-          Hoy de Turno <span class="font-light ml-1">x</span>
-        </button>
-      </div>
-
-      <hr class="my-2" v-if="selectedCategoryName || hasReviewsOnly || showUrgenciesOnly || showOnDutyOnly" />
       <!-- MOBILE: botón de apertura -->
       <div class="block md:hidden">
         <button
@@ -186,8 +145,8 @@
       </div>
 
       <!-- DESKTOP / TABLET -->
-      <div class="hidden md:flex w-full relative gap-8">
-        <div>
+      <div class="hidden md:flex items-center w-full relative gap-8">
+        <div v-if="showCategoryFilter">
           <button
             @click="toggleDropdown"
             class="flex gap-4 text-xs text-gray-500 w-auto justify-between items-center px-4 py-2 bg-white border rounded-lg shadow-sm hover:shadow-md"
@@ -229,46 +188,45 @@
           </transition>
         </div>
 
-        <div class="flex items-center gap-2">
-          <p class="text-xs text-gray-700">Sólo con reseñas</p>
+        <div class="flex flex-wrap gap-4">
+          <!-- Badge botón categoría -->
           <button
-            @click="toggleHasReviews"
-            class="relative w-7 h-4 rounded-full transition-all"
-            :class="hasReviewsOnly ? 'bg-amber-300' : 'bg-gray-300'"
+            class="flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 text-gray-70 w-fit"
+            @click="selectCategory(null)"
+            v-if="selectedCategoryName && showCategoryFilter"
           >
-            <span
-              class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
-              :class="hasReviewsOnly ? 'translate-x-3' : ''"
-            ></span>
+            <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1>
+            <span class="text-text_small font-light ml-1">x</span>
           </button>
-        </div>
-        <div class="flex items-center gap-2">
-          <p class="text-xs text-gray-700">Disponible 24hs</p>
-          <button
-            @click="toggleUrgencies"
-            class="relative w-7 h-4 rounded-full transition-all"
-            :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
-          >
-            <span
-              class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
-              :class="showUrgenciesOnly ? 'translate-x-3' : ''"
-            ></span>
-          </button>
-        </div>
-        <div class="flex items-center gap-2" v-if="isFarmaciaSelected">
-          <p class="text-xs text-gray-700">Farmacia de Turno</p>
-          <button
-            @click="toggleOnDuty"
-            class="relative w-7 h-4 rounded-full transition-all"
-            :class="showOnDutyOnly ? 'bg-cyan-400' : 'bg-gray-300'"
-          >
-            <span
-              class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-all"
-              :class="showOnDutyOnly ? 'translate-x-3' : ''"
-            ></span>
-          </button>
-        </div>
 
+          <!-- Badge botón filtrado por reviews -->
+          <button
+            class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            @click="toggleHasReviews"
+            :class="hasReviewsOnly ? 'bg-gray-200' : 'bg-transparent'"
+          >
+            Con Reseñas <span class="font-light ml-1" :class="hasReviewsOnly ? 'inline' : 'hidden'">x</span>
+          </button>
+
+          <!-- Badge botón filtrado por urgencias -->
+          <button
+            class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            @click="toggleUrgencies"
+            :class="showUrgenciesOnly ? 'bg-gray-200' : 'bg-transparent'"
+          >
+            Disponible 24hs <span class="font-light ml-1" :class="showUrgenciesOnly ? 'inline' : 'hidden'">x</span>
+          </button>
+
+          <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
+          <button
+            class="items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            @click="toggleOnDuty"
+            v-if="isFarmaciaSelected"
+            :class="showOnDutyOnly ? 'bg-gray-200' : 'bg-transparent'"
+          >
+            Hoy de Turno <span class="font-light ml-1" :class="showOnDutyOnly ? 'inline' : 'hidden'">x</span>
+          </button>
+        </div>
       </div>
 
       <!-- Listado -->
@@ -279,27 +237,24 @@
               <div class="card__content">
                   <div class="card__left">
                       <img class="card__img__rounded" :src="product.image_url" alt="product.title">
-                      <div class="badge open">
-                          <span>Desde {{ formatYear(product.created_at) }}</span>
-                      </div>
+                      <Badge status="Disponible">
+                        <span>Desde {{ formatYear(product.created_at) }}</span>
+                      </Badge>
                   </div>
                   <div class="card__right">
                       <div class="card__info" v-if="product.categories?.length">
-                          <!-- INICIO CATEGORÍA -->
                           <h6>{{ product.categories[0].name }}</h6>
-                          <!-- FIN CATEGORÍA -->
-                          <h5>
-                              {{ product.title }}
-                          </h5>
-                          <p class="description" :class="(product.reviews_count > 0 || product.urgencies) ? '!line-clamp-2': 'line-clamp-3'">
-                              {{ product.short_description }}
-                          </p>
+                          <h5>{{ product.title }}</h5>
+                          <p class="description">{{ product.short_description }}</p>
                       </div>
                       <div class="card__meta">
                           <div class="card__rating">
                               <RatingAverage :product-id="product.id" />
                           </div>
-                          <Badge v-if="product.urgencies" status="Urgencias"><span>Urgencias</span></Badge>
+                          <Badge v-if="product.urgencies" status="Urgencias">
+                            <UrgenciesIcon />
+                            <span>Disponible 24hs</span>
+                          </Badge>
                           <Badge v-if="product.is_on_duty_now" status="De Turno">
                             <span>Hoy de turno</span>
                           </Badge>
@@ -308,24 +263,23 @@
               </div>
               <hr class="divider my-2 w-full">
               <div class="card__footer card__footer--between">
-                  <!-- INICIO VER SERVICIO -->
                   <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-primary">
                     Ver servicio
                   </a>
-                  <!-- FIN VER SERVICIO -->
-                  <!-- INICIO VÍAS DE CONTACTO -->
                   <button class="btn btn-secondary" @click="openModal('contact', product)">
                     Contactar
                   </button>
-                  <!-- FIN VÍAS DE CONTACTO -->
               </div>
           </div>
           </li>
         </ul>
+        <div v-if="!loading && products.data && products.data.length === 0" class="w-full text-center py-12 text-gray-400">
+          No se han encontrado resultados.
+        </div>
       </div>
 
       <!-- Paginación -->
-      <div v-if="products && products.links" class="pagination flex flex-wrap gap-2 mt-8 justify-center">
+      <div v-if="showPagination && products && products.links && products.links.length > 3" class="pagination flex flex-wrap gap-2 mt-8 justify-center">
         <button
           v-for="(link, index) in products.links"
           :key="index"
@@ -344,7 +298,6 @@
   </div>
 </template>
 
-
 <script>
 import axios from "axios"
 import { ShareIcon } from "@heroicons/vue/24/outline"
@@ -352,14 +305,31 @@ import FilterIcon from "@/icons/FilterIcon.vue"
 import BadgeHorarios from "../BadgeHorarios.vue"
 import Badge from "../Badge.vue"
 import RatingAverage from "../reviews/RatingAverage.vue"
+import UrgenciesIcon from "@/icons/UrgenciesIcon.vue"
 
 export default {
-  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, RatingAverage },
+  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, RatingAverage, UrgenciesIcon },
 
   props: {
     initialCategory: {
       type: String,
       default: null,
+    },
+    baseUrl: {
+      type: String,
+      default: null,
+    },
+    showCategoryFilter: {
+      type: Boolean,
+      default: true,
+    },
+    showPagination: {
+      type: Boolean,
+      default: true,
+    },
+    title: {
+      type: String,
+      default: '¿Qué necesitás hacer?',
     },
   },
 
@@ -403,7 +373,6 @@ export default {
     async fetchProducts(page = 1) {
       this.loading = true
 
-
       const params = {
         page,
         category: this.selectedCategory || undefined,
@@ -419,38 +388,44 @@ export default {
         })
 
         this.products = response.data.products
-
         this.error = null
 
         // Actualizar URL
-        const url = new URL(window.location);
-        // Actualizar el número de página
+        const url = new URL(this.baseUrl || window.location.href);
         url.searchParams.set("page", this.products.current_page);
-        // Filtro por categoría
-        if (this.selectedCategory) {
-          url.searchParams.set("category", this.selectedCategory);
-        } else {
-          url.searchParams.delete("category");
+
+        // Solo agrega ?category si NO hay baseUrl
+        if (!this.baseUrl) {
+          if (this.selectedCategory) {
+            url.searchParams.set("category", this.selectedCategory);
+          } else {
+            url.searchParams.delete("category");
+          }
         }
-        // Filtro por urgencias
+
         if (this.showUrgenciesOnly) {
           url.searchParams.set("urgencies", "true");
         } else {
           url.searchParams.delete("urgencies");
         }
-        // Filtro por reviews
+
         if (this.hasReviewsOnly) {
           url.searchParams.set("has_reviews", "true");
         } else {
           url.searchParams.delete("has_reviews");
         }
-        // Filtro por farmacias de turno
+
         if (this.showOnDutyOnly) {
-          url.searchParams.set("on_duty", "true")
+          url.searchParams.set("on_duty", "true");
         } else {
-          url.searchParams.delete("on_duty")
+          url.searchParams.delete("on_duty");
         }
-        // Actualizar la URL sin recargar la página
+
+        if (this.showPagination) {
+          url.searchParams.set("page", this.products.current_page);
+        } else {
+          url.searchParams.delete("page");
+        }
         window.history.pushState({}, "", url);
 
       } catch (err) {
@@ -462,10 +437,8 @@ export default {
 
     async goToLink(link) {
       if (!link.url) return
-
       const urlObj = new URL(link.url)
       const page = urlObj.searchParams.get("page") || 1
-
       this.fetchProducts(page)
     },
 
@@ -481,13 +454,8 @@ export default {
 
     selectCategory(category) {
       this.selectedCategory = category ? category.slug : null
-
-      // Resetear filtro "Hoy de turno" si existía
       if (this.showOnDutyOnly) this.showOnDutyOnly = false
-
-      // Vaciar productos para evitar flicker
       this.products.data = []
-
       this.isOpen = false
       this.fetchProducts(1)
     },
@@ -496,19 +464,16 @@ export default {
       this.isOpen = !this.isOpen
     },
 
-    // Toggle de urgencies
     toggleUrgencies() {
       this.showUrgenciesOnly = !this.showUrgenciesOnly
       this.fetchProducts(1)
     },
 
-    // Toggle de Reviews
     toggleHasReviews() {
-      this.hasReviewsOnly = !this.hasReviewsOnly;
-      this.fetchProducts(1);
+      this.hasReviewsOnly = !this.hasReviewsOnly
+      this.fetchProducts(1)
     },
 
-    // Toggle Farmacias de turno
     toggleOnDuty() {
       this.showOnDutyOnly = !this.showOnDutyOnly
       this.fetchProducts(1)
