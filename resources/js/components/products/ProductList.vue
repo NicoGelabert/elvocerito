@@ -151,7 +151,7 @@
         <div v-if="showCategoryFilter" class="flex-shrink-0 relative">
           <button
             @click="toggleDropdown"
-            class="flex gap-4 text-xs text-gray-500 w-auto justify-between items-center px-4 py-2 bg-white border rounded-lg shadow-sm hover:shadow-md"
+            class="flex gap-4 text-sm text-gray-500 w-auto justify-between items-center px-4 py-2 bg-white border rounded-lg shadow-sm hover:shadow-md"
           >
             {{ selectedCategoryName || 'Selecciona una categoría' }}
             <span :class="{ 'rotate-180': isOpen }" class="text-gray-400 transition-transform">▼</span>
@@ -202,13 +202,13 @@
             @click="selectCategory(null)"
             v-if="selectedCategoryName && showCategoryFilter"
           >
-            <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1>
-            <span class="text-text_small font-light ml-1">x</span>
+            <h1 class="text-xs leading-none">Categoría {{ selectedCategoryName }}</h1>
+            <span class="text-xs font-light ml-1">x</span>
           </button> -->
 
           <!-- Badge botón filtrado por reviews -->
           <button
-            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleHasReviews"
             :class="hasReviewsOnly ? 'bg-gray-200' : 'bg-transparent'"
           >
@@ -217,7 +217,7 @@
 
           <!-- Badge botón filtrado por urgencias -->
           <button
-            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleUrgencies"
             :class="showUrgenciesOnly ? 'bg-gray-200' : 'bg-transparent'"
           >
@@ -226,7 +226,7 @@
 
           <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
           <button
-            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-text_small leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleOnDuty"
             v-if="isFarmaciaSelected"
             :class="showOnDutyOnly ? 'bg-gray-200' : 'bg-transparent'"
