@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 mb-16">
+    <div class="flex flex-col mb-16">
         <div class="md:mb-24">
             <x-search-hero />
             <!-- <x-backgrounds.circulos /> -->
