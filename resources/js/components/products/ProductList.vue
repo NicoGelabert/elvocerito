@@ -196,15 +196,15 @@
           <div class="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-gray_50 to-transparent z-10"></div>
           <div class="flex flex-nowrap gap-4 overflow-x-auto py-1 scrollbar-none">
 
-          <!-- Badge botón categoría -->
-          <button
+          <!-- Badge botón categoría, no dropdown -->
+          <!-- <button
             class="flex-shrink-0 flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 text-gray-70 w-fit"
             @click="selectCategory(null)"
             v-if="selectedCategoryName && showCategoryFilter"
           >
             <h1 class="text-text_small leading-none">Categoría {{ selectedCategoryName }}</h1>
             <span class="text-text_small font-light ml-1">x</span>
-          </button>
+          </button> -->
 
           <!-- Badge botón filtrado por reviews -->
           <button
