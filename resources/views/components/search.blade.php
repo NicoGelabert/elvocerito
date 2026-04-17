@@ -14,8 +14,9 @@
     <div class="relative">
         <ul class="search-results divide-y divide-gray-200"></ul>
     </div>
-    
+
     <!-- Sugeridos = anunciantes destacados -->
+    @if($viewedProducts->count() > 0 || $viewedCategories->count() > 0)
     <div class="search_list">
         <h4>Servicios sugeridos</h4>
         <div>
@@ -35,6 +36,7 @@
             </ul>
         </div>        
     </div>
+    @endif
 
     <hr class="divider">
     <!-- Vistos recientemente -->
