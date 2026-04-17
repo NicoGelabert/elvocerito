@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex flex-col mb-16">
         <div class="md:mb-24">
-            <x-search-hero />
+            <x-search-hero :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" :anunciantes_destacados="$anunciantes_destacados"/>
             <!-- <x-backgrounds.circulos /> -->
             <x-categories :categories="$categories"/>
             
@@ -15,12 +15,12 @@
             <hr class="divider">
         </div>
         <x-ultimos-anunciantes :ultimos_anunciantes="$ultimos_anunciantes" />
-        @if($viewedProducts->count() > 0 || $viewedCategories->count() > 0)
+        <!-- @if($viewedProducts->count() > 0 || $viewedCategories->count() > 0)
         <div class="container">
             <hr class="divider">
         </div>
-        <x-recently-viewed :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" />
-        @endif
+        {{-- <x-recently-viewed :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" /> --}}
+        @endif -->
         <div class="container">
             <hr class="divider">
         </div>

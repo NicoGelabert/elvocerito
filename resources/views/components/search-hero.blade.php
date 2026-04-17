@@ -1,3 +1,4 @@
+@props(['viewedProducts', 'viewedCategories', 'anunciantes_destacados'])
 <div class="search_hero" style="background-image:url('{{ asset('storage/common/hero-banner.jpg') }}')">
     <!-- <x-backgrounds.pinmaps /> -->
     <div class="flex flex-col mx-auto gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
@@ -25,5 +26,7 @@
             </div>
         </div>
     </div>
-    <x-search-modal />
+    
+    <x-search-modal :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" :anunciantes_destacados="$anunciantes_destacados"/>
+    
 </div>

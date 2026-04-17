@@ -246,13 +246,13 @@
               <div class="card__content">
                   <div class="card__left">
                       <img class="card__img__rounded" :src="product.image_url" alt="product.title">
-                      <Badge status="Disponible">
-                        <span>Desde {{ formatYear(product.created_at) }}</span>
-                      </Badge>
                   </div>
                   <div class="card__right">
                       <div class="card__info" v-if="product.categories?.length">
                           <h6>{{ product.categories[0].name }}</h6>
+                          <Badge status="Disponible">
+                            <span>Desde {{ formatYear(product.created_at) }}</span>
+                          </Badge>
                           <h5>{{ product.title }}</h5>
                           <p class="description">{{ product.short_description }}</p>
                       </div>
@@ -272,10 +272,10 @@
               </div>
               <hr class="divider my-2 w-full">
               <div class="card__footer card__footer--between">
-                  <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-primary">
+                  <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
                     Ver servicio
                   </a>
-                  <button class="btn btn-secondary" @click="openModal('contact', product)">
+                  <button class="btn btn-primary" @click="openModal('contact', product)">
                     Contactar
                   </button>
               </div>

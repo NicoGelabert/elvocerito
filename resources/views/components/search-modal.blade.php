@@ -1,3 +1,4 @@
+@props(['viewedProducts', 'viewedCategories', 'anunciantes_destacados'])
 <div 
   x-data="{ isOpen: false }" 
   x-init="
@@ -30,7 +31,8 @@
         @click.stop
         class="bg-white p-6 rounded-t-lg md:rounded-lg shadow-xl w-full h-full overflow-auto"
       >
-          <x-search></x-search>       
+      
+      <x-search :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" :anunciantes_destacados="$anunciantes_destacados"></x-search>
       </div>
     </div>
   </div>

@@ -10,9 +10,6 @@
                     <div class="card__content">
                         <div class="card__left">
                             <img class="card__img__rounded" src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
-                            <div class="badge open">
-                                <span>Desde {{ optional($anunciante_destacado->created_at)->translatedFormat('Y') ?? 'Fecha no disponible' }}</span>
-                            </div>
                         </div>
                         <div class="card__right">
                             <div class="card__info">
@@ -22,6 +19,9 @@
                                 @endphp
                                 <h6>{{ $firstCategory->name }}</h6>
                                 <!-- FIN CATEGORÍA -->
+                                 <div class="badge open">
+                                    <span>Desde {{ optional($anunciante_destacado->created_at)->translatedFormat('Y') ?? 'Fecha no disponible' }}</span>
+                                </div>
                                 <h5>
                                     {{ $anunciante_destacado->title}}
                                 </h5>
@@ -66,7 +66,7 @@
                     <div class="card__footer card__footer--between">
                         <!-- INICIO VÍAS DE CONTACTO -->
                         <x-button 
-                            class="btn btn-primary"
+                            class="btn btn-secondary"
                             onclick="window.location.href='{{ route('product.view', [
                                 'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
                                 'product' => $anunciante_destacado->slug
@@ -77,7 +77,7 @@
                         <!-- FIN VÍAS DE CONTACTO -->
                         <!-- INICIO VÍAS DE CONTACTO -->
                         <x-button 
-                            class="btn btn-secondary"
+                            class="btn btn-primary"
                             onclick="window.dispatchEvent(new CustomEvent('open-contact-modal', {
                                 detail: { type: 'contact', id: {{ $anunciante_destacado->id }} }
                             }))"
