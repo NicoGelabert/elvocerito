@@ -1,10 +1,9 @@
-@props(['viewedProducts', 'viewedCategories', 'anunciantes_destacados'])
 <div class="search_hero" style="background-image:url('{{ asset('storage/common/hero-banner.jpg') }}')">
     <!-- <x-backgrounds.pinmaps /> -->
     <div class="flex flex-col mx-auto gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
         <div class="search_hero_container">
             <h1>Servicios cerca tuyo.</h1>
-            <p>Encontrá lo que necesitás fácil y rápido!</p>
+            <p class="subheading">Encontrá lo que necesitás fácil y rápido!</p>
             <x-button class="w-full" onclick="window.dispatchEvent(new CustomEvent('open-search-modal'))">
                 <div class="relative">
                     <span class="w-full block bg-white px-3 py-2 border-transparent rounded-full drop-shadow-search_input focus:outline-none focus:ring-0 focus:border-none cursor-pointer text-gray-400 text-left">
@@ -27,6 +26,6 @@
         </div>
     </div>
     
-    <x-search-modal :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" :anunciantes_destacados="$anunciantes_destacados"/>
+    <x-search-modal />
     
 </div>

@@ -24,7 +24,10 @@
     }
 }
 .search_list{
-    @apply my-12;
+    @apply my-8;
+    h4{
+        @apply mb-4;
+    }
 }
 .search-modal{
     @apply w-full h-full max-w-screen-xl relative;

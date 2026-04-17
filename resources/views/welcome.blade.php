@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex flex-col mb-16">
         <div class="md:mb-24">
-            <x-search-hero :viewedProducts="$viewedProducts" :viewedCategories="$viewedCategories" :anunciantes_destacados="$anunciantes_destacados"/>
+            <x-search-hero/>
             <!-- <x-backgrounds.circulos /> -->
             <x-categories :categories="$categories"/>
             

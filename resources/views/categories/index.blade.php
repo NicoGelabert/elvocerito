@@ -1,3 +1,4 @@
+@props(['viewedProducts', 'viewedCategories', 'anunciantes_destacados'])
 <x-app-layout>
     <div class="categories_index">
         <x-search-hero />

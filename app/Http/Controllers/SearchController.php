@@ -13,63 +13,113 @@ class SearchController extends Controller
     {
         $query = $request->input('query');
 
-        // Verifica que query no esté vacío
-        if (!$query) {
-            return response()->json([]);
+        $products = collect();
+        $categories = collect();
+
+        if ($query) {
+            $products = Product::where('published', 1)
+                ->where(function ($q) use ($query) {
+                    $q->where('title', 'like', "%{$query}%")
+                    ->orWhere('client_number', 'like', "%{$query}%");
+                })
+                ->orWhereHas('categories', function ($q) use ($query) {
+                    $q->where('name', 'like', "%{$query}%");
+                })
+                ->orWhereHas('tags', function ($q) use ($query) {
+                    $q->where('name', 'like', "%{$query}%");
+                })
+                ->with([
+                    'categories' => function ($q) {
+                        $q->select('categories.id', 'categories.name', 'categories.slug', 'categories.parent_id')
+                        ->with('parent:id,name,slug');
+                    },
+                    'images'
+                ])
+                ->select('products.*')
+                ->limit(10)
+                ->get()
+                ->map(function ($product) {
+                    return [
+                        'id' => $product->id,
+                        'title' => $product->title,
+                        'slug' => $product->slug,
+                        'short_description' => $product->short_description,
+                        'categories' => $product->categories,
+                        'image' => $product->images->first()?->url ?? null,
+                    ];
+                });
+
+            $categories = Category::where('name', 'like', "%{$query}%")
+                ->with('parent:id,name,slug')
+                ->get()
+                ->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'name' => $category->name,
+                        'slug' => $category->slug,
+                        'image' => $category->image ?? null,
+                        'parent' => $category->parent ? [
+                            'name' => $category->parent->name,
+                            'slug' => $category->parent->slug,
+                        ] : null,
+                    ];
+                });
         }
 
-        // Obtener productos basados en la búsqueda
-        $products = Product::where('published', 1) // <-- filtro agregado
-            ->where(function ($q) use ($query) {
-                $q->where('title', 'like', "%{$query}%")
-                ->orWhere('client_number', 'like', "%{$query}%");
-            })
-            ->orWhereHas('categories', function ($q) use ($query) {
-                $q->where('name', 'like', "%{$query}%");
-            })
-            ->orWhereHas('tags', function ($q) use ($query) {
-                $q->where('name', 'like', "%{$query}%");
-            })
-            ->with([
-                'categories' => function ($q) {
-                    $q->select('categories.id', 'categories.name', 'categories.slug', 'categories.parent_id')
-                      ->with('parent:id,name,slug');
-                },
-                'images'
-            ])
-            ->select('products.*')
-            ->limit(10)  // Limitar la cantidad de resultados
-            ->get()
-            ->map(function ($product) {
-                return [
-                    'id' => $product->id,
-                    'title' => $product->title,
-                    'slug' => $product->slug,
-                    'short_description' => $product->short_description,
-                    'categories' => $product->categories,
-                    'image' => $product->images->first()?->url ?? null, // Extrae la primera imagen
-                ];
-            });
-            $categories = Category::where('name', 'like', "%{$query}%")
-            ->with('parent:id,name,slug') // Asegura que venga el padre
-            ->get()
-            ->map(function ($category) {
-                return [
-                    'id' => $category->id,
-                    'name' => $category->name,
-                    'slug' => $category->slug,
-                    'image' => $category->image ?? null, // si tenés imagen
-                    'parent' => $category->parent ? [
-                        'name' => $category->parent->name,
-                        'slug' => $category->parent->slug,
-                    ] : null,
-                ];
-            });
+        $viewedProductsIds = json_decode(Cookie::get('recently_viewed'), true) ?? [];
+        $viewedProducts = count($viewedProductsIds)
+            ? Product::whereIn('id', $viewedProductsIds)
+                ->orderByRaw('FIELD(id, ' . implode(',', $viewedProductsIds) . ')')
+                ->with(['categories:id,name,slug', 'images'])
+                ->get()
+                ->map(function ($product) {
+                    return [
+                        'id' => $product->id,
+                        'title' => $product->title,
+                        'slug' => $product->slug,
+                        'categories' => $product->categories,
+                        'image' => $product->images->first()?->url ?? null,
+                    ];
+                })
+            : collect();
 
-        // Devolver los resultados como JSON
+        $viewedCategoryIds = json_decode(Cookie::get('recently_viewed_categories'), true) ?? [];
+        $viewedCategories = count($viewedCategoryIds)
+            ? Category::whereIn('id', $viewedCategoryIds)
+                ->orderByRaw('FIELD(id, ' . implode(',', $viewedCategoryIds) . ')')
+                ->get()
+                ->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'name' => $category->name,
+                        'slug' => $category->slug,
+                        'image' => $category->image ?? null,
+                    ];
+                })
+            : collect();
+
+        $anunciantes_destacados = Product::withCount('reviews')
+        ->where('published', 1)
+        ->where('leading_home', 1)
+        ->with(['categories', 'images'])
+        ->get()
+        ->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'title' => $product->title,
+                'slug' => $product->slug,
+                'categories' => $product->categories,
+                'image' => $product->images->first()?->url ?? null,
+                'reviews_count' => $product->reviews_count,
+            ];
+        });
+
         return response()->json([
             'products' => $products,
             'categories' => $categories,
+            'viewedProducts' => $viewedProducts,
+            'viewedCategories' => $viewedCategories,
+            'anunciantes_destacados' => $anunciantes_destacados,
         ]);
     }
 }

@@ -31,7 +31,7 @@
 .categories_index{
     .search_hero{
         @apply h-[30vh] relative overflow-hidden;
-        h1, p{
+        h1, .subheading{
             @apply hidden;
         }
         iframe {
