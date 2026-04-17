@@ -16,7 +16,6 @@
     </div>
 
     <!-- Sugeridos = anunciantes destacados -->
-    @if($viewedProducts->count() > 0 || $viewedCategories->count() > 0)
     <div class="search_list">
         <h4>Servicios sugeridos</h4>
         <div>
@@ -36,43 +35,44 @@
             </ul>
         </div>        
     </div>
-    @endif
-
+    
+    @if($viewedProducts->count() > 0 || $viewedCategories->count() > 0)
     <hr class="divider">
     <!-- Vistos recientemente -->
     <div class="search_list">
-    <h4>Vistos recientemente</h4>
-    <div>
-        <ul class="divide-y divide-gray-200">
-            @foreach($viewedCategories as $viewedCategory)
-            <li class="py-4 md:p-4 cursor-pointer hover:bg-gray-200 text-left flex justify-between items-center">
-                <div class="flex gap-2 items-center">
-                    <img src="{{ $viewedCategory->image }}" alt="{{$viewedCategory->name}}" class="w-4 h-4">
-                    <span class="search_category_name">{{$viewedCategory->name}}</span>
-                </div>
-                <span class="text-gray_500 text-sm">Categoría</span>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    <hr class="divide-y divide-gray-200">
-    <div>
-        <ul class="divide-y divide-gray-200">
-            @foreach($viewedProducts as $viewedProduct)
-            <li class="py-4 md:p-4 cursor-pointer hover:bg-gray-200 text-left flex items-center gap-4">
-                <img  src="{{ $viewedProduct->image }}" alt="{{ $viewedProduct->title }}" class="w-12 h-12 object-cover rounded border border-gray_400">
-                <div>
-                    @php
-                        $firstCategory = $viewedProduct->categories->first();
-                    @endphp
-                    <h6 class="font-bold">{{$firstCategory->name}}</h6>
-                    <p class="text-sm text-gray-500">{{ $viewedProduct->title }}</p>
-                </div>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    </div>
+        <h4>Vistos recientemente</h4>
+        <div>
+            <ul class="divide-y divide-gray-200">
+                @foreach($viewedCategories as $viewedCategory)
+                <li class="py-4 md:p-4 cursor-pointer hover:bg-gray-200 text-left flex justify-between items-center">
+                    <div class="flex gap-2 items-center">
+                        <img src="{{ $viewedCategory->image }}" alt="{{$viewedCategory->name}}" class="w-4 h-4">
+                        <span class="search_category_name">{{$viewedCategory->name}}</span>
+                    </div>
+                    <span class="text-gray_500 text-sm">Categoría</span>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        <hr class="divide-y divide-gray-200">
+        <div>
+            <ul class="divide-y divide-gray-200">
+                @foreach($viewedProducts as $viewedProduct)
+                <li class="py-4 md:p-4 cursor-pointer hover:bg-gray-200 text-left flex items-center gap-4">
+                    <img  src="{{ $viewedProduct->image }}" alt="{{ $viewedProduct->title }}" class="w-12 h-12 object-cover rounded border border-gray_400">
+                    <div>
+                        @php
+                            $firstCategory = $viewedProduct->categories->first();
+                        @endphp
+                        <h6 class="font-bold">{{$firstCategory->name}}</h6>
+                        <p class="text-sm text-gray-500">{{ $viewedProduct->title }}</p>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>    
+    @endif
     
 </div>
 
