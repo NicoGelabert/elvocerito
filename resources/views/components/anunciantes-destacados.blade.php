@@ -32,18 +32,9 @@
                             <div class="card__meta">
                                 <div class="card__rating">
                                 @if ($anunciante_destacado->reviews_count > 0)
-                                    @php
-                                        $average = \App\Models\Review::where('product_id', $anunciante_destacado->id)
-                                            ->where('published', true)
-                                            ->where('email_verified', true)
-                                            ->avg('rating');
-                                        $average = $average ? round($average, 1) : null;
-                                    @endphp
-
-                                    @if($average)
+                                    
                                         <x-icons.star class="w-4 h-4 text-amber-300" />
-                                        <span class="font-semibold text-xs text-gray-500 leading-none pt-[0.1rem]">{{ $average }}</span>
-                                    @endif
+                                        <span class="font-semibold text-xs text-gray-500 leading-none pt-[0.1rem]">{{ $anunciante_destacado->average_rating }}</span>
 
                                     <span class="text-xs text-gray-500 leading-none pt-[0.1rem]">
                                         ({{ $anunciante_destacado->reviews_count }})

@@ -39,14 +39,16 @@ class DashboardController extends Controller
     {
         return Category::query()
             ->select(['categories.id', 'categories.name', 'categories.image'])
-            ->withCount('products')
+            ->withCount(['products' => function ($q) {
+                $q->where('published', 1);
+            }])
             ->with(['products' => function ($query) {
                 $query->select('products.id', 'products.title', 'products.created_at')
                     ->orderByDesc('products.created_at') // Ordenamos por el producto más reciente
                     ->limit(1);
             }])
             ->whereHas('products', function ($query) {
-                $query->whereNull('products.deleted_at'); // Filtrar productos no eliminados
+                $query->where('published', 1);
             })
             ->where('active', 1)
             ->orderByDesc('products_count')

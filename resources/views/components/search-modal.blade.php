@@ -13,10 +13,9 @@
   <div 
     x-show="isOpen"
     
-    class="bg-popup flex items-center justify-center pt-8 md:p-6"
+    class="bg-popup flex items-center justify-center md:p-6"
   >
     <div class="search-modal">
-      <x-close-button />
       <!-- Modal sin x-show, solo transición -->
       <div 
         x-show="isOpen"
@@ -28,11 +27,21 @@
         x-transition:leave-end="opacity-0 translate-y-full"
         @click.once="$refs.searchInput.focus()"
         @click.stop
-        class="bg-white p-6 rounded-t-lg md:rounded-lg shadow-xl w-full h-full overflow-auto"
+        class="bg-white rounded-t-lg md:rounded-lg shadow-xl w-full max-w-lg mx-auto h-full overflow-hidden"
       >
-      
-      <x-search />
+        <div class="h-full overflow-y-auto px-6 pb-6 [scrollbar-gutter:stable]">
+          <x-search />
+        </div>
       </div>
     </div>
   </div>
 </div>
+<style>
+  ::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 999px;
+}
+</style>

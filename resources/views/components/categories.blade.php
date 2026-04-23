@@ -34,7 +34,7 @@
             <ul class="swiper-wrapper">
                 @foreach ($ordered as $category)
                 <li class="swiper-slide">
-                    <x-button class="bg-transparent" href="{{ route('products.index', ['category' => $category->slug]) }}">
+                    <x-button class="bg-transparent" href="{{ route('categories.view', ['category' => $category->slug]) }}">
                         <img src="{{ $category->image }}" alt="">
                         <p>{{ $category->name }}</p>
                     </x-button>

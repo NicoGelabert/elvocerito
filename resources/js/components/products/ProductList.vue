@@ -6,7 +6,7 @@
 
     <div class="container cards__section">
       <div class="w-full">
-        <h3 class="text-center">{{ title }}</h3>
+        <h3>{{ title }}</h3>
       </div>
       <!-- MOBILE: botón de apertura para mostrar en mobile -->
       <div class="hidden">

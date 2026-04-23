@@ -17,37 +17,46 @@ class SearchController extends Controller
         $categories = collect();
 
         if ($query) {
-            $products = Product::where('published', 1)
-                ->where(function ($q) use ($query) {
-                    $q->where('title', 'like', "%{$query}%")
-                    ->orWhere('client_number', 'like', "%{$query}%");
-                })
-                ->orWhereHas('categories', function ($q) use ($query) {
-                    $q->where('name', 'like', "%{$query}%");
-                })
-                ->orWhereHas('tags', function ($q) use ($query) {
-                    $q->where('name', 'like', "%{$query}%");
-                })
-                ->with([
-                    'categories' => function ($q) {
-                        $q->select('categories.id', 'categories.name', 'categories.slug', 'categories.parent_id')
-                        ->with('parent:id,name,slug');
-                    },
-                    'images'
-                ])
-                ->select('products.*')
-                ->limit(10)
-                ->get()
-                ->map(function ($product) {
-                    return [
-                        'id' => $product->id,
-                        'title' => $product->title,
-                        'slug' => $product->slug,
-                        'short_description' => $product->short_description,
-                        'categories' => $product->categories,
-                        'image' => $product->images->first()?->url ?? null,
-                    ];
-                });
+            $products = Product::withCount(['reviews' => function ($q) {
+                $q->where('published', true)->where('email_verified', true);
+            }])
+            ->withAvg(['reviews' => function ($q) {
+                $q->where('published', true)->where('email_verified', true);
+            }], 'rating')
+            ->where('published', 1)
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                  ->orWhere('client_number', 'like', "%{$query}%")
+                  ->orWhereHas('categories', function ($q) use ($query) {
+                      $q->where('name', 'like', "%{$query}%");
+                  })
+                  ->orWhereHas('tags', function ($q) use ($query) {
+                      $q->where('name', 'like', "%{$query}%");
+                  });
+            })
+            ->with([
+                'categories' => function ($q) {
+                    $q->select('categories.id', 'categories.name', 'categories.slug', 'categories.parent_id')
+                      ->with('parent:id,name,slug');
+                },
+                'images'
+            ])
+            ->limit(10)
+            ->get()
+            ->map(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'title' => $product->title,
+                    'slug' => $product->slug,
+                    'short_description' => $product->short_description,
+                    'categories' => $product->categories,
+                    'image' => $product->images->first()?->url ?? null,
+                    'reviews_count' => $product->reviews_count,
+                    'average_rating' => $product->reviews_avg_rating
+                        ? round($product->reviews_avg_rating, 1)
+                        : null,
+                ];
+            });
 
             $categories = Category::where('name', 'like', "%{$query}%")
                 ->with('parent:id,name,slug')
@@ -68,7 +77,13 @@ class SearchController extends Controller
 
         $viewedProductsIds = json_decode(Cookie::get('recently_viewed'), true) ?? [];
         $viewedProducts = count($viewedProductsIds)
-            ? Product::whereIn('id', $viewedProductsIds)
+            ? Product::withCount(['reviews' => function ($q) {
+                $q->where('published', true)->where('email_verified', true);
+                }])
+                ->withAvg(['reviews' => function ($q) {
+                    $q->where('published', true)->where('email_verified', true);
+                    }], 'rating')
+                ->whereIn('id', $viewedProductsIds)
                 ->orderByRaw('FIELD(id, ' . implode(',', $viewedProductsIds) . ')')
                 ->with(['categories:id,name,slug', 'images'])
                 ->get()
@@ -79,6 +94,10 @@ class SearchController extends Controller
                         'slug' => $product->slug,
                         'categories' => $product->categories,
                         'image' => $product->images->first()?->url ?? null,
+                        'reviews_count' => $product->reviews_count,
+                        'average_rating' => $product->reviews_avg_rating
+                        ? round($product->reviews_avg_rating, 1)
+                        : null,
                     ];
                 })
             : collect();
@@ -98,7 +117,12 @@ class SearchController extends Controller
                 })
             : collect();
 
-        $anunciantes_destacados = Product::withCount('reviews')
+        $anunciantes_destacados = Product::withCount(['reviews' => function ($q) {
+            $q->where('published', true)->where('email_verified', true);
+        }])
+        ->withAvg(['reviews' => function ($q) {
+            $q->where('published', true)->where('email_verified', true);
+        }], 'rating')
         ->where('published', 1)
         ->where('leading_home', 1)
         ->with(['categories', 'images'])
@@ -111,6 +135,28 @@ class SearchController extends Controller
                 'categories' => $product->categories,
                 'image' => $product->images->first()?->url ?? null,
                 'reviews_count' => $product->reviews_count,
+                'average_rating' => $product->reviews_avg_rating
+                ? round($product->reviews_avg_rating, 1)
+                : null,
+            ];
+        });
+
+        $popularCategories = Category::withCount(['products' => function ($q) {
+            $q->where('published', 1);
+        }])
+        ->whereHas('products', function ($q) {
+            $q->where('published', 1);
+        })
+        ->where('active', 1)
+        ->orderByDesc('products_count')
+        ->limit(5)
+        ->get()
+        ->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'slug' => $category->slug,
+                'image' => $category->image ?? null,
             ];
         });
 
@@ -120,6 +166,7 @@ class SearchController extends Controller
             'viewedProducts' => $viewedProducts,
             'viewedCategories' => $viewedCategories,
             'anunciantes_destacados' => $anunciantes_destacados,
+            'popularCategories' => $popularCategories,
         ]);
     }
 }

@@ -1,13 +1,20 @@
 <div {{ $attributes->merge(['class' => "search_bar"]) }}>
-    <div class="relative flex gap-2 items-center border-b mb-4">
-        <div class="text-gray-400">
-            <x-icons.search />
+    <div class="sticky top-0 w-full bg-white z-10 pt-6 pb-4">
+        <div class="flex justify-between items-center">
+            <h3>¿Qué necesitás?</h3>
+            <x-close-button />
         </div>
-        <input type="text" name="query" placeholder="Buscá una empresa o servicio" 
-            class="search_input" x-ref="searchInput">
-        <button type="button" class="clear-search absolute right-2 text-gray-400 hover:text-gray-600 hidden">
-            ✖
-        </button>
+        <hr class="divider my-4">
+        <div class="relative flex gap-2 items-center border rounded-full">
+            <div class="text-gray-400 ml-4">
+                <x-icons.search />
+            </div>
+            <input type="text" name="query" placeholder="Buscá una empresa o servicio" 
+                class="search_input" x-ref="searchInput">
+            <button type="button" class="clear-search absolute right-4 text-gray-400 hover:text-gray-600 hidden">
+                ✖
+            </button>
+        </div>
     </div>
 
     <!-- Contenedor de Resultados -->
@@ -15,18 +22,25 @@
         <ul class="search-results divide-y divide-gray-200"></ul>
     </div>
 
+    <!-- Categorías populares -->
+    <div class="search_list">
+        <h4>Categorías populares</h4>
+        <ul class="divide-y divide-gray-200 popular-categories-list"></ul>
+    </div>
+
     <!-- Sugeridos = anunciantes destacados -->
     <div class="search_list">
+        <hr class="divider my-4">
         <h4>Servicios sugeridos</h4>
         <div>
             <ul class="divide-y divide-gray-200 suggested-list">
-        </div>        
+        </div>
     </div>
     
-    <hr class="divider">
     
     <!-- Vistos recientemente -->
     <div id="recents-section" class="search_list" style="display: none;">
+        <hr class="divider my-4">
         <h4>Vistos recientemente</h4>
         <div>
             <ul class="divide-y divide-gray-200 recent-categories"></ul>
@@ -155,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function createProductItem(product) {
-
         const category = product.categories?.[0];
         if (!category) return document.createElement("li");
 
@@ -164,36 +177,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const a = document.createElement("a");
         a.href = `/${category.slug}/${product.slug}`;
-        a.className =
-            "search-result-link flex items-center gap-4 text-left w-full";
+        a.className = "search-result-link flex items-center justify-between gap-4 text-left w-full";
+
+        // DIV IZQUIERDA: imagen + info
+        const left = document.createElement("div");
+        left.className = "flex items-center gap-4";
 
         const img = document.createElement("img");
         img.src = product.image || "/placeholder.jpg";
         img.alt = product.title;
-        img.className =
-            "w-12 h-12 object-cover rounded border border-gray_400";
+        img.className = "w-12 h-12 object-cover rounded border border-gray_400";
 
         const info = document.createElement("div");
 
-        const title = document.createElement("h6");
-        title.textContent = product.title;
-        title.className = "font-bold";
-
-        const categoryText = document.createElement("p");
+        const categoryText = document.createElement("h6");
         categoryText.textContent = category.name || "";
-        categoryText.className = "text-sm text-gray-500";
+        categoryText.className = "font-bold";
 
-        info.appendChild(title);
+        const title = document.createElement("p");
+        title.textContent = product.title;
+        title.className = "text-sm text-gray-500";
+
         info.appendChild(categoryText);
+        info.appendChild(title);
 
-        a.appendChild(img);
-        a.appendChild(info);
+        left.appendChild(img);
+        left.appendChild(info);
+
+        // DIV DERECHA: rating
+        const reviews = document.createElement("div");
+        reviews.className = "flex items-center gap-1 text-xs text-gray-500 shrink-0";
+
+        if (Number(product.reviews_count) > 0 && product.average_rating !== null) {
+            reviews.innerHTML = `
+                <span class="text-amber-400">★</span>
+                <span class="font-semibold">${product.average_rating}</span>
+                <span>(${product.reviews_count})</span>
+            `;
+        } else {
+            reviews.innerHTML = `
+                <span class="text-amber-400 opacity-40">★</span>
+                <span>Sin reseñas aún</span>
+            `;
+        }
+
+        a.appendChild(left);
+        a.appendChild(reviews);
 
         attachFastNavigation(a);
 
         li.appendChild(a);
 
         return li;
+    }
+
+    function renderPopularCategories(data) {
+        const list = document.querySelector(".popular-categories-list");
+        if (!list) return;
+
+        list.innerHTML = "";
+
+        (data.popularCategories || []).forEach(category => {
+            list.appendChild(createCategoryItem(category));
+        });
     }
 
     /*
@@ -279,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
             resultsList.appendChild(li);
             return;
         }
-
+        
         data.categories.forEach(category => {
             resultsList.appendChild(
                 createCategoryItem(category)
@@ -291,6 +337,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 createProductItem(product)
             );
         });
+
+        const hr = document.createElement("hr");
+        hr.className = "divider my-4";
+        resultsList.appendChild(hr);
     }
 
     function search(query) {
@@ -313,6 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             renderRecents(data);
             renderSuggested(data);
+            renderPopularCategories(data);
         });
 
     /*

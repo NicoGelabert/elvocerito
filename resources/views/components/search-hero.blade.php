@@ -1,6 +1,6 @@
 <div class="search_hero" style="background-image:url('{{ asset('storage/common/hero-banner.jpg') }}')">
     <!-- <x-backgrounds.pinmaps /> -->
-    <div class="flex flex-col mx-auto gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
+    <div class="flex flex-col mx-auto gap-6 md:gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
         <div class="search_hero_container">
             <h1>Servicios cerca tuyo.</h1>
             <p class="subheading">Encontrá lo que necesitás fácil y rápido!</p>
@@ -16,8 +16,8 @@
             </x-button>
         </div>
         <!-- Botones Urgencias y Farmacias de turno -->
-        <div class="flex items-center justify-around gap-4 hidden">
-            <div>
+        <div class="flex items-center justify-center gap-4">
+            <div class="hidden">
                 <x-button href="/servicios?urgencies=true" class="btn btn-urgencies shadow-md"><x-icons.urgencies class="fill-white"/> urgencias</x-button>
             </div>
             <div>

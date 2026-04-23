@@ -22,11 +22,20 @@ class WelcomeController extends Controller
         })
         ->orderBy('name', 'asc')->get();
 
-        $anunciantes_destacados = Product::withCount('reviews')->where([
+        $anunciantes_destacados = Product::withCount(['reviews' => function ($q) {
+            $q->where('published', true)->where('email_verified', true);
+        }])
+        ->withAvg(['reviews' => function ($q) {
+            $q->where('published', true)->where('email_verified', true);
+        }], 'rating')
+        ->where([
             ['published', '=', 1],
             ['leading_home', '=', 1]
         ])->get()->map(function ($anunciante) {
             $anunciante->first_contact = $anunciante->contacts->first(); // Guarda solo el primer contacto
+            $anunciante->average_rating = $anunciante->reviews_avg_rating
+                ? round($anunciante->reviews_avg_rating, 1)
+                : null;
             return $anunciante;
         });
         $ultimos_anunciantes = Product::where('published', 1)
