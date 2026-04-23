@@ -77,6 +77,10 @@ class ProductController extends Controller
             });
         }
 
+        // ───── Ordenamiento ─────
+        $sort = request('sort', 'newest');
+        $query->orderBy('created_at', $sort === 'oldest' ? 'asc' : 'desc');
+
         if (request()->expectsJson()) {
 
             // ───── Carga relaciones y paginación ─────

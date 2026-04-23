@@ -224,6 +224,15 @@
             Disponible 24hs <span class="font-light ml-1" :class="showUrgenciesOnly ? 'inline' : 'hidden'">x</span>
           </button>
 
+          <!-- Badge botón filtrado por antigüedad -->
+          <button
+            class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
+            @click="toggleSortOrder"
+            :class="sortOrder === 'oldest' ? 'bg-gray-200' : 'bg-transparent'"
+          >
+            Más antiguos <span class="font-light ml-1" :class="sortOrder === 'oldest' ? 'inline' : 'hidden'">x</span>
+          </button>
+
           <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
           <button
             class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
@@ -354,6 +363,7 @@ export default {
       showMobileFilters: false,
       hasReviewsOnly: false,
       showOnDutyOnly: false,
+      sortOrder: 'newest',
     }
   },
 
@@ -374,6 +384,7 @@ export default {
     this.showUrgenciesOnly = urlParams.get("urgencies") === "true";
     this.hasReviewsOnly = urlParams.get("has_reviews") === "true";
     this.showOnDutyOnly = urlParams.get("on_duty") === "true";
+    this.sortOrder = urlParams.get("sort") || 'newest';
     this.fetchCategories()
     this.fetchProducts()
   },
@@ -388,6 +399,7 @@ export default {
         urgencies: this.showUrgenciesOnly || undefined,
         has_reviews: this.hasReviewsOnly || undefined,
         on_duty: this.showOnDutyOnly || undefined,
+        sort: this.sortOrder || undefined,
       }
 
       try {
@@ -435,6 +447,13 @@ export default {
         } else {
           url.searchParams.delete("page");
         }
+
+        if (this.sortOrder && this.sortOrder !== 'newest') {
+          url.searchParams.set("sort", this.sortOrder);
+        } else {
+          url.searchParams.delete("sort");
+        }
+
         window.history.pushState({}, "", url);
 
       } catch (err) {
@@ -480,6 +499,11 @@ export default {
 
     toggleHasReviews() {
       this.hasReviewsOnly = !this.hasReviewsOnly
+      this.fetchProducts(1)
+    },
+
+    toggleSortOrder() {
+      this.sortOrder = this.sortOrder === 'oldest' ? 'newest' : 'oldest'
       this.fetchProducts(1)
     },
 
