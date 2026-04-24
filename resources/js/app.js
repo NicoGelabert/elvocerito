@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // MOVIMIENTO DEL NAVBAR
 let prevScrollPos = window.scrollY;
-const scrollThreshold = 15;
+const scrollThreshold = 30;
 const navbar = document.getElementById("navbar");
 const productMenu = document.querySelector(".product_menu");
 const page = document.body.dataset.page;
