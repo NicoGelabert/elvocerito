@@ -20,7 +20,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CiiKrvQ2.js",
+    "file": "assets/app-DSWjBU8a.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -32,7 +32,7 @@
       "resources/js/article-view.js"
     ],
     "css": [
-      "assets/app-0S7OVTVa.css"
+      "assets/app-CG5K4J8W.css"
     ]
   },
   "resources/js/article-view.js": {
@@ -45,7 +45,7 @@
     ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-CXUZMM6r.js",
+    "file": "assets/catalog-CJtZRVO3.js",
     "name": "catalog",
     "src": "resources/js/catalog.js",
     "isDynamicEntry": true,
@@ -78,7 +78,7 @@
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-CJoLoNAm.css",
+    "file": "assets/styles-CKBJ2Lhd.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",

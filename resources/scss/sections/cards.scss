@@ -1,9 +1,12 @@
 .cards__section{
     @apply flex flex-col gap-8 my-8;
-    .title{
-    }
     .category_header{
-        @apply bg-gray_50 py-4 flex flex-col gap-4 z-50 transition-all duration-300 opacity-100 translate-y-0;
+        @apply sticky bg-gray_50 p-4 flex flex-col gap-4 z-40;
+        transition-duration: 300ms;
+        transition-property: top;
+        transition-timing-function: ease;
+    }
+    .title{
     }
     .cards__list{
         @apply w-full mx-auto pb-4;

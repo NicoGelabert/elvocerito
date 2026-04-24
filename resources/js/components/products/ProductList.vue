@@ -4,8 +4,8 @@
     <div v-if="loading" class="spinner-overlay"><div class="spinner"></div></div>
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div class="container cards__section">
-      <div class="category_header">
+    <div class="cards__section">
+      <div class="category_header" :style="{top: headerTop}">
         <h3>{{ title }}</h3>
           <!-- DESKTOP / TABLET -->
         <div class="flex items-center w-full relative gap-4 min-w-0">
@@ -112,7 +112,7 @@
         </div>
       </div>
       
-      <div class="w-full">
+      <div class="w-full container ">
         <!-- MOBILE: botón de apertura para Filtros para mostrar en mobile -->
         <div class="hidden">
           <button
@@ -364,6 +364,7 @@ export default {
       hasReviewsOnly: false,
       showOnDutyOnly: false,
       sortOrder: 'newest',
+      navbarVisible: true,
     }
   },
 
@@ -376,6 +377,9 @@ export default {
       const cat = this.categories.flatMap(g => g.categories).find(c => c.slug === this.selectedCategory)
       return cat?.name?.toLowerCase() === 'farmacias'
     },
+    headerTop() {
+      return this.navbarVisible ? "2.5rem" : "0";
+    }
   },
 
   mounted() {
@@ -387,6 +391,10 @@ export default {
     this.sortOrder = urlParams.get("sort") || 'newest';
     this.fetchCategories()
     this.fetchProducts()
+    window.addEventListener("navbar-change", this.onNavbarChange);
+  },
+  beforeUnmount() {
+    window.removeEventListener("navbar-change", this.onNavbarChange);
   },
 
   methods: {
@@ -524,6 +532,22 @@ export default {
       if (!date) return ''
       const d = new Date(date)
       return d.getFullYear()
+    },
+
+    onNavbarChange(e) {
+      this.navbarVisible = e.detail.visible;
+    },
+
+    handleScroll() {
+      if (window.innerWidth < 1024) return;
+
+      const currentScrollPos = window.scrollY;
+      const scrollThreshold = 15;
+
+      if (Math.abs(currentScrollPos - this.prevScrollPos) > scrollThreshold) {
+        this.navbarVisible = currentScrollPos < this.prevScrollPos;
+        this.prevScrollPos = currentScrollPos;
+      }
     }
   },
 }

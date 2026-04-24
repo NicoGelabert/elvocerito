@@ -263,6 +263,7 @@ function toggleNavbar(currentScrollPos) {
   if (scrollDifference >= scrollThreshold) {
     const isScrollingUp = prevScrollPos > currentScrollPos;
     navbar.style.top = isScrollingUp ? "0" : `-${navbar.offsetHeight}px`;
+    window.dispatchEvent(new CustomEvent("navbar-change", { detail: { visible: isScrollingUp } }));
     prevScrollPos = currentScrollPos;
   }
 }
