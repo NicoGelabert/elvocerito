@@ -1,11 +1,16 @@
 <div 
-  x-data="{ isOpen: false }" 
+  x-data="{ isOpen: false, }" 
   x-init="
     window.addEventListener('open-search-modal', () => {
       isOpen = true
+      document.body.style.overflow = 'hidden'
       if (window.innerWidth >= 768) {
         $nextTick(() => $refs.searchInput.focus())
       }
+    });
+    window.addEventListener('close-search-modal', () => {
+      isOpen = false
+      document.body.style.overflow = ''
     })
   "
 >

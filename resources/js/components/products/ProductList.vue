@@ -5,150 +5,13 @@
     <div v-if="error" class="error">{{ error }}</div>
 
     <div class="container cards__section">
-      <div class="w-full">
+      <div class="category_header">
         <h3>{{ title }}</h3>
-      </div>
-      <!-- MOBILE: botón de apertura para mostrar en mobile -->
-      <div class="hidden">
-        <button
-          @click="toggleMobileFilters"
-          class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
-        >
-          <FilterIcon class="w-4 h-4 text-gray-600 fill-black" />
-          <span>Filtrar</span>
-        </button>
+          <!-- DESKTOP / TABLET -->
+        <div class="flex items-center w-full relative gap-4 min-w-0">
 
-        <!-- Overlay flotante -->
-        <transition name="fade-slide">
-          <div
-            v-if="showMobileFilters"
-            class="bg-popup flex items-center justify-center"
-          >
-            <div class="bg-white w-11/12 max-w-md mx-auto p-6 rounded-2xl shadow-xl relative">
-              <button
-                @click="toggleMobileFilters"
-                class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-
-              <h4 class="text-lg font-semibold mb-4">Filtros</h4>
-              <hr class="mb-4" />
-
-              <!-- Categoría -->
-              <div class="mb-6">
-                <h5 class="text-gray_600 mb-2">Categoría</h5>
-                <button
-                  @click="toggleDropdown"
-                  class="flex gap-4 text-xs text-gray-500 w-full justify-between items-center px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
-                >
-                  {{ selectedCategoryName || 'Selecciona una categoría' }}
-                  <span :class="{ 'rotate-180': isOpen }" class="text-gray-400 transition-transform duration-300">▼</span>
-                </button>
-
-                <transition name="fade-slide">
-                  <ul
-                    v-if="isOpen"
-                    class="absolute z-50 w-[calc(100%-3rem)] bg-white border border-gray-200 mt-1 max-h-72 overflow-auto rounded-lg shadow-lg"
-                  >
-                    <li>
-                      <button
-                        @click="selectCategory(null)"
-                        class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded"
-                        :class="{ 'bg-blue-100 font-semibold': selectedCategory === null }"
-                      >
-                        Todas
-                      </button>
-                    </li>
-
-                    <template v-for="group in categories" :key="group.letter">
-                      <li class="px-4 py-1 mt-3 mb-1 text-gray-400 font-bold border-b">{{ group.letter }}</li>
-
-                      <li v-for="category in group.categories" :key="category.id">
-                        <button
-                          @click="selectCategory(category)"
-                          class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded"
-                          :class="{ 'bg-blue-100 font-semibold': selectedCategory === category.slug }"
-                        >
-                          {{ category.name }}
-                        </button>
-                      </li>
-                    </template>
-                  </ul>
-                </transition>
-              </div>
-
-              <div class="flex flex-wrap gap-8">
-                <!-- Reviews -->
-                <div>
-                  <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
-                  <div class="flex items-center gap-2">
-                    <button
-                      @click="toggleHasReviews"
-                      class="relative w-9 h-5 rounded-full transition-all duration-300"
-                      :class="hasReviewsOnly ? 'bg-amber-300' : 'bg-gray-300'"
-                    >
-                      <span
-                        class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
-                        :class="hasReviewsOnly ? 'translate-x-4' : ''"
-                      ></span>
-                    </button>
-                  </div>
-                </div>
-  
-                <!-- Urgencias -->
-                <div>
-                  <h5 class="text-gray_600 mb-4">Urgencias</h5>
-                  <div class="flex items-center gap-2">
-                    <button
-                      @click="toggleUrgencies"
-                      class="relative w-9 h-5 rounded-full transition-all duration-300"
-                      :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
-                    >
-                      <span
-                        class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
-                        :class="showUrgenciesOnly ? 'translate-x-4' : ''"
-                      ></span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Farmacia de Turno -->
-                <div v-if="isFarmaciaSelected">
-                  <h5 class="text-gray_600 mb-4">Farmacia de Turno</h5>
-                  <div class="flex items-center gap-2">
-                    <button
-                      @click="toggleOnDuty"
-                      class="relative w-9 h-5 rounded-full transition-all duration-300"
-                      :class="showOnDutyOnly ? 'bg-cyan-400' : 'bg-gray-300'"
-                    >
-                      <span
-                        class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
-                        :class="showOnDutyOnly ? 'translate-x-4' : ''"
-                      ></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-6 text-right">
-                <button
-                  @click="toggleMobileFilters"
-                  class="px-5 py-2 bg-primary text-white rounded-lg shadow"
-                >
-                  Aplicar filtros
-                </button>
-              </div>
-            </div>
-          </div>
-        </transition>
-      </div>
-
-      <!-- DESKTOP / TABLET -->
-      <div class="flex items-center w-full relative gap-4 min-w-0">
-
-        <!-- Dropdown fijo -->
-        <div v-if="showCategoryFilter" class="flex-shrink-0 relative">
+          <!-- Dropdown fijo -->
+          <div v-if="showCategoryFilter" class="flex-shrink-0 relative">
           <button
             @click="toggleDropdown"
             class="flex gap-4 text-sm text-gray-500 w-auto justify-between items-center px-4 py-2 bg-white border rounded-lg shadow-sm hover:shadow-md"
@@ -188,130 +51,267 @@
               </template>
             </ul>
           </transition>
-        </div>
+          </div>
 
-        <!-- Badges con scroll -->
-         <div class="relative flex-1 min-w-0">
-          <!-- Fade derecha -->
-          <div class="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-gray_50 to-transparent z-10"></div>
-          <div class="flex flex-nowrap gap-4 overflow-x-auto py-1 scrollbar-none">
+          <!-- Badges con scroll -->
+          <div class="relative flex-1 min-w-0">
+            <!-- Fade derecha -->
+            <div class="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-gray_50 to-transparent z-10">
+            </div>
+            <div class="flex flex-nowrap gap-4 overflow-x-auto py-1 scrollbar-none">
 
-          <!-- Badge botón categoría, no dropdown -->
-          <!-- <button
+            <!-- Badge botón categoría, no dropdown -->
+            <!-- <button
             class="flex-shrink-0 flex items-center justify-center px-2 py-1 rounded-md leading-none font-semibold transition-all shadow-sm border border-gray-300 bg-gray-200 text-gray-70 w-fit"
             @click="selectCategory(null)"
             v-if="selectedCategoryName && showCategoryFilter"
-          >
+            >
             <h1 class="text-xs leading-none">Categoría {{ selectedCategoryName }}</h1>
             <span class="text-xs font-light ml-1">x</span>
-          </button> -->
+            </button> -->
 
-          <!-- Badge botón filtrado por reviews -->
-          <button
+            <!-- Badge botón filtrado por reviews -->
+            <button
             class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleHasReviews"
             :class="hasReviewsOnly ? 'bg-gray-200' : 'bg-transparent'"
-          >
+            >
             Con Reseñas <span class="font-light ml-1" :class="hasReviewsOnly ? 'inline' : 'hidden'">x</span>
-          </button>
+            </button>
 
-          <!-- Badge botón filtrado por urgencias -->
-          <button
+            <!-- Badge botón filtrado por urgencias -->
+            <button
             class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleUrgencies"
             :class="showUrgenciesOnly ? 'bg-gray-200' : 'bg-transparent'"
-          >
+            >
             Disponible 24hs <span class="font-light ml-1" :class="showUrgenciesOnly ? 'inline' : 'hidden'">x</span>
-          </button>
+            </button>
 
-          <!-- Badge botón filtrado por antigüedad -->
-          <button
+            <!-- Badge botón filtrado por antigüedad -->
+            <button
             class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleSortOrder"
             :class="sortOrder === 'oldest' ? 'bg-gray-200' : 'bg-transparent'"
-          >
+            >
             Más antiguos <span class="font-light ml-1" :class="sortOrder === 'oldest' ? 'inline' : 'hidden'">x</span>
-          </button>
+            </button>
 
-          <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
-          <button
+            <!-- Badge botón filtrado por farmacias de turno (solo si Farmacias) -->
+            <button
             class="flex-shrink-0 items-center justify-center px-2 py-1 rounded-md text-xs leading-none font-semibold transition-all shadow-sm border border-gray-300 text-gray-700 w-fit"
             @click="toggleOnDuty"
             v-if="isFarmaciaSelected"
             :class="showOnDutyOnly ? 'bg-gray-200' : 'bg-transparent'"
-          >
+            >
             Hoy de Turno <span class="font-light ml-1" :class="showOnDutyOnly ? 'inline' : 'hidden'">x</span>
+            </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full">
+        <!-- MOBILE: botón de apertura para Filtros para mostrar en mobile -->
+        <div class="hidden">
+          <button
+            @click="toggleMobileFilters"
+            class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
+          >
+            <FilterIcon class="w-4 h-4 text-gray-600 fill-black" />
+            <span>Filtrar</span>
           </button>
 
-          </div>
-        </div>
-      </div>
+          <!-- Overlay flotante -->
+          <transition name="fade-slide">
+            <div
+              v-if="showMobileFilters"
+              class="bg-popup flex items-center justify-center"
+            >
+              <div class="bg-white w-11/12 max-w-md mx-auto p-6 rounded-2xl shadow-xl relative">
+                <button
+                  @click="toggleMobileFilters"
+                  class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
 
-      <!-- Listado -->
-      <div :class="['cards__list', { 'loading-opacity': loading }]">
-        <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <li v-for="product in products.data" :key="product.id">
-            <div class="card__body">
-              <div class="card__content">
-                  <div class="card__left">
-                      <img class="card__img__rounded" :src="product.image_url" alt="product.title">
-                  </div>
-                  <div class="card__right">
-                      <div class="card__info" v-if="product.categories?.length">
-                          <h6>{{ product.categories[0].name }}</h6>
-                          <Badge status="Disponible">
-                            <span>Desde {{ formatYear(product.created_at) }}</span>
-                          </Badge>
-                          <h5>{{ product.title }}</h5>
-                          <p class="description">{{ product.short_description }}</p>
-                      </div>
-                      <div class="card__meta">
-                          <div class="card__rating">
-                              <RatingAverage :product-id="product.id" />
-                          </div>
-                          <Badge v-if="product.urgencies" status="Urgencias">
-                            <UrgenciesIcon />
-                            <span>Disponible 24hs</span>
-                          </Badge>
-                          <Badge v-if="product.is_on_duty_now" status="De Turno">
-                            <span>Hoy de turno</span>
-                          </Badge>
-                      </div>
-                  </div>
-              </div>
-              <hr class="divider my-2 w-full">
-              <div class="card__footer card__footer--between">
-                  <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
-                    Ver servicio
-                  </a>
-                  <button class="btn btn-primary" @click="openModal('contact', product)">
-                    Contactar
+                <h4 class="text-lg font-semibold mb-4">Filtros</h4>
+                <hr class="mb-4" />
+
+                <!-- Categoría -->
+                <div class="mb-6">
+                  <h5 class="text-gray_600 mb-2">Categoría</h5>
+                  <button
+                    @click="toggleDropdown"
+                    class="flex gap-4 text-xs text-gray-500 w-full justify-between items-center px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
+                  >
+                    {{ selectedCategoryName || 'Selecciona una categoría' }}
+                    <span :class="{ 'rotate-180': isOpen }" class="text-gray-400 transition-transform duration-300">▼</span>
                   </button>
+
+                  <transition name="fade-slide">
+                    <ul
+                      v-if="isOpen"
+                      class="absolute z-50 w-[calc(100%-3rem)] bg-white border border-gray-200 mt-1 max-h-72 overflow-auto rounded-lg shadow-lg"
+                    >
+                      <li>
+                        <button
+                          @click="selectCategory(null)"
+                          class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded"
+                          :class="{ 'bg-blue-100 font-semibold': selectedCategory === null }"
+                        >
+                          Todas
+                        </button>
+                      </li>
+
+                      <template v-for="group in categories" :key="group.letter">
+                        <li class="px-4 py-1 mt-3 mb-1 text-gray-400 font-bold border-b">{{ group.letter }}</li>
+
+                        <li v-for="category in group.categories" :key="category.id">
+                          <button
+                            @click="selectCategory(category)"
+                            class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded"
+                            :class="{ 'bg-blue-100 font-semibold': selectedCategory === category.slug }"
+                          >
+                            {{ category.name }}
+                          </button>
+                        </li>
+                      </template>
+                    </ul>
+                  </transition>
+                </div>
+
+                <div class="flex flex-wrap gap-8">
+                  <!-- Reviews -->
+                  <div>
+                    <h5 class="text-gray_600 mb-4">Sólo con Reviews</h5>
+                    <div class="flex items-center gap-2">
+                      <button
+                        @click="toggleHasReviews"
+                        class="relative w-9 h-5 rounded-full transition-all duration-300"
+                        :class="hasReviewsOnly ? 'bg-amber-300' : 'bg-gray-300'"
+                      >
+                        <span
+                          class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                          :class="hasReviewsOnly ? 'translate-x-4' : ''"
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Urgencias -->
+                  <div>
+                    <h5 class="text-gray_600 mb-4">Urgencias</h5>
+                    <div class="flex items-center gap-2">
+                      <button
+                        @click="toggleUrgencies"
+                        class="relative w-9 h-5 rounded-full transition-all duration-300"
+                        :class="showUrgenciesOnly ? 'bg-red-500' : 'bg-gray-300'"
+                      >
+                        <span
+                          class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                          :class="showUrgenciesOnly ? 'translate-x-4' : ''"
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Farmacia de Turno -->
+                  <div v-if="isFarmaciaSelected">
+                    <h5 class="text-gray_600 mb-4">Farmacia de Turno</h5>
+                    <div class="flex items-center gap-2">
+                      <button
+                        @click="toggleOnDuty"
+                        class="relative w-9 h-5 rounded-full transition-all duration-300"
+                        :class="showOnDutyOnly ? 'bg-cyan-400' : 'bg-gray-300'"
+                      >
+                        <span
+                          class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-all"
+                          :class="showOnDutyOnly ? 'translate-x-4' : ''"
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-6 text-right">
+                  <button
+                    @click="toggleMobileFilters"
+                    class="px-5 py-2 bg-primary text-white rounded-lg shadow"
+                  >
+                    Aplicar filtros
+                  </button>
+                </div>
               </div>
+            </div>
+          </transition>
+        </div>
+        <!-- Listado -->
+        <div :class="['cards__list', { 'loading-opacity': loading }]">
+          <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <li v-for="product in products.data" :key="product.id">
+              <div class="card__body">
+                <div class="card__content">
+                    <div class="card__left">
+                        <img class="card__img__rounded" :src="product.image_url" alt="product.title">
+                    </div>
+                    <div class="card__right">
+                        <div class="card__info" v-if="product.categories?.length">
+                            <h6>{{ product.categories[0].name }}</h6>
+                            <Badge status="Disponible">
+                              <span>Desde {{ formatYear(product.created_at) }}</span>
+                            </Badge>
+                            <h5>{{ product.title }}</h5>
+                            <p class="description">{{ product.short_description }}</p>
+                        </div>
+                        <div class="card__meta">
+                            <div class="card__rating">
+                                <RatingAverage :product-id="product.id" />
+                            </div>
+                            <Badge v-if="product.urgencies" status="Urgencias">
+                              <UrgenciesIcon />
+                              <span>Disponible 24hs</span>
+                            </Badge>
+                            <Badge v-if="product.is_on_duty_now" status="De Turno">
+                              <span>Hoy de turno</span>
+                            </Badge>
+                        </div>
+                    </div>
+                </div>
+                <hr class="divider my-2 w-full">
+                <div class="card__footer card__footer--between">
+                    <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
+                      Ver servicio
+                    </a>
+                    <button class="btn btn-primary" @click="openModal('contact', product)">
+                      Contactar
+                    </button>
+                </div>
+            </div>
+            </li>
+          </ul>
+          <div v-if="!loading && products.data && products.data.length === 0" class="w-full text-center py-12 text-gray-400">
+            No se han encontrado resultados.
           </div>
-          </li>
-        </ul>
-        <div v-if="!loading && products.data && products.data.length === 0" class="w-full text-center py-12 text-gray-400">
-          No se han encontrado resultados.
+        </div>
+        <!-- Paginación -->
+        <div v-if="showPagination && products && products.links && products.links.length > 3" class="pagination flex flex-wrap gap-2 mt-8 justify-center">
+          <button
+            v-for="(link, index) in products.links"
+            :key="index"
+            :disabled="!link.url"
+            v-html="link.label"
+            @click="goToLink(link)"
+            class="px-3 py-1 border rounded text-sm"
+            :class="{
+              'bg-primary text-white font-bold': link.active,
+              'opacity-50 cursor-not-allowed': !link.url
+            }"
+          ></button>
         </div>
       </div>
-
-      <!-- Paginación -->
-      <div v-if="showPagination && products && products.links && products.links.length > 3" class="pagination flex flex-wrap gap-2 mt-8 justify-center">
-        <button
-          v-for="(link, index) in products.links"
-          :key="index"
-          :disabled="!link.url"
-          v-html="link.label"
-          @click="goToLink(link)"
-          class="px-3 py-1 border rounded text-sm"
-          :class="{
-            'bg-primary text-white font-bold': link.active,
-            'opacity-50 cursor-not-allowed': !link.url
-          }"
-        ></button>
-      </div>
-
     </div>
   </div>
 </template>
