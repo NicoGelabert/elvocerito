@@ -1,11 +1,11 @@
 <template>
   <div class="flex justify-between mb-3">
-    <h1 class="text-3xl font-semibold">Users</h1>
+    <h1 class="text-3xl font-semibold">Usuarios</h1>
     <button type="button"
             @click="showAddNewModal()"
             class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:text-black hover:bg-white focus:outline-none"
     >
-      Add new User
+      Crear nuevo usuario
     </button>
   </div>
   <UsersTable @clickEdit="editUser"/>
@@ -20,10 +20,8 @@ import UsersTable from "./UsersTable.vue";
 
 const DEFAULT_USER = {
   id: '',
-  title: '',
-  description: '',
-  image: '',
-  price: ''
+  name: '',
+  email: '',
 }
 
 const users = computed(() => store.state.users);

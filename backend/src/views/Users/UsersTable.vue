@@ -2,7 +2,7 @@
   <div class="bg-white p-4 rounded-lg shadow animate-fade-in-down">
     <div class="flex justify-between border-b-2 pb-3">
       <div class="flex items-center">
-        <span class="whitespace-nowrap mr-3">Per Page</span>
+        <span class="whitespace-nowrap mr-3">Por página</span>
         <select @change="getUsers(null)" v-model="perPage"
                 class="appearance-none relative block w-24 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
           <option value="5">5</option>
@@ -11,12 +11,12 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <span class="ml-3">Found {{users.total}} users</span>
+        <span class="ml-3">Encontrados {{users.total}} usuarios</span>
       </div>
       <div>
         <input v-model="search" @change="getUsers(null)"
                class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-               placeholder="Type to Search users">
+               placeholder="Buscar usuario">
       </div>
     </div>
 
@@ -29,7 +29,7 @@
         </TableHeaderCell>
         <TableHeaderCell field="name" :sort-field="sortField" :sort-direction="sortDirection"
                          @click="sortUsers('email')">
-          Name
+          Nombre
         </TableHeaderCell>
         <TableHeaderCell field="email" :sort-field="sortField" :sort-direction="sortDirection"
                          @click="sortUsers('email')">
@@ -37,10 +37,10 @@
         </TableHeaderCell>
         <TableHeaderCell field="created_at" :sort-field="sortField" :sort-direction="sortDirection"
                          @click="sortUsers('created_at')">
-          Create Date
+          Fecha de Creación
         </TableHeaderCell>
         <TableHeaderCell field="actions">
-          Actions
+          Acciones
         </TableHeaderCell>
       </tr>
       </thead>
@@ -49,7 +49,7 @@
         <td colspan="6">
           <Spinner v-if="users.loading"/>
           <p v-else class="text-center py-8 text-gray-700">
-            There are no users
+            No se encontraron usuarios
           </p>
         </td>
       </tr>
@@ -103,7 +103,7 @@
                         class="mr-2 h-5 w-5 text-gray-500"
                         aria-hidden="true"
                       />
-                      Edit
+                      Editar
                     </button>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
@@ -119,7 +119,7 @@
                         class="mr-2 h-5 w-5 text-gray-500"
                         aria-hidden="true"
                       />
-                      Delete
+                      Eliminar
                     </button>
                   </MenuItem>
                 </div>
@@ -133,7 +133,7 @@
 
     <div v-if="!users.loading" class="flex justify-between items-center mt-5">
       <div v-if="users.data.length">
-        Showing from {{ users.from }} to {{ users.to }}
+        Mostrando desde {{ users.from }} a {{ users.to }}
       </div>
       <nav
         v-if="users.total > users.limit"
