@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="flex flex-col md:flex-row justify-between mb-3 w-full gap-4">
-          <h1 class="text-3xl font-semibold">Categories</h1>
+          <h1 class="text-3xl font-semibold">Categorías</h1>
           <div class="flex gap-8">
             <ExportButton
               url="/export-categories"
@@ -11,7 +11,7 @@
             <router-link type="button" :to="{name: 'app.categories.create'}"
                           class="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:text-black hover:bg-white focus:outline-none text-center"
             >
-            Add new Category
+            Crear nueva categoría
             </router-link>
           </div> 
       </div>

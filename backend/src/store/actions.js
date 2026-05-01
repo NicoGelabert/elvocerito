@@ -131,11 +131,16 @@ export function deleteHomeHeroBanner({commit}, id) {
 }
 
 // CATEGORIES
-export function getCategories({commit, state}, {sort_field, sort_direction} = {}) {
+export function getCategories({commit, state}, {url = null, search = '', per_page, sort_field, sort_direction} = {}) {
   commit('setCategories', [true])
-  return axiosClient.get('/categories', {
+  url = url || '/categories'
+  const params = {
+    per_page: state.categories.limit,
+  }
+  return axiosClient.get(url, {
     params: {
-      sort_field, sort_direction
+      ...params,
+      search, per_page, sort_field, sort_direction
     }
   })
     .then((response) => {

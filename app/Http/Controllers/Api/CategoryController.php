@@ -19,16 +19,17 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sortField = request('sort_field', 'updated_at');
-        $sortDirection = request('sort_direction', 'desc');
+        $perPage = $request->get('per_page');
+        $search = $request->get('search', '');
+        $sortField = $request->get('sort_field', 'updated_at');
+        $sortDirection = $request->get('sort_direction', 'desc');
 
-        // Obtener categorías con sus productos
-        $categories = Category::with('products')  // Incluye productos relacionados
+        $categories = Category::query()
+            ->when($search, fn($q) => $q->where('name', 'like', "%{$search}%"))
             ->orderBy($sortField, $sortDirection)
-            ->latest()
-            ->get();
+            ->paginate($perPage);
 
         return CategoryResource::collection($categories);
     }

@@ -38,7 +38,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
     Route::apiResource('homeherobanners', HomeHeroBannerController::class);
-    Route::apiResource('categories', CategoryController::class)->except('show');
+    Route::apiResource('categories', CategoryController::class);
     Route::get('/categories/tree', [CategoryController::class, 'getAsTree']);
     Route::get('/export-categories', [CategoryController::class, 'exportCategories']);
     Route::apiResource('products', ProductController::class);

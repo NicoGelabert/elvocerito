@@ -1,8 +1,8 @@
 <template>
     <Menu as="div" class="relative inline-block text-left">
         <div>
-            <MenuButton class="inline-flex items-center justify-center rounded-full bg-black bg-opacity-0 hover:bg-opacity-5 focus:outline-none">
-                <EllipsisVerticalIcon class="h-5 w-5 text-black" aria-hidden="true" />
+            <MenuButton class="inline-flex items-center justify-center rounded-full">
+                <EllipsisVerticalIcon class="h-5 w-5 text-black hover:text-gray-500" aria-hidden="true" />
             </MenuButton>
         </div>
         <transition enter-active-class="transition duration-100 ease-out" enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">
@@ -15,7 +15,7 @@
                             v-bind="editProps"
                             >
                             <PencilSquareIcon class="mr-2 h-5 w-5 text-black" aria-hidden="true" />
-                                Edit
+                                Editar
                         </component>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
@@ -24,7 +24,7 @@
                             :class="[active ? 'bg-red-500 text-white' : 'text-gray-900','group flex w-full items-center rounded-md px-2 py-2 text-sm']"
                             >
                             <TrashIcon class="mr-2 h-5 w-5 text-red-500" aria-hidden="true" />
-                                Delete
+                                Eliminar
                         </button>
                     </MenuItem>
                 </div>
