@@ -1,7 +1,7 @@
 .cards__section{
     @apply flex flex-col gap-8 my-8;
     .category_header{
-        @apply sticky bg-gray_50 p-4 flex flex-col gap-4 z-40;
+        @apply sticky bg-gray_50 py-4 flex flex-col gap-4 z-40;
         transition-duration: 300ms;
         transition-property: top;
         transition-timing-function: ease;

@@ -96,7 +96,7 @@
       
       /* Spinner */
       .spinner-overlay {
-        @apply flex items-center justify-center bg-white/80 h-full w-full left-0 top-0 fixed z-50;
+        @apply flex items-center justify-center h-full w-full left-0 top-0 fixed z-50;
       }
       
       .spinner {

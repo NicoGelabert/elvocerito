@@ -5,7 +5,7 @@
     <div v-if="error" class="error">{{ error }}</div>
 
     <div class="cards__section">
-      <div class="category_header" :style="{top: headerTop}">
+      <div class="category_header container" :style="{top: headerTop}">
         <h3>{{ title }}</h3>
           <!-- DESKTOP / TABLET -->
         <div class="flex items-center w-full relative gap-4 min-w-0">
@@ -56,7 +56,7 @@
           <!-- Badges con scroll -->
           <div class="relative flex-1 min-w-0">
             <!-- Fade derecha -->
-            <div class="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-gray_50 to-transparent z-10">
+            <div class="pointer-events-none absolute right-0 top-0 h-full w-8 z-10">
             </div>
             <div class="flex flex-nowrap gap-4 overflow-x-auto py-1 scrollbar-none">
 
@@ -112,7 +112,7 @@
         </div>
       </div>
       
-      <div class="w-full container ">
+      <div class="w-full container">
         <!-- MOBILE: botón de apertura para Filtros para mostrar en mobile -->
         <div class="hidden">
           <button
@@ -292,8 +292,12 @@
             </div>
             </li>
           </ul>
-          <div v-if="!loading && products.data && products.data.length === 0" class="w-full text-center py-12 text-gray-400">
-            No se han encontrado resultados.
+          <div v-if="!loading && products.data && products.data.length === 0" class="w-full flex flex-col gap-4 text-center py-12 text-gray-400 mx-auto">
+            <img src="storage/common/no-results.png" alt="No se encontraron resultados" class="mx-auto">
+            <p class="text-base font-bold text-secondary">Buen... No encontramos resultados para tu búsqueda.</p>
+            <span class="text-sm italic">No te preocupes, todavía podemos ayudarte a encontrar lo que necesitás.</span>
+            <button @click="clearFilters" class="text-xl font-bold text-primary underline underline-offset-2">Limpiar filtros</button>
+            <span class="text-sm italic">O explorá estas alternativas similares:</span>
           </div>
         </div>
         <!-- Paginación -->
@@ -548,7 +552,16 @@ export default {
         this.navbarVisible = currentScrollPos < this.prevScrollPos;
         this.prevScrollPos = currentScrollPos;
       }
-    }
+    },
+
+    clearFilters() {
+      this.selectedCategory = this.initialCategory || null
+      this.showUrgenciesOnly = false
+      this.hasReviewsOnly = false
+      this.showOnDutyOnly = false
+      this.sortOrder = 'newest'
+      this.fetchProducts(1)
+    },
   },
 }
 </script>
