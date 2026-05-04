@@ -3,7 +3,7 @@
     .search_hero_container{
         @apply w-full flex flex-col gap-4 z-30
         items-center md:min-w-[32rem];
-        h1, p{
+        h1, h2, p{
             @apply drop-shadow-lg text-white;
         }
         p{

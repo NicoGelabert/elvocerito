@@ -16,8 +16,8 @@
             </x-button>
         </div>
         <!-- Botones Urgencias y Farmacias de turno -->
-        <div class="flex items-center justify-center gap-4">
-            <div class="hidden">
+        <div class="flex items-center justify-center gap-4 hidden">
+            <div class="">
                 <x-button href="/servicios?urgencies=true" class="btn btn-urgencies shadow-md"><x-icons.urgencies class="fill-white"/> urgencias</x-button>
             </div>
             <div>
