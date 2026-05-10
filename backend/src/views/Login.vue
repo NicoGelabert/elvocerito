@@ -32,12 +32,19 @@
                         class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none sm:text-sm"
                         placeholder="Email address"/>
                 </div>
-                <div>
-                <label for="password" class="sr-only">Password</label>
-                <input id="password" name="password" type="password" autocomplete="current-password" required=""
+                <div class="relative">
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password"
+                        :type="showPassword ? 'text' : 'password'"
+                        autocomplete="current-password" required=""
                         v-model="user.password"
-                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none sm:text-sm"
                         placeholder="Password"/>
+                    <button type="button" @click="showPassword = !showPassword"
+                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 z-10">
+                        <EyeIcon v-if="!showPassword" class="h-5 w-5"/>
+                        <EyeSlashIcon v-else class="h-5 w-5"/>
+                    </button>
                 </div>
             </div>
 
@@ -99,10 +106,12 @@
 <script setup>
 
 import {ref} from 'vue'
-import {LockClosedIcon} from '@heroicons/vue/24/solid'
+import {LockClosedIcon, EyeIcon, EyeSlashIcon} from '@heroicons/vue/24/solid'
 import GuestLayout from '../components/GuestLayout.vue'
 import store from "../store"
 import router from "../router"
+
+const showPassword = ref(false)
 
 let loading = ref(false);
 let errorMsg = ref("");

@@ -4,18 +4,17 @@ namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class ResetPasswordNotification extends ResetPassword
 {
     public $token;
+    protected ?string $frontendUrl;
 
-    public function __construct($token)
+    public function __construct($token, ?string $frontendUrl = null)
     {
         $this->token = $token;
+        $this->frontendUrl = $frontendUrl ?? config('app.admin_url');
     }
 
     /**
@@ -26,7 +25,10 @@ class ResetPasswordNotification extends ResetPassword
      */
     public function toMail($notifiable)
     {
-        $url = url(config('app.url').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false));
+        $url = $this->frontendUrl
+            . '/reset-password/'
+            . $this->token
+            . '?email=' . urlencode($notifiable->getEmailForPasswordReset());
 
         return (new MailMessage)
             ->subject(Lang::get('emails.reset_password.subject'))

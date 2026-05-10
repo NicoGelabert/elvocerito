@@ -4,7 +4,10 @@
         
         <Menu as="div" class="relative inline-block text-left">
             <MenuButton class="flex items-center" @click="toggleChevronDownIcon()">
-                <img src="https://randomuser.me/api/portraits/men/1.jpg" class="rounded-full w-8 mr-2">
+                <div :class="avatarColor"
+                    class="rounded-full w-8 h-8 mr-2 flex items-center justify-center text-white text-xs font-semibold">
+                    {{ initials }}
+                </div>
                 <small>{{currentUser.name}}</small>
                     <div :class="[toggleIconDown ? 'iconClosed' : 'iconOpen']" >
                         <ChevronUpIcon
@@ -89,6 +92,21 @@ function logout() {
     })
 }
 
+const colors = [
+    'bg-red-500', 'bg-orange-500', 'bg-amber-500', 'bg-yellow-500',
+    'bg-lime-500', 'bg-emerald-500', 'bg-teal-500', 'bg-cyan-500',
+    'bg-blue-500', 'bg-indigo-500',
+]
+
+const initials = computed(() => {
+    const name = currentUser.value?.name ?? ''
+    return name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+})
+
+const avatarColor = computed(() => {
+    const hash = initials.value.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
+    return colors[hash % colors.length]
+})
 
 </script>
 

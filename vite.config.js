@@ -25,4 +25,12 @@ export default defineConfig({
         }),
     ],
     base: process.env.ASSET_URL,
+    server: {
+        proxy: {
+            '/api': {
+                target: process.env.APP_URL ?? 'http://localhost:8000',
+                changeOrigin: true,
+            },
+        },
+    },
 });

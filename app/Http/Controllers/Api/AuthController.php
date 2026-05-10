@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 
 class AuthController extends Controller
@@ -54,6 +55,46 @@ class AuthController extends Controller
         $user->currentAccessToken()->delete();
 
         return response('', 204);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email'),
+            function ($user, $token) {
+                $user->sendPasswordResetNotification($token, config('app.admin_url'));
+            }
+        );
+
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(['status' => __($status)]);
+        }
+
+        return response()->json(['message' => __($status)], 422);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token'    => 'required',
+            'email'    => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill(['password' => bcrypt($password)])->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json(['status' => __($status)]);
+        }
+
+        return response()->json(['message' => __($status)], 422);
     }
 
     public function getUser(Request $request)

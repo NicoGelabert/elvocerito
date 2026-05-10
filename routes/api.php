@@ -101,3 +101,5 @@ Route::apiResource('authors', AuthorController::class)->only(['index', 'show']);
 Route::get('/categories/{category:slug}/products', [ProductController::class, 'productsByCategory']);
 Route::get('categories/{category}/products', [ProductController::class, 'productsByCategory'])->name('category.products');
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('/forgot-password', [\App\Http\Controllers\Api\AuthController::class, 'forgotPassword']);
+Route::post('/reset-password', [\App\Http\Controllers\Api\AuthController::class, 'resetPassword']);
