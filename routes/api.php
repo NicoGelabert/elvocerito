@@ -103,3 +103,9 @@ Route::get('categories/{category}/products', [ProductController::class, 'product
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('/forgot-password', [\App\Http\Controllers\Api\AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [\App\Http\Controllers\Api\AuthController::class, 'resetPassword']);
+Route::get('/mail-preview', function () {
+    $user = \App\Models\User::first();
+    $token = app('auth.password.broker')->createToken($user);
+    return (new \App\Notifications\ResetPasswordNotification($token))
+        ->toMail($user);
+});

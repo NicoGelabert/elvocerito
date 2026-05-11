@@ -38,7 +38,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #6C4852;
+    color: #9AC01B;
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
@@ -77,7 +77,7 @@ img {
 /* Layout */
 
 .wrapper {
-    background-color: #F5F5F5;
+    background-color: #F5F7FA;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     margin: 0;
@@ -98,12 +98,13 @@ img {
 /* Header */
 
 .header {
+    background-color: #111827;
     padding: 25px 0;
     text-align: center;
 }
 
 .header a {
-    color: #6C4852;
+    color: #9AC01B;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -112,20 +113,26 @@ img {
 /* Logo */
 
 .logo {
-    height: 150px;
-    max-height: 150px;
+    height: auto;
+    margin: 0 auto;
+    width: 250px;
+}
+
+.logo svg{
+    fill: #FFFFFF;
+    height: auto;
     width: 150px;
 }
-.logo svg{
-    fill: #6C4852;
+.logo svg #signo{
+    fill:#9AC01B;
 }
 
 /* Body */
 
 .body {
-    background-color: #F5F5F5;
-    border-bottom: 1px solid #F5F5F5;
-    border-top: 1px solid #F5F5F5;
+    background-color: #F5F7FA;
+    border-bottom: 1px solid #F5F7FA;
+    border-top: 1px solid #F5F7FA;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     margin: 0;
@@ -135,14 +142,14 @@ img {
 }
 
 .inner-body {
-    background-color: #FBFCFF;
-    border-color: #FBFCFF;
+    background-color: #ffffff;
+    border-color: #ffffff;
     border-radius: 2px;
     border-width: 1px;
     box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015);
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 0;
     -premailer-width: 570px;
     width: 570px;
@@ -173,13 +180,13 @@ img {
 }
 
 .footer p {
-    color: #6C4852;
+    color: #111827;
     font-size: 12px;
     text-align: center;
 }
 
 .footer a {
-    color: #6C4852;
+    color: #111827;
     text-decoration: underline;
 }
 
@@ -235,11 +242,11 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #6C4852;
-    border-bottom: 8px solid #6C4852;
-    border-left: 18px solid #6C4852;
-    border-right: 18px solid #6C4852;
-    border-top: 8px solid #6C4852;
+    background-color: #9AC01B;
+    border-bottom: 8px solid #9AC01B;
+    border-left: 18px solid #9AC01B;
+    border-right: 18px solid #9AC01B;
+    border-top: 8px solid #9AC01B;
 }
 
 .button-green,

@@ -36,6 +36,14 @@ use Inertia\Inertia;
 */
 
 Route::middleware(['guestOrVerified'])->group(function () {
+    // Ruta para diseñar los mails
+    // Route::get('/mail-preview', function () {
+    //     $user = \App\Models\User::first();
+    //     $token = app('auth.password.broker')->createToken($user);
+    //     return (new \App\Notifications\ResetPasswordNotification($token))
+    //         ->toMail($user);
+    // });
+    // Fin ruta para diseñar los mails
     Route::get('/', function () {
         return view('underconstruction');
     });
