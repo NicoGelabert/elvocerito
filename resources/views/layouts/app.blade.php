@@ -80,7 +80,7 @@
                 {{ $slot }}
             </main>            
             @include('layouts.footer')
-            
+            @include('components.search-modal')            
         </div>
     </body>
 </html>

@@ -22,22 +22,27 @@
         <ul class="search-results divide-y divide-gray-200"></ul>
     </div>
 
-    <!-- Categorías populares -->
-    <div class="search_list">
+    <!-- Categorías inyectadas (modo categories) -->
+    <div class="search_list injected-categories-section" style="display:none;">
+        <h4>Todas las Categorías</h4>
+        <ul class="divide-y divide-gray-200 injected-categories-list"></ul>
+    </div>
+
+    <!-- Categorías populares (modo search-hero) -->
+    <div class="search_list popular-categories-section">
         <h4>Categorías populares</h4>
         <ul class="divide-y divide-gray-200 popular-categories-list"></ul>
     </div>
 
-    <!-- Sugeridos = anunciantes destacados -->
-    <div class="search_list">
+    <!-- Sugeridos (modo search-hero) -->
+    <div class="search_list suggested-section">
         <hr class="divider my-4">
         <h4>Servicios sugeridos</h4>
         <div>
-            <ul class="divide-y divide-gray-200 suggested-list">
+            <ul class="divide-y divide-gray-200 suggested-list"></ul>
         </div>
     </div>
-    
-    
+
     <!-- Vistos recientemente -->
     <div id="recents-section" class="search_list" style="display: none;">
         <hr class="divider my-4">
@@ -55,6 +60,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
+    const searchBar = document.querySelector(".search_bar");
     const searchBox = document.querySelector(".search_input");
     const resultsList = document.querySelector(".search-results");
     const clearButton = document.querySelector(".clear-search");
@@ -91,16 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function highlightItem(index) {
         const items = getItems();
-
-        items.forEach(item => {
-            item.classList.remove("bg-gray-100");
-        });
-
+        items.forEach(item => item.classList.remove("bg-gray-100"));
         if (items[index]) {
             items[index].classList.add("bg-gray-100");
-            items[index].scrollIntoView({
-                block: "nearest"
-            });
+            items[index].scrollIntoView({ block: "nearest" });
         }
     }
 
@@ -125,19 +125,14 @@ document.addEventListener("DOMContentLoaded", function () {
     */
 
     function createCategoryItem(category) {
-
-        const slug =
-            category.slug ||
-            category.category_slug ||
-            category.url_slug;
+        const slug = category.slug || category.category_slug || category.url_slug;
 
         const li = document.createElement("li");
         li.className = "py-4 md:p-4 hover:bg-gray-200";
 
         const a = document.createElement("a");
         a.href = `${slug}`;
-        a.className =
-            "search-result-link flex justify-between items-center text-left w-full";
+        a.className = "search-result-link flex justify-between items-center text-left w-full";
 
         const wrapper = document.createElement("div");
         wrapper.className = "flex gap-2 items-center";
@@ -157,12 +152,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         wrapper.appendChild(img);
         wrapper.appendChild(name);
-
         a.appendChild(wrapper);
         a.appendChild(label);
-
         attachFastNavigation(a);
-
         li.appendChild(a);
 
         return li;
@@ -179,7 +171,6 @@ document.addEventListener("DOMContentLoaded", function () {
         a.href = `/${category.slug}/${product.slug}`;
         a.className = "search-result-link flex items-center justify-between gap-4 text-left w-full";
 
-        // DIV IZQUIERDA: imagen + info
         const left = document.createElement("div");
         left.className = "flex items-center gap-4";
 
@@ -200,11 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         info.appendChild(categoryText);
         info.appendChild(title);
-
         left.appendChild(img);
         left.appendChild(info);
 
-        // DIV DERECHA: rating
         const reviews = document.createElement("div");
         reviews.className = "flex items-center gap-1 text-xs text-gray-500 shrink-0";
 
@@ -223,80 +212,126 @@ document.addEventListener("DOMContentLoaded", function () {
 
         a.appendChild(left);
         a.appendChild(reviews);
-
         attachFastNavigation(a);
-
         li.appendChild(a);
 
         return li;
     }
 
-    function renderPopularCategories(data) {
-        const list = document.querySelector(".popular-categories-list");
-        if (!list) return;
-
-        list.innerHTML = "";
-
-        (data.popularCategories || []).forEach(category => {
-            list.appendChild(createCategoryItem(category));
-        });
-    }
-
     /*
     |--------------------------------------------------------------------------
-    | RECENTS / SUGGESTED
+    | RENDER SECCIONES
     |--------------------------------------------------------------------------
     */
 
+    function renderInjectedCategories(categories) {
+        const list = document.querySelector(".injected-categories-list");
+        if (!list) return;
+        list.innerHTML = "";
+        categories.forEach(cat => list.appendChild(createCategoryItem(cat)));
+    }
+
+    function renderPopularCategories(data) {
+        const list = document.querySelector(".popular-categories-list");
+        if (!list) return;
+        list.innerHTML = "";
+        (data.popularCategories || []).forEach(cat => list.appendChild(createCategoryItem(cat)));
+    }
+
+    function renderSuggested(data) {
+        const list = document.querySelector(".suggested-list");
+        if (!list) return;
+        list.innerHTML = "";
+        (data.anunciantes_destacados || []).forEach(product => list.appendChild(createProductItem(product)));
+    }
+
     function renderRecents(data) {
+        const recentsSection = document.getElementById("recents-section");
+        const catList = document.querySelector(".recent-categories");
+        const prodList = document.querySelector(".recent-products");
 
-        const recentsSection =
-            document.getElementById("recents-section");
-
-        const catList =
-            document.querySelector(".recent-categories");
-
-        const prodList =
-            document.querySelector(".recent-products");
-
-        const hasRecents =
-            data.viewedProducts.length > 0 ||
-            data.viewedCategories.length > 0;
-
-        recentsSection.style.display =
-            hasRecents ? "block" : "none";
+        const hasRecents = data.viewedProducts.length > 0 || data.viewedCategories.length > 0;
+        recentsSection.style.display = hasRecents ? "block" : "none";
 
         catList.innerHTML = "";
         prodList.innerHTML = "";
 
-        data.viewedCategories.forEach(category => {
-            catList.appendChild(
-                createCategoryItem(category)
-            );
-        });
-
-        data.viewedProducts.forEach(product => {
-            prodList.appendChild(
-                createProductItem(product)
-            );
-        });
+        data.viewedCategories.forEach(cat => catList.appendChild(createCategoryItem(cat)));
+        data.viewedProducts.forEach(product => prodList.appendChild(createProductItem(product)));
     }
 
-    function renderSuggested(data) {
+    function renderSearchResults(data) {
+        clearResults();
+        openResults();
+        renderRecents(data);
 
-        const suggestedList =
-            document.querySelector(".suggested-list");
+        const hasResults = data.products.length || data.categories.length;
 
-        if (!suggestedList) return;
+        if (!hasResults) {
+            const li = document.createElement("li");
+            li.className = "p-2 text-gray-500";
+            li.textContent = "No se encontraron resultados";
+            resultsList.appendChild(li);
+            return;
+        }
 
-        suggestedList.innerHTML = "";
+        data.categories.forEach(cat => resultsList.appendChild(createCategoryItem(cat)));
+        data.products.forEach(product => resultsList.appendChild(createProductItem(product)));
 
-        (data.anunciantes_destacados || []).forEach(product => {
-            suggestedList.appendChild(
-                createProductItem(product)
-            );
-        });
+        const hr = document.createElement("hr");
+        hr.className = "divider my-4";
+        resultsList.appendChild(hr);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | INIT POR MODO — se llama cada vez que se abre el modal
+    |--------------------------------------------------------------------------
+    */
+
+    function initModal(mode, injectedCategories) {
+        const isCategoryMode = mode === 'categories';
+
+        const injectedSection = document.querySelector(".injected-categories-section");
+        const popularSection = document.querySelector(".popular-categories-section");
+        const suggestedSection = document.querySelector(".suggested-section");
+
+        // Mostrar/ocultar secciones según modo
+        injectedSection.style.display = isCategoryMode ? "block" : "none";
+        popularSection.style.display = isCategoryMode ? "none" : "block";
+        suggestedSection.style.display = isCategoryMode ? "none" : "block";
+
+        // Limpiar input y resultados al abrir
+        searchBox.value = "";
+        clearButton.classList.add("hidden");
+        clearResults();
+        closeResults();
+
+        fetch("/search")
+            .then(r => r.json())
+            .then(data => {
+                renderRecents(data);
+
+                if (isCategoryMode) {
+                    renderInjectedCategories(injectedCategories);
+                } else {
+                    renderPopularCategories(data);
+                    renderSuggested(data);
+                }
+            });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ESCUCHAR APERTURA DEL MODAL
+    |--------------------------------------------------------------------------
+    */
+
+    window.addEventListener('open-search-modal', (e) => {
+        const mode = e.detail?.categories?.length > 0 ? 'categories' : 'search';
+        const injectedCategories = e.detail?.categories ?? [];
+        initModal(mode, injectedCategories);
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -304,67 +339,11 @@ document.addEventListener("DOMContentLoaded", function () {
     |--------------------------------------------------------------------------
     */
 
-    function renderSearchResults(data) {
-
-        clearResults();
-        openResults();
-
-        renderRecents(data);
-
-        const hasResults =
-            data.products.length ||
-            data.categories.length;
-
-        if (!hasResults) {
-
-            const li = document.createElement("li");
-            li.className = "p-2 text-gray-500";
-            li.textContent =
-                "No se encontraron resultados";
-
-            resultsList.appendChild(li);
-            return;
-        }
-        
-        data.categories.forEach(category => {
-            resultsList.appendChild(
-                createCategoryItem(category)
-            );
-        });
-
-        data.products.forEach(product => {
-            resultsList.appendChild(
-                createProductItem(product)
-            );
-        });
-
-        const hr = document.createElement("hr");
-        hr.className = "divider my-4";
-        resultsList.appendChild(hr);
-    }
-
     function search(query) {
-
         fetch(`/search?query=${encodeURIComponent(query)}`)
             .then(r => r.json())
-            .then(data => {
-                renderSearchResults(data);
-            });
+            .then(data => renderSearchResults(data));
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | INIT
-    |--------------------------------------------------------------------------
-    */
-
-    fetch("/search")
-        .then(r => r.json())
-        .then(data => {
-            renderRecents(data);
-            renderSuggested(data);
-            renderPopularCategories(data);
-        });
 
     /*
     |--------------------------------------------------------------------------
@@ -373,13 +352,8 @@ document.addEventListener("DOMContentLoaded", function () {
     */
 
     searchBox.addEventListener("input", function () {
-
         const query = this.value.trim();
-
-        clearButton.classList.toggle(
-            "hidden",
-            query.length === 0
-        );
+        clearButton.classList.toggle("hidden", query.length === 0);
 
         if (query.length < 3) {
             closeResults();
@@ -387,10 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         clearTimeout(debounceTimer);
-
-        debounceTimer = setTimeout(() => {
-            search(query);
-        }, 250);
+        debounceTimer = setTimeout(() => search(query), 250);
     });
 
     /*
@@ -400,34 +371,23 @@ document.addEventListener("DOMContentLoaded", function () {
     */
 
     searchBox.addEventListener("keydown", function (e) {
-
         const items = getItems();
-
         if (!items.length) return;
 
         if (e.key === "ArrowDown") {
             e.preventDefault();
-            selectedIndex =
-                selectedIndex < items.length - 1
-                    ? selectedIndex + 1
-                    : 0;
-
+            selectedIndex = selectedIndex < items.length - 1 ? selectedIndex + 1 : 0;
             highlightItem(selectedIndex);
         }
 
         if (e.key === "ArrowUp") {
             e.preventDefault();
-            selectedIndex =
-                selectedIndex > 0
-                    ? selectedIndex - 1
-                    : items.length - 1;
-
+            selectedIndex = selectedIndex > 0 ? selectedIndex - 1 : items.length - 1;
             highlightItem(selectedIndex);
         }
 
         if (e.key === "Enter") {
             e.preventDefault();
-
             if (selectedIndex >= 0 && items[selectedIndex]) {
                 navigate(items[selectedIndex].href);
             }
@@ -445,11 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
     */
 
     document.addEventListener("click", function (event) {
-
-        if (
-            !searchBox.contains(event.target) &&
-            !resultsList.contains(event.target)
-        ) {
+        if (!searchBox.contains(event.target) && !resultsList.contains(event.target)) {
             closeResults();
         }
     });

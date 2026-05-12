@@ -4,7 +4,7 @@
         <div class="search_hero_container">
             <p class="subheading">Hola!</p>
             <h1>Qué necesitás hoy?</h1>
-            <x-button class="w-full" onclick="window.dispatchEvent(new CustomEvent('open-search-modal'))">
+            <x-button class="w-full min-w-[320px]" onclick="window.dispatchEvent(new CustomEvent('open-search-modal'))">
                 <div class="relative">
                     <span class="w-full block bg-white px-3 py-2 border-transparent rounded-full drop-shadow-search_input focus:outline-none focus:ring-0 focus:border-none cursor-pointer text-gray-400 text-left">
                         Buscá una empresa o servicio
@@ -25,7 +25,4 @@
             </div>
         </div>
     </div>
-    
-    <x-search-modal />
-    
 </div>

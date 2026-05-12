@@ -1,8 +1,9 @@
 <div 
-  x-data="{ isOpen: false, }" 
+  x-data="{ isOpen: false, categories: []}" 
   x-init="
-    window.addEventListener('open-search-modal', () => {
+    window.addEventListener('open-search-modal', (e) => {
       isOpen = true
+      categories = e.detail?.categories ?? []
       document.body.style.overflow = 'hidden'
       if (window.innerWidth >= 768) {
         $nextTick(() => $refs.searchInput.focus())
@@ -34,7 +35,7 @@
         @click.stop
         class="bg-white rounded-t-lg md:rounded-lg shadow-xl w-full max-w-lg mx-auto h-full overflow-hidden"
       >
-        <div class="h-full overflow-y-auto px-6 pb-6 [scrollbar-gutter:stable]">
+        <div class="h-full overflow-y-auto px-4 pb-6 [scrollbar-gutter:stable]">
           <x-search />
         </div>
       </div>

@@ -1,13 +1,13 @@
 
 <section id="categories">
-    <x-category-modal :categories="$categories" />
     <div class="categories container">
         <div class="flex flex-col gap-12">
             <div class="categories_title">
                 <h3>Categorías</h3>
                 <div class="flex">
-                    
-                    <x-button class="see-all" onclick="window.dispatchEvent(new CustomEvent('open-category-modal'))">
+                    <x-button class="bg-transparent" x-data @click="window.dispatchEvent(new CustomEvent('open-search-modal', {
+                        detail: { categories: {{ $categories->toJson() }} }
+                    }))">
                         Ver todas
                     </x-button>
                 </div>
