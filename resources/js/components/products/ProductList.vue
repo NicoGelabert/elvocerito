@@ -110,8 +110,8 @@
             </div>
           </div>
         </div>
+        <hr>
       </div>
-      
       <div class="w-full container">
         <!-- MOBILE: botón de apertura para Filtros para mostrar en mobile -->
         <div class="hidden">
@@ -382,7 +382,7 @@ export default {
       return cat?.name?.toLowerCase() === 'farmacias'
     },
     headerTop() {
-      return this.navbarVisible ? "2.5rem" : "0";
+      return this.navbarVisible ? "3.5rem" : "0";
     }
   },
 
