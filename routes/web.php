@@ -15,6 +15,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\NewsletterSubscriberController;
+// Para diseño y previsualización de mails 
+// use App\Mail\NewsletterWelcomeMail;
+// use App\Models\NewsletterSubscriber;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -37,11 +40,18 @@ use Inertia\Inertia;
 
 Route::middleware(['guestOrVerified'])->group(function () {
     // Ruta para diseñar los mails
+    // Caso Autenticación
     // Route::get('/mail-preview', function () {
     //     $user = \App\Models\User::first();
     //     $token = app('auth.password.broker')->createToken($user);
     //     return (new \App\Notifications\ResetPasswordNotification($token))
     //         ->toMail($user);
+    // });
+    // Caso Suscripción
+    // Route::get('/preview-newsletter-mail', function () {
+    //     $subscriber = NewsletterSubscriber::first();
+
+    //     return new NewsletterWelcomeMail($subscriber);
     // });
     // Fin ruta para diseñar los mails
     Route::get('/', function () {

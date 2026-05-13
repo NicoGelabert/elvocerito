@@ -4,43 +4,19 @@
             <div class="footer-logo">
                 <x-logo />
             </div>
-            <x-social-icons />
+            <div class="flex gap-4 items-center">
+                <div class="need_help">
+                    <ul>
+                        <li><p class="text-gray_200">¿Necesitás ayuda?</p></li>
+                        <li><a href=""><p>Contactanos</p></a></li>
+                    </ul>
+                </div>
+                <x-social-icons />
+            </div>
         </div>
         <div class="flex flex-col md:flex-row justify-between gap-8">
             <div class="footer-menu">
                 <ul>
-                    <li x-data="{ open: false, isMd: window.matchMedia('(min-width: 768px)').matches }"
-                        x-init="
-                            const updateIsMd = () => isMd = window.matchMedia('(min-width: 768px)').matches;
-                            window.addEventListener('resize', updateIsMd);
-                            updateIsMd();
-                        "
-                        class="relative">
-                        <div
-                            @click="if (!isMd) open = !open"
-                            :class="{
-                                'w-full cursor-pointer': !isMd,
-                                'cursor-default pointer-events-none': isMd
-                            }"
-                            class="flex justify-between"
-                        >
-                            <p>Legales</p><x-icons.chevron-down />
-                        </div>
-                        <ul @click.outside="if (!isMd) open = false"
-                            x-show="open || isMd"
-                            x-transition
-                            x-cloak
-                            class="footer-sub-menu dropdown md:block"
-                        >
-                            <li>
-                                <a href="/legal/terminos-y-condiciones"><p>Términos y condiciones</p></a>
-                            </li>
-                            <li>
-                                <a href="/legal/politica-de-privacidad"><p>Política de Privacidad</p></a>
-                            </li>                        
-                        </ul>
-                    </li>
-
                     <li x-data="{ open: false, isMd: window.matchMedia('(min-width: 768px)').matches }"
                         x-init="
                             const updateIsMd = () => isMd = window.matchMedia('(min-width: 768px)').matches;
@@ -105,6 +81,38 @@
                             </li>                        
                         </ul>
                     </li>
+
+                    <li x-data="{ open: false, isMd: window.matchMedia('(min-width: 768px)').matches }"
+                        x-init="
+                            const updateIsMd = () => isMd = window.matchMedia('(min-width: 768px)').matches;
+                            window.addEventListener('resize', updateIsMd);
+                            updateIsMd();
+                        "
+                        class="relative">
+                        <div
+                            @click="if (!isMd) open = !open"
+                            :class="{
+                                'w-full cursor-pointer': !isMd,
+                                'cursor-default pointer-events-none': isMd
+                            }"
+                            class="flex justify-between"
+                        >
+                            <p>Legales</p><x-icons.chevron-down />
+                        </div>
+                        <ul @click.outside="if (!isMd) open = false"
+                            x-show="open || isMd"
+                            x-transition
+                            x-cloak
+                            class="footer-sub-menu dropdown md:block"
+                        >
+                            <li>
+                                <a href="/legal/terminos-y-condiciones"><p>Términos y condiciones</p></a>
+                            </li>
+                            <li>
+                                <a href="/legal/politica-de-privacidad"><p>Política de Privacidad</p></a>
+                            </li>                        
+                        </ul>
+                    </li>
                 </ul>            
             </div>
             <div class="footer-subscription">
@@ -144,12 +152,6 @@
                     <p class="text-red-600 mt-2" x-show="error" x-text="error"></p>
                 </form>
             </div>
-        </div>
-        <div class="need_help">
-            <ul>
-                <li><p class="text-gray_200">¿Necesitás ayuda?</p></li>
-                <li><a href=""><p>Contactanos</p></a></li>
-            </ul>
         </div>
     </div>
     <div class="container">
