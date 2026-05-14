@@ -30,7 +30,7 @@ a{
     }
 }
 header{
-    @apply h-14 fixed top-0 w-full block shadow-none bg-secondary text-black dark:text-white;
+    @apply h-12 md:h-14 fixed top-0 w-full block shadow-none bg-secondary text-black dark:text-white;
     transition: top 0.3s, background-color 0.3s ease;
     i {
         @apply leading-none text-lg;

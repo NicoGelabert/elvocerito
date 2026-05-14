@@ -45,7 +45,7 @@
                     .card__content--col{
                         @apply flex-col;
                         .card__img__rectangle{
-                            @apply rounded-lg;
+                            @apply rounded-lg w-full h-full object-cover;
                         }
                     }
                     .card__content--center{

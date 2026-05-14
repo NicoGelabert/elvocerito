@@ -4,7 +4,7 @@
             <div class="footer-logo">
                 <x-logo />
             </div>
-            <div class="flex gap-4 items-center">
+            <div class="flex flex-col md:flex-row gap-4 items-center">
                 <div class="need_help">
                     <ul>
                         <li><p class="text-gray_200">¿Necesitás ayuda?</p></li>
@@ -33,7 +33,7 @@
                             class="flex justify-between"
                         >
 
-                            <p>Publicá con nosotros</p><x-icons.chevron-down />
+                            <p>Soy prestador: Quiero registra mi servicio</p><x-icons.chevron-down class="transition-transform duration-200" ::class="{ 'rotate-180': open }" />
                         </div>
                         <ul @click.outside="if (!isMd) open = false"
                             x-show="open || isMd"
@@ -41,6 +41,9 @@
                             x-cloak
                             class="footer-sub-menu dropdown md:block"
                         >
+                            <li>
+                                <a href="/"><p>Registrate</p></a>
+                            </li>
                             <li>
                                 <a href="/beneficios-de-publicar-en-el-vocerito"><p>Beneficios de publicar en El Vocerito</p></a>
                             </li>
@@ -65,20 +68,23 @@
                             }"
                             class="flex justify-between"
                         >
-                            <p>Sobre El Vocerito</p><x-icons.chevron-down />
+                            <p>Soy usuario</p><x-icons.chevron-down class="transition-transform duration-200" ::class="{ 'rotate-180': open }" />
                         </div>
                         <ul @click.outside="if (!isMd) open = false"
                             x-show="open || isMd"
                             x-transition
                             x-cloak
                             class="footer-sub-menu dropdown md:block"
-                        >
+                            >
+                            <li>
+                                <a href="/como-usar-la-guia"><p>Cómo usar la guía</p></a>
+                            </li>
+                            <li>
+                                <a href="/preguntas-frecuentes"><p>Preguntas Frecuentes</p></a>
+                            </li>                     
                             <li>
                                 <a href="/un-poco-de-historia"><p>Un poco de historia</p></a>
                             </li>
-                            <li>
-                                <a href="/como-usar-la-guia"><p>Cómo usar la guía</p></a>
-                            </li>                        
                         </ul>
                     </li>
 
@@ -97,7 +103,7 @@
                             }"
                             class="flex justify-between"
                         >
-                            <p>Legales</p><x-icons.chevron-down />
+                            <p>Legales</p><x-icons.chevron-down class="transition-transform duration-200" ::class="{ 'rotate-180': open }" />
                         </div>
                         <ul @click.outside="if (!isMd) open = false"
                             x-show="open || isMd"

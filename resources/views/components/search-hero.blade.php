@@ -2,8 +2,8 @@
     <!-- <x-backgrounds.pinmaps /> -->
     <div class="flex flex-col mx-auto gap-6 md:gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
         <div class="search_hero_container">
-            <p class="subheading">Hola!</p>
-            <h1>Qué necesitás hoy?</h1>
+            <h1>¿Qué servicio necesitás hoy?</h1>
+            <p class="subheading">Encontrá servicios y profesionales cerca tuyo!</p>
             <x-button class="w-full min-w-[320px]" onclick="window.dispatchEvent(new CustomEvent('open-search-modal'))">
                 <div class="relative">
                     <span class="w-full block bg-white px-3 py-2 border-transparent rounded-full drop-shadow-search_input focus:outline-none focus:ring-0 focus:border-none cursor-pointer text-gray-400 text-left">

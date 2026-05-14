@@ -1,6 +1,7 @@
-<section id="novedades" class="cards__section container" aria-label="Últimas novedades">
-    <div class="title">
-        <h3>Novedades</h3>
+<section id="novedades" class="cards__section container" aria-label="Notas e Ideas">
+    <div class="articles-title">
+        <h3>Notas e Ideas</h3>
+        <a href="{{ route('news.index') }}">Ver más</a>
     </div>
     <div class="cards__list swiper news">
         <ul class="swiper-wrapper">
@@ -9,7 +10,9 @@
                 <a href="{{ route('news.view', $article) }}" alt="{{ $article->title}}">
                     <div class="card__body">
                         <div class="card__content card__content--col">
-                            <img class="card__img__rectangle" src="{{ $article->image }}" alt="{{ $article->title }}">
+                            <div class="aspect-video">
+                                <img class="card__img__rectangle" src="{{ $article->image }}" alt="{{ $article->title }}">
+                            </div>
                             <h5>
                                 {{ $article->title}}
                             </h5>
@@ -20,15 +23,25 @@
                         <hr class="divider my-2 w-full">
                         <div class="card__footer card__footer--between">
                             <!-- AUTOR -->
-                            @foreach ($article->authors as $author)
-                            <div class="author">
-                                <img class="author__img" src="{{ $author->image }}" alt="$author->name">
-                                <h6>{{ $author->name }}</h6>
-                            </div>
-                            @endforeach
+                            @if ($article->authors->count() === 1)
+                                @foreach ($article->authors as $author)
+                                    <div class="author">
+                                        <img class="author__img" src="{{ $author->image }}" alt="{{ $author->name }}">
+                                        <h6>{{ $author->name }}</h6>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="flex">
+                                    @foreach ($article->authors as $author)
+                                        <div class="author -ml-2 first:ml-0">
+                                            <img class="author__img" src="{{ $author->image }}" alt="{{ $author->name }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
                             <!-- FIN AUTOR -->
                             <!-- FECHA PUBLICACIÓN -->
-                            <p class="published__date">{{ optional($article->created_at)->translatedFormat('j \d\e F \d\e Y') ?? 'Fecha no disponible' }}
+                            <p class="published__date">{{ optional($article->created_at)->format('d/m/y') ?? 'Fecha no disponible' }}
                             <!-- FIN FECHA PUBLICACIÓN -->
                         </div>
                     </div>

@@ -1,3 +1,7 @@
+// Listado de notas en home
+.articles-title{
+    @apply flex justify-between items-center;
+}
 // VISTA DE LISTADO DE  ARTICULOS
 .article-index{
     @apply my-12 md:my-14;
