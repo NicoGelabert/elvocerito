@@ -16,7 +16,7 @@
             </a>
         </li>
         <li>
-            <a href="/servicios">
+            <a href="/">
                 Registrar mi servicio
             </a>
         </li>
@@ -28,7 +28,7 @@
         </li>
         
         <li>
-            <a href="/servicios">
+            <a href="{{ route('news.index') }}">
                 Notas e Ideas
             </a>
         </li>
