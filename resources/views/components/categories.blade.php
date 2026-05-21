@@ -1,5 +1,5 @@
 
-<section id="categories">
+<section id="categories" class="mx-4">
     <div class="categories container">
         <div class="flex flex-col gap-12">
             <div class="categories_title">

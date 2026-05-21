@@ -20,7 +20,7 @@
         />
       </div>
       <!-- Número -->
-      <span class="font-semibold text-xs text-gray-500">Sin reseñas aún</span>
+      <span class="font-semibold text-xs text-gray-500">0</span>
   </div>
   <!-- Si no hay promedio, no muestra nada -->
 </template>

@@ -254,40 +254,42 @@
             <li v-for="product in products.data" :key="product.id">
               <div class="card__body">
                 <div class="card__content">
-                    <div class="card__left">
-                        <img class="card__img__rounded" :src="product.image_url" alt="product.title">
+                  <div class="card__left">
+                      <img class="card__img__rounded" :src="product.image_url" alt="product.title">
+                  </div>
+                  <div class="card__right">
+                    <div class="card__info" v-if="product.categories?.length">
+                        <h6>{{ product.categories[0].name }}</h6>
+                        <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug">
+                          <h5>{{ product.title }}</h5>
+                        </a>
+                        <p class="description">{{ product.short_description }}</p>
                     </div>
-                    <div class="card__right">
-                        <div class="card__info" v-if="product.categories?.length">
-                            <h6>{{ product.categories[0].name }}</h6>
-                            <Badge status="Disponible">
-                              <span>Desde {{ formatYear(product.created_at) }}</span>
-                            </Badge>
-                            <h5>{{ product.title }}</h5>
-                            <p class="description">{{ product.short_description }}</p>
-                        </div>
-                        <div class="card__meta">
-                            <div class="card__rating">
-                                <RatingAverage :product-id="product.id" />
-                            </div>
-                            <Badge v-if="product.urgencies" status="Urgencias">
-                              <UrgenciesIcon />
-                              <span>Disponible 24hs</span>
-                            </Badge>
-                            <Badge v-if="product.is_on_duty_now" status="De Turno">
-                              <span>Hoy de turno</span>
-                            </Badge>
-                        </div>
-                    </div>
+                  </div>
+                </div>
+                <div class="card__meta">
+                  <Badge status="Disponible">
+                    <span>En guía desde {{ formatYear(product.created_at) }}</span>
+                  </Badge>
+                  <Badge v-if="product.urgencies" status="Urgencias">
+                    <UrgenciesIcon />
+                    <span>Disponible 24hs</span>
+                  </Badge>
+                  <div class="card__rating">
+                      <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
+                  </div>
+                  <Badge v-if="product.is_on_duty_now" status="De Turno">
+                    <span>Hoy de turno</span>
+                  </Badge>
                 </div>
                 <hr class="divider my-2 w-full">
                 <div class="card__footer card__footer--between">
+                  <button class="btn btn-primary" @click="openModal('contact', product)">
+                    Contactar
+                  </button>
                     <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
-                      Ver servicio
+                      Ver +
                     </a>
-                    <button class="btn btn-primary" @click="openModal('contact', product)">
-                      Contactar
-                    </button>
                 </div>
             </div>
             </li>
@@ -327,10 +329,11 @@ import FilterIcon from "@/icons/FilterIcon.vue"
 import BadgeHorarios from "../BadgeHorarios.vue"
 import Badge from "../Badge.vue"
 import RatingAverage from "../reviews/RatingAverage.vue"
+import RatingAverageSingleStar from "../reviews/RatingAverageSingleStar.vue"
 import UrgenciesIcon from "@/icons/UrgenciesIcon.vue"
 
 export default {
-  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, RatingAverage, UrgenciesIcon },
+  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, RatingAverage, RatingAverageSingleStar, UrgenciesIcon },
 
   props: {
     initialCategory: {

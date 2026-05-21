@@ -31,15 +31,15 @@
                             .card__info{
                                 @apply flex flex-col gap-2;
                             }
-                            .card__meta{
-                                @apply flex flex-col gap-3;
-                                .card__rating{
-                                    @apply flex items-center gap-1 py-1;
-                                }
-                                .card__badges{
-                                    
-                                }
-                            }
+                        }
+                    }
+                    .card__meta{
+                        @apply w-full flex items-center justify-between;
+                        .card__rating{
+                            @apply flex items-center gap-1 py-1;
+                        }
+                        .card__badges{
+                            
                         }
                     }
                     .card__content--col{
@@ -58,7 +58,7 @@
                         @apply text-small text-gray_500;
                     }
                     .card__footer{
-                        @apply w-full flex items-center;
+                        @apply w-full flex items-center gap-4;
                         .author{
                             @apply flex gap-2 items-center;
                             .author__img{

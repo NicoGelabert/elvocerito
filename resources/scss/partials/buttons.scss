@@ -12,14 +12,14 @@
     }
 }
 .btn-primary{
-    @apply bg-primary hover:bg-primary_hover;
+    @apply bg-primary hover:bg-primary_hover w-full;
     svg{
         @apply fill-gray_50;
     }
 }
 
 .btn-secondary{
-    @apply border border-primary text-primary hover:bg-gray_100;
+    @apply border border-primary text-primary hover:bg-gray_100 whitespace-nowrap;
 }
 
 .btn-terciary{

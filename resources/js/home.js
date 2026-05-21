@@ -32,7 +32,7 @@ var categories_content = new Swiper(".categories_content", {
             },
         },
         1024: {
-            slidesPerView: 7,
+            slidesPerView: 8,
             grid: {
                 rows: 1,
                 fill: 'row',
