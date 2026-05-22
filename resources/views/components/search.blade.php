@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let debounceTimer = null;
     let selectedIndex = -1;
+    let currentMode = 'search';
 
     /*
     |--------------------------------------------------------------------------
@@ -107,6 +108,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function closeResults() {
         resultsList.classList.add("hidden");
         resetSelection();
+
+        const isCategoryMode = currentMode === 'categories';
+        document.querySelector(".injected-categories-section").style.display = isCategoryMode ? "block" : "none";
+        document.querySelector(".popular-categories-section").style.display = isCategoryMode ? "none" : "block";
+        document.querySelector(".suggested-section").style.display = isCategoryMode ? "none" : "block";
+        document.getElementById("recents-section").style.display = "";
     }
 
     function openResults() {
@@ -265,6 +272,15 @@ document.addEventListener("DOMContentLoaded", function () {
         openResults();
         renderRecents(data);
 
+        // Volver al top del contenedor scrolleable
+        document.querySelector(".search_bar").closest(".overflow-y-auto").scrollTop = 0;
+        
+        // Ocultar secciones de fondo
+        document.querySelector(".injected-categories-section").style.display = "none";
+        document.querySelector(".popular-categories-section").style.display = "none";
+        document.querySelector(".suggested-section").style.display = "none";
+        document.getElementById("recents-section").style.display = "none";
+
         const hasResults = data.products.length || data.categories.length;
 
         if (!hasResults) {
@@ -290,6 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
     */
 
     function initModal(mode, injectedCategories) {
+        currentMode = mode;
         const isCategoryMode = mode === 'categories';
 
         const injectedSection = document.querySelector(".injected-categories-section");
