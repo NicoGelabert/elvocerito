@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -109,3 +110,6 @@ Route::get('/mail-preview', function () {
     return (new \App\Notifications\ResetPasswordNotification($token))
         ->toMail($user);
 });
+
+// Agente
+Route::post('/agente', [AgentController::class, 'responder']);

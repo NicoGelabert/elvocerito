@@ -62,7 +62,7 @@ Route::middleware(['guestOrVerified'])->group(function () {
     
     // Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
-    
+
     // Beneficios de Publicar en el Vocerito
     Route::get('/beneficios-de-publicar-en-el-vocerito', function (){
         return view('about/beneficios_de_publicar');
