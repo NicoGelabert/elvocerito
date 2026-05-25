@@ -2,14 +2,14 @@
     <div class="title">
         <h3>Servicios destacados</h3>
     </div>
-    <div class="cards__list swiper servicios_destacados">
+    <div class="cards__list swiper" data-swiper="servicios_destacados">
         <ul class="swiper-wrapper">
             @foreach ($anunciantes_destacados as $anunciante_destacado)
             <li class="swiper-slide">
                 <div class="card__body">
                     <div class="card__content">
                         <div class="card__left">
-                            <img class="card__img__rounded" src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}">
+                            <img class="card__img__rounded" src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}" loading="lazy">
                         </div>
                         <div class="card__right">
                             <div class="card__info">
@@ -69,15 +69,15 @@
                         </x-button>
                         <!-- FIN VÍAS DE CONTACTO -->
                         <!-- INICIO VER SERVICIO -->
-                        <x-button 
-                            class="btn btn-secondary"
-                            onclick="window.location.href='{{ route('product.view', [
-                                'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
-                                'product' => $anunciante_destacado->slug
-                            ]) }}'"
-                            >
-                            Ver +
-                        </x-button>
+                        <a 
+                        href="{{ route('product.view', [
+                            'category' => optional($anunciante_destacado->categories->first())->slug ?? 'sin-categoria',
+                            'product' => $anunciante_destacado->slug
+                        ]) }}"
+                        class="btn btn-secondary"
+                        >
+                        Ver +
+                        </a>
                         <!-- FIN VER SERVICIO -->
                     </div>
                 </div>

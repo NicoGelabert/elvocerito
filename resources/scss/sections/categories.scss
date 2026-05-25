@@ -27,7 +27,7 @@
 
 .categories_index{
     .search_hero{
-        @apply h-[30vh] relative overflow-hidden;
+        @apply h-[40vh] md:h-[50vh] relative overflow-hidden;
         h1, .subheading{
             @apply hidden;
         }
@@ -35,7 +35,7 @@
             @apply absolute top-0 left-0 w-full h-full object-cover;
         }
         .search_hero_container{
-            @apply mb-0;
+            @apply mb-0 gap-8;
         }
     }
     .categories_index_hero{

@@ -11,7 +11,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-DO2A_iTA.css",
+    "file": "assets/app-AbWYp9XL.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -20,23 +20,23 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-veD_iJuj.js",
+    "file": "assets/app-xnomYF7E.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
-      "resources/js/catalog.js",
       "resources/js/home.js",
       "resources/js/product-view.js",
+      "resources/js/catalog.js",
       "resources/js/categories-index.js",
       "resources/js/article-view.js"
     ],
     "css": [
-      "assets/app-Aduks2A8.css"
+      "assets/app-Rt23iWaY.css"
     ]
   },
   "resources/js/article-view.js": {
-    "file": "assets/article-view-GjDR8Yk6.js",
+    "file": "assets/article-view-2ZfjxuGE.js",
     "name": "article-view",
     "src": "resources/js/article-view.js",
     "isDynamicEntry": true,
@@ -45,7 +45,7 @@
     ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-DI8ID7cx.js",
+    "file": "assets/catalog-AIiu06oi.js",
     "name": "catalog",
     "src": "resources/js/catalog.js",
     "isDynamicEntry": true,
@@ -54,13 +54,13 @@
     ]
   },
   "resources/js/categories-index.js": {
-    "file": "assets/categories-index-ZuNH0t5P.js",
+    "file": "assets/categories-index-s9s8X4pW.js",
     "name": "categories-index",
     "src": "resources/js/categories-index.js",
     "isDynamicEntry": true
   },
   "resources/js/home.js": {
-    "file": "assets/home-Dm4bD84c.js",
+    "file": "assets/home-CiXw5xzC.js",
     "name": "home",
     "src": "resources/js/home.js",
     "isDynamicEntry": true,
@@ -69,7 +69,7 @@
     ]
   },
   "resources/js/product-view.js": {
-    "file": "assets/product-view-BuknIDq-.js",
+    "file": "assets/product-view-CthD2yDF.js",
     "name": "product-view",
     "src": "resources/js/product-view.js",
     "isDynamicEntry": true,
@@ -78,7 +78,7 @@
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-Bpw5xMnM.css",
+    "file": "assets/styles-CG_br8CX.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",

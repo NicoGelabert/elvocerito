@@ -18,7 +18,7 @@
                 ], fn($value) => !empty($value))) }}
             </p>
         </a>
-        @if($address->google_maps)
+        <!-- @if($address->google_maps)
         <a href="#" class="" data-popover-target="{{ $popoverId }}">
             <x-icons.map  />
         </a>
@@ -28,7 +28,7 @@
             </div>
             <div data-popper-arrow></div>
         </div>
-        @endif
+        @endif -->
     </div>
     @endforeach
 </div>

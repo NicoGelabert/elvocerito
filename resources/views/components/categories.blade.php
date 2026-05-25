@@ -30,12 +30,12 @@
                 }
             }
         @endphp
-        <div class="categories_content swiper">
+        <div class="swiper categories_content" data-swiper="categories_content">
             <ul class="swiper-wrapper">
                 @foreach ($ordered as $category)
                 <li class="swiper-slide">
                     <x-button class="bg-transparent" href="{{ route('categories.view', ['category' => $category->slug]) }}">
-                        <img src="{{ $category->image }}" alt="">
+                        <img src="{{ $category->image }}" alt="{{ $category->name }}" loading="lazy">
                         <p>{{ $category->name }}</p>
                     </x-button>
                 </li>

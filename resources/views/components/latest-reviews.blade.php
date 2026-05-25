@@ -2,7 +2,7 @@
     <div class="title">
         <h3>Últimas reseñas</h3>
     </div>
-    <div class="cards__list swiper ultimas_reviews">
+    <div class="cards__list swiper" data-swiper="ultimas_reviews">
         <ul class="swiper-wrapper">
             @foreach ($ultimasReviews as $review)
             <li class="swiper-slide">
@@ -14,7 +14,7 @@
                     <div class="card__body">
                         <div class="card__content">
                             <div class="card__left">
-                                <img class="card__img__rounded" src="{{ $review->product->image }}" alt="{{ $review->product->title }}">
+                                <img class="card__img__rounded" src="{{ $review->product->image }}" alt="{{ $review->product->title }}" loading="lazy">
                             </div>
                             <div class="card__right">
                                 @php

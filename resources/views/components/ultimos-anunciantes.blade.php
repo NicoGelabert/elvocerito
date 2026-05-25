@@ -2,7 +2,7 @@
     <div class="title">
         <h3>Nuevos servicios</h3>
     </div>
-    <div class="cards__list swiper nuevos_servicios">
+    <div class="cards__list swiper" data-swiper="nuevos_servicios">
         <ul class="swiper-wrapper">
             @foreach ($ultimos_anunciantes as $ultimo_anunciante)
             <li class="swiper-slide">
@@ -13,7 +13,7 @@
                     <div class="card__body">
                         <div class="card__content">
                             <div class="card__left">
-                                <img class="card__img__rounded" src="{{ $ultimo_anunciante->image }}" alt="{{ $ultimo_anunciante->title }}">
+                                <img class="card__img__rounded" src="{{ $ultimo_anunciante->image }}" alt="{{ $ultimo_anunciante->title }}" loading="lazy">
                             </div>
                             <div class="card__right">
                                 <div class="card__info">

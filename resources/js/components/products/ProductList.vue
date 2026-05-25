@@ -1,8 +1,5 @@
 <template>
   <div class="relative product-list">
-    <!-- Loading y errores -->
-    <div v-if="loading" class="spinner-overlay"><div class="spinner"></div></div>
-    <div v-if="error" class="error">{{ error }}</div>
 
     <div class="cards__section">
       <div class="category_header container" :style="{top: headerTop}">
@@ -249,6 +246,29 @@
           </transition>
         </div>
         <!-- Listado -->
+        <!-- Loading y errores -->
+        <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div v-for="n in 3" :key="n" role="status" class="max-w-sm p-4 border border-default rounded-xl shadow-xs animate-pulse md:p-6 bg-white">
+            <div class="flex items-start gap-2 my-4">
+              <SkeletonProfileIcon class="fill-gray-400" />
+              <div>
+                <div class="h-1 w-16 bg-gray-400 rounded-full mb-2.5"></div>
+                  <div class="h-2.5 bg-gray-400 rounded-full w-32 mb-2.5"></div>
+                  <div class="h-1.5 bg-gray-400 rounded-full w-56 mb-2.5"></div>
+                  <div class="h-1.5 bg-gray-400 rounded-full w-56 mb-2.5"></div>
+                  <div class="h-4 bg-gray-400 rounded-md w-12"></div>
+                  <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <hr class="divider my-2 w-full">
+            <div class="flex justify-between">
+              <div class="h-8 bg-gray-400 rounded-md w-[70%]"></div>
+              <div class="h-8 bg-gray-400 rounded-md w-[25%]"></div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="error" class="error">{{ error }}</div>
         <div :class="['cards__list', { 'loading-opacity': loading }]">
           <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <li v-for="product in products.data" :key="product.id">
@@ -328,12 +348,13 @@ import { ShareIcon } from "@heroicons/vue/24/outline"
 import FilterIcon from "@/icons/FilterIcon.vue"
 import BadgeHorarios from "../BadgeHorarios.vue"
 import Badge from "../Badge.vue"
+import SkeletonProfileIcon from "@/icons/SkeletonProfileIcon.vue"
 import RatingAverage from "../reviews/RatingAverage.vue"
 import RatingAverageSingleStar from "../reviews/RatingAverageSingleStar.vue"
 import UrgenciesIcon from "@/icons/UrgenciesIcon.vue"
 
 export default {
-  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, RatingAverage, RatingAverageSingleStar, UrgenciesIcon },
+  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, SkeletonProfileIcon, RatingAverage, RatingAverageSingleStar, UrgenciesIcon },
 
   props: {
     initialCategory: {

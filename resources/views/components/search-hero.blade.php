@@ -1,6 +1,5 @@
 <div class="search_hero">
-    <!-- <x-backgrounds.pinmaps /> -->
-    <div class="flex flex-col mx-auto gap-6 md:gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-36 md:pb-24' }}">
+    <div class="flex flex-col mx-auto gap-6 md:gap-8 {{ request()->routeIs('categories.index') ? 'pb-0 max-w-[85%]' : 'pb-24 md:pb-16' }}">
         <div class="search_hero_container">
             <h1>¿Qué servicio necesitás hoy?</h1>
             <p class="subheading">Encontrá servicios y profesionales cerca tuyo!</p>

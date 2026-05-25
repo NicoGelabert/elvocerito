@@ -3,6 +3,11 @@
 
 $body-font: "Inter", sans-serif;
 
+#body-content {
+  opacity: 0;
+  transition: opacity 400ms ease;
+  visibility: hidden;
+}
 a{
     @apply hover:text-primary;
 }
@@ -21,12 +26,6 @@ a{
 .logo-hamburguer{
     svg{
         @apply w-36 h-auto fill-black dark:fill-white;
-    }
-}
-.toast{
-    @apply flex flex-col items-center justify-between bg-white text-black dark:bg-black dark:text-white;
-    .progress{
-        @apply bg-black dark:bg-white;
     }
 }
 header{

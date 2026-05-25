@@ -76,38 +76,6 @@
 
                     window.Alpine = Alpine;
                     Alpine.start();
-
-                    // 🚀 Cargar scripts según la página
-                    document.addEventListener("DOMContentLoaded", () => {
-                    
-                    // 🚀 Progreso de carga (porcentaje)
-                    let percentage = 0;
-                    const progressBar = document.getElementById('progress-bar');
-                    const interval = setInterval(function() {
-                        if (percentage &lt; 100) {
-                        percentage += 1;
-                        document.getElementById('loader-percentage').innerText = percentage + '%';
-                        progressBar.style.width = percentage + '%';
-                        } else {
-                        clearInterval(interval);
-                        document.getElementById('loader-wrapper').style.display = 'none';
-                        const content = document.getElementById('body-content');
-                        content.style.display = 'block';
-                        setTimeout(function() {
-                            content.classList.add('fade-in');
-                        }, 10);
-                        }
-                    })
-
-                    const page = document.body.dataset.page;
-                    
-                    // 🚀 Cargar scripts según la página
-                    if (page === 'products.index') {
-                        import('./catalog.js');
-                    } else if (page === 'welcome') {
-                        import('./home.js');
-                    }
-                    });
                 </code>
             </pre>
         </section>

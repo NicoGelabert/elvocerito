@@ -4,6 +4,8 @@ import { Tabs } from 'flowbite';
 import { createApp } from 'vue/dist/vue.esm-bundler';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
+import Swup from 'swup';
+import SwupSlideTheme from '@swup/slide-theme';
 import { get, post } from "./http.js";
 import ProductList from './components/products/ProductList.vue';
 import ContactModal from './components/ContactModal.vue'
@@ -209,44 +211,48 @@ document.addEventListener("alpine:init", () => {
 window.Alpine = Alpine;
 Alpine.start();
 
-// 🚀 Cargar scripts según la página
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // 🚀 Progreso de carga (porcentaje)
-  let percentage = 0;
-  const progressBar = document.getElementById('progress-bar');
-  const interval = setInterval(function() {
-    if (percentage < 100) {
-      percentage += 1;
-      document.getElementById('loader-percentage').innerText = percentage + '%';
-      progressBar.style.width = percentage + '%';
-    } else {
-      clearInterval(interval);
-      document.getElementById('loader-wrapper').style.display = 'none';
-      const content = document.getElementById('body-content');
-      content.style.display = 'block';
-      setTimeout(function() {
-        content.classList.add('fade-in');
-      }, 10);
-    }
-  })
+// Carga de JS por página
+async function loadPageScripts() {
+  const swupEl = document.getElementById('swup');
+  const page = swupEl?.dataset.page;
 
-  
-  // Captura de nombre de la página
-  const page = document.body.dataset.page;  
-  // carga de archivos js por nombre de página
-  if (page === 'product.urgencies' || page === 'categories.view' || page === 'categories.view.subcategory') {
-    import('./catalog.js');
-  } else if (page === 'welcome') {
-    import('./home.js');
+  if (page === 'welcome') {
+    const { init } = await import('./home.js');
+    init();
   } else if (page === 'product.view') {
-    import('./product-view.js');
+    const { init } = await import('./product-view.js');
+    init();
+  } else if (page === 'product.urgencies' || page === 'categories.view' || page === 'categories.view.subcategory') {
+    const { init } = await import('./catalog.js');
+    init();
   } else if (page === 'categories.index') {
-    import('./categories-index.js');
+    const { init } = await import('./categories-index.js');
+    init();
   } else if (page === 'news.view') {
-    import('./article-view.js');
+    const { init } = await import('./article-view.js');
+    init();
   }
 
+  const bodyContent = document.getElementById('body-content');
+  bodyContent.style.visibility = 'visible';
+  bodyContent.style.opacity = '1';
+}
+
+const swup = new Swup({
+  plugins: [new SwupSlideTheme()],
+  containers: ['#swup'],
+});
+
+// Primera carga
+document.addEventListener('DOMContentLoaded', () => {
+  loadPageScripts();
+});
+
+// Cada navegación posterior
+swup.hooks.on('page:view', () => {
+  const newPage = document.getElementById('swup')?.dataset.page;
+  document.body.dataset.page = newPage;
+  loadPageScripts();
 });
 
 // MOVIMIENTO DEL NAVBAR

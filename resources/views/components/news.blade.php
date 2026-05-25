@@ -3,7 +3,7 @@
         <h3>Notas e Ideas</h3>
         <a href="{{ route('news.index') }}">Ver más</a>
     </div>
-    <div class="cards__list swiper news">
+    <div class="cards__list swiper" data-swiper="news">
         <ul class="swiper-wrapper">
             @foreach($articles as $article)
             <li class="swiper-slide">
@@ -11,7 +11,7 @@
                     <div class="card__body">
                         <div class="card__content card__content--col">
                             <div class="aspect-video">
-                                <img class="card__img__rectangle" src="{{ $article->image }}" alt="{{ $article->title }}">
+                                <img class="card__img__rectangle" src="{{ $article->image }}" alt="{{ $article->title }}" loading="lazy">
                             </div>
                             <h5>
                                 {{ $article->title}}
