@@ -24,37 +24,43 @@ class ProductResource extends JsonResource
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
 
-            'categories' => $this->categories->sortBy('id')->values(),
+            'categories' => $this->categories ? $this->categories->pluck('id') : [],
 
             'image_url' => $this->images->first()->url ?? 'storage/common/noimage.png',
             'images' => $this->images,
 
-            'contacts' => $this->contacts->map(fn($c) => [
-                'id' => $c->id,
-                'type' => $c->type,
-                'info' => $c->info,
-            ]),
+            'contacts' => $this->contacts
+                ? $this->contacts->map(fn($c) => [
+                    'id' => $c->id,
+                    'type' => $c->type,
+                    'info' => $c->info,
+                ])->values()
+                : [],
 
-            'socials' => $this->socials->map(fn($s) => [
-                'id' => $s->id,
-                'type' => $s->rrss,
-                'info' => $s->link,
-            ]),
+            'socials' => $this->socials
+                ? $this->socials->map(fn($s) => [
+                    'id' => $s->id,
+                    'type' => $s->rrss,
+                    'info' => $s->link,
+                ])->values()
+                : [],
 
-            'horarios' => $this->horarios->map(fn($h) => [
-                'dia' => mb_strtolower($h->dia),
-                'apertura' => substr($h->apertura, 0, 5), // HH:MM
-                'cierre' => substr($h->cierre, 0, 5),
-            ])->values(),
+            'horarios' => $this->horarios
+                ? $this->horarios->map(fn($h) => [
+                    'dia' => mb_strtolower($h->dia),
+                    'apertura' => substr($h->apertura, 0, 5),
+                    'cierre' => substr($h->cierre, 0, 5),
+                ])->values()
+                : [],
 
-            'pharmacy_shifts' => $this->when($this->pharmacy, function () {
-                return $this->pharmacy->shifts->map(fn($shift) => [
-                    'id'         => $shift->id,
-                    'shift_date' => $shift->shift_date->format('Y-m-d'),
-                    'start_time' => substr($shift->start_time, 0, 5), // HH:MM
-                    'end_time'   => substr($shift->end_time, 0, 5),
-                ]);
-            }),
+            'pharmacy_shifts' => $this->pharmacy
+                ? $this->pharmacy->shifts->map(fn($shift) => [
+                    'id' => $shift->id,
+                    'shift_date' => optional($shift->shift_date)->format('Y-m-d'),
+                    'start_time' => substr($shift->start_time, 0, 5),
+                    'end_time' => substr($shift->end_time, 0, 5),
+                ])->values()
+                : [],
 
             'is_on_duty_now' => $this->pharmacy
                 ? $this->pharmacy->shifts->contains(fn($shift) => $shift->isOnDutyNow())

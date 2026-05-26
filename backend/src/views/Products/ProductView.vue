@@ -543,7 +543,18 @@ onMounted(() => {
     store.dispatch('getProduct', route.params.id)
       .then((response) => {
         loading.value = false;
-        product.value = response.data;
+        product.value = {
+          ...product.value,
+          ...response.data,
+          contacts: response.data.contacts ?? [],
+          socials: response.data.socials ?? [],
+          addresses: response.data.addresses ?? [],
+          webs: response.data.webs ?? [],
+          listitems: response.data.listitems ?? [],
+          horarios: response.data.horarios ?? [],
+          pharmacy_shifts: response.data.pharmacy_shifts ?? [],
+          categories: response.data.categories ?? [],
+        }
         product.value.pharmacy_shifts = response.data.pharmacy_shifts?.length
           ? response.data.pharmacy_shifts
           : [{ shift_date: '' }];
@@ -570,12 +581,16 @@ onMounted(() => {
   
   axiosClient.get('/categories/tree')
   .then(result => {
-    categoriesOptions.value = result.data.sort((a, b) => a.label.localeCompare(b.label));
+    categoriesOptions.value = result.data
   })
   
   axiosClient.get('/tags/tree')
   .then(result => {
-    tagsOptions.value = result.data.sort((a, b) => a.label.localeCompare(b.label));
+    const data = result.data?.data ?? []
+
+    tagsOptions.value = data.sort((a, b) =>
+      (a.label ?? '').localeCompare(b.label ?? '')
+    )
   })
 
 })

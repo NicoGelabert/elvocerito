@@ -33,5 +33,9 @@
             @include('layouts.footer')
             @include('components.search-modal')            
         </div>
+        {{-- Agente Chat --}}
+        <div id="agente-app">
+            <agente-chat></agente-chat>
+        </div>
     </body>
 </html>

@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,7 +97,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 });
 
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
-Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
+Route::apiResource('categories', CategoryController::class)->only(['index', 'show'])->whereNumber('category');;
 Route::apiResource('authors', AuthorController::class)->only(['index', 'show']);
 Route::get('/categories/{category:slug}/products', [ProductController::class, 'productsByCategory']);
 Route::get('categories/{category}/products', [ProductController::class, 'productsByCategory'])->name('category.products');
@@ -109,3 +110,6 @@ Route::get('/mail-preview', function () {
     return (new \App\Notifications\ResetPasswordNotification($token))
         ->toMail($user);
 });
+
+// Agente
+Route::post('/agente', [AgentController::class, 'responder']);

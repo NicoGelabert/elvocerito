@@ -12,7 +12,7 @@ import ContactModal from './components/ContactModal.vue'
 import ReviewForm from './components/reviews/ReviewForm.vue';
 import ReviewList from './components/reviews/ReviewList.vue';
 import RatingAverage from './components/reviews/RatingAverage.vue';
-
+import AgenteChat from './components/AgenteChat.vue'
 
 const productIndex = createApp({});
 productIndex.component('product-list', ProductList);
@@ -23,6 +23,11 @@ const productViewApp = createApp({});
 productViewApp.component('review-form', ReviewForm);
 productViewApp.component('review-list', ReviewList);
 productViewApp.mount('#product-view-app');
+
+//Agente IA
+const agenteApp = createApp({})
+agenteApp.component('agente-chat', AgenteChat)
+agenteApp.mount('#agente-app')
 
 document.querySelectorAll('.product-rating-average').forEach(el => {
   const productId = el.dataset.productId;
