@@ -108,6 +108,7 @@ function formatear(texto) {
   if (!texto) return ''
   return texto
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" class="text-blue-600 underline hover:text-blue-800">$1</a>')
     .replace(/\n/g, '<br>')
 }
 

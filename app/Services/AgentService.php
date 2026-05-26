@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class AgentService
 {
     private string $apiKey;
-    private string $model = 'llama-3.3-70b-versatile'; // gratis en Groq
+    private string $model = 'llama-3.3-70b-versatile';
     private int $maxIteraciones = 5;
 
     public function __construct()
@@ -25,39 +25,45 @@ class AgentService
 
         $pasos = [];
 
-        for ($i = 0; $i < $this->maxIteraciones; $i++) {
-            $respuesta = $this->llamarGroq($mensajes);
-            $mensaje   = $respuesta['choices'][0]['message'];
-            $mensajes[] = $mensaje;
+        try {
+            for ($i = 0; $i < $this->maxIteraciones; $i++) {
+                $respuesta = $this->llamarGroq($mensajes);
+                $mensaje   = $respuesta['choices'][0]['message'];
+                $mensajes[] = $mensaje;
 
-            // ¿El modelo quiere usar una herramienta?
-            if (!empty($mensaje['tool_calls'])) {
-                foreach ($mensaje['tool_calls'] as $toolCall) {
-                    $nombre    = $toolCall['function']['name'];
-                    $args      = json_decode($toolCall['function']['arguments'], true);
-                    $resultado = $this->ejecutarHerramienta($nombre, $args);
+                if (!empty($mensaje['tool_calls'])) {
+                    foreach ($mensaje['tool_calls'] as $toolCall) {
+                        $nombre    = $toolCall['function']['name'];
+                        $args      = json_decode($toolCall['function']['arguments'], true);
+                        $resultado = $this->ejecutarHerramienta($nombre, $args);
 
-                    $pasos[] = [
-                        'herramienta' => $nombre,
-                        'args'        => $args,
-                        'resultado'   => $resultado,
-                    ];
+                        $pasos[] = [
+                            'herramienta' => $nombre,
+                            'args'        => $args,
+                            'resultado'   => $resultado,
+                        ];
 
-                    // Devolver resultado de la tool al modelo
-                    $mensajes[] = [
-                        'role'         => 'tool',
-                        'tool_call_id' => $toolCall['id'],
-                        'content'      => json_encode($resultado),
+                        $mensajes[] = [
+                            'role'         => 'tool',
+                            'tool_call_id' => $toolCall['id'],
+                            'content'      => json_encode($resultado),
+                        ];
+                    }
+                } else {
+                    return [
+                        'respuesta' => $mensaje['content'],
+                        'pasos'     => $pasos,
+                        'historial' => $mensajes,
                     ];
                 }
-            } else {
-                // El modelo terminó → respuesta final
-                return [
-                    'respuesta' => $mensaje['content'],
-                    'pasos'     => $pasos,
-                    'historial' => $mensajes,
-                ];
             }
+        } catch (\Exception $e) {
+            return [
+                'respuesta' => 'Hubo un error al procesar tu consulta. Intentá de nuevo.',
+                'pasos'     => $pasos,
+                'historial' => $historial,
+                'error'     => $e->getMessage(),
+            ];
         }
 
         return [
@@ -72,14 +78,14 @@ class AgentService
     {
         $response = Http::withToken($this->apiKey)
             ->post('https://api.groq.com/openai/v1/chat/completions', [
-                'model'    => $this->model,
-                'messages' => array_merge([['role' => 'system', 'content' => $this->systemPrompt()]], $mensajes),
-                'tools'    => $this->definicionHerramientas(),
+                'model'       => $this->model,
+                'messages'    => array_merge([['role' => 'system', 'content' => $this->systemPrompt()]], $mensajes),
+                'tools'       => $this->definicionHerramientas(),
                 'tool_choice' => 'auto',
             ]);
 
-        return $response->json();
-        // Si la API devuelve error, lanzarlo con detalle
+        $data = $response->json();
+
         if (isset($data['error'])) {
             throw new \Exception('Groq API error: ' . $data['error']['message']);
         }
@@ -99,12 +105,16 @@ class AgentService
         Tu trabajo es ayudar a los usuarios a encontrar anunciantes según lo que necesiten.
         Cuando el usuario pida algo, usá la herramienta buscar_anunciantes para consultar la base de datos.
         Respondé siempre en español, de forma amigable y concisa.
-        Si encontrás resultados, presentalos de forma clara con nombre, descripción y cómo contactarlos.
+        Cuando presentes resultados, mostrá siempre para cada anunciante:
+        - Nombre con su enlace seguido de la calificación si existe, en la misma línea. Ej: [Nombre](url) ⭐4,5 (3 reseñas)
+        - Descripción breve sin usar la palabra "Descripción:"
+        - El valor del campo "contacto" si existe. Si es null, no menciones contacto.
+        Usá formato markdown para los enlaces: [Nombre](url)
         Si no encontrás nada, sugerí buscar con otros términos.
         PROMPT;
     }
 
-    // ─── DEFINICIÓN DE HERRAMIENTAS (formato OpenAI) ──────────────────────
+    // ─── DEFINICIÓN DE HERRAMIENTAS ───────────────────────────────────────
     private function definicionHerramientas(): array
     {
         return [
@@ -149,17 +159,38 @@ class AgentService
         };
     }
 
+    // ─── HELPER: CONTACTO ─────────────────────────────────────────────────
+    private function obtenerContacto($contactos): ?string
+    {
+        $prioridad = ['whatsapp', 'móvil', 'fijo', 'email'];
+
+        foreach ($prioridad as $tipo) {
+            $contacto = $contactos->firstWhere('type', $tipo);
+            if ($contacto) {
+                return "{$contacto->type}: {$contacto->info}";
+            }
+        }
+
+        return null;
+    }
+
     // ─── TOOL: BUSCAR ANUNCIANTES ─────────────────────────────────────────
     private function buscarAnunciantes(string $texto, ?string $categoria, int $limite): array
     {
         $query = Product::query()
             ->where('published', true)
-            ->with(['categories', 'contacts', 'addresses', 'tags'])
+            ->with(['categories', 'contacts', 'addresses', 'tags', 'listitems'])
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            // Primero los que tienen reviews, después los que no
+            ->orderByRaw('reviews_count > 0 DESC')
+            ->orderByDesc('reviews_count')
             ->where(function ($q) use ($texto) {
                 $q->where('title', 'like', "%{$texto}%")
                   ->orWhere('short_description', 'like', "%{$texto}%")
                   ->orWhereHas('tags', fn($t) => $t->where('name', 'like', "%{$texto}%"))
-                  ->orWhereHas('categories', fn($c) => $c->where('name', 'like', "%{$texto}%"));
+                  ->orWhereHas('categories', fn($c) => $c->where('name', 'like', "%{$texto}%"))
+                  ->orWhereHas('listitems', fn($l) => $l->where('item', 'like', "%{$texto}%"));;
             });
 
         if ($categoria) {
@@ -181,12 +212,14 @@ class AgentService
                 'descripcion' => $p->short_description,
                 'categorias'  => $p->categories->pluck('name'),
                 'tags'        => $p->tags->pluck('name'),
-                'contactos'   => $p->contacts->map(fn($c) => [
-                    'tipo'  => $c->type,
-                    'valor' => $c->value,
-                ]),
+                'contacto'    => $this->obtenerContacto($p->contacts),
                 'direccion'   => $p->addresses->first()?->address,
-                'url'         => url("/anunciantes/{$p->slug}"),
+                'url'         => $p->categories->first()
+                    ? url("/{$p->categories->first()->slug}/{$p->slug}")
+                    : url("/anunciantes/{$p->slug}"),
+                'reviews'     => $p->reviews_count > 0
+                    ? '⭐' . number_format($p->reviews_avg_rating, 1) . ' (' . $p->reviews_count . ' reseñas)'
+                    : null,
             ]),
         ];
     }
