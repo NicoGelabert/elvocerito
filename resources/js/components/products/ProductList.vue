@@ -298,8 +298,13 @@
                   <div class="card__rating">
                       <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
                   </div>
+                </div>
+                <div class="flex items-center w-full">
                   <Badge v-if="product.is_on_duty_now" status="De Turno">
                     <span>Hoy de turno</span>
+                  </Badge>
+                  <Badge v-if="product.current_shift" status="Fin de Turno">
+                    <span>Hasta el {{ product.current_shift.end_label }}hs</span>
                   </Badge>
                 </div>
                 <hr class="divider my-2 w-full">

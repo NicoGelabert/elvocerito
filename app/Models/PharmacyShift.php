@@ -50,4 +50,17 @@ class PharmacyShift extends Model
 
         return $now->between($start, $end);
     }
+
+    public function getEndDateTime(): \Carbon\Carbon
+    {
+        $date = $this->shift_date->format('Y-m-d');
+        $start = \Carbon\Carbon::parse("$date {$this->start_time}");
+        $end   = \Carbon\Carbon::parse("$date {$this->end_time}");
+
+        if ($end->lessThan($start)) {
+            $end->addDay();
+        }
+
+        return $end;
+    }
 }

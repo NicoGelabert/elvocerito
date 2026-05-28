@@ -102,6 +102,9 @@ class ProductController extends Controller
 
             // ───── Transformación de cada producto ─────
             $products->getCollection()->transform(function ($product) {
+                $activeShift = $product->pharmacy
+                    ? $product->pharmacy->shifts->first(fn($shift) => $shift->isOnDutyNow())
+                    : null;
                 return array_merge($product->toArray(), [
                     'categories' => $product->categories->sortBy('id')->values(),
                     'image_url' => $product->images->first()->url ?? 'storage/common/noimage.png',
@@ -128,9 +131,17 @@ class ProductController extends Controller
                             'end_time' => substr($shift->end_time, 0, 5),
                         ])
                         : [],
-                    'is_on_duty_now' => $product->pharmacy
-                        ? $product->pharmacy->shifts->contains(fn($shift) => $shift->isOnDutyNow())
-                        : false,
+                    'is_on_duty_now' => (bool) $activeShift,
+                    'current_shift'  => $activeShift ? [
+                        'end_label' => (function() use ($activeShift) {
+                            $date  = $activeShift->shift_date->format('Y-m-d');
+                            $start = \Carbon\Carbon::parse("$date {$activeShift->start_time}");
+                            $end   = \Carbon\Carbon::parse("$date {$activeShift->end_time}");
+                            if ($end->lessThan($start)) $end->addDay();
+                            $end->addMinute();
+                            return $end->isoFormat('dddd D [de] MMMM, H:mm');
+                        })(),
+                    ] : null,
                 ]);
             });
 

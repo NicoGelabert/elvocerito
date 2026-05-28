@@ -26,7 +26,7 @@ class PharmacyShiftRequest extends FormRequest
             'shifts'     => 'required|array|min:1',
             'shifts.*.pharmacy_id' => 'required|exists:pharmacies,id',
             'shifts.*.start_time'  => 'required|date_format:H:i',
-            'shifts.*.end_time'    => 'required|date_format:H:i|after:shifts.*.start_time',
+            'shifts.*.end_time'    => 'required|date_format:H:i',
         ];
     }
 }
