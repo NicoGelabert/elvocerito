@@ -24,7 +24,7 @@
             <x-button href="/anunciantes?urgencies=true" class="btn btn-urgencies"><x-icons.urgencies class="fill-white" /> Disponible 24hs</x-button>
         </li>
         <li>
-            <x-button href="/anunciantes?page=1&category=farmacias&on_duty=true" class="btn btn-on-duty">farmacias de turno</x-button>
+            <x-button href="/farmacias?on_duty=true" class="btn btn-on-duty">farmacias de turno</x-button>
         </li>
         
         <li>
