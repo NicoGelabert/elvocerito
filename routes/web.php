@@ -26,7 +26,7 @@ use Inertia\Inertia;
 // Mails de confirmación
 // use App\Mail\QuotationConfirmation;
 // use Illuminate\Support\Facades\Mail;
-// Mails de confirmación
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,110 +50,119 @@ Route::middleware(['guestOrVerified'])->group(function () {
     // Caso Suscripción
     // Route::get('/preview-newsletter-mail', function () {
     //     $subscriber = NewsletterSubscriber::first();
-
     //     return new NewsletterWelcomeMail($subscriber);
     // });
     // Fin ruta para diseñar los mails
+
     Route::get('/', function () {
         return view('underconstruction');
     });
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-    Route::get('/home',[WelcomeController::class, 'index'])->name('welcome');
-    
+});
+
+Route::middleware(['auth', 'verified'])->group(function() {
+    //INICIO RUTAS PARA MOVER A guestOrVerified
+
+    Route::get('/home', [WelcomeController::class, 'index'])->name('welcome');
+
     // Search
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 
     // Beneficios de Publicar en el Vocerito
-    Route::get('/beneficios-de-publicar-en-el-vocerito', function (){
+    Route::get('/beneficios-de-publicar-en-el-vocerito', function () {
         return view('about/beneficios_de_publicar');
     });
 
     // Un poco de historia
-    Route::get('/un-poco-de-historia', function (){
+    Route::get('/un-poco-de-historia', function () {
         return view('about/un_poco_de_historia');
     });
 
-    
     // Política de Privacidad
-    Route::get('/legal/politica-de-privacidad', function (){
+    Route::get('/legal/politica-de-privacidad', function () {
         return view('legal/privacy-policy');
-        });
-    Route::get('/legal/terminos-y-condiciones', function (){
+    });
+    Route::get('/legal/terminos-y-condiciones', function () {
         return view('legal/terms-and-conditions');
-        });
-            
-    //Faqs
+    });
+
+    // Faqs
     Route::get('/preguntas-frecuentes', [FaqController::class, 'index'])->name('faq.index');
-    
+
     // Cómo usar la guía
     Route::get('/como-usar-la-guia', [FaqController::class, 'comoUsarLaGuia'])->name('faq.comoUsarLaGuia');
-    
+
     // Newsletter
     Route::post('/newsletter', [NewsletterSubscriberController::class, 'store'])->name('newsletter.store');
     Route::get('/newsletter/confirm/{token}', [NewsletterSubscriberController::class, 'confirm'])->name('newsletter.confirm');
     Route::get('/newsletter/unsubscribe/{token}', [NewsletterSubscriberController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
-    //News
+    // News
     Route::get('/novedades', [ArticleController::class, 'index'])->name('news.index');
     Route::get('/novedades/{article:slug}', [ArticleController::class, 'view'])->name('news.view');
-    
+
     // Servicios = Products
     Route::get('/anunciantes', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/{category:slug}/{product:slug}', [ProductController::class, 'view'])->name('product.view');
     Route::get('/urgencias', [ProductController::class, 'urgencies'])->name('product.urgencies');
 
     // Categorías
     Route::get('/categorias', [CategoriesController::class, 'indexJson'])->name('categories.indexJson');
     Route::get('/servicios', [CategoriesController::class, 'index'])->name('categories.index');
-    Route::get('/{category:slug}', [CategoriesController::class, 'view'])->name('categories.view');
-    Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])
-    ->name('categories.view.subcategory');
+    Route::get('/categorias/{category:slug}/{subcategory:slug}', [CategoriesController::class, 'viewSubcategory'])->name('categories.view.subcategory');
 
+    // Contact
     Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+    // Quotation
     Route::get('/quotation', [QuotationController::class, 'create'])->name('quotation.create');
     Route::post('/quotation', [QuotationController::class, 'store'])->name('quotation.store');
 
-    // Crear nueva review
+    // Reviews
     Route::post('/reviews', [ReviewController::class, 'store']);
-    // Verificar review por email
     Route::get('/reviews/verify/{token}', [ReviewController::class, 'verify']);
-    // Listar reviews publicadas para un producto
     Route::get('/products/{product}/reviews', [ReviewController::class, 'publicReviews']);
-    // Promedio de ratings para un producto
     Route::get('/products/{product}/rating-average', [ReviewController::class, 'averageRating']);
-    
-    Route::get('/documentation/js/carga-de-scripts', function(){
+
+    // Documentation
+    Route::get('/documentation/js/carga-de-scripts', function () {
         return view('documentation/js/carga-de-scripts');
     });
-    Route::get('/documentation/php/exportacion-archivos-a-excel', function(){
+    Route::get('/documentation/php/exportacion-archivos-a-excel', function () {
         return view('documentation/php/exportacion-archivos-a-excel');
     });
-    Route::get('/documentation/php/cookie-productos-vistos-recientemente', function(){
+    Route::get('/documentation/php/cookie-productos-vistos-recientemente', function () {
         return view('documentation/php/cookie-productos-vistos-recientemente');
     });
+    //FIN RUTAS PARA MOVER A guestOrVerified
 
-});
-
-Route::middleware(['auth', 'verified'])->group(function() {
+    // Profile
     Route::get('/profile', [ProfileController::class, 'view'])->name('profile');
     Route::post('/profile', [ProfileController::class, 'store'])->name('profile.update');
     Route::post('/profile/password-update', [ProfileController::class, 'passwordUpdate'])->name('profile_password.update');
+
+    // Checkout & Orders
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('cart.checkout');
     Route::post('/checkout/{order}', [CheckoutController::class, 'checkoutOrder'])->name('cart.checkout-order');
     Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('/checkout/failure', [CheckoutController::class, 'failure'])->name('checkout.failure');
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
     Route::get('/orders/{order}', [OrderController::class, 'view'])->name('order.view');
-    // Listar reviews pendientes de publicación
+
+    // Admin - Reviews
     Route::get('/admin/reviews', [ReviewController::class, 'adminIndex']);
-    // Publicar una review
     Route::post('/admin/reviews/{id}/publish', [ReviewController::class, 'publish']);
-    // Responder a una review
     Route::post('/admin/reviews/{id}/respond', [ReviewController::class, 'respond']);
 });
 
 Route::post('/webhook/stripe', [CheckoutController::class, 'webhook']);
+Route::get('/{category:slug}/{product:slug}', [ProductController::class, 'view'])
+    ->middleware(['auth', 'verified'])
+    ->where('category', '^(?!login|register|logout|forgot-password|reset-password|verify-email|confirm-password).*$')
+    ->name('product.view');
 
+Route::get('/{category:slug}', [CategoriesController::class, 'view'])
+    ->middleware(['auth', 'verified'])
+    ->where('category', '^(?!login|register|logout|forgot-password|reset-password|verify-email|confirm-password).*$')
+    ->name('categories.view');
 require __DIR__.'/auth.php';
