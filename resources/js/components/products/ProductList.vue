@@ -287,19 +287,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="card__meta">
-                  <Badge status="Disponible">
-                    <span>En guía desde {{ formatYear(product.created_at) }}</span>
-                  </Badge>
-                  <Badge v-if="product.urgencies" status="Urgencias">
-                    <UrgenciesIcon />
-                    <span>Disponible 24hs</span>
-                  </Badge>
-                  <div class="card__rating">
-                      <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
-                  </div>
-                </div>
                 
+                <div class="flex items-center w-full">
+                  <Badge v-if="product.is_on_duty_now" status="De Turno">
+                    <span>Hoy de turno</span>
+                  </Badge>
+                  <Badge v-if="product.current_shift" status="Fin de Turno">
+                    <span>Hasta el {{ product.current_shift.end_label }}hs</span>
+                  </Badge>
+                </div>
                 <hr class="divider my-2 w-full">
                 <div class="card__footer card__footer--between">
                   <button class="btn btn-primary" @click="openModal('contact', product)">
