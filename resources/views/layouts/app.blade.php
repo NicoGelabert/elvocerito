@@ -39,6 +39,10 @@
             <agente-chat></agente-chat>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                eruda.init();
+            });
+        </script>
     </body>
 </html>
