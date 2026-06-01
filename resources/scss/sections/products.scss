@@ -48,7 +48,7 @@
             
             /* Aplicar opacidad reducida al listado de productos mientras carga */
             .loading-opacity {
-                @apply opacity-20;
+                @apply opacity-60;
             }
             /* Separador de letra */
             ul li.font-bold {
@@ -110,10 +110,7 @@
         }
       }
     
-    /* Aplicar opacidad reducida al listado de productos mientras carga */
-    .loading-opacity {
-        @apply opacity-20;
-    }
+    
 // FIN VISTA DE PRODUCTOS
 // VISTA DE PRODUCTO INDIVIDUAL
 #product-view{
