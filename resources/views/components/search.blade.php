@@ -81,13 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.assign(url);
     }
 
-    function attachFastNavigation(link) {
-        link.addEventListener("mousedown", function (e) {
-            e.preventDefault();
-            navigate(link.href);
-        });
-    }
-
     function resetSelection() {
         selectedIndex = -1;
     }
@@ -161,7 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
         wrapper.appendChild(name);
         a.appendChild(wrapper);
         a.appendChild(label);
-        attachFastNavigation(a);
         li.appendChild(a);
 
         return li;
@@ -219,7 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         a.appendChild(left);
         a.appendChild(reviews);
-        attachFastNavigation(a);
         li.appendChild(a);
 
         return li;
