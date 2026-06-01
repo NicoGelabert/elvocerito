@@ -280,9 +280,9 @@
                   <div class="card__right">
                     <div class="card__info" v-if="product.categories?.length">
                         <h6>{{ product.categories[0].name }}</h6>
-                        
+                        <a :href="product.categories?.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug">
                           <h5>{{ product.title }}</h5>
-                        
+                        </a>
                         <p class="description">{{ product.short_description }}</p>
                     </div>
                   </div>
@@ -299,22 +299,15 @@
                       <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
                   </div>
                 </div>
-                <div class="flex items-center w-full">
-                  <Badge v-if="product.is_on_duty_now" status="De Turno">
-                    <span>Hoy de turno</span>
-                  </Badge>
-                  <Badge v-if="product.current_shift" status="Fin de Turno">
-                    <span>Hasta el {{ product.current_shift.end_label }}hs</span>
-                  </Badge>
-                </div>
+                
                 <hr class="divider my-2 w-full">
                 <div class="card__footer card__footer--between">
                   <button class="btn btn-primary" @click="openModal('contact', product)">
                     Contactar
                   </button>
-                    
+                    <a :href="product.categories?.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
                       Ver +
-                    
+                    </a>
                 </div>
               </div>
             </li>
