@@ -411,7 +411,7 @@ export default {
       return cat?.name?.toLowerCase() === 'farmacias'
     },
     headerTop() {
-      return this.navbarVisible ? "3.5rem" : "0";
+      return this.navbarVisible ? "3rem" : "0";
     }
   },
 
