@@ -287,6 +287,18 @@
                     </div>
                   </div>
                 </div>
+                <div class="card__meta">
+                  <Badge status="Disponible">
+                    <span>En guía desde {{ formatYear(product.created_at) }}</span>
+                  </Badge>
+                  <Badge v-if="product.urgencies" status="Urgencias">
+                    <UrgenciesIcon />
+                    <span>Disponible 24hs</span>
+                  </Badge>
+                  <div class="card__rating">
+                      <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
+                  </div>
+                </div>
                 
                 <hr class="divider my-2 w-full">
                 <div class="card__footer card__footer--between">
