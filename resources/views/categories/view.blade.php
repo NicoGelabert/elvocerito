@@ -18,7 +18,7 @@
         <!-- FIN BREADCRUMBS -->
 
         <product-list 
-            :initial-category='@json($category->slug)'
+            initial-category="{{ $category->slug }}"
             base-url="{{ url()->current() }}"
             :show-category-filter="false"
             :show-pagination="false"

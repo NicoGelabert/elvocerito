@@ -1,9 +1,6 @@
 <template>
   <div class="relative product-list">
-<!-- DEBUG TEMPORAL -->
-    <div style="position:fixed;top:0;left:0;z-index:9999;background:red;color:white;padding:4px;font-size:11px;max-width:100%">
-      loading: @{{ loading }} | total: @{{ products.data?.length }} | error: @{{ error }}
-    </div>
+
     <div class="cards__section">
       <div class="category_header container" :style="{top: headerTop}">
         <h3>{{ title }}</h3>
