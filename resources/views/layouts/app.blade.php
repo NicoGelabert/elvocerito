@@ -38,5 +38,11 @@
         <div id="agente-app">
             <agente-chat></agente-chat>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        @verbatim
+        <script>
+            eruda.init();
+        </script>
+        @endverbatim
     </body>
 </html>

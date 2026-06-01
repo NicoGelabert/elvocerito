@@ -450,7 +450,7 @@ export default {
         })
 
         this.products = response.data.products
-        this.error = null
+        console.log('productos:', this.products.data?.length, this.products.data?.map(p => ({id: p.id, cats: p.categories?.length})))
 
         // Actualizar URL
         const url = new URL(this.baseUrl || window.location.href);
