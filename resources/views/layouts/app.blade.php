@@ -39,10 +39,10 @@
             <agente-chat></agente-chat>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        @verbatim
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                eruda.init();
-            });
+            eruda.init();
         </script>
+        @endverbatim
     </body>
 </html>
