@@ -291,10 +291,11 @@
                   <Badge status="Disponible">
                     <span>En guía desde {{ formatYear(product.created_at) }}</span>
                   </Badge>
+                  <Badge v-if="product.urgencies" status="Urgencias">
+                    <UrgenciesIcon />
+                    <span>Disponible 24hs</span>
+                  </Badge>
                   
-                  <div class="card__rating">
-                      <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
-                  </div>
                 </div>
                 <div class="flex items-center w-full">
                   <Badge v-if="product.is_on_duty_now" status="De Turno">
