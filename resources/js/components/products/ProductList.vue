@@ -291,10 +291,6 @@
                   <Badge status="Disponible">
                     <span>En guía desde {{ formatYear(product.created_at) }}</span>
                   </Badge>
-                  <Badge v-if="product.urgencies" status="Urgencias">
-                    <UrgenciesIcon />
-                    <span>Disponible 24hs</span>
-                  </Badge>
                   
                 </div>
                 <div class="flex items-center w-full">
