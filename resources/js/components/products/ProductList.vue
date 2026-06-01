@@ -450,7 +450,7 @@ export default {
         })
 
         this.products = response.data.products
-        console.log('productos:', this.products.data?.length, this.products.data?.map(p => ({id: p.id, cats: p.categories?.length})))
+        this.error = null
 
         // Actualizar URL
         const url = new URL(this.baseUrl || window.location.href);
@@ -500,7 +500,9 @@ export default {
       } catch (err) {
         this.error = "No se pudieron cargar los productos."
       } finally {
-        this.loading = false
+          this.loading = false
+          const sinCats = this.products.data?.filter(p => !p.categories?.length)
+          if (sinCats?.length) console.warn('Sin categorías:', sinCats.map(p => p.id))
       }
     },
 
