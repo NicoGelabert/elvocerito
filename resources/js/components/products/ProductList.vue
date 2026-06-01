@@ -271,16 +271,16 @@
         <div v-if="error" class="error">{{ error }}</div>
         <div :class="['cards__list', { 'loading-opacity': loading && (!products.data || products.data.length === 0) }]">
           <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <li v-for="product in products.data" :key="product.id" v-if="product.categories?.length">
+            <li v-for="product in products.data" :key="product.id">
               <div class="card__body">
                 <div class="card__content">
                   <div class="card__left">
                       <img class="card__img__rounded" :src="product.image_url" alt="product.title">
                   </div>
                   <div class="card__right">
-                    <div class="card__info">
+                    <div class="card__info" v-if="product.categories?.length">
                         <h6>{{ product.categories[0].name }}</h6>
-                        <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug">
+                        <a :href="product.categories?.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug">
                           <h5>{{ product.title }}</h5>
                         </a>
                         <p class="description">{{ product.short_description }}</p>
@@ -312,7 +312,7 @@
                   <button class="btn btn-primary" @click="openModal('contact', product)">
                     Contactar
                   </button>
-                    <a :href="product.categories.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
+                    <a :href="product.categories?.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
                       Ver +
                     </a>
                 </div>
