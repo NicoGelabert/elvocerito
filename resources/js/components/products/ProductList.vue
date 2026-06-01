@@ -269,7 +269,7 @@
         </div>
 
         <div v-if="error" class="error">{{ error }}</div>
-        <div :class="['cards__list', { 'loading-opacity': loading }]">
+        <div :class="['cards__list', { 'loading-opacity': loading && (!products.data || products.data.length === 0) }]">
           <ul class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <li v-for="product in products.data" :key="product.id">
               <div class="card__body">
