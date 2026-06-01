@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
         li.className = "py-4 md:p-4 hover:bg-gray-200";
 
         const a = document.createElement("a");
-        a.href = `${slug}`;
+        a.href = `/${slug}`;
         a.className = "search-result-link flex justify-between items-center text-left w-full";
 
         const wrapper = document.createElement("div");
