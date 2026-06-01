@@ -312,9 +312,9 @@
                   <button class="btn btn-primary" @click="openModal('contact', product)">
                     Contactar
                   </button>
-                    <a :href="product.categories?.length ? '/' + product.categories[0].slug + '/' + product.slug : '/' + product.slug" class="btn btn-secondary">
+                    
                       Ver +
-                    </a>
+                    
                 </div>
               </div>
             </li>
