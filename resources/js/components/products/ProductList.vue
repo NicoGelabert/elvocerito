@@ -288,11 +288,10 @@
                   </div>
                 </div>
                 <div class="card__meta">
-                  
-                  <Badge v-if="product.urgencies" status="Urgencias">
-                    <UrgenciesIcon />
-                    <span>Disponible 24hs</span>
+                  <Badge status="Disponible">
+                    <span>En guía desde {{ formatYear(product.created_at) }}</span>
                   </Badge>
+                  
                   <div class="card__rating">
                       <RatingAverageSingleStar :product-id="product.id" :reviews-count="product.reviews_count" />
                   </div>
