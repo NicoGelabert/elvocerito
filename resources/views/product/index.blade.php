@@ -1,5 +1,5 @@
 <x-app-layout>
-  <div id="product-index" class="relative">
+  <div id="" class="relative product-index">
     <!-- INICIO BREADCRUMBS -->
     <div class="breadcrumbs">
         <div class="container flex gap-2 items-center">

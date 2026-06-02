@@ -24,5 +24,6 @@
             :show-pagination="false"
             :title='@json($category->name)'>
         </product-list>
+        <contact-modal></contact-modal>
     </div>
 </x-app-layout>

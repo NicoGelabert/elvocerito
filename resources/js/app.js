@@ -7,22 +7,8 @@ import collapse from '@alpinejs/collapse';
 import Swup from 'swup';
 import SwupSlideTheme from '@swup/slide-theme';
 import { get, post } from "./http.js";
-import ProductList from './components/products/ProductList.vue';
-import ContactModal from './components/ContactModal.vue'
-import ReviewForm from './components/reviews/ReviewForm.vue';
-import ReviewList from './components/reviews/ReviewList.vue';
 import RatingAverage from './components/reviews/RatingAverage.vue';
 import AgenteChat from './components/AgenteChat.vue'
-
-const productIndex = createApp({});
-productIndex.component('product-list', ProductList);
-productIndex.component('contact-modal', ContactModal);
-productIndex.mount('#product-index');
-
-const productViewApp = createApp({});
-productViewApp.component('review-form', ReviewForm);
-productViewApp.component('review-list', ReviewList);
-productViewApp.mount('#product-view-app');
 
 //Agente IA
 const agenteApp = createApp({})
@@ -227,7 +213,7 @@ async function loadPageScripts() {
   } else if (page === 'product.view') {
     const { init } = await import('./product-view.js');
     init();
-  } else if (page === 'product.urgencies' || page === 'categories.view' || page === 'categories.view.subcategory') {
+  } else if (page === 'categories.view' || page === 'categories.view.subcategory' || page === 'products.index') {
     const { init } = await import('./catalog.js');
     init();
   } else if (page === 'categories.index') {
