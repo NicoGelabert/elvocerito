@@ -285,12 +285,14 @@
                                     });
                                 @endphp
                                 <div x-data="verificarEstado({{ json_encode($horarios) }})" 
-                                    class="rounded-lg bg-gray-50 flex gap-2 justify-center lg:justify-start items-center">
+                                    class="rounded-lg flex gap-2 justify-center lg:justify-start items-center">
 
                                     <template x-if="estado === 'Disponible'">
                                         <x-badge class="open">
-                                            <p>En este momento se encuentra</p>
-                                            <span x-text="estado"></span>
+                                            <div class="flex gap-1">
+                                                <p>En este momento se encuentra</p>
+                                                <span x-text="estado"></span>
+                                            </div>
                                         </x-badge>
                                     </template>
                                 </div>
