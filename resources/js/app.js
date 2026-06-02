@@ -7,26 +7,12 @@ import collapse from '@alpinejs/collapse';
 import Swup from 'swup';
 import SwupSlideTheme from '@swup/slide-theme';
 import { get, post } from "./http.js";
-import RatingAverage from './components/reviews/RatingAverage.vue';
 import AgenteChat from './components/AgenteChat.vue'
 
 //Agente IA
 const agenteApp = createApp({})
 agenteApp.component('agente-chat', AgenteChat)
 agenteApp.mount('#agente-app')
-
-document.querySelectorAll('.product-rating-average').forEach(el => {
-  const productId = el.dataset.productId;
-
-  createApp({
-    data() {
-      return { productId };
-    },
-    components: { RatingAverage },
-    template: `<rating-average :product-id="productId"/>`
-  }).mount(el);
-});
-
 
 Alpine.plugin(collapse);
 

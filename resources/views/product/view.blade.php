@@ -126,7 +126,7 @@
                                 <h2>{{ $product->title }}</h2>
                                 <!-- Promedio de calificaciones -->
                                 @if ($product->reviews_count > 0)
-                                <div class="flex items-center space-x-2">
+                                <div class="flex justify-center md:justify-start items-center space-x-2">
                                     <div
                                         class="product-rating-average product_rating"
                                         data-product-id="{{ $product->id }}">
@@ -165,9 +165,11 @@
                             </div>
                             <!-- FIN CATEGORÍAS Y NOMBRE -->
                             
-                            <div class="flex gap-4">
+                            <div class="flex gap-4 justify-center md:justify-start">
                                 <!-- INICIO BADGE ABIERTO / CERRADO -->
+                                @if ($product->horarios->isNotEmpty())
                                 <x-badge-horarios :product="$product"/>
+                                @endif
                                 <!-- FIN BADGE ABIERTO / CERRADO -->
                                 <!-- INICIO BADGE URGENCIAS -->
                                 @if($product->urgencies)
@@ -272,25 +274,27 @@
      
                             @if ($product->horarios->isNotEmpty())
                             <div class="hidden text-gray-500" id="horarios" role="tabpanel" aria-labelledby="horarios-tab">
-                                <div class="p-4 rounded-lg bg-gray-50 w-full lg:w-fit mb-4">
-                                     <!-- INICIO BADGE ABIERTO / CERRADO -->
-                                    @php
-                                        $horarios = $product->horarios->map(function($horario) {
-                                            return [
-                                                'dia' => $horario->dia,
-                                                'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
-                                                'cierre' => Carbon::parse($horario->cierre)->format('H:i')
-                                            ];
-                                        });
-                                    @endphp
-                                    <div x-data="verificarEstado({{ json_encode($horarios) }})" class="rounded-lg bg-gray-50 flex gap-2 justify-center lg:justify-start items-center">
-                                        <p>En este momento, se encuentra </p>
-                                        <x-badge x-bind:class="(estado === 'No Disponible' ? 'closed' : (estado === 'Disponible' ? 'open' : ''))">
-                                            <span x-text="estado"></span> <!-- Muestra Abierto o Cerrado -->
+                                <!-- INICIO BADGE ABIERTO / CERRADO -->
+                                @php
+                                    $horarios = $product->horarios->map(function($horario) {
+                                        return [
+                                            'dia' => $horario->dia,
+                                            'apertura' => Carbon::parse($horario->apertura)->format('H:i'),
+                                            'cierre' => Carbon::parse($horario->cierre)->format('H:i')
+                                        ];
+                                    });
+                                @endphp
+                                <div x-data="verificarEstado({{ json_encode($horarios) }})" 
+                                    class="rounded-lg bg-gray-50 flex gap-2 justify-center lg:justify-start items-center">
+
+                                    <template x-if="estado === 'Disponible'">
+                                        <x-badge class="open">
+                                            <p>En este momento se encuentra</p>
+                                            <span x-text="estado"></span>
                                         </x-badge>
-                                    </div>
-                                     <!-- FIN BADGE ABIERTO / CERRADO -->
+                                    </template>
                                 </div>
+                                    <!-- FIN BADGE ABIERTO / CERRADO -->
                                 <div class="flex flex-col md:flex-row gap-8 p-8">
                                     <ul class="list-disc">
                                     @foreach ($product->horarios as $horario)
