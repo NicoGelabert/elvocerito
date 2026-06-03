@@ -14,6 +14,7 @@
                     <div class="card__body">
                         <div class="card__content">
                             <div class="card__left">
+                                <x-icons.servicio_verificado/>
                                 <img class="card__img__rounded" src="{{ $review->product->image }}" alt="{{ $review->product->title }}" loading="lazy">
                             </div>
                             <div class="card__right">

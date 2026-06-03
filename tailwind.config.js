@@ -22,9 +22,10 @@ export default {
                 secondary           : '#111827',
                 terciary            : '#84DCCF',
                 
-                urgencies           : '#C92D2D',
+                urgencies           : '#FFDBC4',
                 urgencies_hover     : '#9F1010',
                 urgencies_active    : '#D85151',
+                urgencies_text      : '#DF854B',
 
                 gray_50             : '#F5F7FA',
                 gray_100            : '#EEF1F6',

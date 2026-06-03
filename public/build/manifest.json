@@ -1,6 +1,6 @@
 {
-  "_RatingAverage-BUQtMiAl.js": {
-    "file": "assets/RatingAverage-BUQtMiAl.js",
+  "_RatingAverage-VqrkpGNp.js": {
+    "file": "assets/RatingAverage-VqrkpGNp.js",
     "name": "RatingAverage",
     "imports": [
       "resources/js/app.js"
@@ -18,7 +18,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-8vOea8xG.css",
+    "file": "assets/app-BvUVh93W.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -27,7 +27,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Kz3EBYXq.js",
+    "file": "assets/app-kBNYkkW2.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -49,16 +49,16 @@
     ]
   },
   "resources/js/catalog.js": {
-    "file": "assets/catalog-BTIMpgjw.js",
+    "file": "assets/catalog-Ce4-VB8x.js",
     "name": "catalog",
     "src": "resources/js/catalog.js",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_RatingAverage-BUQtMiAl.js"
+      "_RatingAverage-VqrkpGNp.js"
     ],
     "css": [
-      "assets/catalog-BvMvzWL3.css"
+      "assets/catalog-DeQIPCHl.css"
     ]
   },
   "resources/js/categories-index.js": {
@@ -77,21 +77,21 @@
     ]
   },
   "resources/js/product-view.js": {
-    "file": "assets/product-view-Vri-lo7Y.js",
+    "file": "assets/product-view-BhGujbKs.js",
     "name": "product-view",
     "src": "resources/js/product-view.js",
     "isDynamicEntry": true,
     "imports": [
       "_grid-cxdqohU_.js",
       "resources/js/app.js",
-      "_RatingAverage-BUQtMiAl.js"
+      "_RatingAverage-VqrkpGNp.js"
     ],
     "css": [
       "assets/product-view-BpYeOR7Q.css"
     ]
   },
   "resources/scss/styles.scss": {
-    "file": "assets/styles-CCWxcwoD.css",
+    "file": "assets/styles-sOWRlgxU.css",
     "src": "resources/scss/styles.scss",
     "isEntry": true,
     "name": "styles",

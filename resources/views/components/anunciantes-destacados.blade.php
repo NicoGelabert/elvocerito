@@ -9,6 +9,7 @@
                 <div class="card__body">
                     <div class="card__content">
                         <div class="card__left">
+                            <x-icons.servicio_verificado/>
                             <img class="card__img__rounded" src="{{ $anunciante_destacado->image }}" alt="{{ $anunciante_destacado->title }}" loading="lazy">
                         </div>
                         <div class="card__right">

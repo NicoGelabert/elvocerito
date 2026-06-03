@@ -275,6 +275,7 @@
               <div class="card__body">
                 <div class="card__content">
                   <div class="card__left">
+                      <VerifiedServiceIcon />
                       <img class="card__img__rounded" :src="product.image_url" alt="product.title">
                   </div>
                   <div class="card__right">
@@ -357,9 +358,10 @@ import SkeletonProfileIcon from "@/icons/SkeletonProfileIcon.vue"
 import RatingAverage from "../reviews/RatingAverage.vue"
 import RatingAverageSingleStar from "../reviews/RatingAverageSingleStar.vue"
 import UrgenciesIcon from "@/icons/UrgenciesIcon.vue"
+import VerifiedServiceIcon from "@/icons/VerifiedServiceIcon.vue"
 
 export default {
-  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, SkeletonProfileIcon, RatingAverage, RatingAverageSingleStar, UrgenciesIcon },
+  components: { ShareIcon, BadgeHorarios, Badge, FilterIcon, SkeletonProfileIcon, RatingAverage, RatingAverageSingleStar, UrgenciesIcon, VerifiedServiceIcon },
 
   props: {
     initialCategory: {

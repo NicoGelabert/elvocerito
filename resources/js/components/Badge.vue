@@ -52,7 +52,7 @@ const badgeClass = computed(() => {
 }
 
 .urgencies{
-  @apply bg-red-200 text-red-800;
+  @apply bg-urgencies text-urgencies_text;
 }
 
 .de_turno{

@@ -20,7 +20,10 @@
                             @apply text-gray_600 line-clamp-2;
                         }
                         .card__left{
-                            @apply flex flex-col items-center justify-between gap-4;
+                            @apply flex flex-col items-center justify-between gap-4 relative;
+                            svg{
+                                @apply absolute right-0 w-5 h-5;
+                            }
                             .card__img__rounded{
                                 @apply rounded-full object-cover
                                 aspect-square max-w-16 border border-gray_200;

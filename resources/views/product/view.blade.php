@@ -87,7 +87,10 @@
                 <div class="flex flex-col lg:flex-row gap-6  bg-white rounded-xl p-4">
                     <!-- INICIO PRIMERA COLUMNA -->
                     <div class="product_header custom-scrollbar lg:overflow-x-hidden flex-1">
-                        <img src="{{ $product->image }}" alt="{{ $product->title }}">
+                        <div class="relative w-fit mx-auto">
+                            <x-icons.servicio_verificado class="absolute right-0 top-2 w-8 h-8 z-10"/>
+                            <img src="{{ $product->image }}" alt="{{ $product->title }}">
+                        </div>
                         <!-- INICIO CONTENEDOR PRODUCT HEADER SIN IMAGEN -->
                         <div class="flex flex-col lg:pr-4 lg:pl-2 gap-4">
                             <!-- INICIO CATEGORÍAS Y NOMBRE -->
