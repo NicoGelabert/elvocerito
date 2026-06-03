@@ -222,7 +222,7 @@ class ProductController extends Controller
             'category' => $category,
             'tags' => $tags,
             'viewedCategories' => $viewedCategoriesObjects,
-        ]);
+        ])->with('backRoute', route('categories.view', $category->slug));
     }
 
 

@@ -1,16 +1,9 @@
 <x-app-layout>
   <div id="" class="relative product-index">
-    <!-- INICIO BREADCRUMBS -->
-    <div class="breadcrumbs">
-        <div class="container flex gap-2 items-center">
-            <a href="/">
-                <x-icons.home class="fill-gray_400" />
-            </a>
-            <p>/</p>
-            <h2 class="text-small">Buscador</h2>
-        </div>
-    </div>
-    <!-- FIN BREADCRUMBS -->
+    <x-breadcrumbs :crumbs="[
+        ['label' => 'Notas e Ideas', 'url' => route('news.index')],
+        ['label' => $article->title],
+    ]" />
     <product-list :initial-category='@json($category)'>
     </product-list>
     <contact-modal></contact-modal>

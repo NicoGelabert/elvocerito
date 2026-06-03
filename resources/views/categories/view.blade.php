@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="category_view product-index">
-        <x-breadcrumbs :crumbs="[
+        <x-breadcrumbs :back-route="$backRoute" :crumbs="[
             ['label' => 'Servicios', 'url' => route('categories.index')],
             ['label' => $category->name, 'url' => ''],
         ]" />

@@ -35,7 +35,7 @@ class CategoriesController extends Controller
 
         $tags = $products->pluck('tags')->flatten()->unique('id')->values();
         
-        return view('categories.view', compact('category', 'subcategories', 'products', 'tags'));
+        return view('categories.view', compact('category', 'subcategories', 'products', 'tags'))->with('backRoute', route('categories.index'));
     }
 
     public function viewSubcategory($category, $subcategory)

@@ -76,7 +76,7 @@
         <!-- FIN MENU CON IMAGEN, TITLE, BAGDE ABI/CER, CONTACT -->
         <!-- INICIO HOJA PRODUCTO -->
         <div class="product">
-            <x-breadcrumbs :crumbs="[
+            <x-breadcrumbs :back-route="$backRoute" :crumbs="[
                 ['label' => 'Servicios', 'url' => route('categories.index')],
                 ['label' => $category->name, 'url' => route('categories.view', $category->slug)],
             ]" />

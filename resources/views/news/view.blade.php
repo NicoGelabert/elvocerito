@@ -17,7 +17,7 @@
     <div id="article-view">
         <!-- INICIO HOJA ARTICULO -->
         <div class="article">
-            <x-breadcrumbs :crumbs="[
+            <x-breadcrumbs :back-route="$backRoute" :crumbs="[
                 ['label' => 'Notas e Ideas', 'url' => route('news.index')],
                 ['label' => $article->title],
             ]" />
