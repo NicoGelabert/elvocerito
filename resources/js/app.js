@@ -6,6 +6,7 @@ import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import Swup from 'swup';
 import SwupSlideTheme from '@swup/slide-theme';
+import SwupScrollPlugin from '@swup/scroll-plugin';
 import { get, post } from "./http.js";
 import AgenteChat from './components/AgenteChat.vue'
 
@@ -216,7 +217,14 @@ async function loadPageScripts() {
 }
 
 const swup = new Swup({
-  plugins: [new SwupSlideTheme()],
+  cache: false,
+  plugins: [
+    new SwupSlideTheme(),
+    new SwupScrollPlugin({
+      doScrollingRightAway: false,
+      animateScroll: false,
+    })
+  ],
   containers: ['#swup'],
 });
 
@@ -232,6 +240,9 @@ swup.hooks.on('page:view', () => {
   loadPageScripts();
 });
 
+window.addEventListener('popstate', () => {
+  swup.navigate(window.location.href);
+});
 // MOVIMIENTO DEL NAVBAR
 let prevScrollPos = window.scrollY;
 const scrollThreshold = 100;
