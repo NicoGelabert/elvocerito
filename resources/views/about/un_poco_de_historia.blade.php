@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-breadcrumbs breadcrumbs_location="Un poco de historia" />
+    <x-breadcrumbs :crumbs="[
+        ['label' => 'Un poco de historia'],
+    ]" />
 
     <div class="max-w-6xl mx-auto py-20 px-4 un-poco-de-historia container">
 

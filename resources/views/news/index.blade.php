@@ -1,16 +1,8 @@
 <x-app-layout>
     <div class="article-index">
-        <!-- INICIO BREADCRUMBS -->
-        <div class="breadcrumbs">
-            <div class="container flex gap-2 items-center">
-                <a href="/">
-                    <x-icons.home class="fill-gray_400" />
-                </a>
-                <p>/</p>
-                <h2 class="text-small">Artículos</h2>
-            </div>
-        </div>
-        <!-- FIN BREADCRUMBS -->
+        <x-breadcrumbs :crumbs="[
+            ['label' => 'Notas e Ideas'],
+        ]" />
         <div class="articles_list container">
             @foreach($articles as $article)
                 <a href="{{ route('news.view', $article) }}">

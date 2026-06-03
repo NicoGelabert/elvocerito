@@ -1,5 +1,8 @@
 <x-app-layout>
-    <x-breadcrumbs breadcrumbs_location="Términos y Condiciones" />
+    <x-breadcrumbs :crumbs="[
+        ['label' => 'Legales'],
+        ['label' => 'Términos y Condiciones'],
+    ]" />
 
     <div class="flex flex-col justify-center gap-12 py-16 container legal-page">
         <h1>{{ __('Términos y Condiciones – ElVocerito.com') }}</h1>

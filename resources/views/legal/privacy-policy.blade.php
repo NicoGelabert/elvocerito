@@ -1,5 +1,8 @@
 <x-app-layout>
-    <x-breadcrumbs breadcrumbs_location="Política de Privacidad" />
+    <x-breadcrumbs :crumbs="[
+            ['label' => 'Legales'],
+            ['label' => 'Política de Privacidad'],
+        ]" />
 
     <div class="flex flex-col justify-center gap-12 py-16 container cookie-policy">
         <h1>{{ __('Política de Privacidad – ElVocerito.com') }}</h1>

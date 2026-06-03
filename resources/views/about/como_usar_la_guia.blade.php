@@ -1,5 +1,7 @@
 <x-app-layout>
-    <x-breadcrumbs breadcrumbs_location="Un poco de historia" />
+    <x-breadcrumbs :crumbs="[
+        ['label' => 'Cómo usar la Guía Vocerito'],
+    ]" />
     <div class="flex flex-col justify-center gap-12 py-16 container como-usar-la-guia">
         <h1>Cómo usar la Guía Vocerito</h1>
 

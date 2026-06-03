@@ -17,21 +17,10 @@
     <div id="article-view">
         <!-- INICIO HOJA ARTICULO -->
         <div class="article">
-            <!-- INICIO BREADCRUMBS -->
-            <div class="breadcrumbs">
-                <div class="container flex gap-2 items-center">
-                    <a href="/">
-                        <x-icons.home class="fill-gray_400" />
-                    </a>
-                    <p>/</p>
-                    <x-button href="/novedades" class="bg-none">
-                        <p>Artículos</p>
-                    </x-button>
-                    <p>/</p>
-                    <h2 class="text-small">{{$article->title}}</h2>
-                </div>
-            </div>
-            <!-- FIN BREADCRUMBS -->
+            <x-breadcrumbs :crumbs="[
+                ['label' => 'Notas e Ideas', 'url' => route('news.index')],
+                ['label' => $article->title],
+            ]" />
             <!-- INICIO PRIMERA FILA -->
             <div class="container">
                 <div class="flex flex-col-reverse lg:flex-row gap-6 bg-white rounded-xl p-4">

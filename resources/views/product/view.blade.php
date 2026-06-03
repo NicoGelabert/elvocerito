@@ -76,24 +76,10 @@
         <!-- FIN MENU CON IMAGEN, TITLE, BAGDE ABI/CER, CONTACT -->
         <!-- INICIO HOJA PRODUCTO -->
         <div class="product">
-            <!-- INICIO BREADCRUMBS -->
-            <div class="breadcrumbs">
-                <div class="container flex gap-2 items-center">
-                    <a href="/">
-                        <x-icons.home class="fill-gray_400" />
-                    </a>
-                    <p>/</p>
-                    <a href="/servicios">
-                        <p class="hidden md:block">Categorías</p>
-                        <p class="md:hidden">...</p>
-                    </a>
-                    <p>/</p>
-                    <x-button href="{{route ('categories.view', [ 'category' => $category->slug])}}" class="bg-none">
-                        <p>{{ $category->name }}</p>
-                    </x-button>
-                </div>
-            </div>
-            <!-- FIN BREADCRUMBS -->
+            <x-breadcrumbs :crumbs="[
+                ['label' => 'Servicios', 'url' => route('categories.index')],
+                ['label' => $category->name, 'url' => route('categories.view', $category->slug)],
+            ]" />
             <!-- INICIO PRIMERA FILA -->
             <div class="container">
                 <x-contact-modal :product="$product" />
